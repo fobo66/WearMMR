@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context="io.github.fobo66.wearmmr.SettingsActivity"
+    tools:context="io.github.fobo66.wearmmr.ui.SettingsActivity"
     tools:deviceIds="wear"
     >
 

@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr
+package io.github.fobo66.wearmmr.ui
 
 import android.content.BroadcastReceiver
 import android.content.ComponentName
@@ -25,6 +25,9 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
+import io.github.fobo66.wearmmr.R
+import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
+import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import org.jetbrains.anko.startActivity
 
 import java.lang.ref.WeakReference
@@ -62,8 +65,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
     return Engine()
   }
 
-  private class EngineHandler(reference: MatchmakingRatingWatchFace.Engine) : Handler() {
-    private val mWeakReference: WeakReference<MatchmakingRatingWatchFace.Engine> = WeakReference(
+  private class EngineHandler(reference: Engine) : Handler() {
+    private val mWeakReference: WeakReference<Engine> = WeakReference(
         reference)
 
     override fun handleMessage(msg: Message) {
@@ -146,7 +149,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
       batteryComplication = ComplicationDrawable(applicationContext)
       ratingComplication = getDrawable(
-          R.drawable.rating_complication_drawable) as ComplicationDrawable
+              R.drawable.rating_complication_drawable) as ComplicationDrawable
       ratingComplication.setContext(applicationContext)
     }
 

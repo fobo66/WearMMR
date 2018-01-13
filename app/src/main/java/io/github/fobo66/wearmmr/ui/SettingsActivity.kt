@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr
+package io.github.fobo66.wearmmr.ui
 
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView.BufferType.EDITABLE
 import butterknife.BindView
 import butterknife.ButterKnife
+import io.github.fobo66.wearmmr.R
 import org.jetbrains.anko.defaultSharedPreferences
 
 class SettingsActivity : WearableActivity() {

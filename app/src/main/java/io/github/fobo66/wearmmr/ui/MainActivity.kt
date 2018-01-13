@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr
+package io.github.fobo66.wearmmr.ui
 
 import android.os.Bundle
 import android.support.wear.widget.drawer.WearableActionDrawerView
@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
