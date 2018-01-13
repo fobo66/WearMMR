@@ -27,6 +27,12 @@ class MainActivity : WearableActivity() {
   @BindView(R.id.player_name)
   lateinit var playerName: TextView
 
+  @BindView(R.id.player_persona_name)
+  lateinit var playerPersonaName: TextView
+
+  @BindView(R.id.rating)
+  lateinit var rating: TextView
+
   private val noPlayerId = -1
 
   private val disposables = CompositeDisposable()
@@ -67,9 +73,10 @@ class MainActivity : WearableActivity() {
             db.gameStatsDao().findOneByPlayerId(playerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( { playerInfo ->
-                  toast(playerInfo.toString())
-                  playerName.text = playerInfo.name
+                .subscribe( { matchmakingRating ->
+                  playerName.text = matchmakingRating.name
+                  playerPersonaName.text = String.format("(%s)", matchmakingRating.personaName)
+                  rating.text = matchmakingRating.rating.toString()
                 }, {error ->
                   Log.e(this.javaClass.name, "Cannot load data from database", error)
                 })

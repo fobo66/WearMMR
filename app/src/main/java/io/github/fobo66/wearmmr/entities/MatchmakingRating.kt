@@ -18,12 +18,15 @@ data class MatchmakingRating(
 
     @ColumnInfo(name = "player_name") val name: String,
 
+    @ColumnInfo(name = "player_persona_name") val personaName: String,
+
     @ColumnInfo(name = "player_rating") val rating: Int?
 
 ) : Parcelable {
 
   constructor(parcel: Parcel) : this(
       parcel.readInt(),
+      parcel.readString(),
       parcel.readString(),
       parcel.readInt())
 
