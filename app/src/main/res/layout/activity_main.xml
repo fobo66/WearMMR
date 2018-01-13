@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.wear.widget.drawer.WearableDrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context="io.github.fobo66.wearmmr.SettingsActivity"
+    tools:deviceIds="wear"
+    >
+  <android.support.v4.widget.NestedScrollView
+      android:id="@+id/content"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      >
+
+    <include layout="@layout/content_main"/>
+
+  </android.support.v4.widget.NestedScrollView>
+  <android.support.wear.widget.drawer.WearableActionDrawerView
+      android:id="@+id/bottom_action_drawer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:actionMenu="@menu/action_drawer_menu"
+      />
+</android.support.wear.widget.drawer.WearableDrawerLayout>

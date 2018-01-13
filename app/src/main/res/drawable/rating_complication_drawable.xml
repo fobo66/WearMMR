@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<drawable
+    class="android.support.wearable.complications.rendering.ComplicationDrawable"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:textColor="#e0e0e0"
+    app:iconColor="#d50000"
+    app:titleColor="#FFFAFAFA">
+  <ambient
+      app:iconColor="#b71c1c"
+      app:textColor="#bdbdbd" />
+</drawable>
