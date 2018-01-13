@@ -7,7 +7,7 @@ import android.support.wearable.complications.SystemProviders.ProviderId
  * Created 12/17/17.
  */
 
-const val API_BASE_URL: String = "https://api.opendota.com/api"
+const val API_BASE_URL: String = "https://api.opendota.com/api/"
 
 @ProviderId
 const val RATING_PROVIDER_ID = 31977
