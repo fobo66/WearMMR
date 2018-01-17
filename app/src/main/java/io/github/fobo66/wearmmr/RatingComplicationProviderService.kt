@@ -55,7 +55,8 @@ class RatingComplicationProviderService : ComplicationProviderService() {
               .subscribeOn(Schedulers.io())
               .map { playerInfo ->
                 MatchmakingRating(playerInfo.profile.accountId, playerInfo.profile.name,
-                    playerInfo.profile.personaName, playerInfo.mmrEstimate.estimate)
+                  playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
+                  playerInfo.mmrEstimate.estimate)
               }
               .flatMap { rating ->
                 db.gameStatsDao().insertRating(rating)

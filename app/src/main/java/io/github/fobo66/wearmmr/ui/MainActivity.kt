@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.support.wear.widget.drawer.WearableActionDrawerView
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.bumptech.glide.Glide
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +25,10 @@ class MainActivity : WearableActivity() {
 
   @BindView(R.id.bottom_action_drawer)
   lateinit var navigationDrawer: WearableActionDrawerView
+
+  @BindView(R.id.player_pic)
+  lateinit var playerPic: ImageView
+
 
   @BindView(R.id.player_name)
   lateinit var playerName: TextView
@@ -77,6 +83,10 @@ class MainActivity : WearableActivity() {
                   playerName.text = matchmakingRating.name
                   playerPersonaName.text = String.format("(%s)", matchmakingRating.personaName)
                   rating.text = matchmakingRating.rating.toString()
+
+                  Glide.with(this)
+                          .load(matchmakingRating.avatarUrl)
+                          .into(playerPic)
                 }, {error ->
                   Log.e(this.javaClass.name, "Cannot load data from database", error)
                 })

@@ -20,6 +20,8 @@ data class MatchmakingRating(
 
     @ColumnInfo(name = "player_persona_name") val personaName: String,
 
+    @ColumnInfo(name = "player_avatar_url") val avatarUrl: String?,
+
     @ColumnInfo(name = "player_rating") val rating: Int?
 
 ) : Parcelable {
@@ -28,11 +30,14 @@ data class MatchmakingRating(
       parcel.readInt(),
       parcel.readString(),
       parcel.readString(),
+      parcel.readString(),
       parcel.readInt())
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
     parcel.writeInt(playerId)
     parcel.writeString(name)
+    parcel.writeString(personaName)
+    parcel.writeString(avatarUrl)
     if (rating != null) {
       parcel.writeInt(rating)
     } else {
