@@ -12,25 +12,26 @@ import org.jetbrains.anko.defaultSharedPreferences
 
 class SettingsActivity : WearableActivity() {
 
-  @BindView(R.id.player_id_input) lateinit var playerIdInput: EditText
+    @BindView(R.id.player_id_input)
+    lateinit var playerIdInput: EditText
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_settings)
-    ButterKnife.bind(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_settings)
+        ButterKnife.bind(this)
 
-    // Enables Always-on
-    setAmbientEnabled()
+        // Enables Always-on
+        setAmbientEnabled()
 
-    playerIdInput.setText(defaultSharedPreferences.getInt("playerId", 0).toString(), EDITABLE)
+        playerIdInput.setText(defaultSharedPreferences.getInt("playerId", 0).toString(), EDITABLE)
 
-    playerIdInput.setOnEditorActionListener({ _, actionId, _ ->
-      if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-        val playerId: Int = Integer.parseInt(playerIdInput.text.toString())
-        this.defaultSharedPreferences.edit().putInt("playerId", playerId).apply()
-        return@setOnEditorActionListener true
-      }
-      false
-    })
-  }
+        playerIdInput.setOnEditorActionListener({ _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                val playerId: Int = Integer.parseInt(playerIdInput.text.toString())
+                this.defaultSharedPreferences.edit().putInt("playerId", playerId).apply()
+                return@setOnEditorActionListener true
+            }
+            false
+        })
+    }
 }

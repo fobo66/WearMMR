@@ -14,12 +14,12 @@ import io.reactivex.Flowable
  */
 @Dao
 interface MatchmakingDao {
-  @Query("SELECT * FROM mmr WHERE playerId LIKE :playerId LIMIT 1")
-  fun findOneByPlayerId(playerId: Int): Flowable<MatchmakingRating>
+    @Query("SELECT * FROM mmr WHERE playerId LIKE :playerId LIMIT 1")
+    fun findOneByPlayerId(playerId: Int): Flowable<MatchmakingRating>
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertRating(rating: MatchmakingRating)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRating(rating: MatchmakingRating)
 
-  @Update
-  fun updateRatings(vararg ratings: MatchmakingRating)
+    @Update
+    fun updateRatings(vararg ratings: MatchmakingRating)
 }

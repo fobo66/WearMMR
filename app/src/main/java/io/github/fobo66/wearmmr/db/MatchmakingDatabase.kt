@@ -10,5 +10,5 @@ import io.github.fobo66.wearmmr.entities.MatchmakingRating
  */
 @Database(entities = [(MatchmakingRating::class)], version = 1)
 abstract class MatchmakingDatabase : RoomDatabase() {
-  abstract fun gameStatsDao(): MatchmakingDao
+    abstract fun gameStatsDao(): MatchmakingDao
 }

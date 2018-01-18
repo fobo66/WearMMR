@@ -26,36 +26,37 @@ data class MatchmakingRating(
 
 ) : Parcelable {
 
-  constructor(parcel: Parcel) : this(
-      parcel.readInt(),
-      parcel.readString(),
-      parcel.readString(),
-      parcel.readString(),
-      parcel.readInt())
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt()
+    )
 
-  override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(playerId)
-    parcel.writeString(name)
-    parcel.writeString(personaName)
-    parcel.writeString(avatarUrl)
-    if (rating != null) {
-      parcel.writeInt(rating)
-    } else {
-      parcel.writeInt(0)
-    }
-  }
-
-  override fun describeContents(): Int {
-    return 0
-  }
-
-  companion object CREATOR : Creator<MatchmakingRating> {
-    override fun createFromParcel(parcel: Parcel): MatchmakingRating {
-      return MatchmakingRating(parcel)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(playerId)
+        parcel.writeString(name)
+        parcel.writeString(personaName)
+        parcel.writeString(avatarUrl)
+        if (rating != null) {
+            parcel.writeInt(rating)
+        } else {
+            parcel.writeInt(0)
+        }
     }
 
-    override fun newArray(size: Int): Array<MatchmakingRating?> {
-      return arrayOfNulls(size)
+    override fun describeContents(): Int {
+        return 0
     }
-  }
+
+    companion object CREATOR : Creator<MatchmakingRating> {
+        override fun createFromParcel(parcel: Parcel): MatchmakingRating {
+            return MatchmakingRating(parcel)
+        }
+
+        override fun newArray(size: Int): Array<MatchmakingRating?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

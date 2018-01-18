@@ -9,7 +9,7 @@ import org.koin.android.module.AndroidModule
  */
 class AppModule(val appContext: Context) : AndroidModule() {
 
-  override fun context() = applicationContext {
-    provide { appContext }
-  }
+    override fun context() = applicationContext {
+        provide { appContext }
+    }
 }

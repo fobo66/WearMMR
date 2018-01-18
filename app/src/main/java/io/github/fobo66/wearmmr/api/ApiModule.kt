@@ -14,23 +14,23 @@ import retrofit2.converter.jackson.JacksonConverterFactory
  */
 class ApiModule : AndroidModule() {
 
-  override fun context() = applicationContext {
-    provide { provideHttpClient() }
-    provide { provideApiClient(get()) }
-  }
+    override fun context() = applicationContext {
+        provide { provideHttpClient() }
+        provide { provideApiClient(get()) }
+    }
 
-  private fun provideHttpClient(): OkHttpClient {
-    return OkHttpClient()
-  }
+    private fun provideHttpClient(): OkHttpClient {
+        return OkHttpClient()
+    }
 
-  private fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
-    val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(API_BASE_URL)
-        .addConverterFactory(JacksonConverterFactory.create(jacksonObjectMapper()))
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .client(httpClient)
-        .build()
+    private fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(API_BASE_URL)
+            .addConverterFactory(JacksonConverterFactory.create(jacksonObjectMapper()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(httpClient)
+            .build()
 
-    return retrofit.create(MatchmakingRatingApi::class.java)
-  }
+        return retrofit.create(MatchmakingRatingApi::class.java)
+    }
 }

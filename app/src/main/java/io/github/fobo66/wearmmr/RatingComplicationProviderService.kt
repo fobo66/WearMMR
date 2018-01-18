@@ -27,62 +27,77 @@ import org.koin.android.ext.android.inject
 
 class RatingComplicationProviderService : ComplicationProviderService() {
 
-  private val noPlayerId = -1
+    private val noPlayerId = -1
 
-  private val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
-  val matchmakingRatingClient: MatchmakingRatingApi by inject()
-  val db: MatchmakingDatabase by inject()
+    val matchmakingRatingClient: MatchmakingRatingApi by inject()
+    val db: MatchmakingDatabase by inject()
 
-  override fun onComplicationUpdate(
-      complicationId: Int, dataType: Int, complicationManager: ComplicationManager?) {
-    updateRating(complicationManager, complicationId)
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    disposables.clear()
-  }
-
-  private fun updateRating(
-      complicationManager: ComplicationManager?,
-      complicationId: Int) {
-    val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
-
-    if (playerId != noPlayerId) {
-      disposables.add(
-          matchmakingRatingClient.fetchPlayerProfile(playerId)
-              .subscribeOn(Schedulers.io())
-              .map { playerInfo ->
-                MatchmakingRating(playerInfo.profile.accountId, playerInfo.profile.name,
-                  playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
-                  playerInfo.mmrEstimate.estimate)
-              }
-              .flatMap { rating ->
-                db.gameStatsDao().insertRating(rating)
-                return@flatMap Observable.just(rating.rating)
-              }
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(
-                  {
-                    val complicationData: ComplicationData = Builder(
-                        ComplicationData.TYPE_SHORT_TEXT)
-                        .setIcon(Icon.createWithResource(applicationContext,
-                            drawable.ic_rating))
-                        .setShortText(ComplicationText.plainText(it.toString()))
-                        .setContentDescription(ComplicationText.plainText(
-                            applicationContext.getText(string.rating_complcation_description)))
-                        .build()
-
-                    complicationManager!!.updateComplicationData(complicationId, complicationData)
-                  },
-                  { error ->
-                    Log.e(javaClass.name, "Error while updating player info", error)
-                    complicationManager!!.noUpdateRequired(complicationId)
-                  })
-      )
-    } else {
-      complicationManager!!.noUpdateRequired(complicationId)
+    override fun onComplicationUpdate(
+        complicationId: Int, dataType: Int, complicationManager: ComplicationManager?
+    ) {
+        updateRating(complicationManager, complicationId)
     }
-  }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
+    }
+
+    private fun updateRating(
+        complicationManager: ComplicationManager?,
+        complicationId: Int
+    ) {
+        val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
+
+        if (playerId != noPlayerId) {
+            disposables.add(
+                matchmakingRatingClient.fetchPlayerProfile(playerId)
+                    .subscribeOn(Schedulers.io())
+                    .map { playerInfo ->
+                        MatchmakingRating(
+                            playerInfo.profile.accountId, playerInfo.profile.name,
+                            playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
+                            playerInfo.mmrEstimate.estimate
+                        )
+                    }
+                    .flatMap { rating ->
+                        db.gameStatsDao().insertRating(rating)
+                        return@flatMap Observable.just(rating.rating)
+                    }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            val complicationData: ComplicationData = Builder(
+                                ComplicationData.TYPE_SHORT_TEXT
+                            )
+                                .setIcon(
+                                    Icon.createWithResource(
+                                        applicationContext,
+                                        drawable.ic_rating
+                                    )
+                                )
+                                .setShortText(ComplicationText.plainText(it.toString()))
+                                .setContentDescription(
+                                    ComplicationText.plainText(
+                                        applicationContext.getText(string.rating_complcation_description)
+                                    )
+                                )
+                                .build()
+
+                            complicationManager!!.updateComplicationData(
+                                complicationId,
+                                complicationData
+                            )
+                        },
+                        { error ->
+                            Log.e(javaClass.name, "Error while updating player info", error)
+                            complicationManager!!.noUpdateRequired(complicationId)
+                        })
+            )
+        } else {
+            complicationManager!!.noUpdateRequired(complicationId)
+        }
+    }
 }

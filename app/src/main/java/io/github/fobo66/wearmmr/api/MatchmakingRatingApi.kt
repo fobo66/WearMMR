@@ -12,6 +12,6 @@ import retrofit2.http.Path
  */
 interface MatchmakingRatingApi {
 
-  @GET("players/{id}")
-  fun fetchPlayerProfile(@Path("id") id: Int): Observable<PlayerInfo>
+    @GET("players/{id}")
+    fun fetchPlayerProfile(@Path("id") id: Int): Observable<PlayerInfo>
 }

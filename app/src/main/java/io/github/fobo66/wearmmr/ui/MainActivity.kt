@@ -21,83 +21,84 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : WearableActivity() {
 
-  val db: MatchmakingDatabase by inject()
+    val db: MatchmakingDatabase by inject()
 
-  @BindView(R.id.bottom_action_drawer)
-  lateinit var navigationDrawer: WearableActionDrawerView
+    @BindView(R.id.bottom_action_drawer)
+    lateinit var navigationDrawer: WearableActionDrawerView
 
-  @BindView(R.id.player_pic)
-  lateinit var playerPic: ImageView
+    @BindView(R.id.player_pic)
+    lateinit var playerPic: ImageView
 
 
-  @BindView(R.id.player_name)
-  lateinit var playerName: TextView
+    @BindView(R.id.player_name)
+    lateinit var playerName: TextView
 
-  @BindView(R.id.player_persona_name)
-  lateinit var playerPersonaName: TextView
+    @BindView(R.id.player_persona_name)
+    lateinit var playerPersonaName: TextView
 
-  @BindView(R.id.rating)
-  lateinit var rating: TextView
+    @BindView(R.id.rating)
+    lateinit var rating: TextView
 
-  private val noPlayerId = -1
+    private val noPlayerId = -1
 
-  private val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    ButterKnife.bind(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        ButterKnife.bind(this)
 
-    // Enables Always-on
-    setAmbientEnabled()
+        // Enables Always-on
+        setAmbientEnabled()
 
-    navigationDrawer.setOnMenuItemClickListener {
-      when (it.itemId) {
-        R.id.action_settings -> {
-          startActivity<SettingsActivity>()
-          return@setOnMenuItemClickListener true
+        navigationDrawer.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_settings -> {
+                    startActivity<SettingsActivity>()
+                    return@setOnMenuItemClickListener true
+                }
+            }
+            false
         }
-      }
-      false
     }
-  }
 
-  override fun onResume() {
-    super.onResume()
+    override fun onResume() {
+        super.onResume()
 
-    val isFirstLaunch: Boolean = defaultSharedPreferences.getBoolean("firstLaunch", true)
+        val isFirstLaunch: Boolean = defaultSharedPreferences.getBoolean("firstLaunch", true)
 
-    if (isFirstLaunch) {
-      defaultSharedPreferences.edit().putBoolean("firstLaunch", false).apply()
-      toast(R.string.set_playerid_message)
-      startActivity<SettingsActivity>()
-    } else {
-      val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
+        if (isFirstLaunch) {
+            defaultSharedPreferences.edit().putBoolean("firstLaunch", false).apply()
+            toast(R.string.set_playerid_message)
+            startActivity<SettingsActivity>()
+        } else {
+            val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
 
-      if (playerId != noPlayerId) {
-        disposables.add(
-            db.gameStatsDao().findOneByPlayerId(playerId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( { matchmakingRating ->
-                  playerName.text = matchmakingRating.name
-                  playerPersonaName.text = String.format("(%s)", matchmakingRating.personaName)
-                  rating.text = matchmakingRating.rating.toString()
+            if (playerId != noPlayerId) {
+                disposables.add(
+                    db.gameStatsDao().findOneByPlayerId(playerId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ matchmakingRating ->
+                            playerName.text = matchmakingRating.name
+                            playerPersonaName.text =
+                                    String.format("(%s)", matchmakingRating.personaName)
+                            rating.text = matchmakingRating.rating.toString()
 
-                  Glide.with(this)
-                          .load(matchmakingRating.avatarUrl)
-                          .into(playerPic)
-                }, {error ->
-                  Log.e(this.javaClass.name, "Cannot load data from database", error)
-                })
-        )
-      }
+                            Glide.with(this)
+                                .load(matchmakingRating.avatarUrl)
+                                .into(playerPic)
+                        }, { error ->
+                            Log.e(this.javaClass.name, "Cannot load data from database", error)
+                        })
+                )
+            }
+        }
     }
-  }
 
-  override fun onDestroy() {
-    super.onDestroy()
+    override fun onDestroy() {
+        super.onDestroy()
 
-    disposables.clear()
-  }
+        disposables.clear()
+    }
 }

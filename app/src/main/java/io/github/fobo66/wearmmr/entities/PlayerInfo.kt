@@ -9,7 +9,12 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * Created 12/17/17.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties("leaderboard_rank", "competitive_rank", "solo_competitive_rank", "tracked_until")
+@JsonIgnoreProperties(
+    "leaderboard_rank",
+    "competitive_rank",
+    "solo_competitive_rank",
+    "tracked_until"
+)
 data class PlayerInfo(
     val profile: PlayerProfile,
     @JsonProperty("rank_tier") val rankTier: Int?,

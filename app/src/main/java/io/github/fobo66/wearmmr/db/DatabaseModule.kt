@@ -9,13 +9,13 @@ import org.koin.android.module.AndroidModule
  * Created 12/20/17.
  */
 class DatabaseModule : AndroidModule() {
-  override fun context() = applicationContext {
-    provide { provideRoomDatabase(get()) }
-  }
+    override fun context() = applicationContext {
+        provide { provideRoomDatabase(get()) }
+    }
 
-  private fun provideRoomDatabase(appContext: Context): MatchmakingDatabase {
-    return Room.databaseBuilder(appContext, MatchmakingDatabase::class.java, "matchmaking")
-        .build()
-  }
+    private fun provideRoomDatabase(appContext: Context): MatchmakingDatabase {
+        return Room.databaseBuilder(appContext, MatchmakingDatabase::class.java, "matchmaking")
+            .build()
+    }
 
 }

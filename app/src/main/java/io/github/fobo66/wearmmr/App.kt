@@ -9,10 +9,10 @@ import org.koin.android.ext.android.startKoin
  * (c) 2017 Andrey Mukamolow <fobo66@protonmail.com>
  * Created 12/18/17.
  */
-class App: Application() {
-  override fun onCreate() {
-    super.onCreate()
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
 
-    startKoin(this, listOf(AppModule(applicationContext), ApiModule(), DatabaseModule()))
-  }
+        startKoin(this, listOf(AppModule(applicationContext), ApiModule(), DatabaseModule()))
+    }
 }
