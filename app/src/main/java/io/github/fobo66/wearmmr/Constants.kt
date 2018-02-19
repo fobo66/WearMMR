@@ -11,3 +11,6 @@ const val API_BASE_URL: String = "https://api.opendota.com/api/"
 
 @ProviderId
 const val RATING_PROVIDER_ID = 31977
+
+@ProviderId
+const val BATTERY_PROVIDER_ID = 98798712

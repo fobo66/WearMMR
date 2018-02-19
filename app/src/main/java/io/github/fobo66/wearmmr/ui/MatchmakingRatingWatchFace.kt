@@ -17,6 +17,7 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
+import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
@@ -113,10 +114,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                     .build()
             )
 
-            setActiveComplications(SystemProviders.WATCH_BATTERY, RATING_PROVIDER_ID)
-            setDefaultComplicationProvider(
-                SystemProviders.WATCH_BATTERY,
-                SystemProviders.batteryProvider(), TYPE_SHORT_TEXT
+            setActiveComplications(BATTERY_PROVIDER_ID, RATING_PROVIDER_ID)
+            setDefaultSystemComplicationProvider(
+                BATTERY_PROVIDER_ID,
+                SystemProviders.WATCH_BATTERY, TYPE_SHORT_TEXT
             )
             setDefaultComplicationProvider(
                 RATING_PROVIDER_ID,
@@ -193,7 +194,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             data: ComplicationData?
         ) {
             when (watchFaceComplicationId) {
-                SystemProviders.WATCH_BATTERY -> batteryComplication.setComplicationData(data)
+                BATTERY_PROVIDER_ID -> batteryComplication.setComplicationData(data)
                 RATING_PROVIDER_ID -> ratingComplication.setComplicationData(data)
             }
             invalidate()
