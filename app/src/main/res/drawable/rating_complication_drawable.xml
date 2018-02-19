@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <drawable xmlns:app="http://schemas.android.com/apk/res-auto"
     class="android.support.wearable.complications.rendering.ComplicationDrawable"
-    app:borderColor="#d50000"
+    app:backgroundColor="@color/complication_background"
+    app:borderColor="@color/complication_background"
     app:iconColor="#e0e0e0"
     app:textColor="#e0e0e0"
     app:titleColor="#e0e0e0">
     <ambient
+        app:backgroundColor="@android:color/transparent"
         app:iconColor="#757575"
         app:textColor="#bdbdbd" />
 </drawable>
