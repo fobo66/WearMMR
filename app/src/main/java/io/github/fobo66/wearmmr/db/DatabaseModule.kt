@@ -1,21 +1,21 @@
 package io.github.fobo66.wearmmr.db
 
 import android.arch.persistence.room.Room
-import android.content.Context
-import org.koin.android.module.AndroidModule
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module.applicationContext
 
 /**
- * (c) 2017 Andrey Mukamolow <fobo66@protonmail.com>
- * Created 12/20/17.
+ * (c) 2018 Andrey Mukamolow <fobo66@protonmail.com>
+ * Created 2/20/18.
  */
-class DatabaseModule : AndroidModule() {
-    override fun context() = applicationContext {
-        provide { provideRoomDatabase(get()) }
-    }
 
-    private fun provideRoomDatabase(appContext: Context): MatchmakingDatabase {
-        return Room.databaseBuilder(appContext, MatchmakingDatabase::class.java, "matchmaking")
+val databaseModule = applicationContext {
+    provide {
+        Room.databaseBuilder(
+            androidApplication(),
+            MatchmakingDatabase::class.java,
+            "matchmaking"
+        )
             .build()
     }
-
 }

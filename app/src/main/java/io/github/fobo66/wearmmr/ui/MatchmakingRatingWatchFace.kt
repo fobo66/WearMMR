@@ -1,15 +1,7 @@
 package io.github.fobo66.wearmmr.ui
 
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.content.*
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
@@ -29,10 +21,8 @@ import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import org.jetbrains.anko.startActivity
-
 import java.lang.ref.WeakReference
-import java.util.Calendar
-import java.util.TimeZone
+import java.util.*
 
 /**
  * Digital watch face with seconds. In ambient mode, the seconds aren't displayed. On devices with
@@ -159,7 +149,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             ratingComplication = getDrawable(
                 R.drawable.rating_complication_drawable
             ) as ComplicationDrawable
-            ratingComplication.setContext(applicationContext)
+            ratingComplication.setContext(this@MatchmakingRatingWatchFace)
         }
 
         override fun onDestroy() {
@@ -209,10 +199,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             invalidate()
         }
 
-        /**
-         * Captures tap event (and tap type) and toggles the background color if the user finishes
-         * a tap.
-         */
         override fun onTapCommand(tapType: Int, x: Int, y: Int, eventTime: Long) {
             when (tapType) {
                 WatchFaceService.TAP_TYPE_TOUCH -> {
@@ -223,7 +209,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 }
                 WatchFaceService.TAP_TYPE_TAP ->
                     // The user has completed the tap gesture.
-                    // TODO: Add code to handle the tap gesture.
                     startActivity<MainActivity>()
             }
             invalidate()

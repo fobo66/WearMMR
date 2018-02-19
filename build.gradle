@@ -5,7 +5,7 @@ buildscript {
     butterknifeVersion = '8.8.1'
     toothpickVersion = '1.1.1'
     anko_version = '0.10.3'
-    kotlin_version = '1.2.20'
+    kotlin_version = '1.2.21'
     supportLibsVersion = '27.0.2'
     roomVersion = '1.0.0'
     retrofitVersion = '2.3.0'

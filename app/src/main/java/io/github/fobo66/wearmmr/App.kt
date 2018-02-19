@@ -1,8 +1,8 @@
 package io.github.fobo66.wearmmr
 
 import android.app.Application
-import io.github.fobo66.wearmmr.api.ApiModule
-import io.github.fobo66.wearmmr.db.DatabaseModule
+import io.github.fobo66.wearmmr.api.apiModule
+import io.github.fobo66.wearmmr.db.databaseModule
 import org.koin.android.ext.android.startKoin
 
 /**
@@ -13,6 +13,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(this, listOf(AppModule(applicationContext), ApiModule(), DatabaseModule()))
+        startKoin(this, listOf(databaseModule, apiModule))
     }
 }
