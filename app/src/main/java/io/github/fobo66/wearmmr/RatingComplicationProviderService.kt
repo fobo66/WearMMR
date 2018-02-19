@@ -6,7 +6,6 @@ import android.support.wearable.complications.ComplicationData.Builder
 import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
-import android.support.wearable.complications.SystemProviders.ProviderId
 import android.util.Log
 import io.github.fobo66.wearmmr.R.drawable
 import io.github.fobo66.wearmmr.R.string
@@ -79,7 +78,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                                     )
                                 )
                                 .setShortText(ComplicationText.plainText(it.toString()))
-                                .setContentDescription(
+                                .setImageContentDescription(
                                     ComplicationText.plainText(
                                         applicationContext.getText(string.rating_complcation_description)
                                     )
