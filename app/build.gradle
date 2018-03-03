@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.fabric'
+
 apply from: 'https://gist.githubusercontent.com/fobo66/17d5116b5c7bccf5f28036f401f3c09d/raw/23dcd9e144a40da0f3140d788de8f7f541d11408/propertiesLoader.gradle'
 
 def keystoreProperties = loadProperties('keystore.properties')
@@ -85,4 +87,11 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.5.0'
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true
+    }
+    implementation 'com.google.firebase:firebase-core:11.8.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
