@@ -5,8 +5,8 @@ buildscript {
     butterknifeVersion = '8.8.1'
     toothpickVersion = '1.1.1'
     anko_version = '0.10.3'
-    kotlin_version = '1.2.21'
-    supportLibsVersion = '27.0.2'
+    kotlin_version = '1.2.30'
+    supportLibsVersion = '27.1.0'
     roomVersion = '1.0.0'
     retrofitVersion = '2.3.0'
     rxVersion = '2.1.7'
@@ -16,13 +16,16 @@ buildscript {
   repositories {
     google()
     jcenter()
+
+    maven {
+      url 'https://maven.fabric.io/public'
+    }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.0.1'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-    // NOTE: Do not place your application dependencies here; they belong
-    // in the individual module build.gradle files
+    classpath 'com.google.gms:google-services:3.2.0'
+    classpath 'io.fabric.tools:gradle:1.25.1'
   }
 }
 
