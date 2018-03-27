@@ -10,7 +10,7 @@ import org.koin.dsl.module.applicationContext
  */
 
 val databaseModule = applicationContext {
-    provide {
+    bean {
         Room.databaseBuilder(
             androidApplication(),
             MatchmakingDatabase::class.java,
