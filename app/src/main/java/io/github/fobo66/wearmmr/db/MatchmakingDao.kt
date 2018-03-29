@@ -21,7 +21,7 @@ import io.github.fobo66.wearmmr.entities.MatchmakingRating
 import io.reactivex.Flowable
 
 /**
- * DAO for matchmaking
+ * DAO for MMR
  *
  * Created 12/20/17.
  */

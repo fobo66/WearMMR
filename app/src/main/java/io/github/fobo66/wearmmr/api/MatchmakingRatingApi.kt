@@ -22,7 +22,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
- * (c) 2017 Andrey Mukamolow <fobo66@protonmail.com>
+ * OpenDota API client
  * Created 12/17/17.
  */
 interface MatchmakingRatingApi {

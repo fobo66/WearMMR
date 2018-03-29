@@ -87,20 +87,11 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
     }
 
-    private val backgroundBitmap: Bitmap
-        get() {
-            val bgBitmap: Bitmap = (resources.getDrawable(
-                R.drawable.dota_logo,
-                null
-            ) as BitmapDrawable).bitmap
-            return bgBitmap
-        }
-
     inner class Engine : CanvasWatchFaceService.Engine() {
 
-        private lateinit var mCalendar: Calendar
+        private lateinit var calendar: Calendar
 
-        private var mRegisteredTimeZoneReceiver = false
+        private var registeredTimeZoneReceiver = false
 
         private var timeXOffset: Float = 0F
         private var timeYOffset: Float = 0F
@@ -108,8 +99,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private var mmrXOffset: Float = 0F
         private var mmrYOffset: Float = 0F
 
-        private lateinit var mBackgroundPaint: Paint
-        private lateinit var mTextPaint: Paint
+        private lateinit var backgroundPaint: Paint
+        private lateinit var backgroundBitmap: Bitmap
+
+        private lateinit var textPaint: Paint
         private lateinit var batteryComplication: ComplicationDrawable
         private lateinit var ratingComplication: ComplicationDrawable
 
@@ -117,15 +110,15 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
          * Whether the display supports fewer bits for each color in ambient mode. When true, we
          * disable anti-aliasing in ambient mode.
          */
-        private var mLowBitAmbient: Boolean = false
-        private var mBurnInProtection: Boolean = false
+        private var lowBitAmbient: Boolean = false
+        private var burnInProtection: Boolean = false
         private var modeAmbient: Boolean = false
 
-        private val mUpdateTimeHandler: Handler = EngineHandler(this)
+        private val updateTimeHandler: Handler = EngineHandler(this)
 
-        private val mTimeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        private val timeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                mCalendar.timeZone = TimeZone.getDefault()
+                calendar.timeZone = TimeZone.getDefault()
                 invalidate()
             }
         }
@@ -150,7 +143,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 TYPE_SHORT_TEXT
             )
 
-            mCalendar = Calendar.getInstance()
+            calendar = Calendar.getInstance()
 
             val resources = this@MatchmakingRatingWatchFace.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
@@ -159,12 +152,17 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             mmrYOffset = resources.getDimension(R.dimen.mmr_y_offset)
 
             // Initializes background.
-            mBackgroundPaint = Paint().apply {
+            backgroundPaint = Paint().apply {
                 color = ContextCompat.getColor(applicationContext, R.color.background)
             }
 
+            backgroundBitmap = (resources.getDrawable(
+                R.drawable.dota_logo,
+                null
+            ) as BitmapDrawable).bitmap
+
             // Initializes Watch Face.
-            mTextPaint = Paint().apply {
+            textPaint = Paint().apply {
                 typeface =
                         ResourcesCompat.getFont(this@MatchmakingRatingWatchFace, R.font.trajan_pro)
                 isAntiAlias = true
@@ -179,16 +177,16 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         override fun onDestroy() {
-            mUpdateTimeHandler.removeMessages(MSG_UPDATE_TIME)
+            updateTimeHandler.removeMessages(MSG_UPDATE_TIME)
             super.onDestroy()
         }
 
         override fun onPropertiesChanged(properties: Bundle) {
             super.onPropertiesChanged(properties)
-            mLowBitAmbient = properties.getBoolean(
+            lowBitAmbient = properties.getBoolean(
                 WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false
             )
-            mBurnInProtection = properties.getBoolean(
+            burnInProtection = properties.getBoolean(
                 WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false
             )
         }
@@ -202,8 +200,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             super.onAmbientModeChanged(inAmbientMode)
             modeAmbient = inAmbientMode
 
-            if (mLowBitAmbient) {
-                mTextPaint.isAntiAlias = !inAmbientMode
+            if (lowBitAmbient) {
+                textPaint.isAntiAlias = !inAmbientMode
             }
 
             batteryComplication.setInAmbientMode(inAmbientMode)
@@ -278,28 +276,28 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             if (modeAmbient) {
                 canvas.drawColor(Color.BLACK)
             } else {
-                val bgBitmap: Bitmap = backgroundBitmap
                 canvas.drawBitmap(
-                    bgBitmap,
-                    0f, 0f, mBackgroundPaint
+                    backgroundBitmap,
+                    0f, 0f,
+                    backgroundPaint
                 )
             }
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
             val now = System.currentTimeMillis()
-            mCalendar.timeInMillis = now
+            calendar.timeInMillis = now
 
             val time = if (modeAmbient)
                 String.format(
-                    "%d:%02d", mCalendar.get(Calendar.HOUR),
-                    mCalendar.get(Calendar.MINUTE)
+                    "%d:%02d", calendar.get(Calendar.HOUR),
+                    calendar.get(Calendar.MINUTE)
                 )
             else
                 String.format(
-                    "%d:%02d:%02d", mCalendar.get(Calendar.HOUR),
-                    mCalendar.get(Calendar.MINUTE), mCalendar.get(Calendar.SECOND)
+                    "%d:%02d:%02d", calendar.get(Calendar.HOUR),
+                    calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND)
                 )
-            canvas.drawText(time, timeXOffset, timeYOffset, mTextPaint)
+            canvas.drawText(time, timeXOffset, timeYOffset, textPaint)
 
             batteryComplication.draw(canvas, now)
             ratingComplication.draw(canvas, now)
@@ -312,7 +310,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 registerTimeZoneReceiver()
 
                 // Update time zone in case it changed while we weren't visible.
-                mCalendar.timeZone = TimeZone.getDefault()
+                calendar.timeZone = TimeZone.getDefault()
                 invalidate()
             } else {
                 unregisterTimeZoneReceiver()
@@ -324,27 +322,26 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         private fun registerTimeZoneReceiver() {
-            if (mRegisteredTimeZoneReceiver) {
+            if (registeredTimeZoneReceiver) {
                 return
             }
-            mRegisteredTimeZoneReceiver = true
+            registeredTimeZoneReceiver = true
             val filter = IntentFilter(Intent.ACTION_TIMEZONE_CHANGED)
-            this@MatchmakingRatingWatchFace.registerReceiver(mTimeZoneReceiver, filter)
+            this@MatchmakingRatingWatchFace.registerReceiver(timeZoneReceiver, filter)
         }
 
         private fun unregisterTimeZoneReceiver() {
-            if (!mRegisteredTimeZoneReceiver) {
+            if (!registeredTimeZoneReceiver) {
                 return
             }
-            mRegisteredTimeZoneReceiver = false
-            this@MatchmakingRatingWatchFace.unregisterReceiver(mTimeZoneReceiver)
+            registeredTimeZoneReceiver = false
+            this@MatchmakingRatingWatchFace.unregisterReceiver(timeZoneReceiver)
         }
 
         override fun onApplyWindowInsets(insets: WindowInsets) {
             super.onApplyWindowInsets(insets)
 
             // Load resources that have alternate values for round watches.
-            val resources = this@MatchmakingRatingWatchFace.resources
             val isRound = insets.isRound
             timeXOffset = resources.getDimension(
                 if (isRound)
@@ -360,22 +357,22 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                     R.dimen.digital_text_size
             )
 
-            mTextPaint.textSize = textSize
+            textPaint.textSize = textSize
         }
 
         /**
-         * Starts the [.mUpdateTimeHandler] timer if it should be running and isn't currently
+         * Starts the [.updateTimeHandler] timer if it should be running and isn't currently
          * or stops it if it shouldn't be running but currently is.
          */
         private fun updateTimer() {
-            mUpdateTimeHandler.removeMessages(MSG_UPDATE_TIME)
+            updateTimeHandler.removeMessages(MSG_UPDATE_TIME)
             if (shouldTimerBeRunning()) {
-                mUpdateTimeHandler.sendEmptyMessage(MSG_UPDATE_TIME)
+                updateTimeHandler.sendEmptyMessage(MSG_UPDATE_TIME)
             }
         }
 
         /**
-         * Returns whether the [.mUpdateTimeHandler] timer should be running. The timer should
+         * Returns whether the [.updateTimeHandler] timer should be running. The timer should
          * only run when we're visible and in interactive mode.
          */
         private fun shouldTimerBeRunning(): Boolean {
@@ -390,7 +387,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             if (shouldTimerBeRunning()) {
                 val timeMs = System.currentTimeMillis()
                 val delayMs = INTERACTIVE_UPDATE_RATE_MS - timeMs % INTERACTIVE_UPDATE_RATE_MS
-                mUpdateTimeHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIME, delayMs)
+                updateTimeHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIME, delayMs)
             }
         }
     }
