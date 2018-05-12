@@ -3,16 +3,16 @@
 buildscript {
   ext {
     butterknifeVersion = '8.8.1'
-    toothpickVersion = '1.1.1'
     anko_version = '0.10.3'
     kotlin_version = '1.2.31'
     koin_version = '0.9.1'
-    supportLibsVersion = '27.1.0'
-    roomVersion = '1.0.0'
+    supportLibsVersion = '27.1.1'
+    roomVersion = '1.1.0'
     retrofitVersion = '2.3.0'
     rxVersion = '2.1.7'
     rxAndroidVersion = '2.0.1'
     rxKotlinVersion = '2.2.0'
+    wearableVersion = '2.3.0'
   }
   repositories {
     google()
@@ -23,7 +23,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.0'
+    classpath 'com.android.tools.build:gradle:3.1.2'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath 'com.google.gms:google-services:3.2.0'
     classpath 'io.fabric.tools:gradle:1.25.1'
