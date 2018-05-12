@@ -123,6 +123,19 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
         }
 
+        private val timeFormat: String
+            get() {
+                return if (modeAmbient)
+                    getString(
+                        R.string.time_format_ambient, calendar.get(Calendar.HOUR),
+                        calendar.get(Calendar.MINUTE)
+                    )
+                else getString(
+                    R.string.time_format, calendar.get(Calendar.HOUR),
+                    calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND)
+                )
+            }
+
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
@@ -287,17 +300,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             val now = System.currentTimeMillis()
             calendar.timeInMillis = now
 
-            val time = if (modeAmbient)
-                String.format(
-                    "%d:%02d", calendar.get(Calendar.HOUR),
-                    calendar.get(Calendar.MINUTE)
-                )
-            else
-                String.format(
-                    "%d:%02d:%02d", calendar.get(Calendar.HOUR),
-                    calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND)
-                )
-            canvas.drawText(time, timeXOffset, timeYOffset, textPaint)
+            canvas.drawText(timeFormat, timeXOffset, timeYOffset, textPaint)
 
             batteryComplication.draw(canvas, now)
             ratingComplication.draw(canvas, now)
