@@ -24,9 +24,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.bumptech.glide.Glide
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
+import io.github.fobo66.wearmmr.util.GlideApp
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -101,8 +101,9 @@ class MainActivity : WearableActivity() {
                                     String.format("(%s)", matchmakingRating.personaName)
                             rating.text = matchmakingRating.rating.toString()
 
-                            Glide.with(this)
+                            GlideApp.with(this)
                                 .load(matchmakingRating.avatarUrl)
+                                .placeholder(R.drawable.ic_person)
                                 .into(playerPic)
                         }, { error ->
                             Log.e(this.javaClass.name, "Cannot load data from database", error)

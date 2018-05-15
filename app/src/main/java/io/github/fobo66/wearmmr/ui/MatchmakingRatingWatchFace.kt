@@ -33,10 +33,13 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
+import io.github.fobo66.wearmmr.util.GlideApp
 import org.jetbrains.anko.startActivity
 import java.lang.ref.WeakReference
 import java.util.*
@@ -127,13 +130,20 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             get() {
                 return if (modeAmbient)
                     getString(
-                        R.string.time_format_ambient, calendar.get(Calendar.HOUR),
+                        R.string.time_format_ambient, calendar.get(Calendar.HOUR_OF_DAY),
                         calendar.get(Calendar.MINUTE)
                     )
                 else getString(
-                    R.string.time_format, calendar.get(Calendar.HOUR),
+                    R.string.time_format, calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND)
                 )
+            }
+
+        private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
+            object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    canvas.drawBitmap(resource, 0f, 0f, paint)
+                }
             }
 
         override fun onCreate(holder: SurfaceHolder) {
@@ -289,11 +299,12 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             if (modeAmbient) {
                 canvas.drawColor(Color.BLACK)
             } else {
-                canvas.drawBitmap(
-                    backgroundBitmap,
-                    0f, 0f,
-                    backgroundPaint
-                )
+                GlideApp.with(baseContext)
+                    .asBitmap()
+                    .override(bounds.width(), bounds.height())
+                    .fitCenter()
+                    .load(R.drawable.dota_logo)
+                    .into(getBackgroundImageTarget(canvas, backgroundPaint))
             }
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
