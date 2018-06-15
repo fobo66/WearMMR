@@ -24,6 +24,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.crashlytics.android.Crashlytics
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.util.GlideApp
@@ -107,6 +108,7 @@ class MainActivity : WearableActivity() {
                                 .into(playerPic)
                         }, { error ->
                             Log.e(this.javaClass.name, "Cannot load data from database", error)
+                            Crashlytics.logException(error)
                         })
                 )
             }
