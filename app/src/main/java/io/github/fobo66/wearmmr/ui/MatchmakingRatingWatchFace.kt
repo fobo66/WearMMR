@@ -99,8 +99,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private var timeXOffset: Float = 0F
         private var timeYOffset: Float = 0F
 
-        private var mmrXOffset: Float = 0F
-        private var mmrYOffset: Float = 0F
+        private var complicationYOffset: Float = 30F
 
         private lateinit var backgroundPaint: Paint
         private lateinit var backgroundBitmap: Bitmap
@@ -170,9 +169,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
             val resources = this@MatchmakingRatingWatchFace.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
-
-            mmrXOffset = resources.getDimension(R.dimen.mmr_x_offset)
-            mmrYOffset = resources.getDimension(R.dimen.mmr_y_offset)
 
             // Initializes background.
             backgroundPaint = Paint().apply {
@@ -273,22 +269,22 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             val midpointOfScreen = width / 2
 
             val horizontalOffset = (midpointOfScreen - sizeOfComplication) / 2
-            val verticalOffset = midpointOfScreen - (sizeOfComplication / 2) + 30
+            val verticalOffset = midpointOfScreen - (sizeOfComplication / 2) + complicationYOffset
 
             val batteryComplicationBounds = Rect(
                 horizontalOffset,
-                verticalOffset,
+                verticalOffset.toInt(),
                 (horizontalOffset + sizeOfComplication),
-                (verticalOffset + sizeOfComplication)
+                ((verticalOffset + sizeOfComplication).toInt())
             )
 
             batteryComplication.bounds = batteryComplicationBounds
 
             val ratingComplicationBounds = Rect(
                 (midpointOfScreen + horizontalOffset),
-                verticalOffset,
+                verticalOffset.toInt(),
                 (midpointOfScreen + horizontalOffset + sizeOfComplication),
-                (verticalOffset + sizeOfComplication)
+                ((verticalOffset + sizeOfComplication).toInt())
             )
 
             ratingComplication.bounds = ratingComplicationBounds
@@ -362,6 +358,13 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                     R.dimen.digital_x_offset_round
                 else
                     R.dimen.digital_x_offset
+            )
+
+            complicationYOffset = resources.getDimension(
+                if (isRound)
+                    R.dimen.complication_y_offset_round
+                else
+                    R.dimen.complication_y_offset
             )
 
             val textSize = resources.getDimension(
