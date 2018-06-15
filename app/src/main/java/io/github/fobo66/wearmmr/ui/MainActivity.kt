@@ -16,7 +16,10 @@
 
 package io.github.fobo66.wearmmr.ui
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.NotificationCompat
 import android.support.wear.widget.drawer.WearableActionDrawerView
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
@@ -34,6 +37,7 @@ import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
+
 
 class MainActivity : WearableActivity() {
 
@@ -86,6 +90,7 @@ class MainActivity : WearableActivity() {
         if (isFirstLaunch) {
             defaultSharedPreferences.edit().putBoolean("firstLaunch", false).apply()
             toast(R.string.set_playerid_message)
+
             startActivity<SettingsActivity>()
         } else {
             val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
@@ -117,5 +122,24 @@ class MainActivity : WearableActivity() {
         super.onDestroy()
 
         disposables.clear()
+    }
+
+    private fun createPlayerIdRequestNotification() {
+        val messagingStyle =
+            NotificationCompat.MessagingStyle(getString(R.string.set_playerid_message))
+        messagingStyle.conversationTitle = getString(R.string.app_name)
+
+        val notifyIntent = Intent(this, MainActivity::class.java)
+
+
+        val mainPendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+
+        NotificationCompat.Builder(this, "playerId")
     }
 }

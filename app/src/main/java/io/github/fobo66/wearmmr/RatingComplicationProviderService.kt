@@ -45,7 +45,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
 
     private val disposables = CompositeDisposable()
 
-    val matchmakingRatingClient: MatchmakingRatingApi by inject()
+    private val matchmakingRatingClient: MatchmakingRatingApi by inject()
     val db: MatchmakingDatabase by inject()
 
     override fun onComplicationUpdate(
