@@ -33,8 +33,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/dota_logo"
-      />
+      app:srcCompat="@drawable/ic_person" />
   <TextView
       android:id="@+id/player_name"
       android:layout_width="wrap_content"
@@ -58,6 +57,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:fontFamily="@font/trajan_pro"
+      android:text="@string/placeholder_rating"
       android:textSize="40sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

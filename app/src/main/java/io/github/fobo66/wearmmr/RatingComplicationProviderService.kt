@@ -95,7 +95,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                                 .setShortText(ComplicationText.plainText(it.toString()))
                                 .setImageContentDescription(
                                     ComplicationText.plainText(
-                                        applicationContext.getText(string.rating_complcation_description)
+                                        applicationContext.getText(string.rating_complication_description)
                                     )
                                 )
                                 .build()
