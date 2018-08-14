@@ -16,9 +16,11 @@
 
 package io.github.fobo66.wearmmr.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView.BufferType.EDITABLE
 import butterknife.BindView
@@ -31,6 +33,10 @@ class SettingsActivity : WearableActivity() {
     @BindView(R.id.player_id_input)
     lateinit var playerIdInput: EditText
 
+    private val inputMethodManager: InputMethodManager by lazy {
+        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -41,13 +47,14 @@ class SettingsActivity : WearableActivity() {
 
         playerIdInput.setText(defaultSharedPreferences.getInt("playerId", 0).toString(), EDITABLE)
 
-        playerIdInput.setOnEditorActionListener({ _, actionId, _ ->
+        playerIdInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
                 val playerId: Int = Integer.parseInt(playerIdInput.text.toString())
                 this.defaultSharedPreferences.edit().putInt("playerId", playerId).apply()
                 return@setOnEditorActionListener true
             }
             false
-        })
+        }
     }
 }
