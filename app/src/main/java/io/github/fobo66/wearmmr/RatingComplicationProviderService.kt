@@ -45,7 +45,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
 
     private val disposables = CompositeDisposable()
 
-    val matchmakingRatingClient: MatchmakingRatingApi by inject()
+    private val matchmakingRatingClient: MatchmakingRatingApi by inject()
     val db: MatchmakingDatabase by inject()
 
     override fun onComplicationUpdate(
@@ -73,7 +73,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                         MatchmakingRating(
                             playerInfo.profile.accountId, playerInfo.profile.name,
                             playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
-                            playerInfo.mmrEstimate.estimate
+                            playerInfo.mmrEstimate?.estimate
                         )
                     }
                     .flatMap { rating ->

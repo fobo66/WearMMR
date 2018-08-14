@@ -30,6 +30,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class PlayerInfo(
     val profile: PlayerProfile,
     @JsonProperty("rank_tier") val rankTier: Int?,
-    @JsonProperty("mmr_estimate") val mmrEstimate: MmrEstimate
+    @JsonProperty("mmr_estimate") val mmrEstimate: MmrEstimate?
 
 )
