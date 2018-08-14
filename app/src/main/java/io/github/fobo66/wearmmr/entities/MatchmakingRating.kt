@@ -35,9 +35,9 @@ data class MatchmakingRating(
 
     @PrimaryKey val playerId: Int,
 
-    @ColumnInfo(name = "player_name") val name: String,
+    @ColumnInfo(name = "player_name") val name: String?,
 
-    @ColumnInfo(name = "player_persona_name") val personaName: String,
+    @ColumnInfo(name = "player_persona_name") val personaName: String?,
 
     @ColumnInfo(name = "player_avatar_url") val avatarUrl: String?,
 
