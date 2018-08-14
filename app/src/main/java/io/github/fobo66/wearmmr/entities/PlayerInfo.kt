@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
     "tracked_until"
 )
 data class PlayerInfo(
-    val profile: PlayerProfile,
+    @JsonProperty("profile") val profile: PlayerProfile,
     @JsonProperty("rank_tier") val rankTier: Int?,
     @JsonProperty("mmr_estimate") val mmrEstimate: MmrEstimate?
 

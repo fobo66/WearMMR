@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 )
 data class PlayerProfile(
     @JsonProperty("account_id") val accountId: Int,
-    val name: String?,
+    @JsonProperty("name") val name: String?,
     @JsonProperty("personaname") val personaName: String?,
     @JsonProperty("avatar") val avatarUrl: String
 )
