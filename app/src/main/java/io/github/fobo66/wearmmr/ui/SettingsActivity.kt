@@ -50,8 +50,8 @@ class SettingsActivity : WearableActivity() {
         playerIdInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-                val playerId: Int = Integer.parseInt(playerIdInput.text.toString())
-                this.defaultSharedPreferences.edit().putInt("playerId", playerId).apply()
+                val playerId: Long = playerIdInput.text.toString().toLong()
+                this.defaultSharedPreferences.edit().putLong("playerId", playerId).apply()
                 return@setOnEditorActionListener true
             }
             false

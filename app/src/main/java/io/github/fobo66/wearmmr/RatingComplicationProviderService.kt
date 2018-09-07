@@ -41,12 +41,12 @@ import org.koin.android.ext.android.inject
 
 class RatingComplicationProviderService : ComplicationProviderService() {
 
-    private val noPlayerId = -1
+    private val noPlayerId: Long = -1
 
     private val disposables = CompositeDisposable()
 
     private val matchmakingRatingClient: MatchmakingRatingApi by inject()
-    val db: MatchmakingDatabase by inject()
+    private val db: MatchmakingDatabase by inject()
 
     override fun onComplicationUpdate(
         complicationId: Int, dataType: Int, complicationManager: ComplicationManager?
@@ -63,7 +63,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
         complicationManager: ComplicationManager?,
         complicationId: Int
     ) {
-        val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
+        val playerId = defaultSharedPreferences.getLong("playerId", noPlayerId)
 
         if (playerId != noPlayerId) {
             disposables.add(
