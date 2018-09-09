@@ -56,7 +56,7 @@ class MainActivity : WearableActivity() {
     @BindView(R.id.rating)
     lateinit var rating: TextView
 
-    private val noPlayerId = -1
+    private val noPlayerId = -1L
 
     private val disposables = CompositeDisposable()
 
@@ -89,7 +89,7 @@ class MainActivity : WearableActivity() {
             toast(R.string.set_playerid_message)
             startActivity<SettingsActivity>()
         } else {
-            val playerId = defaultSharedPreferences.getInt("playerId", noPlayerId)
+            val playerId = defaultSharedPreferences.getLong("playerId", noPlayerId)
 
             if (playerId != noPlayerId) {
                 disposables.add(

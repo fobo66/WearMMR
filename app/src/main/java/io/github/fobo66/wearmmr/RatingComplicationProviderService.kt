@@ -23,6 +23,7 @@ import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
 import android.util.Log
+import com.crashlytics.android.Crashlytics
 import io.github.fobo66.wearmmr.R.drawable
 import io.github.fobo66.wearmmr.R.string
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
@@ -104,9 +105,10 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                                 complicationId,
                                 complicationData
                             )
-                        },
-                        { error ->
-                            Log.e(javaClass.name, "Error while updating player info", error)
+                        }
+                        , { error ->
+                            Log.e(javaClass.simpleName, "Failed to load rating", error)
+                            Crashlytics.logException(error)
                             complicationManager!!.noUpdateRequired(complicationId)
                         })
             )
