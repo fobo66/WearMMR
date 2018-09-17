@@ -1,5 +1,5 @@
 /*
- * Copyright 2018. Andrey Mukamolow <fobo66@protonmail.com>
+ * Copyright 2018. Andrey Mukamolov <fobo66@protonmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package io.github.fobo66.wearmmr
 import android.support.wearable.complications.SystemProviders.ProviderId
 
 /**
- * (c) 2017 Andrey Mukamolow <fobo66@protonmail.com>
+ * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
  * Created 12/17/17.
  */
 
