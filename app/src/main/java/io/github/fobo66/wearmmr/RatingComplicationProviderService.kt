@@ -24,12 +24,10 @@ import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
 import android.util.Log
 import com.crashlytics.android.Crashlytics
-import io.github.fobo66.wearmmr.R.drawable
-import io.github.fobo66.wearmmr.R.string
+
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.entities.MatchmakingRating
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -77,10 +75,8 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                             playerInfo.mmrEstimate?.estimate
                         )
                     }
-                    .flatMap { rating ->
-                        db.gameStatsDao().insertRating(rating)
-                        return@flatMap Observable.just(rating.rating)
-                    }
+                    .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
+                    .map { rating -> rating.rating }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
@@ -90,13 +86,13 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                                 .setIcon(
                                     Icon.createWithResource(
                                         applicationContext,
-                                        drawable.ic_rating
+                                        R.drawable.ic_rating
                                     )
                                 )
                                 .setShortText(ComplicationText.plainText(it.toString()))
                                 .setImageContentDescription(
                                     ComplicationText.plainText(
-                                        applicationContext.getText(string.rating_complication_description)
+                                        applicationContext.getText(R.string.rating_complication_description)
                                     )
                                 )
                                 .build()
