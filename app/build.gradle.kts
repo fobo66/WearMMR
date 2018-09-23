@@ -128,6 +128,7 @@ dependencies {
         isTransitive = true
     }
     implementation("com.google.firebase:firebase-core:16.0.3")
+    implementation("net.danlew:android.joda:2.9.9.4")
 }
 
 apply(plugin = "com.google.gms.google-services")

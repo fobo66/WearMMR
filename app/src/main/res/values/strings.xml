@@ -25,7 +25,7 @@
     <string name="rating_complication_description">Rating value</string>
     <string name="profile_picture_content_desc">Player\'s profile picture</string>
     <string name="settings_player_id_hint">Please specify your Steam ID in the input above so we can fetch your MMR</string>
-    <string name="time_format">%1$d:%2$02d:%3$02d</string>
-    <string name="time_format_ambient">%1$d:%2$02d</string>
+    <string name="time_format">HH:mm:ss</string>
+    <string name="time_format_ambient">HH:mm</string>
     <string name="placeholder_rating" translatable="false">--</string>
 </resources>

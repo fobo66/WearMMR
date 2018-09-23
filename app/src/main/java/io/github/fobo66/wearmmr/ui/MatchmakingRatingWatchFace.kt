@@ -41,6 +41,8 @@ import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import io.github.fobo66.wearmmr.util.GlideApp
 import org.jetbrains.anko.startActivity
+import org.joda.time.DateTimeZone
+import org.joda.time.LocalTime
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -92,7 +94,15 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
     inner class Engine : CanvasWatchFaceService.Engine() {
 
-        private lateinit var calendar: Calendar
+        private lateinit var time: LocalTime
+
+        private val ambientTimeFormat: String by lazy {
+            getString(R.string.time_format_ambient)
+        }
+
+        private val regularTimeFormat: String by lazy {
+            getString(R.string.time_format)
+        }
 
         private var registeredTimeZoneReceiver = false
 
@@ -120,7 +130,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
         private val timeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                calendar.timeZone = TimeZone.getDefault()
+                updateTimeZone()
                 invalidate()
             }
         }
@@ -128,14 +138,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private val timeFormat: String
             get() {
                 return if (modeAmbient)
-                    getString(
-                        R.string.time_format_ambient, calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE)
-                    )
-                else getString(
-                    R.string.time_format, calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND)
-                )
+                    ambientTimeFormat
+                else regularTimeFormat
             }
 
         private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
@@ -165,7 +169,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 TYPE_SHORT_TEXT
             )
 
-            calendar = Calendar.getInstance()
+            time = LocalTime.now()
 
             val resources = this@MatchmakingRatingWatchFace.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
@@ -305,9 +309,9 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
             val now = System.currentTimeMillis()
-            calendar.timeInMillis = now
+            time = LocalTime.now()
 
-            canvas.drawText(timeFormat, timeXOffset, timeYOffset, textPaint)
+            canvas.drawText(time.toString(timeFormat), timeXOffset, timeYOffset, textPaint)
 
             batteryComplication.draw(canvas, now)
             ratingComplication.draw(canvas, now)
@@ -320,7 +324,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 registerTimeZoneReceiver()
 
                 // Update time zone in case it changed while we weren't visible.
-                calendar.timeZone = TimeZone.getDefault()
+                updateTimeZone()
                 invalidate()
             } else {
                 unregisterTimeZoneReceiver()
@@ -329,6 +333,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             // Whether the timer should be running depends on whether we're visible (as well as
             // whether we're in ambient mode), so we may need to start or stop the timer.
             updateTimer()
+        }
+
+        private fun updateTimeZone() {
+            time = LocalTime(DateTimeZone.forTimeZone(TimeZone.getDefault()))
         }
 
         private fun registerTimeZoneReceiver() {

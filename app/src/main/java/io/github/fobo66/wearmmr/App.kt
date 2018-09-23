@@ -19,6 +19,7 @@ package io.github.fobo66.wearmmr
 import android.app.Application
 import io.github.fobo66.wearmmr.api.apiModule
 import io.github.fobo66.wearmmr.db.databaseModule
+import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.android.startKoin
 
 @Suppress("unused")
@@ -26,6 +27,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        JodaTimeAndroid.init(this)
         startKoin(this, listOf(databaseModule, apiModule))
     }
 }
