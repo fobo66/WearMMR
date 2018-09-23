@@ -27,10 +27,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(
     "cheese", "avatarmedium", "avatarfull", "steamid", "profileurl", "last_login",
-    "loccountrycode"
+    "loccountrycode", "is_contributor"
 )
 data class PlayerProfile(
-    @JsonProperty("account_id") val accountId: Int,
+    @JsonProperty("account_id") val accountId: Long,
     @JsonProperty("name") val name: String?,
     @JsonProperty("personaname") val personaName: String?,
     @JsonProperty("avatar") val avatarUrl: String

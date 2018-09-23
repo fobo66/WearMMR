@@ -21,7 +21,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.applicationContext
 
 /**
- * DI components for http client
+ * DI component for Room database
  *
  * Created 2/20/18.
  */

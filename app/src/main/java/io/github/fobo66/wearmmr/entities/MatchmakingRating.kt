@@ -33,7 +33,7 @@ import android.os.Parcelable.Creator
 @Entity(tableName = "mmr")
 data class MatchmakingRating(
 
-    @PrimaryKey val playerId: Int,
+    @PrimaryKey val playerId: Long,
 
     @ColumnInfo(name = "player_name") val name: String?,
 
@@ -46,7 +46,7 @@ data class MatchmakingRating(
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -54,7 +54,7 @@ data class MatchmakingRating(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(playerId)
+        parcel.writeLong(playerId)
         parcel.writeString(name)
         parcel.writeString(personaName)
         parcel.writeString(avatarUrl)
