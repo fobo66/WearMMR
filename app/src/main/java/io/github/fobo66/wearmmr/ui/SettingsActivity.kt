@@ -73,7 +73,10 @@ class SettingsActivity : WearableActivity() {
     }
 
     private fun updatePlayerIdPreference() {
-        val playerId: Long = playerIdInput.text.toString().toLong()
-        this.defaultSharedPreferences.edit().putLong("playerId", playerId).apply()
+        val playerIdString = playerIdInput.text.toString()
+        if (playerIdString.isNotBlank()) {
+            val playerId: Long = playerIdString.toLong()
+            this.defaultSharedPreferences.edit().putLong("playerId", playerId).apply()
+        }
     }
 }
