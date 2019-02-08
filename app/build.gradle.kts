@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import java.util.*
 import java.io.FileInputStream
 
+val kotlin_version = "1.3.11"
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -87,7 +89,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("reflect", kotlin_version))
 
     implementation("org.jetbrains.anko:anko-commons:$ankoVersion")
     implementation("org.jetbrains.anko:anko-sdk25:$ankoVersion")
@@ -127,7 +129,7 @@ dependencies {
     implementation("com.crashlytics.sdk.android:crashlytics:2.9.5@aar") {
         isTransitive = true
     }
-    implementation("com.google.firebase:firebase-core:16.0.3")
+    implementation("com.google.firebase:firebase-core:16.0.7")
     implementation("net.danlew:android.joda:2.9.9.4")
 }
 

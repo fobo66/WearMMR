@@ -2,6 +2,7 @@
 
 buildscript {
 
+    val kotlin_version = "1.3.11"
     repositories {
         google()
         jcenter()
@@ -10,9 +11,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:3.1.4")
-        classpath(kotlin("gradle-plugin", version = "1.2.61"))
-        classpath("com.google.gms:google-services:3.2.0")
+        classpath("com.android.tools.build:gradle:3.3.1")
+        classpath(kotlin("gradle-plugin", version = kotlin_version))
+        classpath("com.google.gms:google-services:4.2.0")
         classpath("io.fabric.tools:gradle:1.25.4")
     }
 }
@@ -21,6 +22,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 
