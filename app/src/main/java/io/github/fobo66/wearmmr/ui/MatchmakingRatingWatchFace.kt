@@ -23,8 +23,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders
@@ -34,6 +32,8 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
@@ -60,26 +60,13 @@ import java.util.*
  */
 class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
-    companion object {
-        /**
-         * Updates rate in milliseconds for interactive mode. We update once a second since seconds
-         * are displayed in interactive mode.
-         */
-        private const val INTERACTIVE_UPDATE_RATE_MS = 1000
-
-        /**
-         * Handler message id for updating the time periodically in interactive mode.
-         */
-        private const val MSG_UPDATE_TIME = 0
-    }
-
     override fun onCreateEngine(): Engine {
         return Engine()
     }
 
     private class EngineHandler(reference: Engine) : Handler() {
         private val mWeakReference: WeakReference<Engine> = WeakReference(
-            reference
+                reference
         )
 
         override fun handleMessage(msg: Message) {
@@ -143,34 +130,34 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
 
         private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
-            object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    canvas.drawBitmap(resource, 0f, 0f, paint)
-                }
+                object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        canvas.drawBitmap(resource, 0f, 0f, paint)
+                    }
 
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    canvas.drawPaint(paint)
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        canvas.drawPaint(paint)
+                    }
                 }
-            }
 
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
             setWatchFaceStyle(
-                WatchFaceStyle.Builder(this@MatchmakingRatingWatchFace)
-                    .setAcceptsTapEvents(true)
-                    .build()
+                    WatchFaceStyle.Builder(this@MatchmakingRatingWatchFace)
+                            .setAcceptsTapEvents(true)
+                            .build()
             )
 
             setActiveComplications(BATTERY_PROVIDER_ID, RATING_PROVIDER_ID)
             setDefaultSystemComplicationProvider(
-                BATTERY_PROVIDER_ID,
-                SystemProviders.WATCH_BATTERY, TYPE_SHORT_TEXT
+                    BATTERY_PROVIDER_ID,
+                    SystemProviders.WATCH_BATTERY, TYPE_SHORT_TEXT
             )
             setDefaultComplicationProvider(
-                RATING_PROVIDER_ID,
-                ComponentName(applicationContext, RatingComplicationProviderService::class.java),
-                TYPE_SHORT_TEXT
+                    RATING_PROVIDER_ID,
+                    ComponentName(applicationContext, RatingComplicationProviderService::class.java),
+                    TYPE_SHORT_TEXT
             )
 
             time = LocalTime.now()
@@ -185,8 +172,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
             backgroundBitmap = (ResourcesCompat.getDrawable(
                     resources,
-                R.drawable.dota_logo,
-                null
+                    R.drawable.dota_logo,
+                    null
             ) as BitmapDrawable).bitmap
 
             // Initializes Watch Face.
@@ -200,7 +187,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             batteryComplication = ComplicationDrawable(applicationContext)
             ratingComplication = ResourcesCompat.getDrawable(
                     resources,
-                R.drawable.rating_complication_drawable,
+                    R.drawable.rating_complication_drawable,
                     null
             ) as ComplicationDrawable
             ratingComplication.setContext(this@MatchmakingRatingWatchFace)
@@ -214,10 +201,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         override fun onPropertiesChanged(properties: Bundle) {
             super.onPropertiesChanged(properties)
             lowBitAmbient = properties.getBoolean(
-                WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false
+                    WatchFaceService.PROPERTY_LOW_BIT_AMBIENT, false
             )
             burnInProtection = properties.getBoolean(
-                WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false
+                    WatchFaceService.PROPERTY_BURN_IN_PROTECTION, false
             )
         }
 
@@ -243,8 +230,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         override fun onComplicationDataUpdate(
-            watchFaceComplicationId: Int,
-            data: ComplicationData?
+                watchFaceComplicationId: Int,
+                data: ComplicationData?
         ) {
             when (watchFaceComplicationId) {
                 BATTERY_PROVIDER_ID -> batteryComplication.setComplicationData(data)
@@ -269,10 +256,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         override fun onSurfaceChanged(
-            holder: SurfaceHolder?,
-            format: Int,
-            width: Int,
-            height: Int
+                holder: SurfaceHolder?,
+                format: Int,
+                width: Int,
+                height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
 
@@ -283,19 +270,19 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             val verticalOffset = midpointOfScreen - (sizeOfComplication / 2) + complicationYOffset
 
             val batteryComplicationBounds = Rect(
-                horizontalOffset,
-                verticalOffset.toInt(),
-                (horizontalOffset + sizeOfComplication),
-                ((verticalOffset + sizeOfComplication).toInt())
+                    horizontalOffset,
+                    verticalOffset.toInt(),
+                    (horizontalOffset + sizeOfComplication),
+                    ((verticalOffset + sizeOfComplication).toInt())
             )
 
             batteryComplication.bounds = batteryComplicationBounds
 
             val ratingComplicationBounds = Rect(
-                (midpointOfScreen + horizontalOffset),
-                verticalOffset.toInt(),
-                (midpointOfScreen + horizontalOffset + sizeOfComplication),
-                ((verticalOffset + sizeOfComplication).toInt())
+                    (midpointOfScreen + horizontalOffset),
+                    verticalOffset.toInt(),
+                    (midpointOfScreen + horizontalOffset + sizeOfComplication),
+                    ((verticalOffset + sizeOfComplication).toInt())
             )
 
             ratingComplication.bounds = ratingComplicationBounds
@@ -307,11 +294,11 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 canvas.drawColor(Color.BLACK)
             } else {
                 GlideApp.with(baseContext)
-                    .asBitmap()
-                    .override(bounds.width(), bounds.height())
-                    .fitCenter()
-                    .load(R.drawable.dota_logo)
-                    .into(getBackgroundImageTarget(canvas, backgroundPaint))
+                        .asBitmap()
+                        .override(bounds.width(), bounds.height())
+                        .fitCenter()
+                        .load(R.drawable.dota_logo)
+                        .into(getBackgroundImageTarget(canvas, backgroundPaint))
             }
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
@@ -369,24 +356,24 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             // Load resources that have alternate values for round watches.
             val isRound = insets.isRound
             timeXOffset = resources.getDimension(
-                if (isRound)
-                    R.dimen.digital_x_offset_round
-                else
-                    R.dimen.digital_x_offset
+                    if (isRound)
+                        R.dimen.digital_x_offset_round
+                    else
+                        R.dimen.digital_x_offset
             )
 
             complicationYOffset = resources.getDimension(
-                if (isRound)
-                    R.dimen.complication_y_offset_round
-                else
-                    R.dimen.complication_y_offset
+                    if (isRound)
+                        R.dimen.complication_y_offset_round
+                    else
+                        R.dimen.complication_y_offset
             )
 
             val textSize = resources.getDimension(
-                if (isRound)
-                    R.dimen.digital_text_size_round
-                else
-                    R.dimen.digital_text_size
+                    if (isRound)
+                        R.dimen.digital_text_size_round
+                    else
+                        R.dimen.digital_text_size
             )
 
             textPaint.textSize = textSize
@@ -423,4 +410,18 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
         }
     }
+
+    companion object {
+        /**
+         * Updates rate in milliseconds for interactive mode. We update once a second since seconds
+         * are displayed in interactive mode.
+         */
+        private const val INTERACTIVE_UPDATE_RATE_MS = 1000
+
+        /**
+         * Handler message id for updating the time periodically in interactive mode.
+         */
+        private const val MSG_UPDATE_TIME = 0
+    }
+
 }
