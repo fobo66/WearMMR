@@ -17,8 +17,7 @@
 package io.github.fobo66.wearmmr.db
 
 import androidx.room.Room
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module
 
 /**
  * DI component for Room database
@@ -26,10 +25,10 @@ import org.koin.dsl.module.applicationContext
  * Created 2/20/18.
  */
 
-val databaseModule = applicationContext {
-    bean {
+val databaseModule = module {
+    single {
         Room.databaseBuilder(
-            androidApplication(),
+            get(),
             MatchmakingDatabase::class.java,
             "matchmaking"
         )

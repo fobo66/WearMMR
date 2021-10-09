@@ -20,7 +20,9 @@ import android.app.Application
 import io.github.fobo66.wearmmr.api.apiModule
 import io.github.fobo66.wearmmr.db.databaseModule
 import net.danlew.android.joda.JodaTimeAndroid
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 @Suppress("unused")
 class App : Application() {
@@ -28,6 +30,10 @@ class App : Application() {
         super.onCreate()
 
         JodaTimeAndroid.init(this)
-        startKoin(this, listOf(databaseModule, apiModule))
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(databaseModule, apiModule)
+        }
     }
 }

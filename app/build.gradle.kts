@@ -45,7 +45,7 @@ val roomVersion = "1.1.1"
 val rxVersion = "2.1.7"
 val rxKotlinVersion = "2.2.0"
 val rxAndroidVersion = "2.0.1"
-val koinVersion = "0.9.1"
+val koinVersion = "3.1.2"
 
 android {
 
@@ -118,7 +118,7 @@ dependencies {
     implementation("androidx.room:room-rxjava2:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
 
-    implementation("org.koin:koin-android:$koinVersion")
+    implementation("io.insert-koin:koin-android:$koinVersion")
 
     implementation("com.github.bumptech.glide:glide:4.7.1")
     kapt("com.github.bumptech.glide:compiler:4.7.1")

@@ -19,7 +19,7 @@ package io.github.fobo66.wearmmr.api
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.fobo66.wearmmr.API_BASE_URL
 import okhttp3.OkHttpClient
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -29,9 +29,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory
  * Created 12/18/17.
  */
 
-val apiModule = applicationContext {
-    bean { provideHttpClient() }
-    bean { provideApiClient(get()) }
+val apiModule = module {
+    single { provideHttpClient() }
+    single { provideApiClient(get()) }
 }
 
 fun provideHttpClient(): OkHttpClient {
