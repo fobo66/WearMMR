@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import java.util.*
 import java.io.FileInputStream
 
-val kotlin_version = "1.3.11"
+val kotlin_version = "1.5.31"
 
 plugins {
     id("com.android.application")
