@@ -36,15 +36,15 @@ fun loadProperties(propertiesName: String): Properties {
 
 val keystoreProperties = loadProperties("keystore.properties")
 
-val butterknifeVersion = "8.8.1"
+val butterknifeVersion = "10.2.3"
 val ankoVersion = "0.10.3"
-val wearableVersion = "2.3.0"
+val wearableVersion = "2.8.1"
 val supportLibsVersion = "27.1.1"
-val retrofitVersion = "2.3.0"
+val retrofitVersion = "2.9.0"
 val roomVersion = "1.1.1"
-val rxVersion = "2.1.7"
-val rxKotlinVersion = "2.2.0"
-val rxAndroidVersion = "2.0.1"
+val rxVersion = "2.2.21"
+val rxKotlinVersion = "2.4.0"
+val rxAndroidVersion = "2.1.1"
 val koinVersion = "3.1.2"
 
 android {
@@ -105,7 +105,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-jackson:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
 
     implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
@@ -120,11 +120,11 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
-    implementation("com.github.bumptech.glide:glide:4.7.1")
-    kapt("com.github.bumptech.glide:compiler:4.7.1")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    kapt("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")
     implementation("com.google.firebase:firebase-analytics:19.0.2")
-    implementation("net.danlew:android.joda:2.9.9.4")
+    implementation("net.danlew:android.joda:2.10.9.1")
 }
