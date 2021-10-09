@@ -16,7 +16,7 @@
 
 package io.github.fobo66.wearmmr.db
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.applicationContext
 

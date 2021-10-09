@@ -17,14 +17,14 @@
 package io.github.fobo66.wearmmr.ui
 
 import android.os.Bundle
-import android.support.wear.widget.drawer.WearableActionDrawerView
+import androidx.wear.widget.drawer.WearableActionDrawerView
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.util.GlideApp
@@ -108,7 +108,7 @@ class MainActivity : WearableActivity() {
                                 .into(playerPic)
                         }, { error ->
                             Log.e(this.javaClass.name, "Cannot load data from database", error)
-                            Crashlytics.logException(error)
+                            FirebaseCrashlytics.getInstance().recordException(error)
                         })
                 )
             }

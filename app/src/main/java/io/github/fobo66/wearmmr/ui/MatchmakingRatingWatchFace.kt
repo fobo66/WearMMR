@@ -22,8 +22,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders

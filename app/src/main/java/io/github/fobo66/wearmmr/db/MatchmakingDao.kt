@@ -16,7 +16,7 @@
 
 package io.github.fobo66.wearmmr.db
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import io.github.fobo66.wearmmr.entities.MatchmakingRating
 import io.reactivex.Flowable
 

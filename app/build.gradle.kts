@@ -58,7 +58,7 @@ android {
         versionName = "1.0.2"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -94,18 +94,18 @@ dependencies {
     implementation("org.jetbrains.anko:anko-appcompat-v7:$ankoVersion")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
-    implementation("com.android.support:percent:$supportLibsVersion")
-    implementation("com.android.support:animated-vector-drawable:$supportLibsVersion")
-    implementation("com.android.support:support-v4:$supportLibsVersion")
-    implementation("com.android.support:appcompat-v7:$supportLibsVersion")
-    implementation("com.android.support:recyclerview-v7:$supportLibsVersion")
-    implementation("com.android.support:wear:$supportLibsVersion")
+    implementation("androidx.percentlayout:percentlayout:1.0.0")
+    implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.wear:wear:1.2.0")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-jackson:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1")
 
     implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
@@ -114,16 +114,16 @@ dependencies {
     implementation("com.jakewharton:butterknife:$butterknifeVersion")
     kapt("com.jakewharton:butterknife-compiler:$butterknifeVersion")
 
-    implementation("android.arch.persistence.room:runtime:$roomVersion")
-    implementation("android.arch.persistence.room:rxjava2:$roomVersion")
-    kapt("android.arch.persistence.room:compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.room:room-rxjava2:2.3.0")
+    kapt("androidx.room:room-compiler:2.3.0")
 
     implementation("org.koin:koin-android:$koinVersion")
 
     implementation("com.github.bumptech.glide:glide:4.7.1")
     kapt("com.github.bumptech.glide:compiler:4.7.1")
 
-    implementation("com.android.support.constraint:constraint-layout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")
     implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("net.danlew:android.joda:2.9.9.4")
