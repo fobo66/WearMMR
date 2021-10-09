@@ -49,13 +49,13 @@ val koinVersion = "3.1.2"
 
 android {
 
-    compileSdk = 31
+    compileSdk = 30
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
-        minSdk = 24
-        targetSdk = 31
-        versionCode = 3
-        versionName = "1.0.2"
+        minSdk = 25
+        targetSdk = 30
+        versionCode = 4
+        versionName = "1.1"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
