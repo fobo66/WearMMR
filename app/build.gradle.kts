@@ -34,8 +34,6 @@ fun loadProperties(propertiesName: String): Properties {
     return properties
 }
 
-val keystoreProperties = loadProperties("keystore.properties")
-
 val butterknifeVersion = "10.2.3"
 val ankoVersion = "0.10.3"
 val wearableVersion = "2.8.1"
@@ -63,6 +61,8 @@ android {
 
     signingConfigs {
         register("releaseSign") {
+            val keystoreProperties = loadProperties("keystore.properties")
+
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
             storeFile = File(keystoreProperties["storeFile"] as String)
@@ -71,7 +71,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             signingConfig = signingConfigs["releaseSign"]
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
