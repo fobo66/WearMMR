@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.wearable.activity.WearableActivity
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,7 +40,7 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    val db: MatchmakingDatabase by inject()
+    private val db: MatchmakingDatabase by inject()
 
     @BindView(R.id.bottom_action_drawer)
     lateinit var navigationDrawer: WearableActionDrawerView
