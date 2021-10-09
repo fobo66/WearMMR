@@ -5,9 +5,8 @@ import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
-    id("kotlin-kapt")
+    kotlin("android")
+    kotlin("kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -47,7 +46,7 @@ val koinVersion = "3.1.2"
 
 android {
 
-    compileSdk = 30
+    compileSdk = 31
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 25

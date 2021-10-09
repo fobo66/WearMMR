@@ -16,6 +16,8 @@
 
 package io.github.fobo66.wearmmr.ui
 
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
@@ -124,5 +126,11 @@ class MainActivity : WearableActivity() {
         super.onDestroy()
 
         disposables.clear()
+    }
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
     }
 }

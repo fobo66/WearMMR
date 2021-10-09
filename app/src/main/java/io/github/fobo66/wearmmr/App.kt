@@ -29,7 +29,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        JodaTimeAndroid.init(this)
         startKoin {
             androidLogger()
             androidContext(this@App)

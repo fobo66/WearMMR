@@ -19,6 +19,7 @@ package io.github.fobo66.wearmmr.ui
 import android.content.*
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -33,14 +34,13 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import io.github.fobo66.wearmmr.util.GlideApp
-import org.jetbrains.anko.startActivity
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalTime
 import java.lang.ref.WeakReference
@@ -143,9 +143,13 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
 
         private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
-            object : SimpleTarget<Bitmap>() {
+            object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     canvas.drawBitmap(resource, 0f, 0f, paint)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    canvas.drawPaint(paint)
                 }
             }
 
@@ -179,7 +183,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 color = ContextCompat.getColor(applicationContext, R.color.background)
             }
 
-            backgroundBitmap = (resources.getDrawable(
+            backgroundBitmap = (ResourcesCompat.getDrawable(
+                    resources,
                 R.drawable.dota_logo,
                 null
             ) as BitmapDrawable).bitmap
@@ -193,8 +198,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
 
             batteryComplication = ComplicationDrawable(applicationContext)
-            ratingComplication = getDrawable(
-                R.drawable.rating_complication_drawable
+            ratingComplication = ResourcesCompat.getDrawable(
+                    resources,
+                R.drawable.rating_complication_drawable,
+                    null
             ) as ComplicationDrawable
             ratingComplication.setContext(this@MatchmakingRatingWatchFace)
         }
@@ -256,7 +263,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 }
                 WatchFaceService.TAP_TYPE_TAP ->
                     // The user has completed the tap gesture.
-                    startActivity<MainActivity>()
+                    MainActivity.start(this@MatchmakingRatingWatchFace)
             }
             invalidate()
         }
