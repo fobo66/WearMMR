@@ -89,10 +89,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
-    implementation("org.jetbrains.anko:anko-commons:$ankoVersion")
-    implementation("org.jetbrains.anko:anko-sdk25:$ankoVersion")
-    implementation("org.jetbrains.anko:anko-appcompat-v7:$ankoVersion")
-
     implementation("com.google.android.support:wearable:$wearableVersion")
     implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")

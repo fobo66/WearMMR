@@ -18,6 +18,8 @@ package io.github.fobo66.wearmmr.ui
 
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.support.wearable.complications.ProviderUpdateRequester
@@ -29,7 +31,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
-import org.jetbrains.anko.defaultSharedPreferences
 
 class SettingsActivity : WearableActivity() {
 
@@ -46,6 +47,8 @@ class SettingsActivity : WearableActivity() {
             ComponentName(this, RatingComplicationProviderService::class.java)
         )
     }
+
+    private lateinit var defaultSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +80,12 @@ class SettingsActivity : WearableActivity() {
         if (playerIdString.isNotBlank()) {
             val playerId: Long = playerIdString.toLong()
             this.defaultSharedPreferences.edit().putLong("playerId", playerId).apply()
+        }
+    }
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, SettingsActivity::class.java))
         }
     }
 }

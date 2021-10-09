@@ -16,12 +16,15 @@
 
 package io.github.fobo66.wearmmr.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.wear.widget.drawer.WearableActionDrawerView
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.preference.PreferenceManager
+import androidx.wear.widget.drawer.WearableActionDrawerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -31,9 +34,6 @@ import io.github.fobo66.wearmmr.util.GlideApp
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.defaultSharedPreferences
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
 class MainActivity : WearableActivity() {
@@ -58,12 +58,15 @@ class MainActivity : WearableActivity() {
 
     private val noPlayerId = -1L
 
+    private lateinit var defaultSharedPreferences: SharedPreferences
+
     private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
+        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         // Enables Always-on
         setAmbientEnabled()
@@ -71,11 +74,13 @@ class MainActivity : WearableActivity() {
         navigationDrawer.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings -> {
-                    startActivity<SettingsActivity>()
-                    return@setOnMenuItemClickListener true
+                    SettingsActivity.start(this)
+                    true
+                }
+                else -> {
+                    false
                 }
             }
-            false
         }
     }
 
@@ -86,30 +91,30 @@ class MainActivity : WearableActivity() {
 
         if (isFirstLaunch) {
             defaultSharedPreferences.edit().putBoolean("firstLaunch", false).apply()
-            toast(R.string.set_playerid_message)
-            startActivity<SettingsActivity>()
+            Toast.makeText(this, R.string.set_playerid_message, Toast.LENGTH_SHORT).show()
+            SettingsActivity.start(this)
         } else {
             val playerId = defaultSharedPreferences.getLong("playerId", noPlayerId)
 
             if (playerId != noPlayerId) {
                 disposables.add(
-                    db.gameStatsDao().findOneByPlayerId(playerId)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ matchmakingRating ->
-                            playerName.text = matchmakingRating.name
-                            playerPersonaName.text =
-                                    String.format("(%s)", matchmakingRating.personaName)
-                            rating.text = matchmakingRating.rating.toString()
+                        db.gameStatsDao().findOneByPlayerId(playerId)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe({ matchmakingRating ->
+                                    playerName.text = matchmakingRating.name
+                                    playerPersonaName.text =
+                                            String.format("(%s)", matchmakingRating.personaName)
+                                    rating.text = matchmakingRating.rating.toString()
 
-                            GlideApp.with(this)
-                                .load(matchmakingRating.avatarUrl)
-                                .placeholder(R.drawable.ic_person)
-                                .into(playerPic)
-                        }, { error ->
-                            Log.e(this.javaClass.name, "Cannot load data from database", error)
-                            FirebaseCrashlytics.getInstance().recordException(error)
-                        })
+                                    GlideApp.with(this)
+                                            .load(matchmakingRating.avatarUrl)
+                                            .placeholder(R.drawable.ic_person)
+                                            .into(playerPic)
+                                }, { error ->
+                                    Log.e(this.javaClass.name, "Cannot load data from database", error)
+                                    FirebaseCrashlytics.getInstance().recordException(error)
+                                })
                 )
             }
         }
