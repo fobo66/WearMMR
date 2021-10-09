@@ -78,6 +78,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
