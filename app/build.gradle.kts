@@ -8,7 +8,8 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("io.fabric")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 /*
@@ -123,11 +124,7 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.7.1")
 
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
-    implementation("com.crashlytics.sdk.android:crashlytics:2.9.5@aar") {
-        isTransitive = true
-    }
-    implementation("com.google.firebase:firebase-core:16.0.7")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.3")
+    implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("net.danlew:android.joda:2.9.9.4")
 }
-
-apply(plugin = "com.google.gms.google-services")

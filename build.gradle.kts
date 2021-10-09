@@ -13,7 +13,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:7.1.0-alpha13")
         classpath(kotlin("gradle-plugin", version = kotlin_version))
         classpath("com.google.gms:google-services:4.3.10")
-        classpath("io.fabric.tools:gradle:1.25.4")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
     }
 }
 
