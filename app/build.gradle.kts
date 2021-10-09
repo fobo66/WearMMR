@@ -50,11 +50,11 @@ val koinVersion = "0.9.1"
 
 android {
 
-    compileSdkVersion(28)
+    compileSdk = 31
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
-        minSdkVersion(24)
-        targetSdkVersion(28)
+        minSdk = 24
+        targetSdk = 31
         versionCode = 3
         versionName = "1.0.2"
         multiDexEnabled = true
