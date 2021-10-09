@@ -3,8 +3,6 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import java.util.*
 import java.io.FileInputStream
 
-val kotlin_version = "1.5.31"
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -88,8 +86,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation(kotlin("reflect", kotlin_version))
+    implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
     implementation("org.jetbrains.anko:anko-commons:$ankoVersion")
     implementation("org.jetbrains.anko:anko-sdk25:$ankoVersion")
