@@ -21,18 +21,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.wearable.activity.WearableActivity
 import android.support.wearable.complications.ProviderUpdateRequester
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView.BufferType.EDITABLE
+import androidx.appcompat.app.AppCompatActivity
 import butterknife.BindView
 import butterknife.ButterKnife
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 
-class SettingsActivity : WearableActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     @BindView(R.id.player_id_input)
     lateinit var playerIdInput: EditText
@@ -54,9 +54,6 @@ class SettingsActivity : WearableActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         ButterKnife.bind(this)
-
-        // Enables Always-on
-        setAmbientEnabled()
 
         playerIdInput.setText(defaultSharedPreferences.getLong("playerId", 0).toString(), EDITABLE)
 

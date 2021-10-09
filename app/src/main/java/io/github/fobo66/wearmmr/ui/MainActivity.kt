@@ -25,6 +25,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.wear.widget.drawer.WearableActionDrawerView
 import butterknife.BindView
@@ -38,7 +39,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 
-class MainActivity : WearableActivity() {
+class MainActivity : AppCompatActivity() {
 
     val db: MatchmakingDatabase by inject()
 
@@ -69,9 +70,6 @@ class MainActivity : WearableActivity() {
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-
-        // Enables Always-on
-        setAmbientEnabled()
 
         navigationDrawer.setOnMenuItemClickListener {
             when (it.itemId) {
