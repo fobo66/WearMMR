@@ -16,13 +16,12 @@
 
 package io.github.fobo66.wearmmr.api
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.github.fobo66.wearmmr.API_BASE_URL
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.jackson.JacksonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * DI components for http client
@@ -41,7 +40,7 @@ fun provideHttpClient(): OkHttpClient {
 fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
-        .addConverterFactory(JacksonConverterFactory.create(jacksonObjectMapper()))
+        .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(httpClient)
         .build()
