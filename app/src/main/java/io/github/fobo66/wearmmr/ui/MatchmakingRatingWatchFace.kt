@@ -47,6 +47,7 @@ import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
+import io.github.fobo66.wearmmr.model.MatchmakingWatchFaceViewModel.Companion.INTERACTIVE_UPDATE_RATE_MS
 import io.github.fobo66.wearmmr.util.GlideApp
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler.Companion.MSG_UPDATE_TIME
@@ -399,13 +400,4 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
         }
     }
-
-    companion object {
-        /**
-         * Updates rate in milliseconds for interactive mode. We update once a second since seconds
-         * are displayed in interactive mode.
-         */
-        private const val INTERACTIVE_UPDATE_RATE_MS = 1000
-    }
-
 }
