@@ -34,9 +34,7 @@ fun loadProperties(propertiesName: String): Properties {
 }
 
 val butterknifeVersion = "10.2.3"
-val ankoVersion = "0.10.3"
 val wearableVersion = "2.8.1"
-val supportLibsVersion = "27.1.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "1.1.1"
 val rxVersion = "2.2.21"
@@ -93,10 +91,8 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
     implementation("com.google.android.support:wearable:$wearableVersion")
-    implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.wear:wear:1.2.0")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
