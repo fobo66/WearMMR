@@ -30,8 +30,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders
@@ -50,9 +48,10 @@ import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import io.github.fobo66.wearmmr.util.GlideApp
+import io.github.fobo66.wearmmr.util.TimeUpdateHandler
+import io.github.fobo66.wearmmr.util.TimeUpdateHandler.Companion.MSG_UPDATE_TIME
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalTime
-import java.lang.ref.WeakReference
 import java.util.*
 
 /**
@@ -71,18 +70,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
     override fun onCreateEngine(): Engine {
         return Engine()
-    }
-
-    private class EngineHandler(reference: Engine) : Handler(Looper.getMainLooper()) {
-        private val engineReference: WeakReference<Engine> = WeakReference(
-            reference
-        )
-
-        override fun handleMessage(msg: Message) {
-            when (msg.what) {
-                MSG_UPDATE_TIME -> engineReference.get()?.handleUpdateTimeMessage()
-            }
-        }
     }
 
     inner class Engine : CanvasWatchFaceService.Engine() {
@@ -115,7 +102,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private var burnInProtection: Boolean = false
         private var modeAmbient: Boolean = false
 
-        private val updateTimeHandler: Handler = EngineHandler(this)
+        private val updateTimeHandler: Handler = TimeUpdateHandler(this)
 
         private val timeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
@@ -419,11 +406,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
          * are displayed in interactive mode.
          */
         private const val INTERACTIVE_UPDATE_RATE_MS = 1000
-
-        /**
-         * Handler message id for updating the time periodically in interactive mode.
-         */
-        private const val MSG_UPDATE_TIME = 0
     }
 
 }
