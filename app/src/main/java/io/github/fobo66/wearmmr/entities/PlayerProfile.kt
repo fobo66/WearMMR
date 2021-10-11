@@ -16,22 +16,14 @@
 
 package io.github.fobo66.wearmmr.entities
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(
-    "cheese", "avatarmedium", "avatarfull", "steamid", "profileurl", "last_login",
-    "loccountrycode", "is_contributor"
-)
+
+@JsonClass(generateAdapter = true)
 data class PlayerProfile(
-    @JsonProperty("account_id") val accountId: Long,
-    @JsonProperty("name") val name: String?,
-    @JsonProperty("personaname") val personaName: String?,
-    @JsonProperty("avatar") val avatarUrl: String
+    @Json(name = "account_id") val accountId: Long,
+    @Json(name = "name") val name: String?,
+    @Json(name = "personaname") val personaName: String?,
+    @Json(name = "avatar") val avatarUrl: String
 )

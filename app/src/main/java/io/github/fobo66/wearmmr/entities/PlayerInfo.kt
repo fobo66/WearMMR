@@ -16,20 +16,14 @@
 
 package io.github.fobo66.wearmmr.entities
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties(
-    "leaderboard_rank",
-    "competitive_rank",
-    "solo_competitive_rank",
-    "tracked_until"
-)
+
+@JsonClass(generateAdapter = true)
 data class PlayerInfo(
-    @JsonProperty("profile") val profile: PlayerProfile,
-    @JsonProperty("rank_tier") val rankTier: Int?,
-    @JsonProperty("mmr_estimate") val mmrEstimate: MmrEstimate?
+    @Json(name = "profile") val profile: PlayerProfile,
+    @Json(name = "rank_tier") val rankTier: Int?,
+    @Json(name = "mmr_estimate") val mmrEstimate: MmrEstimate?
 
 )
