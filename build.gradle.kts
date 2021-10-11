@@ -2,16 +2,14 @@
 
 buildscript {
 
-    val kotlin_version = "1.5.31"
     repositories {
         google()
         mavenCentral()
-        maven("https://maven.fabric.io/public")
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.0-alpha13")
-        classpath(kotlin("gradle-plugin", version = kotlin_version))
+        classpath(kotlin("gradle-plugin", version = "1.5.31"))
         classpath("com.google.gms:google-services:4.3.10")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.18.1")
