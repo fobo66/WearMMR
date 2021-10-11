@@ -47,7 +47,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
     private val db: MatchmakingDatabase by inject()
 
     override fun onComplicationUpdate(
-            complicationId: Int, dataType: Int, complicationManager: ComplicationManager
+        complicationId: Int, dataType: Int, complicationManager: ComplicationManager
     ) {
         updateRating(complicationManager, complicationId)
     }
@@ -58,53 +58,56 @@ class RatingComplicationProviderService : ComplicationProviderService() {
     }
 
     private fun updateRating(
-            complicationManager: ComplicationManager,
-            complicationId: Int
+        complicationManager: ComplicationManager,
+        complicationId: Int
     ) {
-        val playerId = PreferenceManager.getDefaultSharedPreferences(this).getLong("playerId", noPlayerId)
+        val playerId =
+            PreferenceManager.getDefaultSharedPreferences(this).getLong("playerId", noPlayerId)
 
         if (playerId != noPlayerId) {
             disposables.add(
-                    matchmakingRatingClient.fetchPlayerProfile(playerId)
-                            .subscribeOn(Schedulers.io())
-                            .map { playerInfo ->
-                                MatchmakingRating(
-                                        playerInfo.profile.accountId, playerInfo.profile.name,
-                                        playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
-                                        playerInfo.mmrEstimate?.estimate
+                matchmakingRatingClient.fetchPlayerProfile(playerId)
+                    .subscribeOn(Schedulers.io())
+                    .map { playerInfo ->
+                        MatchmakingRating(
+                            playerInfo.profile.accountId, playerInfo.profile.name,
+                            playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
+                            playerInfo.mmrEstimate?.estimate
+                        )
+                    }
+                    .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
+                    .map { rating -> rating.rating }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            val complicationData: ComplicationData = Builder(
+                                ComplicationData.TYPE_SHORT_TEXT
+                            )
+                                .setIcon(
+                                    Icon.createWithResource(
+                                        applicationContext,
+                                        R.drawable.ic_rating
+                                    )
                                 )
-                            }
-                            .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
-                            .map { rating -> rating.rating }
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                    {
-                                        val complicationData: ComplicationData = Builder(
-                                                ComplicationData.TYPE_SHORT_TEXT
+                                .setShortText(ComplicationText.plainText(it.toString()))
+                                .setImageContentDescription(
+                                    ComplicationText.plainText(
+                                        applicationContext.getText(
+                                            R.string.rating_complication_description
                                         )
-                                                .setIcon(
-                                                        Icon.createWithResource(
-                                                                applicationContext,
-                                                                R.drawable.ic_rating
-                                                        )
-                                                )
-                                                .setShortText(ComplicationText.plainText(it.toString()))
-                                                .setImageContentDescription(
-                                                        ComplicationText.plainText(
-                                                                applicationContext.getText(R.string.rating_complication_description)
-                                                        )
-                                                )
-                                                .build()
+                                    )
+                                )
+                                .build()
 
-                                        complicationManager.updateComplicationData(
-                                                complicationId,
-                                                complicationData
-                                        )
-                                    }, { error ->
-                                Log.e(javaClass.simpleName, "Failed to load rating", error)
-                                FirebaseCrashlytics.getInstance().recordException(error)
-                                complicationManager.noUpdateRequired(complicationId)
-                            })
+                            complicationManager.updateComplicationData(
+                                complicationId,
+                                complicationData
+                            )
+                        }, { error ->
+                            Log.e(javaClass.simpleName, "Failed to load rating", error)
+                            FirebaseCrashlytics.getInstance().recordException(error)
+                            complicationManager.noUpdateRequired(complicationId)
+                        })
             )
         } else {
             complicationManager.noUpdateRequired(complicationId)

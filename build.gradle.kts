@@ -14,6 +14,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", version = kotlin_version))
         classpath("com.google.gms:google-services:4.3.10")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.18.1")
     }
 }
 
@@ -24,7 +25,14 @@ allprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+tasks {
+    register("clean", Delete::class) {
+        delete(rootProject.buildDir)
+    }
+
+    withType<io.gitlab.arturbosch.detekt.Detekt> {
+        // Target version of the generated JVM bytecode. It is used for type resolution.
+        this.jvmTarget = "1.8"
+    }
 }
 
