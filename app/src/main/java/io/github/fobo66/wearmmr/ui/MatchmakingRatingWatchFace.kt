@@ -74,16 +74,13 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
     }
 
     private class EngineHandler(reference: Engine) : Handler(Looper.getMainLooper()) {
-        private val mWeakReference: WeakReference<Engine> = WeakReference(
+        private val engineReference: WeakReference<Engine> = WeakReference(
             reference
         )
 
         override fun handleMessage(msg: Message) {
-            val engine = mWeakReference.get()
-            if (engine != null) {
-                when (msg.what) {
-                    MSG_UPDATE_TIME -> engine.handleUpdateTimeMessage()
-                }
+            when (msg.what) {
+                MSG_UPDATE_TIME -> engineReference.get()?.handleUpdateTimeMessage()
             }
         }
     }
