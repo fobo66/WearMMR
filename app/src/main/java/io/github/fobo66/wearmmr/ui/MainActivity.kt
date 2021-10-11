@@ -97,23 +97,25 @@ class MainActivity : AppCompatActivity() {
 
             if (playerId != noPlayerId) {
                 disposables.add(
-                        db.gameStatsDao().findOneByPlayerId(playerId)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe({ matchmakingRating ->
-                                    playerName.text = matchmakingRating.name
-                                    playerPersonaName.text =
-                                            String.format("(%s)", matchmakingRating.personaName)
-                                    rating.text = matchmakingRating.rating.toString()
+                    db.gameStatsDao().findOneByPlayerId(playerId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ matchmakingRating ->
+                            playerName.text = matchmakingRating.name
+                            playerPersonaName.text = getString(
+                                R.string.player_name_display_placeholder,
+                                matchmakingRating.personaName
+                            )
+                            rating.text = matchmakingRating.rating.toString()
 
-                                    GlideApp.with(this)
-                                            .load(matchmakingRating.avatarUrl)
-                                            .placeholder(R.drawable.ic_person)
-                                            .into(playerPic)
-                                }, { error ->
-                                    Log.e(this.javaClass.name, "Cannot load data from database", error)
-                                    FirebaseCrashlytics.getInstance().recordException(error)
-                                })
+                            GlideApp.with(this)
+                                .load(matchmakingRating.avatarUrl)
+                                .placeholder(R.drawable.ic_person)
+                                .into(playerPic)
+                        }, { error ->
+                            Log.e(this.javaClass.name, "Cannot load data from database", error)
+                            FirebaseCrashlytics.getInstance().recordException(error)
+                        })
                 )
             }
         }

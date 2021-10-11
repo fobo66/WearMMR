@@ -27,5 +27,6 @@
     <string name="settings_player_id_hint">Please specify your Steam ID in the input above so we can fetch your MMR</string>
     <string name="time_format">HH:mm:ss</string>
     <string name="time_format_ambient">HH:mm</string>
+    <string name="player_name_display_placeholder" translatable="false">(%1$s)</string>
     <string name="placeholder_rating" translatable="false">--</string>
 </resources>
