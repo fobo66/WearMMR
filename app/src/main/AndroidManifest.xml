@@ -63,6 +63,7 @@
     <service
         android:name=".ui.MatchmakingRatingWatchFace"
         android:label="@string/mmr_watchface_name"
+        android:directBootAware="true"
         android:permission="android.permission.BIND_WALLPAPER">
       <meta-data
           android:name="android.service.wallpaper"
