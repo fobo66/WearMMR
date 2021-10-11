@@ -37,6 +37,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                                 .placeholder(R.drawable.ic_person)
                                 .into(playerPic)
                         }, { error ->
-                            Log.e(this.javaClass.name, "Cannot load data from database", error)
+                            Timber.e(error, "Cannot load data from database")
                             FirebaseCrashlytics.getInstance().recordException(error)
                         })
                 )

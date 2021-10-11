@@ -127,4 +127,5 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")
     implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("net.danlew:android.joda:2.10.12")
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }

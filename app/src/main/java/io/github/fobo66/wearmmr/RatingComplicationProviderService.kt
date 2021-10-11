@@ -22,7 +22,6 @@ import android.support.wearable.complications.ComplicationData.Builder
 import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
@@ -32,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 /**
  * Provides rating info for watchface
@@ -104,7 +104,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
                                 complicationData
                             )
                         }, { error ->
-                            Log.e(javaClass.simpleName, "Failed to load rating", error)
+                            Timber.e(error, "Failed to load rating")
                             FirebaseCrashlytics.getInstance().recordException(error)
                             complicationManager.noUpdateRequired(complicationId)
                         })
