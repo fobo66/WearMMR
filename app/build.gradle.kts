@@ -90,12 +90,15 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
-    implementation("com.google.android.support:wearable:$wearableVersion")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.wear:wear:1.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
+    implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
+    implementation("androidx.wear:wear:1.2.0")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
