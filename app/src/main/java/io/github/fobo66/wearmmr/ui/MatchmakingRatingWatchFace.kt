@@ -72,7 +72,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         return Engine()
     }
 
-    inner class Engine : CanvasWatchFaceService.Engine() {
+    inner class Engine : CanvasWatchFaceService.Engine(true) {
 
         private lateinit var time: LocalTime
 
