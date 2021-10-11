@@ -30,6 +30,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
@@ -72,7 +73,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         return Engine()
     }
 
-    private class EngineHandler(reference: Engine) : Handler() {
+    private class EngineHandler(reference: Engine) : Handler(Looper.getMainLooper()) {
         private val mWeakReference: WeakReference<Engine> = WeakReference(
             reference
         )
@@ -91,13 +92,9 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
         private lateinit var time: LocalTime
 
-        private val ambientTimeFormat: String by lazy {
-            getString(R.string.time_format_ambient)
-        }
+        private val ambientTimeFormat: String = getString(R.string.time_format_ambient)
 
-        private val regularTimeFormat: String by lazy {
-            getString(R.string.time_format)
-        }
+        private val regularTimeFormat: String = getString(R.string.time_format)
 
         private var registeredTimeZoneReceiver = false
 
