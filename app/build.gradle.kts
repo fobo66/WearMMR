@@ -33,9 +33,7 @@ fun loadProperties(propertiesName: String): Properties {
     return properties
 }
 
-val ankoVersion = "0.10.3"
 val wearableVersion = "2.8.1"
-val supportLibsVersion = "27.1.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "1.1.1"
 val rxVersion = "2.2.21"
@@ -80,6 +78,13 @@ android {
         viewBinding = true
     }
 
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -91,14 +96,15 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
-    implementation("com.google.android.support:wearable:$wearableVersion")
-    implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.wear:wear:1.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
+    implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
+    implementation("androidx.wear:wear:1.2.0")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
@@ -118,6 +124,8 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")

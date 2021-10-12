@@ -30,7 +30,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders
@@ -42,16 +41,19 @@ import android.view.SurfaceHolder
 import android.view.WindowInsets
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
+import io.github.fobo66.wearmmr.model.MatchmakingWatchFaceViewModel.Companion.INTERACTIVE_UPDATE_RATE_MS
 import io.github.fobo66.wearmmr.util.GlideApp
+import io.github.fobo66.wearmmr.util.TimeUpdateHandler
+import io.github.fobo66.wearmmr.util.TimeUpdateHandler.Companion.MSG_UPDATE_TIME
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalTime
-import java.lang.ref.WeakReference
 import java.util.*
 
 /**
@@ -72,32 +74,9 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         return Engine()
     }
 
-    private class EngineHandler(reference: Engine) : Handler() {
-        private val mWeakReference: WeakReference<Engine> = WeakReference(
-            reference
-        )
-
-        override fun handleMessage(msg: Message) {
-            val engine = mWeakReference.get()
-            if (engine != null) {
-                when (msg.what) {
-                    MSG_UPDATE_TIME -> engine.handleUpdateTimeMessage()
-                }
-            }
-        }
-    }
-
-    inner class Engine : CanvasWatchFaceService.Engine() {
+    inner class Engine : CanvasWatchFaceService.Engine(true) {
 
         private lateinit var time: LocalTime
-
-        private val ambientTimeFormat: String by lazy {
-            getString(R.string.time_format_ambient)
-        }
-
-        private val regularTimeFormat: String by lazy {
-            getString(R.string.time_format)
-        }
 
         private var registeredTimeZoneReceiver = false
 
@@ -121,7 +100,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private var burnInProtection: Boolean = false
         private var modeAmbient: Boolean = false
 
-        private val updateTimeHandler: Handler = EngineHandler(this)
+        private val updateTimeHandler: Handler = TimeUpdateHandler(this)
 
         private val timeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
@@ -131,21 +110,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         private val timeFormat: String
-            get() {
-                return if (modeAmbient)
-                    ambientTimeFormat
-                else regularTimeFormat
-            }
-
-        private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
-            object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    canvas.drawBitmap(resource, 0f, 0f, paint)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    canvas.drawPaint(paint)
-                }
+            get() = if (modeAmbient) {
+                TIME_FORMAT_AMBIENT
+            } else {
+                TIME_FORMAT_INTERACTIVE
             }
 
         override fun onCreate(holder: SurfaceHolder) {
@@ -170,7 +138,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
             time = LocalTime.now()
 
-            val resources = this@MatchmakingRatingWatchFace.resources
+            val resources = baseContext.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
 
             // Initializes background.
@@ -187,7 +155,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             // Initializes Watch Face.
             textPaint = Paint().apply {
                 typeface =
-                    ResourcesCompat.getFont(this@MatchmakingRatingWatchFace, R.font.trajan_pro)
+                    ResourcesCompat.getFont(baseContext, R.font.trajan_pro)
                 isAntiAlias = true
                 color = ContextCompat.getColor(applicationContext, R.color.digital_text)
             }
@@ -198,7 +166,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 R.drawable.rating_complication_drawable,
                 null
             ) as ComplicationDrawable
-            ratingComplication.setContext(this@MatchmakingRatingWatchFace)
+            ratingComplication.setContext(baseContext)
         }
 
         override fun onDestroy() {
@@ -258,7 +226,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 }
                 WatchFaceService.TAP_TYPE_TAP ->
                     // The user has completed the tap gesture.
-                    MainActivity.start(this@MatchmakingRatingWatchFace)
+                    MainActivity.start(baseContext)
             }
             invalidate()
         }
@@ -306,7 +274,18 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                     .override(bounds.width(), bounds.height())
                     .fitCenter()
                     .load(R.drawable.dota_logo)
-                    .into(getBackgroundImageTarget(canvas, backgroundPaint))
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            canvas.drawBitmap(resource, 0f, 0f, backgroundPaint)
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                            canvas.drawPaint(backgroundPaint)
+                        }
+                    })
             }
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
@@ -347,7 +326,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
             registeredTimeZoneReceiver = true
             val filter = IntentFilter(Intent.ACTION_TIMEZONE_CHANGED)
-            this@MatchmakingRatingWatchFace.registerReceiver(timeZoneReceiver, filter)
+            LocalBroadcastManager.getInstance(baseContext)
+                .registerReceiver(timeZoneReceiver, filter)
         }
 
         private fun unregisterTimeZoneReceiver() {
@@ -355,7 +335,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 return
             }
             registeredTimeZoneReceiver = false
-            this@MatchmakingRatingWatchFace.unregisterReceiver(timeZoneReceiver)
+            LocalBroadcastManager.getInstance(baseContext)
+                .unregisterReceiver(timeZoneReceiver)
         }
 
         override fun onApplyWindowInsets(insets: WindowInsets) {
@@ -420,16 +401,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
     }
 
     companion object {
-        /**
-         * Updates rate in milliseconds for interactive mode. We update once a second since seconds
-         * are displayed in interactive mode.
-         */
-        private const val INTERACTIVE_UPDATE_RATE_MS = 1000
-
-        /**
-         * Handler message id for updating the time periodically in interactive mode.
-         */
-        private const val MSG_UPDATE_TIME = 0
+        private const val TIME_FORMAT_AMBIENT = "HH:mm"
+        private const val TIME_FORMAT_INTERACTIVE = "HH:mm:ss"
     }
-
 }
