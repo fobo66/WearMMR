@@ -92,6 +92,7 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
     implementation("com.google.android.support:wearable:$wearableVersion")
+    implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -110,7 +111,10 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
     implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+
     implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.room:room-ktx:2.3.0")
     implementation("androidx.room:room-rxjava2:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
 
