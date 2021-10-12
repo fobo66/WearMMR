@@ -10,7 +10,8 @@ val viewModelsModule = module {
         MainViewModel(
             preferences = PreferenceManager.getDefaultSharedPreferences(
                 androidContext()
-            )
+            ),
+            get()
         )
     }
 
