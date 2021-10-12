@@ -78,6 +78,13 @@ android {
         viewBinding = true
     }
 
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -117,6 +124,8 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")
