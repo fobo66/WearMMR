@@ -41,6 +41,7 @@ import android.view.SurfaceHolder
 import android.view.WindowInsets
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
@@ -329,7 +330,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
             registeredTimeZoneReceiver = true
             val filter = IntentFilter(Intent.ACTION_TIMEZONE_CHANGED)
-            this@MatchmakingRatingWatchFace.registerReceiver(timeZoneReceiver, filter)
+            LocalBroadcastManager.getInstance(this@MatchmakingRatingWatchFace)
+                .registerReceiver(timeZoneReceiver, filter)
         }
 
         private fun unregisterTimeZoneReceiver() {
@@ -337,7 +339,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 return
             }
             registeredTimeZoneReceiver = false
-            this@MatchmakingRatingWatchFace.unregisterReceiver(timeZoneReceiver)
+            LocalBroadcastManager.getInstance(this@MatchmakingRatingWatchFace)
+                .unregisterReceiver(timeZoneReceiver)
         }
 
         override fun onApplyWindowInsets(insets: WindowInsets) {
