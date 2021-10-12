@@ -142,7 +142,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
             time = LocalTime.now()
 
-            val resources = this@MatchmakingRatingWatchFace.resources
+            val resources = baseContext.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
 
             // Initializes background.
@@ -159,7 +159,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             // Initializes Watch Face.
             textPaint = Paint().apply {
                 typeface =
-                    ResourcesCompat.getFont(this@MatchmakingRatingWatchFace, R.font.trajan_pro)
+                    ResourcesCompat.getFont(baseContext, R.font.trajan_pro)
                 isAntiAlias = true
                 color = ContextCompat.getColor(applicationContext, R.color.digital_text)
             }
@@ -170,7 +170,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 R.drawable.rating_complication_drawable,
                 null
             ) as ComplicationDrawable
-            ratingComplication.setContext(this@MatchmakingRatingWatchFace)
+            ratingComplication.setContext(baseContext)
         }
 
         override fun onDestroy() {
@@ -230,7 +230,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 }
                 WatchFaceService.TAP_TYPE_TAP ->
                     // The user has completed the tap gesture.
-                    MainActivity.start(this@MatchmakingRatingWatchFace)
+                    MainActivity.start(baseContext)
             }
             invalidate()
         }
@@ -330,7 +330,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
             }
             registeredTimeZoneReceiver = true
             val filter = IntentFilter(Intent.ACTION_TIMEZONE_CHANGED)
-            LocalBroadcastManager.getInstance(this@MatchmakingRatingWatchFace)
+            LocalBroadcastManager.getInstance(baseContext)
                 .registerReceiver(timeZoneReceiver, filter)
         }
 
@@ -339,7 +339,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 return
             }
             registeredTimeZoneReceiver = false
-            LocalBroadcastManager.getInstance(this@MatchmakingRatingWatchFace)
+            LocalBroadcastManager.getInstance(baseContext)
                 .unregisterReceiver(timeZoneReceiver)
         }
 
