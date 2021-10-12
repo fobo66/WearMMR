@@ -33,7 +33,6 @@ fun loadProperties(propertiesName: String): Properties {
     return properties
 }
 
-val butterknifeVersion = "10.2.3"
 val wearableVersion = "2.8.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "1.1.1"
@@ -109,9 +108,6 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
     implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
-
-    implementation("com.jakewharton:butterknife:$butterknifeVersion")
-    kapt("com.jakewharton:butterknife-compiler:$butterknifeVersion")
 
     implementation("androidx.room:room-runtime:2.3.0")
     implementation("androidx.room:room-rxjava2:2.3.0")

@@ -21,16 +21,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import androidx.wear.widget.drawer.WearableActionDrawerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.R
+import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.util.GlideApp
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,21 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private val db: MatchmakingDatabase by inject()
 
-    @BindView(R.id.bottom_action_drawer)
-    lateinit var navigationDrawer: WearableActionDrawerView
-
-    @BindView(R.id.player_pic)
-    lateinit var playerPic: ImageView
-
-
-    @BindView(R.id.player_name)
-    lateinit var playerName: TextView
-
-    @BindView(R.id.player_persona_name)
-    lateinit var playerPersonaName: TextView
-
-    @BindView(R.id.rating)
-    lateinit var rating: TextView
+    private lateinit var binding: ActivityMainBinding
 
     private val noPlayerId = -1L
 
@@ -66,11 +48,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        navigationDrawer.setOnMenuItemClickListener {
+        binding.bottomActionDrawer.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings -> {
                     SettingsActivity.start(this)
@@ -101,17 +83,17 @@ class MainActivity : AppCompatActivity() {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ matchmakingRating ->
-                            playerName.text = matchmakingRating.name
-                            playerPersonaName.text = getString(
+                            binding.content.playerName.text = matchmakingRating.name
+                            binding.content.playerPersonaName.text = getString(
                                 R.string.player_name_display_placeholder,
                                 matchmakingRating.personaName
                             )
-                            rating.text = matchmakingRating.rating.toString()
+                            binding.content.rating.text = matchmakingRating.rating.toString()
 
                             GlideApp.with(this)
                                 .load(matchmakingRating.avatarUrl)
                                 .placeholder(R.drawable.ic_person)
-                                .into(playerPic)
+                                .into(binding.content.playerPic)
                         }, { error ->
                             Log.e(this.javaClass.name, "Cannot load data from database", error)
                             FirebaseCrashlytics.getInstance().recordException(error)
