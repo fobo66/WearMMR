@@ -16,16 +16,8 @@
 
 package io.github.fobo66.wearmmr.ui
 
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.content.*
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -41,6 +33,8 @@ import android.view.SurfaceHolder
 import android.view.WindowInsets
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -48,12 +42,13 @@ import io.github.fobo66.wearmmr.BATTERY_PROVIDER_ID
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.RATING_PROVIDER_ID
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
-import io.github.fobo66.wearmmr.model.MatchmakingWatchFaceViewModel.Companion.INTERACTIVE_UPDATE_RATE_MS
+import io.github.fobo66.wearmmr.model.MatchmakingWatchFaceViewModel
 import io.github.fobo66.wearmmr.util.GlideApp
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler.Companion.MSG_UPDATE_TIME
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalTime
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 /**
@@ -68,13 +63,25 @@ import java.util.*
  * in the Google Watch Face Code Lab:
  * https://codelabs.developers.google.com/codelabs/watchface/index.html#0
  */
-class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
+class MatchmakingRatingWatchFace : CanvasWatchFaceService(), ViewModelStoreOwner {
 
-    override fun onCreateEngine(): Engine {
-        return Engine()
+    private val store: ViewModelStore by lazy {
+        checkNotNull(application) {
+            "Your activity is not yet attached to the Application instance. You can't request ViewModel before onCreate call."
+        }
+        ViewModelStore()
     }
 
-    inner class Engine : CanvasWatchFaceService.Engine(true) {
+    private val model: MatchmakingWatchFaceViewModel by viewModel()
+
+    override fun onCreateEngine(): Engine {
+        return Engine(model)
+    }
+
+    override fun getViewModelStore(): ViewModelStore = store
+
+    inner class Engine(private val viewModel: MatchmakingWatchFaceViewModel) :
+        CanvasWatchFaceService.Engine(true) {
 
         private lateinit var time: LocalTime
 
@@ -393,8 +400,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         fun handleUpdateTimeMessage() {
             invalidate()
             if (shouldTimerBeRunning()) {
-                val timeMs = System.currentTimeMillis()
-                val delayMs = INTERACTIVE_UPDATE_RATE_MS - timeMs % INTERACTIVE_UPDATE_RATE_MS
+                val delayMs = viewModel.calculateNextTimeTick()
                 updateTimeHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIME, delayMs)
             }
         }
