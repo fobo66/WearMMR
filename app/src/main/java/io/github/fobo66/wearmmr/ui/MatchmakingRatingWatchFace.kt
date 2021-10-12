@@ -120,17 +120,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 else regularTimeFormat
             }
 
-        private fun getBackgroundImageTarget(canvas: Canvas, paint: Paint) =
-            object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    canvas.drawBitmap(resource, 0f, 0f, paint)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    canvas.drawPaint(paint)
-                }
-            }
-
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
 
@@ -289,7 +278,18 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                     .override(bounds.width(), bounds.height())
                     .fitCenter()
                     .load(R.drawable.dota_logo)
-                    .into(getBackgroundImageTarget(canvas, backgroundPaint))
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            canvas.drawBitmap(resource, 0f, 0f, backgroundPaint)
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                            canvas.drawPaint(backgroundPaint)
+                        }
+                    })
             }
 
             // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
