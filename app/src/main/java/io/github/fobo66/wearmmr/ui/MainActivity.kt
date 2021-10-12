@@ -28,11 +28,13 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
+import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.util.GlideApp
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +45,8 @@ class MainActivity : AppCompatActivity() {
     private val noPlayerId = -1L
 
     private lateinit var defaultSharedPreferences: SharedPreferences
+
+    val viewModel: MainViewModel by viewModel()
 
     private val disposables = CompositeDisposable()
 
