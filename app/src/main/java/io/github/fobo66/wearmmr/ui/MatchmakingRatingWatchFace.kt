@@ -78,10 +78,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
         private lateinit var time: LocalTime
 
-        private val ambientTimeFormat: String = getString(R.string.time_format_ambient)
-
-        private val regularTimeFormat: String = getString(R.string.time_format)
-
         private var registeredTimeZoneReceiver = false
 
         private var timeXOffset: Float = 0F
@@ -114,10 +110,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         }
 
         private val timeFormat: String
-            get() {
-                return if (modeAmbient)
-                    ambientTimeFormat
-                else regularTimeFormat
+            get() = if (modeAmbient) {
+                TIME_FORMAT_AMBIENT
+            } else {
+                TIME_FORMAT_INTERACTIVE
             }
 
         override fun onCreate(holder: SurfaceHolder) {
@@ -402,5 +398,10 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
                 updateTimeHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIME, delayMs)
             }
         }
+    }
+
+    companion object {
+        private const val TIME_FORMAT_AMBIENT = "HH:mm"
+        private const val TIME_FORMAT_INTERACTIVE = "HH:mm:ss"
     }
 }
