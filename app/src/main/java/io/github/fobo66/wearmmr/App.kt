@@ -19,6 +19,7 @@ package io.github.fobo66.wearmmr
 import android.app.Application
 import io.github.fobo66.wearmmr.api.apiModule
 import io.github.fobo66.wearmmr.db.databaseModule
+import io.github.fobo66.wearmmr.util.dispatchersModule
 import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -32,7 +33,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(databaseModule, apiModule)
+            modules(databaseModule, apiModule, dispatchersModule)
         }
     }
 }
