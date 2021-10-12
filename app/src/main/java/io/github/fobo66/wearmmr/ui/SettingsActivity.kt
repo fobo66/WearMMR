@@ -26,6 +26,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType.EDITABLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import io.github.fobo66.wearmmr.databinding.ActivitySettingsBinding
 
@@ -50,6 +51,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.playerIdInput.setText(
             defaultSharedPreferences.getLong("playerId", 0).toString(),
