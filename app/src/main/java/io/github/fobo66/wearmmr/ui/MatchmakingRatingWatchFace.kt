@@ -16,8 +16,16 @@
 
 package io.github.fobo66.wearmmr.ui
 
-import android.content.*
-import android.graphics.*
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -47,7 +55,9 @@ import io.github.fobo66.wearmmr.util.GlideApp
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler
 import io.github.fobo66.wearmmr.util.TimeUpdateHandler.Companion.MSG_UPDATE_TIME
 import org.joda.time.DateTimeZone
+import org.joda.time.Instant
 import org.joda.time.LocalTime
+import org.joda.time.format.DateTimeFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -295,14 +305,18 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), ViewModelStoreOwner
                     })
             }
 
-            // Draw H:MM in ambient mode or H:MM:SS in interactive mode.
-            val now = System.currentTimeMillis()
+            val now = Instant.now()
             time = LocalTime.now()
 
-            canvas.drawText(time.toString(timeFormat), timeXOffset, timeYOffset, textPaint)
+            canvas.drawText(
+                time.toString(DateTimeFormat.forPattern(timeFormat)),
+                timeXOffset,
+                timeYOffset,
+                textPaint
+            )
 
-            batteryComplication.draw(canvas, now)
-            ratingComplication.draw(canvas, now)
+            batteryComplication.draw(canvas, now.millis)
+            ratingComplication.draw(canvas, now.millis)
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
