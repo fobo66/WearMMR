@@ -39,7 +39,7 @@ val roomVersion = "1.1.1"
 val rxVersion = "2.2.21"
 val rxKotlinVersion = "2.4.0"
 val rxAndroidVersion = "2.1.1"
-val koinVersion = "3.1.2"
+val koinVersion = "3.1.3"
 
 android {
 
