@@ -23,6 +23,9 @@ import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.preference.PreferenceManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
@@ -37,7 +40,9 @@ import org.koin.android.ext.android.inject
  * Provides rating info for watchface
  */
 
-class RatingComplicationProviderService : ComplicationProviderService() {
+class RatingComplicationProviderService : ComplicationProviderService(), LifecycleOwner {
+
+    private val lifecycleRegistry = LifecycleRegistry(this)
 
     private val noPlayerId: Long = -1
 
@@ -45,6 +50,14 @@ class RatingComplicationProviderService : ComplicationProviderService() {
 
     private val matchmakingRatingClient: MatchmakingRatingApi by inject()
     private val db: MatchmakingDatabase by inject()
+
+    override fun getLifecycle(): Lifecycle = lifecycleRegistry
+
+    override fun onCreate() {
+        super.onCreate()
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+
+    }
 
     override fun onComplicationUpdate(
         complicationId: Int, dataType: Int, complicationManager: ComplicationManager
@@ -55,6 +68,7 @@ class RatingComplicationProviderService : ComplicationProviderService() {
     override fun onDestroy() {
         super.onDestroy()
         disposables.clear()
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     }
 
     private fun updateRating(
