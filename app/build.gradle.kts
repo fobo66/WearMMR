@@ -97,10 +97,10 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.activity:activity-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
@@ -134,5 +134,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.google.firebase:firebase-crashlytics:18.2.3")
     implementation("com.google.firebase:firebase-analytics:19.0.2")
-    implementation("net.danlew:android.joda:2.10.12")
+    implementation("net.danlew:android.joda:2.10.12.2")
 }
