@@ -14,8 +14,4 @@ val viewModelsModule = module {
             get()
         )
     }
-
-    viewModel {
-        MatchmakingWatchFaceViewModel()
-    }
 }

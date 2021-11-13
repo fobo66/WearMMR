@@ -1,8 +1,6 @@
 package io.github.fobo66.wearmmr.model
 
-import androidx.lifecycle.ViewModel
-
-class MatchmakingWatchFaceViewModel : ViewModel() {
+class MatchmakingWatchFaceViewModel {
 
     fun calculateNextTimeTick(): Long =
         INTERACTIVE_UPDATE_RATE_MS - System.currentTimeMillis() % INTERACTIVE_UPDATE_RATE_MS

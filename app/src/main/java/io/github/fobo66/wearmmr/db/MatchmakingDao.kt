@@ -27,7 +27,7 @@ import io.github.fobo66.wearmmr.entities.MatchmakingRating
 @Dao
 interface MatchmakingDao {
     @Query("SELECT * FROM mmr WHERE playerId = :playerId LIMIT 1")
-    suspend fun findOneByPlayerId(playerId: Long): MatchmakingRating
+    suspend fun findOneByPlayerId(playerId: Long): MatchmakingRating?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRating(rating: MatchmakingRating)

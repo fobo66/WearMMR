@@ -16,16 +16,8 @@
 
 package io.github.fobo66.wearmmr.ui
 
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.content.*
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -41,8 +33,6 @@ import android.view.SurfaceHolder
 import android.view.WindowInsets
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -58,7 +48,6 @@ import org.joda.time.DateTimeZone
 import org.joda.time.Instant
 import org.joda.time.LocalTime
 import org.joda.time.format.DateTimeFormat
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 /**
@@ -73,22 +62,16 @@ import java.util.*
  * in the Google Watch Face Code Lab:
  * https://codelabs.developers.google.com/codelabs/watchface/index.html#0
  */
-class MatchmakingRatingWatchFace : CanvasWatchFaceService(), ViewModelStoreOwner {
+class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
 
-    private val store: ViewModelStore by lazy {
-        checkNotNull(application) {
-            "Your activity is not yet attached to the Application instance. You can't request ViewModel before onCreate call."
-        }
-        ViewModelStore()
+
+    private val model: MatchmakingWatchFaceViewModel by lazy(mode = LazyThreadSafetyMode.NONE) {
+        MatchmakingWatchFaceViewModel()
     }
-
-    private val model: MatchmakingWatchFaceViewModel by viewModel()
 
     override fun onCreateEngine(): Engine {
         return Engine(model)
     }
-
-    override fun getViewModelStore(): ViewModelStore = store
 
     inner class Engine(private val viewModel: MatchmakingWatchFaceViewModel) :
         CanvasWatchFaceService.Engine(true) {
