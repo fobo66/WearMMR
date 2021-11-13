@@ -101,7 +101,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
@@ -132,7 +132,7 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.3")
-    implementation("com.google.firebase:firebase-analytics:19.0.2")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.4")
+    implementation("com.google.firebase:firebase-analytics:20.0.0")
     implementation("net.danlew:android.joda:2.10.12.2")
 }
