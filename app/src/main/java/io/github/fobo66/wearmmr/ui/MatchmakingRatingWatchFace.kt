@@ -22,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.os.IBinder
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders
@@ -31,8 +32,12 @@ import android.support.wearable.watchface.WatchFaceService
 import android.support.wearable.watchface.WatchFaceStyle
 import android.view.SurfaceHolder
 import android.view.WindowInsets
+import androidx.annotation.CallSuper
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -62,11 +67,46 @@ import java.util.*
  * in the Google Watch Face Code Lab:
  * https://codelabs.developers.google.com/codelabs/watchface/index.html#0
  */
-class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
+class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
+
+    private val dispatcher = ServiceLifecycleDispatcher(this)
 
 
     private val model: MatchmakingWatchFaceViewModel by lazy(mode = LazyThreadSafetyMode.NONE) {
         MatchmakingWatchFaceViewModel()
+    }
+
+    @CallSuper
+    override fun onCreate() {
+        dispatcher.onServicePreSuperOnCreate()
+        super.onCreate()
+    }
+
+    @CallSuper
+    override fun onBind(intent: Intent): IBinder? {
+        dispatcher.onServicePreSuperOnBind()
+        return null
+    }
+
+    @CallSuper
+    override fun onStart(intent: Intent?, startId: Int) {
+        dispatcher.onServicePreSuperOnStart()
+        super.onStart(intent, startId)
+    }
+
+    // this method is added only to annotate it with @CallSuper.
+    // In usual service super.onStartCommand is no-op, but in LifecycleService
+    // it results in mDispatcher.onServicePreSuperOnStart() call, because
+    // super.onStartCommand calls onStart().
+    @CallSuper
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        dispatcher.onServicePreSuperOnDestroy()
+        super.onDestroy()
     }
 
     override fun onCreateEngine(): Engine {
@@ -407,4 +447,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService() {
         private const val TIME_FORMAT_AMBIENT = "HH:mm"
         private const val TIME_FORMAT_INTERACTIVE = "HH:mm:ss"
     }
+
+    override fun getLifecycle(): Lifecycle = dispatcher.lifecycle
 }

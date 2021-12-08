@@ -36,6 +36,7 @@ fun loadProperties(propertiesName: String): Properties {
 val wearableVersion = "2.8.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "1.1.1"
+val lifecycleVersion = "2.4.0"
 val rxVersion = "2.2.21"
 val rxKotlinVersion = "2.4.0"
 val rxAndroidVersion = "2.1.1"
@@ -100,8 +101,9 @@ dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
