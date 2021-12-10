@@ -129,6 +129,6 @@ dependencies {
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("com.google.firebase:firebase-crashlytics:18.2.5")
-    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-analytics:20.0.1")
     implementation("net.danlew:android.joda:2.10.12.2")
 }
