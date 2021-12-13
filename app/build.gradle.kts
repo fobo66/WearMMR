@@ -112,8 +112,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi:1.12.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation("com.squareup.moshi:moshi:1.13.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 
     implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
@@ -134,7 +134,7 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.5")
-    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.6")
+    implementation("com.google.firebase:firebase-analytics:20.0.1")
     implementation("net.danlew:android.joda:2.10.12.2")
 }
