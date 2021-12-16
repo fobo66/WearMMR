@@ -116,7 +116,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
     implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
 
-    implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.room:room-runtime:2.4.0")
     implementation("androidx.room:room-rxjava2:2.4.0")
     kapt("androidx.room:room-compiler:2.4.0")
 
