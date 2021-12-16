@@ -114,7 +114,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
     }
 
     inner class Engine(private val viewModel: MatchmakingWatchFaceViewModel) :
-        CanvasWatchFaceService.Engine(true) {
+        CanvasWatchFaceService.Engine() {
 
         private lateinit var time: LocalTime
 
@@ -178,7 +178,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
 
             time = LocalTime.now()
 
-            val resources = baseContext.resources
+            val resources = applicationContext.resources
             timeYOffset = resources.getDimension(R.dimen.digital_y_offset)
 
             // Initializes background.
@@ -195,7 +195,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
             // Initializes Watch Face.
             textPaint = Paint().apply {
                 typeface =
-                    ResourcesCompat.getFont(baseContext, R.font.trajan_pro)
+                    ResourcesCompat.getFont(applicationContext, R.font.trajan_pro)
                 isAntiAlias = true
                 color = ContextCompat.getColor(applicationContext, R.color.digital_text)
             }
@@ -206,7 +206,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
                 R.drawable.rating_complication_drawable,
                 null
             ) as ComplicationDrawable
-            ratingComplication.setContext(baseContext)
+            ratingComplication.setContext(this@MatchmakingRatingWatchFace)
         }
 
         override fun onDestroy() {
@@ -266,7 +266,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
                 }
                 WatchFaceService.TAP_TYPE_TAP ->
                     // The user has completed the tap gesture.
-                    MainActivity.start(baseContext)
+                    MainActivity.start(this@MatchmakingRatingWatchFace)
             }
             invalidate()
         }
