@@ -22,6 +22,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 
 /**
  * DI components for http client
@@ -31,6 +32,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 val apiModule = module {
     single { provideHttpClient() }
     single { provideApiClient(get()) }
+    single { provideCoroutinesApiClient(get()) }
 }
 
 fun provideHttpClient(): OkHttpClient {
@@ -45,5 +47,16 @@ fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
         .client(httpClient)
         .build()
 
-    return retrofit.create(MatchmakingRatingApi::class.java)
+    return retrofit.create()
+}
+
+fun provideCoroutinesApiClient(httpClient: OkHttpClient): CoroutinesMatchmakingRatingApi {
+    val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(API_BASE_URL)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(httpClient)
+        .build()
+
+    return retrofit.create()
 }
