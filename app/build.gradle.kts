@@ -118,7 +118,7 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.3.0")
     implementation("androidx.room:room-rxjava2:2.4.0")
-    kapt("androidx.room:room-compiler:2.3.0")
+    kapt("androidx.room:room-compiler:2.4.0")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
