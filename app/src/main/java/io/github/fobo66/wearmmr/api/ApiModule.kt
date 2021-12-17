@@ -32,7 +32,6 @@ import retrofit2.create
 val apiModule = module {
     single { provideHttpClient() }
     single { provideApiClient(get()) }
-    single { provideCoroutinesApiClient(get()) }
 }
 
 fun provideHttpClient(): OkHttpClient {
@@ -40,17 +39,6 @@ fun provideHttpClient(): OkHttpClient {
 }
 
 fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
-    val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(API_BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .client(httpClient)
-        .build()
-
-    return retrofit.create()
-}
-
-fun provideCoroutinesApiClient(httpClient: OkHttpClient): CoroutinesMatchmakingRatingApi {
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())

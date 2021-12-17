@@ -3,7 +3,7 @@ package io.github.fobo66.wearmmr.domain.usecase
 import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import io.github.fobo66.wearmmr.api.CoroutinesMatchmakingRatingApi
+import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.entities.toMatchmakingRating
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,7 +13,7 @@ import retrofit2.HttpException
 class RatingComplicationUseCase(
     private val db: MatchmakingDatabase,
     private val preferences: SharedPreferences,
-    private val matchmakingRatingClient: CoroutinesMatchmakingRatingApi,
+    private val matchmakingRatingClient: MatchmakingRatingApi,
     private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend fun execute(): Int? {
