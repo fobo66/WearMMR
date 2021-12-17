@@ -35,7 +35,7 @@ fun loadProperties(propertiesName: String): Properties {
 
 val wearableVersion = "2.8.1"
 val retrofitVersion = "2.9.0"
-val roomVersion = "1.1.1"
+val roomVersion = "2.4.0"
 val lifecycleVersion = "2.4.0"
 val rxVersion = "2.2.21"
 val rxKotlinVersion = "2.4.0"
@@ -121,10 +121,10 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
-    implementation("androidx.room:room-runtime:2.4.0")
-    implementation("androidx.room:room-ktx:2.4.0")
-    implementation("androidx.room:room-rxjava2:2.4.0")
-    kapt("androidx.room:room-compiler:2.4.0")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-rxjava2:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
