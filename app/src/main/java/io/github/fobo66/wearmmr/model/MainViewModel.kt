@@ -30,7 +30,8 @@ class MainViewModel(
             val playerId = preferences.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
 
             if (playerId != NO_PLAYER_ID) {
-                val rating = matchmakingDatabase.gameStatsDao().findOneByPlayerId(playerId)
+                val rating =
+                    matchmakingDatabase.coroutinesGameStatsDao().findOneByPlayerId(playerId)
                 if (rating != null) {
                     _state.emit(MainViewState.LoadedRating(rating))
                 } else {
