@@ -26,16 +26,14 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType.EDITABLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.getSystemService
+import androidx.preference.PreferenceManager
 import io.github.fobo66.wearmmr.RatingComplicationProviderService
 import io.github.fobo66.wearmmr.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
-
-    private val inputMethodManager: InputMethodManager by lazy {
-        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    }
 
     private val updateRequester: ProviderUpdateRequester by lazy {
         ProviderUpdateRequester(
@@ -50,6 +48,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.playerIdInput.setText(
             defaultSharedPreferences.getLong("playerId", 0).toString(),
@@ -58,12 +57,16 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.playerIdInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+                getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(
+                    currentFocus!!.windowToken,
+                    0
+                )
                 updatePlayerIdPreference()
                 updateComplication()
-                return@setOnEditorActionListener true
+                true
+            } else {
+                false
             }
-            false
         }
     }
 

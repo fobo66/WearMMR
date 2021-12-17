@@ -16,35 +16,48 @@
 
 package io.github.fobo66.wearmmr
 
+import android.content.Intent
 import android.graphics.drawable.Icon
+import android.os.IBinder
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.Builder
 import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
-import android.util.Log
-import androidx.preference.PreferenceManager
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
-import io.github.fobo66.wearmmr.db.MatchmakingDatabase
-import io.github.fobo66.wearmmr.entities.MatchmakingRating
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ServiceLifecycleDispatcher
+import androidx.lifecycle.lifecycleScope
+import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 /**
  * Provides rating info for watchface
  */
 
-class RatingComplicationProviderService : ComplicationProviderService() {
+class RatingComplicationProviderService : ComplicationProviderService(), LifecycleOwner {
 
-    private val noPlayerId: Long = -1
+    private val dispatcher = ServiceLifecycleDispatcher(this)
 
-    private val disposables = CompositeDisposable()
+    private val ratingComplicationUseCase: RatingComplicationUseCase by inject()
 
-    private val matchmakingRatingClient: MatchmakingRatingApi by inject()
-    private val db: MatchmakingDatabase by inject()
+    override fun getLifecycle(): Lifecycle = dispatcher.lifecycle
+
+    override fun onCreate() {
+        dispatcher.onServicePreSuperOnCreate()
+        super.onCreate()
+    }
+
+    override fun onStart(intent: Intent?, startId: Int) {
+        dispatcher.onServicePreSuperOnStart()
+        super.onStart(intent, startId)
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        dispatcher.onServicePreSuperOnBind()
+        return super.onBind(intent)
+    }
 
     override fun onComplicationUpdate(
         complicationId: Int, dataType: Int, complicationManager: ComplicationManager
@@ -53,64 +66,44 @@ class RatingComplicationProviderService : ComplicationProviderService() {
     }
 
     override fun onDestroy() {
+        dispatcher.onServicePreSuperOnDestroy()
         super.onDestroy()
-        disposables.clear()
     }
 
     private fun updateRating(
         complicationManager: ComplicationManager,
         complicationId: Int
     ) {
-        val playerId =
-            PreferenceManager.getDefaultSharedPreferences(this).getLong("playerId", noPlayerId)
+        lifecycleScope.launch {
+            val rating = ratingComplicationUseCase.execute()
 
-        if (playerId != noPlayerId) {
-            disposables.add(
-                matchmakingRatingClient.fetchPlayerProfile(playerId)
-                    .subscribeOn(Schedulers.io())
-                    .map { playerInfo ->
-                        MatchmakingRating(
-                            playerInfo.profile.accountId, playerInfo.profile.name,
-                            playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
-                            playerInfo.mmrEstimate?.estimate
+            if (rating != null) {
+                val complicationData: ComplicationData = Builder(
+                    ComplicationData.TYPE_SHORT_TEXT
+                )
+                    .setIcon(
+                        Icon.createWithResource(
+                            applicationContext,
+                            R.drawable.ic_rating
                         )
-                    }
-                    .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
-                    .map { rating -> rating.rating }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            val complicationData: ComplicationData = Builder(
-                                ComplicationData.TYPE_SHORT_TEXT
+                    )
+                    .setShortText(ComplicationText.plainText(rating.toString()))
+                    .setImageContentDescription(
+                        ComplicationText.plainText(
+                            applicationContext.getText(
+                                R.string.rating_complication_description
                             )
-                                .setIcon(
-                                    Icon.createWithResource(
-                                        applicationContext,
-                                        R.drawable.ic_rating
-                                    )
-                                )
-                                .setShortText(ComplicationText.plainText(it.toString()))
-                                .setImageContentDescription(
-                                    ComplicationText.plainText(
-                                        applicationContext.getText(
-                                            R.string.rating_complication_description
-                                        )
-                                    )
-                                )
-                                .build()
+                        )
+                    )
+                    .build()
 
-                            complicationManager.updateComplicationData(
-                                complicationId,
-                                complicationData
-                            )
-                        }, { error ->
-                            Log.e(javaClass.simpleName, "Failed to load rating", error)
-                            FirebaseCrashlytics.getInstance().recordException(error)
-                            complicationManager.noUpdateRequired(complicationId)
-                        })
-            )
-        } else {
-            complicationManager.noUpdateRequired(complicationId)
+                complicationManager.updateComplicationData(
+                    complicationId,
+                    complicationData
+                )
+            } else {
+                complicationManager.noUpdateRequired(complicationId)
+            }
         }
     }
 }

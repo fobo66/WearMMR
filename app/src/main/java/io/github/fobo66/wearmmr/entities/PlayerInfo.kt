@@ -27,3 +27,9 @@ data class PlayerInfo(
     @Json(name = "mmr_estimate") val mmrEstimate: MmrEstimate?
 
 )
+
+fun PlayerInfo.toMatchmakingRating(): MatchmakingRating = MatchmakingRating(
+    profile.accountId, profile.name,
+    profile.personaName, profile.avatarUrl,
+    mmrEstimate?.estimate
+)

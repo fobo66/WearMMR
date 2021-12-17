@@ -6,6 +6,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
@@ -35,7 +36,8 @@ fun loadProperties(propertiesName: String): Properties {
 
 val wearableVersion = "2.8.1"
 val retrofitVersion = "2.9.0"
-val roomVersion = "1.1.1"
+val roomVersion = "2.4.0"
+val lifecycleVersion = "2.4.0"
 val rxVersion = "2.2.21"
 val rxKotlinVersion = "2.4.0"
 val rxAndroidVersion = "2.1.1"
@@ -97,10 +99,12 @@ dependencies {
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
+    implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
@@ -116,9 +120,12 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
     implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
 
-    implementation("androidx.room:room-runtime:2.4.0")
-    implementation("androidx.room:room-rxjava2:2.4.0")
-    kapt("androidx.room:room-compiler:2.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-rxjava2:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
