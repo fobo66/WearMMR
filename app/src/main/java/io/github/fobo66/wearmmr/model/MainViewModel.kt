@@ -31,7 +31,7 @@ class MainViewModel(
 
             if (playerId != NO_PLAYER_ID) {
                 val rating =
-                    matchmakingDatabase.coroutinesGameStatsDao().findOneByPlayerId(playerId)
+                    matchmakingDatabase.gameStatsDao().findOneByPlayerId(playerId)
                 if (rating != null) {
                     _state.emit(MainViewState.LoadedRating(rating))
                 } else {

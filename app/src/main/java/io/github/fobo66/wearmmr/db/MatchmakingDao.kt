@@ -16,9 +16,11 @@
 
 package io.github.fobo66.wearmmr.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import io.github.fobo66.wearmmr.entities.MatchmakingRating
-import io.reactivex.Flowable
 
 /**
  * DAO for MMR
@@ -28,11 +30,8 @@ import io.reactivex.Flowable
 @Dao
 interface MatchmakingDao {
     @Query("SELECT * FROM mmr WHERE playerId = :playerId LIMIT 1")
-    fun findOneByPlayerId(playerId: Long): Flowable<MatchmakingRating>
+    suspend fun findOneByPlayerId(playerId: Long): MatchmakingRating?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRating(rating: MatchmakingRating)
-
-    @Update
-    fun updateRatings(vararg ratings: MatchmakingRating)
+    suspend fun insertRating(rating: MatchmakingRating)
 }

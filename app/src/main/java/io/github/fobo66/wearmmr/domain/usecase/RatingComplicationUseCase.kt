@@ -28,7 +28,7 @@ class RatingComplicationUseCase(
                 matchmakingRatingClient.fetchPlayerProfile(playerId)
             }
             val rating = playerInfo.toMatchmakingRating()
-            db.coroutinesGameStatsDao().insertRating(rating)
+            db.gameStatsDao().insertRating(rating)
             rating.rating
         } catch (e: HttpException) {
             Log.e(TAG, "Failed to load rating", e)
