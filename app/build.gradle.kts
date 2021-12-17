@@ -38,10 +38,8 @@ val wearableVersion = "2.8.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.0"
 val lifecycleVersion = "2.4.0"
-val rxVersion = "2.2.21"
-val rxKotlinVersion = "2.4.0"
-val rxAndroidVersion = "2.1.1"
 val koinVersion = "3.1.4"
+val moshiVersion = "1.13.0"
 
 android {
 
@@ -86,6 +84,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
 
     kapt {
         arguments {
@@ -112,13 +114,8 @@ dependencies {
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi:1.13.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
-
-    implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
-    implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
-    implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
+    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
