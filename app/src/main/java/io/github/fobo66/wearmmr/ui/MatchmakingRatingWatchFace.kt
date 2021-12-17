@@ -22,7 +22,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.os.IBinder
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.TYPE_SHORT_TEXT
 import android.support.wearable.complications.SystemProviders
@@ -80,12 +79,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
     override fun onCreate() {
         dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
-    }
-
-    @CallSuper
-    override fun onBind(intent: Intent): IBinder? {
-        dispatcher.onServicePreSuperOnBind()
-        return null
     }
 
     @CallSuper
