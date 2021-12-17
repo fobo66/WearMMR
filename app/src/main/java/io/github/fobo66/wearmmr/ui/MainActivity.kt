@@ -18,60 +18,31 @@ package io.github.fobo66.wearmmr.ui
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
-import androidx.wear.widget.drawer.WearableActionDrawerView
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import io.github.fobo66.wearmmr.R
-import io.github.fobo66.wearmmr.db.MatchmakingDatabase
+import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
+import io.github.fobo66.wearmmr.model.MainViewModel
+import io.github.fobo66.wearmmr.model.MainViewState
 import io.github.fobo66.wearmmr.util.GlideApp
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import org.koin.android.ext.android.inject
-import timber.log.Timber
+import kotlinx.coroutines.flow.collect
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val db: MatchmakingDatabase by inject()
+    private lateinit var binding: ActivityMainBinding
 
-    @BindView(R.id.bottom_action_drawer)
-    lateinit var navigationDrawer: WearableActionDrawerView
-
-    @BindView(R.id.player_pic)
-    lateinit var playerPic: ImageView
-
-
-    @BindView(R.id.player_name)
-    lateinit var playerName: TextView
-
-    @BindView(R.id.player_persona_name)
-    lateinit var playerPersonaName: TextView
-
-    @BindView(R.id.rating)
-    lateinit var rating: TextView
-
-    private val noPlayerId = -1L
-
-    private lateinit var defaultSharedPreferences: SharedPreferences
-
-    private val disposables = CompositeDisposable()
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
-        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        navigationDrawer.setOnMenuItemClickListener {
+        binding.bottomActionDrawer.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings -> {
                     SettingsActivity.start(this)
@@ -82,50 +53,54 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
+        viewModel.checkViewState()
 
-        val isFirstLaunch: Boolean = defaultSharedPreferences.getBoolean("firstLaunch", true)
+        lifecycleScope.launchWhenResumed {
+            viewModel.state.collect {
+                when (it) {
+                    MainViewState.FirstLaunch -> {
+                        Toast.makeText(
+                            this@MainActivity,
+                            R.string.set_playerid_message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        SettingsActivity.start(this@MainActivity)
+                    }
+                    is MainViewState.LoadedRating -> {
+                        binding.content.progressBar.isVisible = false
+                        binding.content.playerDetails.isVisible = true
+                        binding.content.playerName.text = it.rating.name
+                        binding.content.playerPersonaName.text = getString(
+                            R.string.player_name_display_placeholder,
+                            it.rating.personaName
+                        )
+                        binding.content.rating.text = it.rating.rating.toString()
 
-        if (isFirstLaunch) {
-            defaultSharedPreferences.edit().putBoolean("firstLaunch", false).apply()
-            Toast.makeText(this, R.string.set_playerid_message, Toast.LENGTH_SHORT).show()
-            SettingsActivity.start(this)
-        } else {
-            val playerId = defaultSharedPreferences.getLong("playerId", noPlayerId)
+                        GlideApp.with(this@MainActivity)
+                            .load(it.rating.avatarUrl)
+                            .placeholder(R.drawable.ic_person)
+                            .into(binding.content.playerPic)
+                    }
+                    MainViewState.Loading -> {
+                        binding.content.playerDetails.isVisible = false
+                        binding.content.progressBar.isVisible = true
+                    }
+                    MainViewState.NoRating -> {
+                        binding.content.progressBar.isVisible = false
+                        binding.content.playerDetails.isVisible = true
+                        binding.content.playerName.text = ""
+                        binding.content.playerPersonaName.text = ""
+                        GlideApp.with(this@MainActivity)
+                            .load(R.drawable.ic_person)
+                            .into(binding.content.playerPic)
+                        binding.content.rating.setText(R.string.placeholder_rating)
+                    }
+                }
 
-            if (playerId != noPlayerId) {
-                disposables.add(
-                    db.gameStatsDao().findOneByPlayerId(playerId)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ matchmakingRating ->
-                            playerName.text = matchmakingRating.name
-                            playerPersonaName.text = getString(
-                                R.string.player_name_display_placeholder,
-                                matchmakingRating.personaName
-                            )
-                            rating.text = matchmakingRating.rating.toString()
-
-                            GlideApp.with(this)
-                                .load(matchmakingRating.avatarUrl)
-                                .placeholder(R.drawable.ic_person)
-                                .into(playerPic)
-                        }, { error ->
-                            Timber.e(error, "Cannot load data from database")
-                            FirebaseCrashlytics.getInstance().recordException(error)
-                        })
-                )
             }
+
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        disposables.clear()
     }
 
     companion object {

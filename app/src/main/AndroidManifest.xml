@@ -30,7 +30,7 @@
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
       android:supportsRtl="true"
-      android:theme="@android:style/Theme.DeviceDefault">
+      android:theme="@style/Theme.AppCompat.NoActionBar">
     <uses-library
         android:name="com.google.android.wearable"
         android:required="true"/>
@@ -40,16 +40,17 @@
 
     <activity
         android:name=".ui.MainActivity"
-        android:label="@string/app_name">
+        android:exported="true">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
 
     <activity
         android:name=".ui.SettingsActivity"
+        android:exported="false"
         android:label="@string/title_activity_settings">
       <intent-filter>
         <action android:name=
@@ -63,6 +64,8 @@
     <service
         android:name=".ui.MatchmakingRatingWatchFace"
         android:label="@string/mmr_watchface_name"
+        android:directBootAware="true"
+        android:exported="false"
         android:permission="android.permission.BIND_WALLPAPER">
       <meta-data
           android:name="android.service.wallpaper"
@@ -94,6 +97,7 @@
         android:name=".RatingComplicationProviderService"
         android:icon="@drawable/ic_rating"
         android:label="@string/complications_provider_matchmaking_rating_name"
+        android:exported="false"
         android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
 
       <meta-data

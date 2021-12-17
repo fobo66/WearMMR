@@ -6,6 +6,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
@@ -33,16 +34,12 @@ fun loadProperties(propertiesName: String): Properties {
     return properties
 }
 
-val butterknifeVersion = "10.2.3"
-val ankoVersion = "0.10.3"
 val wearableVersion = "2.8.1"
-val supportLibsVersion = "27.1.1"
 val retrofitVersion = "2.9.0"
-val roomVersion = "1.1.1"
-val rxVersion = "2.2.21"
-val rxKotlinVersion = "2.4.0"
-val rxAndroidVersion = "2.1.1"
-val koinVersion = "3.1.2"
+val roomVersion = "2.4.0"
+val lifecycleVersion = "2.4.0"
+val koinVersion = "3.1.4"
+val moshiVersion = "1.13.0"
 
 android {
 
@@ -51,8 +48,8 @@ android {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 25
         targetSdk = 30
-        versionCode = 4
-        versionName = "1.1"
+        versionCode = 5
+        versionName = "2.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -81,6 +78,17 @@ android {
         viewBinding = true
     }
 
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -92,40 +100,40 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("reflect", KotlinCompilerVersion.VERSION))
 
-    implementation("com.google.android.support:wearable:$wearableVersion")
-    implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.wear:wear:1.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
+
+    implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
+    implementation("androidx.wear:wear:1.2.0")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi:1.12.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
-    implementation("io.reactivex.rxjava2:rxjava:$rxVersion")
-    implementation("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
-    implementation("io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
-    implementation("com.jakewharton:butterknife:$butterknifeVersion")
-    kapt("com.jakewharton:butterknife-compiler:$butterknifeVersion")
-
-    implementation("androidx.room:room-runtime:2.3.0")
-    implementation("androidx.room:room-rxjava2:2.3.0")
-    kapt("androidx.room:room-compiler:2.3.0")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-rxjava2:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.3")
-    implementation("com.google.firebase:firebase-analytics:19.0.2")
-    implementation("net.danlew:android.joda:2.10.12")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.6")
+    implementation("com.google.firebase:firebase-analytics:20.0.2")
+    implementation("net.danlew:android.joda:2.10.12.2")
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
