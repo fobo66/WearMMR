@@ -16,21 +16,19 @@
 
 package io.github.fobo66.wearmmr.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import android.os.Parcel
-import android.os.Parcelable
-import android.os.Parcelable.Creator
+import kotlinx.parcelize.Parcelize
 
 /**
- * Entity for showing detailed rating in activity.
- *
- * We implement Parcelable explicitly for reason.
+ * Entity for showing detailed rating in activity and persisting it in the database.
  *
  * Created 12/20/17.
  */
 @Entity(tableName = "mmr")
+@Parcelize
 data class MatchmakingRating(
 
     @PrimaryKey val playerId: Long,
@@ -43,39 +41,4 @@ data class MatchmakingRating(
 
     @ColumnInfo(name = "player_rating") val rating: Int?
 
-) : Parcelable {
-
-    constructor(parcel: Parcel) : this(
-        parcel.readLong(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readInt()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(playerId)
-        parcel.writeString(name)
-        parcel.writeString(personaName)
-        parcel.writeString(avatarUrl)
-        if (rating != null) {
-            parcel.writeInt(rating)
-        } else {
-            parcel.writeInt(0)
-        }
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Creator<MatchmakingRating> {
-        override fun createFromParcel(parcel: Parcel): MatchmakingRating {
-            return MatchmakingRating(parcel)
-        }
-
-        override fun newArray(size: Int): Array<MatchmakingRating?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+) : Parcelable
