@@ -19,6 +19,7 @@ package io.github.fobo66.wearmmr
 import android.app.Application
 import io.github.fobo66.wearmmr.api.apiModule
 import io.github.fobo66.wearmmr.db.databaseModule
+import io.github.fobo66.wearmmr.domain.domainModule
 import io.github.fobo66.wearmmr.model.viewModelsModule
 import io.github.fobo66.wearmmr.util.dispatchersModule
 import org.koin.android.ext.koin.androidContext
@@ -33,7 +34,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(databaseModule, apiModule, dispatchersModule, viewModelsModule)
+            modules(databaseModule, apiModule, dispatchersModule, viewModelsModule, domainModule)
         }
     }
 }

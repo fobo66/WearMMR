@@ -24,18 +24,12 @@ import android.support.wearable.complications.ComplicationData.Builder
 import android.support.wearable.complications.ComplicationManager
 import android.support.wearable.complications.ComplicationProviderService
 import android.support.wearable.complications.ComplicationText
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ServiceLifecycleDispatcher
-import androidx.preference.PreferenceManager
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
-import io.github.fobo66.wearmmr.db.MatchmakingDatabase
-import io.github.fobo66.wearmmr.entities.toMatchmakingRating
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.lifecycleScope
+import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 /**
@@ -46,12 +40,7 @@ class RatingComplicationProviderService : ComplicationProviderService(), Lifecyc
 
     private val dispatcher = ServiceLifecycleDispatcher(this)
 
-    private val noPlayerId: Long = -1
-
-    private val disposables = CompositeDisposable()
-
-    private val matchmakingRatingClient: MatchmakingRatingApi by inject()
-    private val db: MatchmakingDatabase by inject()
+    private val ratingComplicationUseCase: RatingComplicationUseCase by inject()
 
     override fun getLifecycle(): Lifecycle = dispatcher.lifecycle
 
@@ -79,59 +68,42 @@ class RatingComplicationProviderService : ComplicationProviderService(), Lifecyc
     override fun onDestroy() {
         dispatcher.onServicePreSuperOnDestroy()
         super.onDestroy()
-        disposables.clear()
     }
 
     private fun updateRating(
         complicationManager: ComplicationManager,
         complicationId: Int
     ) {
-        val playerId =
-            PreferenceManager.getDefaultSharedPreferences(this).getLong("playerId", noPlayerId)
+        lifecycleScope.launch {
+            val rating = ratingComplicationUseCase.execute()
 
-        if (playerId != noPlayerId) {
-            disposables.add(
-                matchmakingRatingClient.fetchPlayerProfile(playerId)
-                    .subscribeOn(Schedulers.io())
-                    .map { playerInfo ->
-                        playerInfo.toMatchmakingRating()
-                    }
-                    .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
-                    .map { rating -> rating.rating }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            val complicationData: ComplicationData = Builder(
-                                ComplicationData.TYPE_SHORT_TEXT
+            if (rating != null) {
+                val complicationData: ComplicationData = Builder(
+                    ComplicationData.TYPE_SHORT_TEXT
+                )
+                    .setIcon(
+                        Icon.createWithResource(
+                            applicationContext,
+                            R.drawable.ic_rating
+                        )
+                    )
+                    .setShortText(ComplicationText.plainText(rating.toString()))
+                    .setImageContentDescription(
+                        ComplicationText.plainText(
+                            applicationContext.getText(
+                                R.string.rating_complication_description
                             )
-                                .setIcon(
-                                    Icon.createWithResource(
-                                        applicationContext,
-                                        R.drawable.ic_rating
-                                    )
-                                )
-                                .setShortText(ComplicationText.plainText(it.toString()))
-                                .setImageContentDescription(
-                                    ComplicationText.plainText(
-                                        applicationContext.getText(
-                                            R.string.rating_complication_description
-                                        )
-                                    )
-                                )
-                                .build()
+                        )
+                    )
+                    .build()
 
-                            complicationManager.updateComplicationData(
-                                complicationId,
-                                complicationData
-                            )
-                        }, { error ->
-                            Log.e(javaClass.simpleName, "Failed to load rating", error)
-                            FirebaseCrashlytics.getInstance().recordException(error)
-                            complicationManager.noUpdateRequired(complicationId)
-                        })
-            )
-        } else {
-            complicationManager.noUpdateRequired(complicationId)
+                complicationManager.updateComplicationData(
+                    complicationId,
+                    complicationData
+                )
+            } else {
+                complicationManager.noUpdateRequired(complicationId)
+            }
         }
     }
 }
