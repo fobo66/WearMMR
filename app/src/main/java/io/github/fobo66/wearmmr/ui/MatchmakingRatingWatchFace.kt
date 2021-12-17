@@ -52,6 +52,7 @@ import org.joda.time.DateTimeZone
 import org.joda.time.Instant
 import org.joda.time.LocalTime
 import org.joda.time.format.DateTimeFormat
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -137,6 +138,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
 
         private val timeZoneReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
+                Timber.v("Timezone was updated")
                 updateTimeZone()
                 invalidate()
             }
@@ -151,6 +153,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
 
         override fun onCreate(holder: SurfaceHolder) {
             super.onCreate(holder)
+            Timber.v("Created watchface")
 
             setWatchFaceStyle(
                 WatchFaceStyle.Builder(this@MatchmakingRatingWatchFace)
@@ -200,6 +203,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
                 null
             ) as ComplicationDrawable
             ratingComplication.setContext(this@MatchmakingRatingWatchFace)
+            Timber.v("Initialized watchface")
         }
 
         override fun onDestroy() {
@@ -219,6 +223,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
 
         override fun onTimeTick() {
             super.onTimeTick()
+            Timber.v("Time tick")
             invalidate()
         }
 
@@ -271,6 +276,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
             height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
+            Timber.v("Watchface surface changed")
 
             val sizeOfComplication = width / 4
             val midpointOfScreen = width / 2
