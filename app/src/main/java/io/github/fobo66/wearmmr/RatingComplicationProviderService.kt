@@ -16,7 +16,9 @@
 
 package io.github.fobo66.wearmmr
 
+import android.content.Intent
 import android.graphics.drawable.Icon
+import android.os.IBinder
 import android.support.wearable.complications.ComplicationData
 import android.support.wearable.complications.ComplicationData.Builder
 import android.support.wearable.complications.ComplicationManager
@@ -25,7 +27,7 @@ import android.support.wearable.complications.ComplicationText
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.preference.PreferenceManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
@@ -42,7 +44,7 @@ import org.koin.android.ext.android.inject
 
 class RatingComplicationProviderService : ComplicationProviderService(), LifecycleOwner {
 
-    private val lifecycleRegistry = LifecycleRegistry(this)
+    private val dispatcher = ServiceLifecycleDispatcher(this)
 
     private val noPlayerId: Long = -1
 
@@ -51,12 +53,21 @@ class RatingComplicationProviderService : ComplicationProviderService(), Lifecyc
     private val matchmakingRatingClient: MatchmakingRatingApi by inject()
     private val db: MatchmakingDatabase by inject()
 
-    override fun getLifecycle(): Lifecycle = lifecycleRegistry
+    override fun getLifecycle(): Lifecycle = dispatcher.lifecycle
 
     override fun onCreate() {
+        dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    }
 
+    override fun onStart(intent: Intent?, startId: Int) {
+        dispatcher.onServicePreSuperOnStart()
+        super.onStart(intent, startId)
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        dispatcher.onServicePreSuperOnBind()
+        return super.onBind(intent)
     }
 
     override fun onComplicationUpdate(
@@ -66,9 +77,9 @@ class RatingComplicationProviderService : ComplicationProviderService(), Lifecyc
     }
 
     override fun onDestroy() {
+        dispatcher.onServicePreSuperOnDestroy()
         super.onDestroy()
         disposables.clear()
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     }
 
     private fun updateRating(
