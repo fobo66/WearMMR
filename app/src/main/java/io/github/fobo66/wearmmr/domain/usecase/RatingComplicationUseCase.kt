@@ -1,7 +1,6 @@
 package io.github.fobo66.wearmmr.domain.usecase
 
 import android.content.SharedPreferences
-import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
@@ -9,6 +8,7 @@ import io.github.fobo66.wearmmr.entities.toMatchmakingRating
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import timber.log.Timber
 
 class RatingComplicationUseCase(
     private val db: MatchmakingDatabase,
@@ -31,7 +31,7 @@ class RatingComplicationUseCase(
             db.gameStatsDao().insertRating(rating)
             rating.rating
         } catch (e: HttpException) {
-            Log.e(TAG, "Failed to load rating", e)
+            Timber.e(e, "Failed to load rating")
             FirebaseCrashlytics.getInstance().recordException(e)
             null
         }
@@ -40,6 +40,5 @@ class RatingComplicationUseCase(
     companion object {
         private const val KEY_PLAYER_ID = "playerId"
         private const val NO_PLAYER_ID = -1L
-        private const val TAG = "RatingComplicationUseCase"
     }
 }

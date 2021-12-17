@@ -31,6 +31,7 @@ import androidx.lifecycle.lifecycleScope
 import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 /**
  * Provides rating info for watchface
