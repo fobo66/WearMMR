@@ -48,8 +48,8 @@ android {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 25
         targetSdk = 30
-        versionCode = 4
-        versionName = "1.1"
+        versionCode = 5
+        versionName = "2.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
