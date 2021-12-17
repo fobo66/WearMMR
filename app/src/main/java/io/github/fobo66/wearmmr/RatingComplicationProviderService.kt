@@ -30,7 +30,7 @@ import androidx.preference.PreferenceManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
-import io.github.fobo66.wearmmr.entities.MatchmakingRating
+import io.github.fobo66.wearmmr.entities.toMatchmakingRating
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -83,11 +83,7 @@ class RatingComplicationProviderService : ComplicationProviderService(), Lifecyc
                 matchmakingRatingClient.fetchPlayerProfile(playerId)
                     .subscribeOn(Schedulers.io())
                     .map { playerInfo ->
-                        MatchmakingRating(
-                            playerInfo.profile.accountId, playerInfo.profile.name,
-                            playerInfo.profile.personaName, playerInfo.profile.avatarUrl,
-                            playerInfo.mmrEstimate?.estimate
-                        )
+                        playerInfo.toMatchmakingRating()
                     }
                     .doOnNext { rating -> db.gameStatsDao().insertRating(rating) }
                     .map { rating -> rating.rating }
