@@ -1,5 +1,5 @@
 /*
- * Copyright 2018. Andrey Mukamolov <fobo66@protonmail.com>
+ * Copyright 2018. Andrey Mukamolov
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
 import io.github.fobo66.wearmmr.util.GlideApp
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

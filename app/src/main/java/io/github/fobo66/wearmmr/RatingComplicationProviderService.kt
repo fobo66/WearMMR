@@ -1,5 +1,5 @@
 /*
- * Copyright 2018. Andrey Mukamolov <fobo66@protonmail.com>
+ * Copyright 2018. Andrey Mukamolov
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import androidx.lifecycle.lifecycleScope
 import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 /**
  * Provides rating info for watchface

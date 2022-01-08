@@ -1,5 +1,5 @@
 /*
- * Copyright 2018. Andrey Mukamolov <fobo66@protonmail.com>
+ * Copyright 2018. Andrey Mukamolov
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,8 +16,16 @@
 
 package io.github.fobo66.wearmmr.ui
 
-import android.content.*
-import android.graphics.*
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
