@@ -125,7 +125,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
         private var timeXOffset: Float = 0F
         private var timeYOffset: Float = 0F
 
-        private var complicationYOffset: Float = 30F
+        private var complicationYOffset: Float = DEFAULT_Y_OFFSET
 
         private lateinit var backgroundPaint: Paint
         private lateinit var backgroundBitmap: Bitmap
@@ -286,7 +286,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
             super.onSurfaceChanged(holder, format, width, height)
             Timber.v("Watchface surface changed")
 
-            val sizeOfComplication = width / 4
+            val sizeOfComplication = width / COMPLICATION_SIZE_DIVIDER
             val midpointOfScreen = width / 2
 
             val horizontalOffset = (midpointOfScreen - sizeOfComplication) / 2
@@ -453,6 +453,8 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
     companion object {
         private const val TIME_FORMAT_AMBIENT = "HH:mm"
         private const val TIME_FORMAT_INTERACTIVE = "HH:mm:ss"
+        private const val DEFAULT_Y_OFFSET = 30F
+        private const val COMPLICATION_SIZE_DIVIDER = 4
     }
 
     override fun getLifecycle(): Lifecycle = dispatcher.lifecycle
