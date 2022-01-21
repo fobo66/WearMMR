@@ -132,7 +132,7 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.6")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.7")
     implementation("com.google.firebase:firebase-analytics:20.0.2")
     implementation("net.danlew:android.joda:2.10.12.2")
     implementation("com.jakewharton.timber:timber:5.0.1")
