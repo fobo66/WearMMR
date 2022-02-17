@@ -34,7 +34,7 @@ fun loadProperties(propertiesName: String): Properties {
     return properties
 }
 
-val wearableVersion = "2.8.1"
+val wearableVersion = "2.9.0"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.1"
 val lifecycleVersion = "2.4.1"
