@@ -127,7 +127,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koinVersion")
 
     implementation("com.github.bumptech.glide:glide:4.13.1")
-    kapt("com.github.bumptech.glide:compiler:4.13.0")
+    kapt("com.github.bumptech.glide:compiler:4.13.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
