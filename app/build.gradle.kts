@@ -133,7 +133,7 @@ dependencies {
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("com.google.firebase:firebase-crashlytics:18.2.9")
-    implementation("com.google.firebase:firebase-analytics:20.1.1")
+    implementation("com.google.firebase:firebase-analytics:20.1.2")
     implementation("net.danlew:android.joda:2.10.14")
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
