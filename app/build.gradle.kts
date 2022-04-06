@@ -39,6 +39,7 @@ val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
 val koinVersion = "3.1.5"
+val glideVersion = "4.13.1"
 val moshiVersion = "1.13.0"
 
 android {
@@ -88,7 +89,6 @@ android {
         jvmTarget = "11"
     }
 
-
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -126,8 +126,8 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:$koinVersion")
 
-    implementation("com.github.bumptech.glide:glide:4.13.1")
-    kapt("com.github.bumptech.glide:compiler:4.13.1")
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
