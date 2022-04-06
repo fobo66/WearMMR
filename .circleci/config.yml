@@ -1,0 +1,56 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+# For a detailed guide to building and testing on Android, read the docs:
+# https://circleci.com/docs/2.0/language-android/ for more details.
+version: 2.1
+
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  android: circleci/android@2.0.0
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
+  lint:
+    docker:
+      - image: cimg/android:2022.03.1
+    steps:
+      - checkout
+      - android/restore-gradle-cache:
+          cache-prefix: v1a
+      - run: ./gradlew detekt
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+  unit-tests:
+    # These next lines define the Android machine image executor.
+    # See: https://circleci.com/docs/2.0/executor-types/
+    docker:
+      - image: cimg/android:2022.03.1
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - android/restore-build-cache:
+          cache-prefix: v1a
+      - android/restore-gradle-cache:
+          cache-prefix: v1a
+      # The next step will run the unit tests
+      - android/run-tests:
+          test-command: ./gradlew  testDebug --continue
+      - store_test_results:
+          path: app/build/test-results/testDebugUnitTest
+      - android/save-build-cache:
+          cache-prefix: v1a
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  check: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - lint
