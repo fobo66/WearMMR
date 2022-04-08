@@ -38,7 +38,7 @@ val wearableVersion = "2.9.0"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
-val koinVersion = "3.1.5"
+val koinVersion = "3.1.6"
 val glideVersion = "4.13.1"
 val moshiVersion = "1.13.0"
 
