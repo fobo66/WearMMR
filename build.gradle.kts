@@ -24,7 +24,7 @@ allprojects {
 }
 
 tasks {
-    register("clean", Delete::class) {
+    register<Delete>("clean") {
         delete(rootProject.buildDir)
     }
 
