@@ -58,12 +58,10 @@ android {
 
     signingConfigs {
         register("releaseSign") {
-            val keystoreProperties = loadProperties("keystore.properties")
-
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = File(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
+            keyAlias = loadSecret(rootProject, KEY_ALIAS)
+            keyPassword = loadSecret(rootProject, KEY_PASSWORD)
+            storeFile = rootProject.file(loadSecret(rootProject, STORE_FILE))
+            storePassword = loadSecret(rootProject, STORE_PASSWORD)
         }
     }
 

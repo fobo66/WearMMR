@@ -6,5 +6,5 @@
 /build
 /captures
 .externalNativeBuild
-/keystore.properties
+.env
 *.jks
