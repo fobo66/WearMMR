@@ -109,6 +109,10 @@ dependencies {
     implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.2.0")
+    implementation("androidx.wear.watchface:watchface:1.1.0-alpha05")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.0-alpha05")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.0-alpha05")
+    implementation("androidx.wear.watchface:watchface-editor:1.1.0-alpha05")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
