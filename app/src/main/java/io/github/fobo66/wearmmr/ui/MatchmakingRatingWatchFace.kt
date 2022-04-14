@@ -79,7 +79,6 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
 
     private val dispatcher = ServiceLifecycleDispatcher(this)
 
-
     private val model: MatchmakingWatchFaceViewModel by lazy(mode = LazyThreadSafetyMode.NONE) {
         MatchmakingWatchFaceViewModel()
     }
@@ -190,11 +189,13 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
                 color = ContextCompat.getColor(applicationContext, R.color.background)
             }
 
-            backgroundBitmap = (ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.dota_logo,
-                null
-            ) as BitmapDrawable).bitmap
+            backgroundBitmap = (
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.dota_logo,
+                    null
+                ) as BitmapDrawable
+                ).bitmap
 
             // Initializes Watch Face.
             textPaint = Paint().apply {
