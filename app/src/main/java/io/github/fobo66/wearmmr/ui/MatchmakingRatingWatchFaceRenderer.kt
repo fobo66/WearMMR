@@ -5,11 +5,13 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.SurfaceHolder
 import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import java.io.PrintWriter
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class MatchmakingRatingWatchFaceRenderer(
     private val context: Context,
@@ -18,36 +20,56 @@ class MatchmakingRatingWatchFaceRenderer(
     private val complicationSlotsManager: ComplicationSlotsManager,
     currentUserStyleRepository: CurrentUserStyleRepository,
     canvasType: Int
-) : Renderer.CanvasRenderer2<Renderer.SharedAssets>(
+) : Renderer.CanvasRenderer2<MatchmakingRatingSharedAssets>(
     surfaceHolder,
     currentUserStyleRepository,
     watchState,
     canvasType,
-    16L,
+    DEFAULT_FRAME_UPDATE_DELAY_MS,
     true
 ) {
+    private val timeFormat: String
+        get() = if (renderParameters.drawMode == DrawMode.AMBIENT) {
+            TIME_FORMAT_AMBIENT
+        } else {
+            TIME_FORMAT_INTERACTIVE
+        }
+
     override fun onDump(writer: PrintWriter) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun createSharedAssets(): SharedAssets =
+    override suspend fun createSharedAssets(): MatchmakingRatingSharedAssets =
         MatchmakingRatingSharedAssets(context)
 
     override fun render(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
-        sharedAssets: SharedAssets
+        sharedAssets: MatchmakingRatingSharedAssets
     ) {
-        TODO("Not yet implemented")
+        canvas.drawBitmap(sharedAssets.backgroundBitmap, 0f, 0f, sharedAssets.backgroundPaint)
+
+        canvas.drawText(
+            zonedDateTime.format(DateTimeFormatter.ofPattern(timeFormat)),
+            sharedAssets.timeXOffset,
+            sharedAssets.timeYOffset,
+            sharedAssets.textPaint
+        )
     }
 
     override fun renderHighlightLayer(
         canvas: Canvas,
         bounds: Rect,
         zonedDateTime: ZonedDateTime,
-        sharedAssets: SharedAssets
+        sharedAssets: MatchmakingRatingSharedAssets
     ) {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        private const val DEFAULT_FRAME_UPDATE_DELAY_MS = 16L
+        private const val TIME_FORMAT_AMBIENT = "HH:mm"
+        private const val TIME_FORMAT_INTERACTIVE = "HH:mm:ss"
     }
 }
