@@ -114,6 +114,7 @@ class MatchmakingRatingWatchFace : CanvasWatchFaceService(), LifecycleOwner {
         return Engine(model)
     }
 
+    @Suppress("TooManyFunctions")
     inner class Engine(private val viewModel: MatchmakingWatchFaceViewModel) :
         CanvasWatchFaceService.Engine() {
 
