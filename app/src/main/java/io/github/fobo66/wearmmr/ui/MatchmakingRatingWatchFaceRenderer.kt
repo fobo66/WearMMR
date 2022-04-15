@@ -9,7 +9,6 @@ import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
 import androidx.wear.watchface.WatchState
 import androidx.wear.watchface.style.CurrentUserStyleRepository
-import java.io.PrintWriter
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -34,10 +33,6 @@ class MatchmakingRatingWatchFaceRenderer(
         } else {
             TIME_FORMAT_INTERACTIVE
         }
-
-    override fun onDump(writer: PrintWriter) {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun createSharedAssets(): MatchmakingRatingSharedAssets =
         MatchmakingRatingSharedAssets(context)
