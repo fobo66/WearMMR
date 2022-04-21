@@ -44,11 +44,11 @@ val moshiVersion = "1.13.0"
 
 android {
 
-    compileSdk = 31
+    compileSdk = 32
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 25
-        targetSdk = 30
+        targetSdk = 32
         versionCode = 5
         versionName = "2.0"
         multiDexEnabled = true
@@ -107,12 +107,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
+//    implementation("androidx.wear:wear-watchface-complications-rendering:1.0.0-alpha22")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.2.0")
-    implementation("androidx.wear.watchface:watchface:1.1.0-alpha05")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.0-alpha05")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.0-alpha05")
-    implementation("androidx.wear.watchface:watchface-editor:1.1.0-alpha05")
+    implementation("androidx.wear.watchface:watchface:1.1.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.0-beta01")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.0-beta01")
+    implementation("androidx.wear.watchface:watchface-editor:1.1.0-beta01")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
