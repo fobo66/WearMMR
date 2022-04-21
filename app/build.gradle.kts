@@ -35,6 +35,7 @@ fun loadProperties(propertiesName: String): Properties {
 }
 
 val wearableVersion = "2.9.0"
+val wearableWatchfaceVersion = "1.1.0-beta01"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
@@ -107,13 +108,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     implementation("com.google.android.support:wearable:$wearableVersion")
-//    implementation("androidx.wear:wear-watchface-complications-rendering:1.0.0-alpha22")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
-    implementation("androidx.wear:wear:1.2.0")
-    implementation("androidx.wear.watchface:watchface:1.1.0-beta01")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:1.1.0-beta01")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.0-beta01")
-    implementation("androidx.wear.watchface:watchface-editor:1.1.0-beta01")
+    implementation("androidx.wear:wear:1.3.0-alpha02")
+    implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
