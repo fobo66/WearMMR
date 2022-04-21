@@ -30,4 +30,11 @@ class NewMatchmakingRatingWatchFace : WatchFaceService() {
             renderer
         )
     }
+
+    override fun createComplicationSlotsManager(currentUserStyleRepository: CurrentUserStyleRepository): ComplicationSlotsManager {
+        return ComplicationSlotsManager(
+            listOf(),
+            currentUserStyleRepository
+        )
+    }
 }
