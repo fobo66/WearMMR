@@ -51,6 +51,12 @@ class MatchmakingRatingWatchFaceRenderer(
             sharedAssets.timeYOffset,
             sharedAssets.textPaint
         )
+
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            if (complication.enabled) {
+                complication.render(canvas, zonedDateTime, renderParameters)
+            }
+        }
     }
 
     override fun renderHighlightLayer(
