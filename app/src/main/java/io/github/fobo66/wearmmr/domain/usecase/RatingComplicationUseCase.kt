@@ -1,7 +1,8 @@
 package io.github.fobo66.wearmmr.domain.usecase
 
 import android.content.SharedPreferences
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.entities.toMatchmakingRating
@@ -32,7 +33,7 @@ class RatingComplicationUseCase(
             rating.rating
         } catch (e: HttpException) {
             Timber.e(e, "Failed to load rating")
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
             null
         }
     }
