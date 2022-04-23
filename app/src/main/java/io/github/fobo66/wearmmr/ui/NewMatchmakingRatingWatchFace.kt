@@ -1,5 +1,6 @@
 package io.github.fobo66.wearmmr.ui
 
+import android.content.ComponentName
 import android.graphics.RectF
 import android.view.SurfaceHolder
 import androidx.wear.watchface.CanvasComplicationFactory
@@ -18,6 +19,7 @@ import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawabl
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import io.github.fobo66.wearmmr.R
+import io.github.fobo66.wearmmr.domain.RatingComplicationDataSource
 
 class NewMatchmakingRatingWatchFace : WatchFaceService() {
     override suspend fun createWatchFace(
@@ -61,7 +63,10 @@ class NewMatchmakingRatingWatchFace : WatchFaceService() {
             canvasComplicationFactory = complicationFactory,
             supportedTypes = ComplicationsConfig.Left.supportedTypes,
             defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_WATCH_BATTERY, ComplicationType.SHORT_TEXT
+                ComponentName(applicationContext, RatingComplicationDataSource::class.java),
+                ComplicationType.SHORT_TEXT,
+                SystemDataSources.DATA_SOURCE_STEP_COUNT,
+                ComplicationType.SHORT_TEXT
             ),
             bounds = ComplicationSlotBounds(
                 RectF(
@@ -77,7 +82,7 @@ class NewMatchmakingRatingWatchFace : WatchFaceService() {
         val rightComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
             id = ComplicationsConfig.Right.id,
             canvasComplicationFactory = complicationFactory,
-            supportedTypes = ComplicationsConfig.Left.supportedTypes,
+            supportedTypes = ComplicationsConfig.Right.supportedTypes,
             defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
                 SystemDataSources.DATA_SOURCE_WATCH_BATTERY, ComplicationType.SHORT_TEXT
             ),
