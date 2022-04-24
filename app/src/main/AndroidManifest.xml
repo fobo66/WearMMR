@@ -61,38 +61,6 @@
         </activity>
 
         <service
-            android:name=".ui.MatchmakingRatingWatchFace"
-            android:directBootAware="true"
-            android:exported="true"
-            android:label="@string/mmr_watchface_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/watch_face" />
-            <meta-data
-                android:name="com.google.android.wearable.watchface.preview"
-                android:resource="@drawable/watchface_preview" />
-            <meta-data
-                android:name="com.google.android.wearable.watchface.preview_circular"
-                android:resource="@drawable/watchface_preview_circular" />
-
-            <!-- companion configuration activity -->
-            <meta-data
-                android:name="com.google.android.wearable.watchface.companionConfigurationAction"
-                android:value="io.github.fobo66.wearmmr.CONFIG_DIGITAL" />
-            <!-- wearable configuration activity -->
-            <meta-data
-                android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
-                android:value="io.github.fobo66.wearmmr.CONFIG_DIGITAL" />
-
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-
-                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
-            </intent-filter>
-        </service>
-
-        <service
             android:name=".ui.NewMatchmakingRatingWatchFace"
             android:directBootAware="true"
             android:exported="true"
@@ -123,30 +91,6 @@
         </service>
 
         <service
-            android:name=".RatingComplicationProviderService"
-            android:exported="true"
-            android:icon="@drawable/ic_rating"
-            android:label="@string/complications_provider_matchmaking_rating_name"
-            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-
-            <meta-data
-                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT" />
-
-            <meta-data
-                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="43200" />
-
-            <meta-data
-                android:name="android.support.wearable.complications.SAFE_WATCH_FACES"
-                android:value="io.github.fobo66.wearmmr.MatchmakingRatingWatchFace" />
-
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
-            </intent-filter>
-        </service>
-
-        <service
             android:name=".domain.RatingComplicationDataSource"
             android:exported="true"
             android:icon="@drawable/ic_rating"
@@ -160,12 +104,6 @@
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="43200" />
-
-            <meta-data
-                android:name="androidx.wear.watchface.complications.data.source.IMMEDIATE_UPDATE_PERIOD_MILLISECONDS"
-                android:value="43200" />
-
-            <meta-data android:name="android.support.wearable.complications.PROVIDER_CONFIG_ACTION" />
 
             <intent-filter>
                 <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
