@@ -15,7 +15,7 @@
   -->
 
 <drawable xmlns:app="http://schemas.android.com/apk/res-auto"
-    class="android.support.wearable.complications.rendering.ComplicationDrawable"
+    class="androidx.wear.watchface.complications.rendering.ComplicationDrawable"
     app:backgroundColor="@color/complication_background"
     app:borderColor="@color/complication_background"
     app:iconColor="#e0e0e0"
