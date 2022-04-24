@@ -28,11 +28,13 @@ class MatchmakingRatingWatchFaceRenderer(
     true
 ) {
     private val timeFormat: String
-        get() = if (renderParameters.drawMode == DrawMode.AMBIENT) {
+        get() = if (isAmbient()) {
             TIME_FORMAT_AMBIENT
         } else {
             TIME_FORMAT_INTERACTIVE
         }
+
+    private fun isAmbient() = renderParameters.drawMode == DrawMode.AMBIENT
 
     override suspend fun createSharedAssets(): MatchmakingRatingSharedAssets =
         MatchmakingRatingSharedAssets(context)
@@ -43,7 +45,11 @@ class MatchmakingRatingWatchFaceRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MatchmakingRatingSharedAssets
     ) {
-        canvas.drawBitmap(sharedAssets.backgroundBitmap, 0f, 0f, sharedAssets.backgroundPaint)
+        if (isAmbient()) {
+            canvas.drawPaint(sharedAssets.backgroundPaint)
+        } else {
+            canvas.drawBitmap(sharedAssets.backgroundBitmap, 0f, 0f, sharedAssets.backgroundPaint)
+        }
 
         canvas.drawText(
             zonedDateTime.format(DateTimeFormatter.ofPattern(timeFormat)),
