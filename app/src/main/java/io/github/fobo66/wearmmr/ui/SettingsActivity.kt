@@ -21,24 +21,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.wearable.complications.ProviderUpdateRequester
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType.EDITABLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
-import io.github.fobo66.wearmmr.RatingComplicationProviderService
+import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import io.github.fobo66.wearmmr.databinding.ActivitySettingsBinding
+import io.github.fobo66.wearmmr.domain.RatingComplicationDataSource
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
 
-    private val updateRequester: ProviderUpdateRequester by lazy {
-        ProviderUpdateRequester(
+    private val updateRequester: ComplicationDataSourceUpdateRequester by lazy {
+        ComplicationDataSourceUpdateRequester.create(
             this,
-            ComponentName(this, RatingComplicationProviderService::class.java)
+            ComponentName(this, RatingComplicationDataSource::class.java)
         )
     }
 

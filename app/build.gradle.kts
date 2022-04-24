@@ -107,7 +107,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
-    implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.3.0-alpha02")
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
