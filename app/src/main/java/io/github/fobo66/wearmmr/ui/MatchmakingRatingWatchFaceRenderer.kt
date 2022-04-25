@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.SurfaceHolder
+import androidx.core.graphics.toRectF
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
@@ -48,7 +49,12 @@ class MatchmakingRatingWatchFaceRenderer(
         if (isAmbient()) {
             canvas.drawPaint(sharedAssets.backgroundPaint)
         } else {
-            canvas.drawBitmap(sharedAssets.backgroundBitmap, 0f, 0f, sharedAssets.backgroundPaint)
+            canvas.drawBitmap(
+                sharedAssets.backgroundBitmap,
+                null,
+                bounds.toRectF(),
+                sharedAssets.backgroundPaint
+            )
         }
 
         canvas.drawText(
