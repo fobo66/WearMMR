@@ -16,8 +16,6 @@
 
 package io.github.fobo66.wearmmr.ui
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -96,15 +94,11 @@ class MainActivity : AppCompatActivity() {
                         binding.content.rating.setText(R.string.placeholder_rating)
                     }
                 }
-
             }
-
         }
     }
 
     companion object {
-        fun start(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
-        }
+        const val REQUEST_CODE = 1245
     }
 }

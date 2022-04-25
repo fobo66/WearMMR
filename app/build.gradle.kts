@@ -35,6 +35,7 @@ fun loadProperties(propertiesName: String): Properties {
 }
 
 val wearableVersion = "2.9.0"
+val wearableWatchfaceVersion = "1.1.0-beta01"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
@@ -44,11 +45,11 @@ val moshiVersion = "1.13.0"
 
 android {
 
-    compileSdk = 31
+    compileSdk = 32
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
-        minSdk = 25
-        targetSdk = 30
+        minSdk = 26
+        targetSdk = 32
         versionCode = 5
         versionName = "2.0"
         multiDexEnabled = true
@@ -101,14 +102,19 @@ dependencies {
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
+    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
-    implementation("com.google.android.support:wearable:$wearableVersion")
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
-    implementation("androidx.wear:wear:1.2.0")
+    implementation("androidx.wear:wear:1.3.0-alpha02")
+    implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion")
+    implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
@@ -119,7 +125,6 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.room:room-rxjava2:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("io.insert-koin:koin-android:$koinVersion")
@@ -130,8 +135,9 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.9")
-    implementation("com.google.firebase:firebase-analytics:20.1.2")
+    implementation(platform("com.google.firebase:firebase-bom:29.3.1"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("net.danlew:android.joda:2.10.14")
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
