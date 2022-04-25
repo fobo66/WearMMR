@@ -52,5 +52,4 @@ class MainViewModel(
         private const val KEY_PLAYER_ID = "playerId"
         private const val KEY_FIRST_LAUNCH = "firstLaunch"
     }
-
 }
