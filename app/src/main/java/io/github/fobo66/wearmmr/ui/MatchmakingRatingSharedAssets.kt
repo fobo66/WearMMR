@@ -33,14 +33,6 @@ class MatchmakingRatingSharedAssets(context: Context) : Renderer.SharedAssets {
 
     val timeYOffset = context.resources.getDimension(R.dimen.digital_y_offset)
 
-    val complicationYOffset = context.resources.getDimension(
-        if (context.resources.configuration.isScreenRound) {
-            R.dimen.complication_y_offset_round
-        } else {
-            R.dimen.complication_y_offset
-        }
-    )
-
     val textPaint = Paint().apply {
         typeface =
             ResourcesCompat.getFont(context, R.font.trajan_pro)
