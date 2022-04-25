@@ -1,12 +1,15 @@
 package io.github.fobo66.wearmmr.domain
 
+import android.graphics.drawable.Icon
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.NoDataComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
+import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
 import org.koin.android.ext.android.inject
 
@@ -31,6 +34,15 @@ class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
                     .build(),
                 PlainComplicationText.Builder("MMR").build()
             )
+                .setMonochromaticImage(
+                    MonochromaticImage.Builder(
+                        Icon.createWithResource(
+                            applicationContext,
+                            R.drawable.ic_rating
+                        )
+                    )
+                        .build()
+                )
                 .build()
         } else {
             NoDataComplicationData()
