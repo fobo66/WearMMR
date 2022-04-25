@@ -71,7 +71,13 @@ class MatchmakingRatingWatchFaceRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MatchmakingRatingSharedAssets
     ) {
-        TODO("Not yet implemented")
+        canvas.drawColor(renderParameters.highlightLayer!!.backgroundTint)
+
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            if (complication.enabled) {
+                complication.renderHighlightLayer(canvas, zonedDateTime, renderParameters)
+            }
+        }
     }
 
     companion object {
