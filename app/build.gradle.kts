@@ -39,7 +39,7 @@ val wearableWatchfaceVersion = "1.1.0-beta01"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
-val koinVersion = "3.1.6"
+val koinVersion = "3.2.0"
 val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
 
