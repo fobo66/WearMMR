@@ -35,7 +35,7 @@ fun loadProperties(propertiesName: String): Properties {
 }
 
 val wearableVersion = "2.9.0"
-val wearableWatchfaceVersion = "1.1.0-beta02"
+val wearableWatchfaceVersion = "1.1.0-rc01"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.4.2"
 val lifecycleVersion = "2.4.1"
