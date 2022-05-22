@@ -17,7 +17,6 @@
 <resources>
   <color name="background">#000000</color>
   <color name="icon_color">#BEFFFFFF</color>
-  <color name="activity_background">#3E3E3E</color>
   <color name="digital_text">#ffffff</color>
   <color name="complication_background">#7C0F0F</color>
 </resources>

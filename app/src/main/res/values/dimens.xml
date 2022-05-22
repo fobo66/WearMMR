@@ -31,6 +31,4 @@
   <dimen name="digital_x_offset">15dp</dimen>
   <dimen name="digital_x_offset_round">25dp</dimen>
   <dimen name="digital_y_offset">90dp</dimen>
-  <dimen name="complication_y_offset">40dp</dimen>
-  <dimen name="complication_y_offset_round">30dp</dimen>
 </resources>
