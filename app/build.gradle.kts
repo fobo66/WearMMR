@@ -87,6 +87,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    namespace = "io.github.fobo66.wearmmr"
 
     kapt {
         arguments {
