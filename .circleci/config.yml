@@ -18,6 +18,7 @@ jobs:
       - image: cimg/android:2022.04.1
     steps:
       - checkout
+      - run: cp app/google-services.json.example app/google-services.json
       - android/restore-gradle-cache:
           cache-prefix: v1a
       - run: ./gradlew detekt lintDebug
@@ -25,6 +26,8 @@ jobs:
           cache-prefix: v1a
       - store_artifacts:
           path: app/build/reports/lint-results-debug.html
+      - store_artifacts:
+          path: app/build/reports/detekt/detekt.html
   unit-tests:
     # These next lines define the Android machine image executor.
     # See: https://circleci.com/docs/2.0/executor-types/
@@ -36,6 +39,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run: cp app/google-services.json.example app/google-services.json
       - android/restore-build-cache:
           cache-prefix: v1a
       - android/restore-gradle-cache:
