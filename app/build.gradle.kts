@@ -34,6 +34,7 @@ val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
 
 android {
+    namespace = "io.github.fobo66.wearmmr"
 
     compileSdk = 32
     defaultConfig {
@@ -77,12 +78,15 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    namespace = "io.github.fobo66.wearmmr"
 
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
+    }
+
+    lint {
+        disable += "DialogFragmentCallbacksDetector"
     }
 }
 
