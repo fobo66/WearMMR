@@ -1,6 +1,3 @@
-import java.io.FileInputStream
-import java.util.*
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -26,12 +23,6 @@ plugins {
  *    See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun loadProperties(propertiesName: String): Properties {
-    val propertiesFile = rootProject.file(propertiesName)
-    val properties = Properties()
-    properties.load(FileInputStream(propertiesFile))
-    return properties
-}
 
 val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.0-rc01"
