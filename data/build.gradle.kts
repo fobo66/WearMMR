@@ -36,4 +36,5 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.8.0")
+    implementation("io.insert-koin:koin-android:3.2.0")
 }
