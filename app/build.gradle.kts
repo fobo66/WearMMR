@@ -92,6 +92,8 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":data"))
+
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.activity:activity-ktx:1.5.0")
