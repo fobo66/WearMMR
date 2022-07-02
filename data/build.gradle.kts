@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -35,7 +36,13 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.5.0-alpha02"
+
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 }
