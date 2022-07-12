@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -11,7 +12,6 @@ android {
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

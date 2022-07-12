@@ -3,8 +3,8 @@ package io.github.fobo66.wearmmr.domain.usecase
 import android.content.SharedPreferences
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import io.github.fobo66.data.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
-import io.github.fobo66.wearmmr.db.MatchmakingDatabase
 import io.github.fobo66.wearmmr.entities.toMatchmakingRating
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

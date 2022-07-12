@@ -16,7 +16,7 @@ val dataModule = module {
     }
 
     single<PreferenceDataSource> {
-        PreferenceDataSourceImpl()
+        PreferenceDataSourceImpl(get())
     }
 }
 

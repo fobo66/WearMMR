@@ -27,7 +27,6 @@ plugins {
 val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.0"
 val retrofitVersion = "2.9.0"
-val roomVersion = "2.5.0-alpha02"
 val lifecycleVersion = "2.5.0"
 val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
@@ -117,10 +116,6 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
-
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
