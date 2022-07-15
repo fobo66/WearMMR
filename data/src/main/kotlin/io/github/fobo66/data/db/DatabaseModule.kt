@@ -34,4 +34,7 @@ val databaseModule = module {
         )
             .build()
     }
+    factory {
+        get<MatchmakingDatabase>().gameStatsDao()
+    }
 }
