@@ -1,6 +1,6 @@
 # WearMMR
 
-[![CircleCI](https://circleci.com/gh/fobo66/WearMMR/tree/master.svg?style=svg)](https://circleci.com/gh/fobo66/WearMMR/tree/master)
+[![CircleCI](https://circleci.com/gh/fobo66/WearMMR/tree/main.svg?style=svg)](https://circleci.com/gh/fobo66/WearMMR/tree/main)
 
 This is an Android Wear app and watchface for displaying your Dota 2 MMR. On first launch, you will be prompted to input your (or somebody else's) player ID. After that, you will be able to see your estimated MMR every time you look at your watch. When you click on the MMR, detailed view is shown.
 
