@@ -77,12 +77,6 @@ android {
         jvmTarget = "11"
     }
 
-    kapt {
-        arguments {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-    }
-
     lint {
         disable += "DialogFragmentCallbacksDetector"
     }
