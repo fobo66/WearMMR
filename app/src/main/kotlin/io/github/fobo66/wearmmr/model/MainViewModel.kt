@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.fobo66.data.db.MatchmakingDatabase
+import io.github.fobo66.data.source.PersistenceDataSource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import timber.log.Timber
 
 class MainViewModel(
     private val preferences: SharedPreferences,
-    private val matchmakingDatabase: MatchmakingDatabase
+    private val persistenceDataSource: PersistenceDataSource
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState.Loading)
@@ -32,8 +32,7 @@ class MainViewModel(
             val playerId = preferences.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
 
             if (playerId != NO_PLAYER_ID) {
-                val rating =
-                    matchmakingDatabase.gameStatsDao().findOneByPlayerId(playerId)
+                val rating = persistenceDataSource.loadRating(playerId)
                 if (rating != null) {
                     Timber.d("Loaded rating")
                     _state.emit(MainViewState.LoadedRating(rating))
