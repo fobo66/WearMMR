@@ -33,5 +33,5 @@ interface MatchmakingDao {
     suspend fun findOneByPlayerId(playerId: Long): MatchmakingRating?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRating(rating: MatchmakingRating)
+    suspend fun insertRating(rating: MatchmakingRating): Long
 }

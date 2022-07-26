@@ -5,7 +5,7 @@ import io.github.fobo66.data.entities.MatchmakingRating
 
 interface PersistenceDataSource {
     suspend fun loadRating(id: Long): MatchmakingRating?
-    suspend fun saveRating(rating: MatchmakingRating)
+    suspend fun saveRating(rating: MatchmakingRating): Long
 }
 
 class PersistenceDataSourceImpl(
