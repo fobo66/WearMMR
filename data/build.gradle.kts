@@ -39,6 +39,10 @@ android {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
+
+    lint {
+        disable += "DialogFragmentCallbacksDetector"
+    }
 }
 
 dependencies {
@@ -56,7 +60,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
     androidTestImplementation("androidx.test:runner:1.4.0")
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test.junit"))
+    testImplementation(kotlin("test-junit"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 }
