@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -42,6 +44,18 @@ android {
 
     lint {
         disable += "DialogFragmentCallbacksDetector"
+    }
+
+    testOptions {
+        animationsDisabled = true
+        managedDevices {
+            devices.register<ManagedVirtualDevice>("pixel") {
+                device = "Pixel 2"
+                apiLevel = 30
+                systemImageSource = "aosp-atd"
+                require64Bit = false
+            }
+        }
     }
 }
 
