@@ -53,6 +53,34 @@ jobs:
           cache-prefix: v1a
       - android/save-gradle-cache:
           cache-prefix: v1a
+  ui-tests:
+    executor:
+      name: android/android-machine
+      tag: 2022.03.1
+      resource-class: large
+    steps:
+      - checkout
+      - android/restore-build-cache:
+          cache-prefix: v1a
+      - restore_cache:
+          keys:
+            - v1a
+      - android/run-tests:
+          test-command: ./gradlew pixelDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
+      - store_test_results:
+          path: app/build/outputs/androidTest-results/managedDevice/pixel
+      - store_artifacts:
+          path: data/build/reports/androidTests/managedDevice/pixel
+      - android/save-build-cache:
+          cache-prefix: v1a
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+      - save_cache:
+          key: v1a
+          paths:
+            - ".gradle"
+            - "app/build"
+            - "data/build"
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -60,3 +88,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - lint
+      - ui-tests
