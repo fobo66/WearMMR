@@ -54,19 +54,19 @@ jobs:
       - android/save-gradle-cache:
           cache-prefix: v1a
   ui-tests:
-    executor:
-      name: android/android-machine
-      tag: 2022.06.1
+    docker:
+      - image: cimg/android:2022.06.1
       resource-class: large
     steps:
       - checkout
+      - run: cp app/google-services.json.example app/google-services.json
       - android/restore-build-cache:
           cache-prefix: v1a
       - restore_cache:
           keys:
             - v1a
       - android/run-tests:
-          test-command: ./gradlew pixelDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
+          test-command: ./gradlew pixelDebugAndroidTest
       - store_test_results:
           path: app/build/outputs/androidTest-results/managedDevice/pixel
       - store_artifacts:
