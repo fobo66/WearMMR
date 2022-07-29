@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr.data.source
+package io.github.fobo66.data.source
 
 import android.content.Context
 import androidx.room.Room
@@ -6,8 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.fobo66.data.db.MatchmakingDatabase
 import io.github.fobo66.data.entities.MatchmakingRating
-import io.github.fobo66.data.source.PersistenceDataSource
-import io.github.fobo66.data.source.PersistenceDataSourceImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
