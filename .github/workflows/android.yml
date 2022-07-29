@@ -5,6 +5,11 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+env:
+  WEARMMR_KEY_ALIAS: ${{secrets.WEARMMR_KEY_ALIAS}}
+  WEARMMR_KEY_PASSWORD: ${{secrets.WEARMMR_KEY_PASSWORD}}
+  WEARMMR_KEYSTORE_FILE: ${{secrets.WEARMMR_KEYSTORE_FILE}}
+  WEARMMR_KEYSTORE_PASSWORD: ${{secrets.WEARMMR_KEYSTORE_PASSWORD}}
 
 jobs:
   lint:
