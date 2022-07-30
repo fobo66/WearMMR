@@ -6,8 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,5 +38,17 @@ class PreferenceDataSourceImplTest {
     @Test
     fun getDefaultLong() = runTest {
         assertEquals(0L, preferenceDataSource.getLong("test"))
+    }
+
+    @Test
+    fun saveBoolean() = runTest {
+        preferenceDataSource.saveBoolean("test", true)
+        assertTrue(preferenceDataSource.getBoolean("test"))
+    }
+
+    @Test
+    fun saveLong() = runTest {
+        preferenceDataSource.saveLong("long", 1L)
+        assertEquals(1L, preferenceDataSource.getLong("long"))
     }
 }
