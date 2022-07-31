@@ -8,8 +8,8 @@ import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
 import io.github.fobo66.wearmmr.entities.toMatchmakingRating
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import timber.log.Timber
-import java.io.IOException
 
 class RatingComplicationUseCase(
     private val persistenceDataSource: PersistenceDataSource,
@@ -31,7 +31,7 @@ class RatingComplicationUseCase(
             val rating = playerInfo.toMatchmakingRating()
             persistenceDataSource.saveRating(rating)
             rating.rating
-        } catch (e: IOException) {
+        } catch (e: HttpException) {
             Timber.e(e, "Failed to load rating")
             Firebase.crashlytics.recordException(e)
             null
