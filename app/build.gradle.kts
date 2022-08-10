@@ -25,7 +25,7 @@ plugins {
  */
 
 val wearableVersion = "2.9.0"
-val wearableWatchfaceVersion = "1.1.0"
+val wearableWatchfaceVersion = "1.1.1"
 val retrofitVersion = "2.9.0"
 val roomVersion = "2.5.0-alpha02"
 val lifecycleVersion = "2.5.1"
