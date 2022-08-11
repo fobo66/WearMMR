@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.db
+package io.github.fobo66.data.db
 
-import androidx.room.Room
-import org.koin.dsl.module
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import io.github.fobo66.data.entities.MatchmakingRating
 
 /**
- * DI component for Room database
- *
- * Created 2/20/18.
+ * MMR Database
+ * Created 12/20/17.
  */
-
-val databaseModule = module {
-    single {
-        Room.databaseBuilder(
-            get(),
-            MatchmakingDatabase::class.java,
-            "matchmaking"
-        )
-            .build()
-    }
+@Database(entities = [(MatchmakingRating::class)], version = 1)
+abstract class MatchmakingDatabase : RoomDatabase() {
+    abstract fun gameStatsDao(): MatchmakingDao
 }

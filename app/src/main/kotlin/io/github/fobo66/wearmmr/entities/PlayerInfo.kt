@@ -18,6 +18,7 @@ package io.github.fobo66.wearmmr.entities
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import io.github.fobo66.data.entities.MatchmakingRating
 
 
 @JsonClass(generateAdapter = true)

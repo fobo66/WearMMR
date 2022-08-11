@@ -21,7 +21,7 @@ jobs:
       - run: cp app/google-services.json.example app/google-services.json
       - android/restore-gradle-cache:
           cache-prefix: v1a
-      - run: ./gradlew detekt lintDebug
+      - run: ./gradlew detekt lintDebug --continue
       - android/save-gradle-cache:
           cache-prefix: v1a
       - store_artifacts:
@@ -46,13 +46,42 @@ jobs:
           cache-prefix: v1a
       # The next step will run the unit tests
       - android/run-tests:
-          test-command: ./gradlew  testDebug --continue
+          test-command: ./gradlew testDebug
       - store_test_results:
           path: app/build/test-results/testDebugUnitTest
       - android/save-build-cache:
           cache-prefix: v1a
       - android/save-gradle-cache:
           cache-prefix: v1a
+  ui-tests:
+    executor:
+      name: android/android-machine
+      tag: 2022.06.1
+    steps:
+      - checkout
+      - android/accept-licenses
+      - run: cp app/google-services.json.example app/google-services.json
+      - android/restore-build-cache:
+          cache-prefix: v1a
+      - restore_cache:
+          keys:
+            - v1a
+      - android/run-tests:
+          test-command: ./gradlew pixelDebugAndroidTest
+      - store_test_results:
+          path: app/build/outputs/androidTest-results/managedDevice/pixel
+      - store_artifacts:
+          path: data/build/reports/androidTests/managedDevice/pixel
+      - android/save-build-cache:
+          cache-prefix: v1a
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+      - save_cache:
+          key: v1a
+          paths:
+            - ".gradle"
+            - "app/build"
+            - "data/build"
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -60,3 +89,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - lint
+      - ui-tests

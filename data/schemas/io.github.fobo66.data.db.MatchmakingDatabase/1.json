@@ -40,18 +40,19 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "playerId"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
       }
     ],
+    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5f12bb55d4ce4ee952e83164c0f528b9\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5f12bb55d4ce4ee952e83164c0f528b9')"
     ]
   }
 }

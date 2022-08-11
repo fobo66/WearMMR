@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.db
+package io.github.fobo66.data.db
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import io.github.fobo66.wearmmr.entities.MatchmakingRating
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import io.github.fobo66.data.entities.MatchmakingRating
 
 /**
- * MMR Database
+ * DAO for MMR
+ *
  * Created 12/20/17.
  */
-@Database(entities = [(MatchmakingRating::class)], version = 1)
-abstract class MatchmakingDatabase : RoomDatabase() {
-    abstract fun gameStatsDao(): MatchmakingDao
+@Dao
+interface MatchmakingDao {
+    @Query("SELECT * FROM mmr WHERE playerId = :playerId LIMIT 1")
+    suspend fun findOneByPlayerId(playerId: Long): MatchmakingRating?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRating(rating: MatchmakingRating): Long
 }

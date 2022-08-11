@@ -1,6 +1,6 @@
 package io.github.fobo66.wearmmr.model
 
-import io.github.fobo66.wearmmr.entities.MatchmakingRating
+import io.github.fobo66.data.entities.MatchmakingRating
 
 sealed class MainViewState {
     object FirstLaunch : MainViewState()

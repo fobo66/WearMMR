@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.entities
+package io.github.fobo66.data.entities
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
