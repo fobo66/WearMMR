@@ -46,7 +46,7 @@ class MatchmakingRatingWatchFaceRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MatchmakingRatingSharedAssets
     ) {
-        if (isAmbient()) {
+        if (isAmbient() || sharedAssets.backgroundBitmap.isRecycled) {
             canvas.drawPaint(sharedAssets.backgroundPaint)
         } else {
             canvas.drawBitmap(
