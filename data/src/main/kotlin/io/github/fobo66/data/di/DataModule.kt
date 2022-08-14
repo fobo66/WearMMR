@@ -31,8 +31,10 @@ val dataModule = module {
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = "wearmmr",
     produceMigrations = { context ->
-        listOf(SharedPreferencesMigration(produceSharedPreferences = {
-            PreferenceManager.getDefaultSharedPreferences(context)
-        }))
+        listOf(
+            SharedPreferencesMigration(produceSharedPreferences = {
+                PreferenceManager.getDefaultSharedPreferences(context)
+            })
+        )
     }
 )
