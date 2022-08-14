@@ -122,6 +122,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("net.danlew:android.joda:2.10.14")
+    implementation("net.danlew:android.joda:2.11.0")
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
