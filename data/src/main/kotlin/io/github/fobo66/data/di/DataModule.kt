@@ -6,6 +6,8 @@ import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.preference.PreferenceManager
+import io.github.fobo66.data.repositories.RatingRepository
+import io.github.fobo66.data.repositories.RatingRepositoryImpl
 import io.github.fobo66.data.source.PersistenceDataSource
 import io.github.fobo66.data.source.PersistenceDataSourceImpl
 import io.github.fobo66.data.source.PreferenceDataSource
@@ -25,6 +27,10 @@ val dataModule = module {
 
     single<PersistenceDataSource> {
         PersistenceDataSourceImpl(get())
+    }
+
+    single<RatingRepository> {
+        RatingRepositoryImpl(get(), get())
     }
 }
 
