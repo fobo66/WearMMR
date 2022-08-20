@@ -21,7 +21,6 @@ class PersistenceDataSourceImplTest {
     private lateinit var persistenceDataSource: PersistenceDataSource
     private lateinit var db: MatchmakingDatabase
 
-
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
