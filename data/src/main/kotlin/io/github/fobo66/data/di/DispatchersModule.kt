@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr.util
+package io.github.fobo66.data.di
 
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.qualifier

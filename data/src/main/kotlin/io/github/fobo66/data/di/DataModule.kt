@@ -12,33 +12,24 @@ import io.github.fobo66.data.API_BASE_URL
 import io.github.fobo66.data.api.MatchmakingRatingApi
 import io.github.fobo66.data.repositories.RatingRepository
 import io.github.fobo66.data.repositories.RatingRepositoryImpl
+import io.github.fobo66.data.source.NetworkDataSource
+import io.github.fobo66.data.source.NetworkDataSourceImpl
 import io.github.fobo66.data.source.PersistenceDataSource
 import io.github.fobo66.data.source.PersistenceDataSourceImpl
 import io.github.fobo66.data.source.PreferenceDataSource
 import io.github.fobo66.data.source.PreferenceDataSourceImpl
-import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val dataModule = module {
 
     single {
         androidContext().dataStore
-    }
-
-    single<PreferenceDataSource> {
-        PreferenceDataSourceImpl(get())
-    }
-
-    single<PersistenceDataSource> {
-        PersistenceDataSourceImpl(get())
-    }
-
-    single<RatingRepository> {
-        RatingRepositoryImpl(get(), get())
     }
 
     single {
@@ -55,6 +46,25 @@ val dataModule = module {
             .httpClient(get<HttpClient>())
             .build()
             .create<MatchmakingRatingApi>()
+    }
+
+    single<PreferenceDataSource> {
+        PreferenceDataSourceImpl(get())
+    }
+
+    single<PersistenceDataSource> {
+        PersistenceDataSourceImpl(get())
+    }
+
+    single<NetworkDataSource> {
+        NetworkDataSourceImpl(
+            get(),
+            get(qualifier("io"))
+        )
+    }
+
+    single<RatingRepository> {
+        RatingRepositoryImpl(get(), get())
     }
 }
 
