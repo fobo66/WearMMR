@@ -49,6 +49,8 @@ jobs:
           test-command: ./gradlew testDebug
       - store_test_results:
           path: app/build/test-results/testDebugUnitTest
+      - store_test_results:
+          path: data/build/test-results/testDebugUnitTest
       - android/save-build-cache:
           cache-prefix: v1a
       - android/save-gradle-cache:
