@@ -16,11 +16,14 @@
 
 package io.github.fobo66.wearmmr.api
 
-import io.github.fobo66.wearmmr.API_BASE_URL
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import io.github.fobo66.data.API_BASE_URL
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
 /**
@@ -37,10 +40,11 @@ fun provideHttpClient(): OkHttpClient {
     return OkHttpClient()
 }
 
+@OptIn(ExperimentalSerializationApi::class)
 fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .client(httpClient)
         .build()
 

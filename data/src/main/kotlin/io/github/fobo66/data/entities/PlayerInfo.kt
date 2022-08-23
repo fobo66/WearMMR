@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.entities
+package io.github.fobo66.data.entities
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
+data class PlayerInfo(
+    @SerialName("profile") val profile: PlayerProfile,
+    @SerialName("rank_tier") val rankTier: Int?,
+    @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate?
 
-@JsonClass(generateAdapter = true)
-data class PlayerProfile(
-    @Json(name = "account_id") val accountId: Long,
-    @Json(name = "name") val name: String?,
-    @Json(name = "personaname") val personaName: String?,
-    @Json(name = "avatar") val avatarUrl: String
+)
+
+fun PlayerInfo.toMatchmakingRating(): MatchmakingRating = MatchmakingRating(
+    profile.accountId,
+    profile.name,
+    profile.personaName,
+    profile.avatarUrl,
+    mmrEstimate?.estimate
 )

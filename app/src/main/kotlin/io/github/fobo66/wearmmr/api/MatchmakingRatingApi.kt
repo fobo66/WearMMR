@@ -16,7 +16,7 @@
 
 package io.github.fobo66.wearmmr.api
 
-import io.github.fobo66.wearmmr.entities.PlayerInfo
+import io.github.fobo66.data.entities.PlayerInfo
 import retrofit2.http.GET
 import retrofit2.http.Path
 

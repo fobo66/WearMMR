@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.entities
+package io.github.fobo66.data.entities
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
-@JsonClass(generateAdapter = true)
-data class MmrEstimate(
-    @Json(name = "estimate") val estimate: Int?
+@Serializable
+data class PlayerProfile(
+    @SerialName("account_id") val accountId: Long,
+    @SerialName("name") val name: String?,
+    @SerialName("personaname") val personaName: String?,
+    @SerialName("avatar") val avatarUrl: String
 )

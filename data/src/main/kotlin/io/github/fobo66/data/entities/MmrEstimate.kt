@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr
+package io.github.fobo66.data.entities
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-const val API_BASE_URL: String = "https://api.opendota.com/api/"
+@Serializable
+data class MmrEstimate(
+    @SerialName("estimate") val estimate: Int?
+)
