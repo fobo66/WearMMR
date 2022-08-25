@@ -1,11 +1,11 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
+    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
 }
 
 /*
@@ -28,7 +28,6 @@ val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
 val retrofitVersion = "2.9.0"
 val lifecycleVersion = "2.5.1"
-val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
 
 android {
@@ -107,14 +106,13 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
     implementation("com.squareup.moshi:moshi:$moshiVersion")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
+    implementation("io.coil-kt:coil:2.2.0")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
