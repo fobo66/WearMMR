@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
     id("kotlin-parcelize")
     id("kotlinx-serialization")
     id("com.google.gms.google-services")
@@ -29,17 +28,16 @@ val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
 val retrofitVersion = "2.9.0"
 val lifecycleVersion = "2.5.1"
-val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
 
 android {
     namespace = "io.github.fobo66.wearmmr"
 
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 5
         versionName = "2.0"
         multiDexEnabled = true
@@ -100,9 +98,15 @@ dependencies {
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.3.0-alpha02")
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion")
+    implementation(
+        "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
+    )
     implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -113,10 +117,9 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
+    implementation("io.coil-kt:coil:2.2.0")
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))

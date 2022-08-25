@@ -69,11 +69,11 @@ jobs:
           keys:
             - v1a
       - android/run-tests:
-          test-command: ./gradlew pixelDebugAndroidTest
+          test-command: ./gradlew pixelDebugAndroidTest  --console=plain
       - store_test_results:
-          path: app/build/outputs/androidTest-results/managedDevice/pixel
+          path: data/build/outputs/androidTest-results/managedDevice/allDevices
       - store_artifacts:
-          path: data/build/reports/androidTests/managedDevice/pixel
+          path: data/build/reports/androidTests/managedDevice/allDevices
       - android/save-build-cache:
           cache-prefix: v1a
       - android/save-gradle-cache:

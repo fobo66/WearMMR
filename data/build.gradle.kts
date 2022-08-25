@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace = "io.github.fobo66.wearmmr.data"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 26
@@ -82,6 +82,7 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.4.0")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
+    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 }
