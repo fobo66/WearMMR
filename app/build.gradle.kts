@@ -34,11 +34,11 @@ val moshiVersion = "1.13.0"
 android {
     namespace = "io.github.fobo66.wearmmr"
 
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 5
         versionName = "2.0"
         multiDexEnabled = true
