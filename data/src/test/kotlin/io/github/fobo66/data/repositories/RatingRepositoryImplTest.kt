@@ -1,14 +1,16 @@
 package io.github.fobo66.data.repositories
 
 import io.github.fobo66.data.entities.MatchmakingRating
+import io.github.fobo66.data.fake.FakeNetworkDataSource
 import io.github.fobo66.data.fake.FakePersistenceDataSource
 import io.github.fobo66.data.fake.FakePreferenceDataSource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
+import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 
 class RatingRepositoryImplTest {
 
@@ -16,11 +18,21 @@ class RatingRepositoryImplTest {
 
     private val preferenceDataSource = FakePreferenceDataSource()
 
+    private val networkDataSource = FakeNetworkDataSource()
+
     private lateinit var ratingRepository: RatingRepository
 
     @BeforeTest
     fun setUp() {
-        ratingRepository = RatingRepositoryImpl(persistenceDataSource, preferenceDataSource)
+        ratingRepository =
+            RatingRepositoryImpl(persistenceDataSource, preferenceDataSource, networkDataSource)
+    }
+
+    @AfterTest
+    fun tearDown() {
+        networkDataSource.clear()
+        persistenceDataSource.clear()
+        preferenceDataSource.clear()
     }
 
     @Test
@@ -31,7 +43,7 @@ class RatingRepositoryImplTest {
 
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun loadRating() = runTest {
+    fun `load rating from cache`() = runTest {
         preferenceDataSource.long = 1L
         persistenceDataSource.rating = MatchmakingRating(
             1L,
@@ -40,13 +52,23 @@ class RatingRepositoryImplTest {
             "test",
             1
         )
-        assertNotNull(ratingRepository.loadRating())
+
+        ratingRepository.loadRating()
+
+        assertTrue {
+            persistenceDataSource.isLoadedFromCache
+        }
     }
 
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun `no rating for given id`() = runTest {
+    fun `no rating for given id - fetch rating`() = runTest {
         preferenceDataSource.long = 1L
-        assertNull(ratingRepository.loadRating())
+
+        ratingRepository.loadRating()
+
+        assertTrue {
+            networkDataSource.isFetched
+        }
     }
 }

@@ -4,7 +4,7 @@ import io.github.fobo66.data.source.PreferenceDataSource
 
 class FakePreferenceDataSource : PreferenceDataSource, Clearable {
 
-    var long = 0L
+    var long = -1L
     override suspend fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         return defaultValue
     }
