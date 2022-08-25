@@ -113,6 +113,7 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
+    implementation("io.coil-kt:coil:2.2.0")
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
