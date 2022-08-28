@@ -7,6 +7,7 @@ import io.github.fobo66.data.fake.FakePreferenceDataSource
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -57,6 +58,29 @@ class RatingRepositoryImplTest {
 
         assertTrue {
             persistenceDataSource.isLoadedFromCache
+        }
+    }
+
+    @Test
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun `fetch rating always from network`() = runTest {
+        preferenceDataSource.long = 1L
+        persistenceDataSource.rating = MatchmakingRating(
+            1L,
+            "test",
+            "test",
+            "test",
+            1
+        )
+
+        ratingRepository.fetchRating()
+
+        assertFalse {
+            persistenceDataSource.isLoadedFromCache
+        }
+
+        assertTrue {
+            networkDataSource.isFetched
         }
     }
 
