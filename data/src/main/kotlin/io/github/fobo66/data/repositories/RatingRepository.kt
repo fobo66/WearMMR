@@ -20,14 +20,7 @@ class RatingRepositoryImpl(
         val playerId = preferenceDataSource.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
 
         return if (playerId != NO_PLAYER_ID) {
-            val cachedRating = persistenceDataSource.loadRating(playerId)
-            if (cachedRating == null) {
-                val networkRating = networkDataSource.fetchRating(playerId).toMatchmakingRating()
-                persistenceDataSource.saveRating(networkRating)
-                networkRating
-            } else {
-                cachedRating
-            }
+            persistenceDataSource.loadRating(playerId) ?: fetchRating(playerId)
         } else {
             null
         }
@@ -37,12 +30,16 @@ class RatingRepositoryImpl(
         val playerId = preferenceDataSource.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
 
         return if (playerId != NO_PLAYER_ID) {
-            val networkRating = networkDataSource.fetchRating(playerId).toMatchmakingRating()
-            persistenceDataSource.saveRating(networkRating)
-            networkRating
+            fetchRating(playerId)
         } else {
             null
         }
+    }
+
+    private suspend fun fetchRating(playerId: Long): MatchmakingRating {
+        val networkRating = networkDataSource.fetchRating(playerId).toMatchmakingRating()
+        persistenceDataSource.saveRating(networkRating)
+        return networkRating
     }
 
     companion object {
