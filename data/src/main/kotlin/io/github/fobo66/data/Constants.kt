@@ -14,23 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.fobo66.wearmmr.entities
+package io.github.fobo66.data
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import io.github.fobo66.data.entities.MatchmakingRating
+/**
+ * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
+ * Created 12/17/17.
+ */
 
-
-@JsonClass(generateAdapter = true)
-data class PlayerInfo(
-    @Json(name = "profile") val profile: PlayerProfile,
-    @Json(name = "rank_tier") val rankTier: Int?,
-    @Json(name = "mmr_estimate") val mmrEstimate: MmrEstimate?
-
-)
-
-fun PlayerInfo.toMatchmakingRating(): MatchmakingRating = MatchmakingRating(
-    profile.accountId, profile.name,
-    profile.personaName, profile.avatarUrl,
-    mmrEstimate?.estimate
-)
+const val API_BASE_URL: String = "https://api.opendota.com/api/"

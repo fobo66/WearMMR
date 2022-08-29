@@ -3,6 +3,7 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
     id("com.google.devtools.ksp") version "1.7.10-1.0.6"
@@ -38,6 +39,8 @@ android {
 
     ksp {
         arg("room.schemaLocation", "$projectDir/schemas")
+        arg("room.incremental", "true")
+        arg("room.expandProjection", "true")
     }
 
     lint {
@@ -60,6 +63,8 @@ android {
 dependencies {
     val roomVersion = "2.5.0-alpha02"
     val coroutinesVersion = "1.6.4"
+    val ktorVersion = "2.1.0"
+    val ktorfitVersion = "1.0.0-beta11"
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -69,11 +74,17 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
+    ksp("de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
     androidTestImplementation("androidx.test:runner:1.4.0")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
+    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 }

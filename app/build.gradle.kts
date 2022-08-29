@@ -2,10 +2,10 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
-    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
 }
 
 /*
@@ -98,15 +98,20 @@ dependencies {
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.3.0-alpha03")
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion")
+    implementation(
+        "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
+    )
     implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
 
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi:$moshiVersion")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 

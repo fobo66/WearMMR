@@ -49,6 +49,8 @@ jobs:
           test-command: ./gradlew testDebug
       - store_test_results:
           path: app/build/test-results/testDebugUnitTest
+      - store_test_results:
+          path: data/build/test-results/testDebugUnitTest
       - android/save-build-cache:
           cache-prefix: v1a
       - android/save-gradle-cache:
@@ -56,7 +58,7 @@ jobs:
   ui-tests:
     executor:
       name: android/android-machine
-      tag: 2022.06.1
+      tag: 2022.08.1
     steps:
       - checkout
       - android/accept-licenses
@@ -89,4 +91,5 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - lint
+      - unit-tests
       - ui-tests
