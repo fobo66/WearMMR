@@ -33,18 +33,27 @@ import retrofit2.create
 
 val apiModule = module {
     single { provideHttpClient() }
-    single { provideApiClient(get()) }
+    single { provideJson() }
+    single { provideApiClient(get(), get()) }
 }
 
 fun provideHttpClient(): OkHttpClient {
     return OkHttpClient()
 }
 
+fun provideJson(): Json {
+    return Json {
+        ignoreUnknownKeys = true
+    }
+}
+
 @OptIn(ExperimentalSerializationApi::class)
-fun provideApiClient(httpClient: OkHttpClient): MatchmakingRatingApi {
+fun provideApiClient(httpClient: OkHttpClient, json: Json): MatchmakingRatingApi {
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
-        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+        .addConverterFactory(
+            json.asConverterFactory("application/json".toMediaType())
+        )
         .client(httpClient)
         .build()
 
