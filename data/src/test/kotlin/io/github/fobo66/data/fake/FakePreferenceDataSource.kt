@@ -20,6 +20,6 @@ class FakePreferenceDataSource : PreferenceDataSource, Clearable {
     }
 
     override fun clear() {
-        long = 0L
+        long = -1L
     }
 }
