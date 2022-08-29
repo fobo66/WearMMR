@@ -61,7 +61,7 @@ android {
 }
 
 dependencies {
-    val roomVersion = "2.5.0-alpha02"
+    val roomVersion = "2.5.0-alpha03"
     val coroutinesVersion = "1.6.4"
     val ktorVersion = "2.1.0"
     val ktorfitVersion = "1.0.0-beta11"
