@@ -12,6 +12,8 @@ import io.github.fobo66.data.API_BASE_URL
 import io.github.fobo66.data.api.MatchmakingRatingApi
 import io.github.fobo66.data.repositories.RatingRepository
 import io.github.fobo66.data.repositories.RatingRepositoryImpl
+import io.github.fobo66.data.repositories.SettingsRepository
+import io.github.fobo66.data.repositories.SettingsRepositoryImpl
 import io.github.fobo66.data.source.NetworkDataSource
 import io.github.fobo66.data.source.NetworkDataSourceImpl
 import io.github.fobo66.data.source.PersistenceDataSource
@@ -74,6 +76,10 @@ val dataModule = module {
             get(),
             get()
         )
+    }
+
+    single<SettingsRepository> {
+        SettingsRepositoryImpl(get())
     }
 }
 
