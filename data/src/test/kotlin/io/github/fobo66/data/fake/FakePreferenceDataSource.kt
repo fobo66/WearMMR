@@ -4,26 +4,26 @@ import io.github.fobo66.data.source.PreferenceDataSource
 
 class FakePreferenceDataSource : PreferenceDataSource, Clearable {
 
-    var long = -1L
-    var boolean = true
+    var longNumber: Long? = null
+    var booleanValue: Boolean? = null
     override suspend fun getBoolean(key: String, defaultValue: Boolean): Boolean {
-        return boolean
+        return booleanValue ?: defaultValue
     }
 
     override suspend fun saveBoolean(key: String, value: Boolean) {
-        boolean = value
+        booleanValue = value
     }
 
     override suspend fun getLong(key: String, defaultValue: Long): Long {
-        return long
+        return longNumber ?: defaultValue
     }
 
     override suspend fun saveLong(key: String, value: Long) {
-        long = value
+        longNumber = value
     }
 
     override fun clear() {
-        long = -1L
-        boolean = true
+        longNumber = -1L
+        booleanValue = true
     }
 }

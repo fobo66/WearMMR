@@ -45,7 +45,7 @@ class RatingRepositoryImplTest {
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
     fun `load rating from cache`() = runTest {
-        preferenceDataSource.long = 1L
+        preferenceDataSource.longNumber = 1L
         persistenceDataSource.rating = MatchmakingRating(
             1L,
             "test",
@@ -64,7 +64,7 @@ class RatingRepositoryImplTest {
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
     fun `fetch rating always from network`() = runTest {
-        preferenceDataSource.long = 1L
+        preferenceDataSource.longNumber = 1L
         persistenceDataSource.rating = MatchmakingRating(
             1L,
             "test",
@@ -87,7 +87,7 @@ class RatingRepositoryImplTest {
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
     fun `no rating for given id - fetch rating`() = runTest {
-        preferenceDataSource.long = 1L
+        preferenceDataSource.longNumber = 1L
 
         ratingRepository.loadRating()
 
