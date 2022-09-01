@@ -37,6 +37,15 @@ android {
         jvmTarget = "11"
     }
 
+    libraryVariants.all {
+        val variantName = this.name
+        kotlin.sourceSets {
+            getByName(variantName) {
+                kotlin.srcDir("build/generated/ksp/$variantName/kotlin")
+            }
+        }
+    }
+
     ksp {
         arg("room.schemaLocation", "$projectDir/schemas")
         arg("room.incremental", "true")

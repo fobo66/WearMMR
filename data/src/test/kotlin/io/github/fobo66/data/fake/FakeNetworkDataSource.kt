@@ -7,7 +7,23 @@ import kotlinx.serialization.json.Json
 class FakeNetworkDataSource : NetworkDataSource, Clearable {
     var isFetched = false
 
-    private val response = """
+    private val json: Json by lazy {
+        Json {
+            ignoreUnknownKeys = true
+        }
+    }
+
+    override suspend fun fetchRating(playerId: Long): PlayerInfo {
+        isFetched = true
+        return json.decodeFromString(PlayerInfo.serializer(), response)
+    }
+
+    override fun clear() {
+        isFetched = false
+    }
+
+    companion object {
+        val response = """
         {
           "solo_competitive_rank": 0,
           "competitive_rank": 0,
@@ -33,18 +49,6 @@ class FakeNetworkDataSource : NetworkDataSource, Clearable {
             "is_subscriber": false
           }
         }
-    """.trimIndent()
-
-    private val json = Json {
-        ignoreUnknownKeys = true
-    }
-
-    override suspend fun fetchRating(playerId: Long): PlayerInfo {
-        isFetched = true
-        return json.decodeFromString(PlayerInfo.serializer(), response)
-    }
-
-    override fun clear() {
-        isFetched = false
+        """.trimIndent()
     }
 }
