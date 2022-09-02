@@ -1,8 +1,8 @@
 package io.github.fobo66.data.source
 
 import de.jensklingenberg.ktorfit.Ktorfit
-import de.jensklingenberg.ktorfit.create
 import de.jensklingenberg.ktorfit.ktorfit
+import io.github.fobo66.data.api.createMatchmakingRatingApi
 import io.github.fobo66.data.fake.FakeNetworkDataSource
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respondError
@@ -54,7 +54,7 @@ class NetworkDataSourceImplTest {
     @BeforeTest
     fun setUp() {
         networkDataSource = NetworkDataSourceImpl(
-            ktorfit.create(),
+            ktorfit.createMatchmakingRatingApi(),
             Executors.newSingleThreadExecutor().asCoroutineDispatcher()
         )
     }
