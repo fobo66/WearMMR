@@ -19,9 +19,4 @@ class RatingComplicationUseCase(
             null
         }
     }
-
-    companion object {
-        private const val KEY_PLAYER_ID = "playerId"
-        private const val NO_PLAYER_ID = -1L
-    }
 }
