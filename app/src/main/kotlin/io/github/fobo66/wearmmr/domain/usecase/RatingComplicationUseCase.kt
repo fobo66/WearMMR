@@ -1,37 +1,19 @@
 package io.github.fobo66.wearmmr.domain.usecase
 
-import android.content.SharedPreferences
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
-import io.github.fobo66.data.entities.toMatchmakingRating
-import io.github.fobo66.data.source.PersistenceDataSource
-import io.github.fobo66.wearmmr.api.MatchmakingRatingApi
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
+import io.github.fobo66.data.repositories.RatingRepository
+import okio.IOException
 import timber.log.Timber
 
 class RatingComplicationUseCase(
-    private val persistenceDataSource: PersistenceDataSource,
-    private val preferences: SharedPreferences,
-    private val matchmakingRatingClient: MatchmakingRatingApi,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ratingRepository: RatingRepository
 ) {
     suspend fun execute(): Int? {
-        val playerId = preferences.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
-
-        if (playerId == NO_PLAYER_ID) {
-            return null
-        }
-
         return try {
-            val playerInfo = withContext(ioDispatcher) {
-                matchmakingRatingClient.fetchPlayerProfile(playerId)
-            }
-            val rating = playerInfo.toMatchmakingRating()
-            persistenceDataSource.saveRating(rating)
-            rating.rating
-        } catch (e: HttpException) {
+            val rating = ratingRepository.fetchRating()
+            rating?.rating
+        } catch (e: IOException) {
             Timber.e(e, "Failed to load rating")
             Firebase.crashlytics.recordException(e)
             null
