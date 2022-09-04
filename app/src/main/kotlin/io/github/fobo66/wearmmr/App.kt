@@ -20,7 +20,6 @@ import android.app.Application
 import io.github.fobo66.data.db.databaseModule
 import io.github.fobo66.data.di.dataModule
 import io.github.fobo66.data.di.dispatchersModule
-import io.github.fobo66.wearmmr.api.apiModule
 import io.github.fobo66.wearmmr.domain.domainModule
 import io.github.fobo66.wearmmr.model.viewModelsModule
 import org.koin.android.ext.koin.androidContext
@@ -42,7 +41,6 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 databaseModule,
-                apiModule,
                 dispatchersModule,
                 viewModelsModule,
                 domainModule,
