@@ -5,14 +5,15 @@ import de.jensklingenberg.ktorfit.ktorfit
 import io.github.fobo66.data.api.createMatchmakingRatingApi
 import io.github.fobo66.data.fake.FakeNetworkDataSource
 import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.respondError
-import io.ktor.client.engine.mock.respondOk
+import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import java.util.concurrent.Executors
+import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.test.runTest
@@ -26,9 +27,16 @@ class NetworkDataSourceImplTest {
     private val engine: MockEngine by lazy {
         MockEngine {
             if (it.url.encodedPath.contains('1')) {
-                respondOk(FakeNetworkDataSource.response)
+                respond(
+                    FakeNetworkDataSource.response,
+                    headers = headersOf("Content-Type", "application/json")
+                )
             } else {
-                respondError(HttpStatusCode.InternalServerError)
+                respond(
+                    content = "",
+                    status = HttpStatusCode.InternalServerError,
+                    headers = headersOf("Content-Type", "application/json")
+                )
             }
         }
     }
@@ -41,8 +49,7 @@ class NetworkDataSourceImplTest {
                     json(
                         json = Json {
                             ignoreUnknownKeys = true
-                        },
-                        contentType = ContentType.Any
+                        }
                     )
                 }
             }
@@ -51,12 +58,21 @@ class NetworkDataSourceImplTest {
 
     private lateinit var networkDataSource: NetworkDataSource
 
+    private lateinit var dispatcher: ExecutorCoroutineDispatcher
+
     @BeforeTest
     fun setUp() {
+        dispatcher =
+            Executors.newSingleThreadExecutor().asCoroutineDispatcher()
         networkDataSource = NetworkDataSourceImpl(
             ktorfit.createMatchmakingRatingApi(),
-            Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+            dispatcher
         )
+    }
+
+    @AfterTest
+    fun tearDown() {
+        dispatcher.close()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
