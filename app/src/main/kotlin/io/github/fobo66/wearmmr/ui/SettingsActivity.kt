@@ -19,17 +19,18 @@ package io.github.fobo66.wearmmr.ui
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType.EDITABLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
-import androidx.preference.PreferenceManager
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import io.github.fobo66.wearmmr.databinding.ActivitySettingsBinding
 import io.github.fobo66.wearmmr.domain.RatingComplicationDataSource
+import io.github.fobo66.wearmmr.model.SettingsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -42,18 +43,19 @@ class SettingsActivity : AppCompatActivity() {
         )
     }
 
-    private lateinit var defaultSharedPreferences: SharedPreferences
+    private val settingsViewModel: SettingsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        binding.playerIdInput.setText(
-            defaultSharedPreferences.getLong("playerId", 0).toString(),
-            EDITABLE
-        )
+        lifecycleScope.launchWhenResumed {
+            binding.playerIdInput.setText(
+                settingsViewModel.loadPlayerId(),
+                EDITABLE
+            )
+        }
 
         binding.playerIdInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -77,8 +79,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun updatePlayerIdPreference() {
         val playerIdString = binding.playerIdInput.text.toString()
         if (playerIdString.isNotBlank()) {
-            val playerId: Long = playerIdString.toLong()
-            this.defaultSharedPreferences.edit().putLong("playerId", playerId).apply()
+            settingsViewModel.savePlayerId(playerIdString)
         }
     }
 

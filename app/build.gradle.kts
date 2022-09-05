@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
@@ -25,22 +25,18 @@ plugins {
  */
 
 val wearableVersion = "2.9.0"
-val wearableWatchfaceVersion = "1.1.0"
-val retrofitVersion = "2.9.0"
-val roomVersion = "2.5.0-alpha02"
+val wearableWatchfaceVersion = "1.1.1"
 val lifecycleVersion = "2.5.1"
-val koinVersion = "3.2.0"
-val glideVersion = "4.13.2"
 val moshiVersion = "1.13.0"
 
 android {
     namespace = "io.github.fobo66.wearmmr"
 
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 5
         versionName = "2.0"
         multiDexEnabled = true
@@ -79,12 +75,6 @@ android {
         jvmTarget = "11"
     }
 
-    kapt {
-        arguments {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-    }
-
     lint {
         disable += "DialogFragmentCallbacksDetector"
     }
@@ -93,45 +83,42 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":data"))
+
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.activity:activity-ktx:1.5.1")
-    implementation("androidx.fragment:fragment-ktx:1.5.1")
+    implementation("androidx.fragment:fragment-ktx:1.5.2")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
     compileOnly("com.google.android.wearable:wearable:$wearableVersion")
-    implementation("androidx.wear:wear:1.3.0-alpha02")
+    implementation("androidx.wear:wear:1.3.0-alpha03")
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion")
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion")
+    implementation(
+        "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion"
+    )
+    implementation(
+        "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
+    )
     implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
-
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi:$moshiVersion")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("io.insert-koin:koin-android:3.2.0")
 
-    implementation("io.insert-koin:koin-android:$koinVersion")
+    implementation("io.coil-kt:coil:2.2.0")
 
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
-
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
+    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("net.danlew:android.joda:2.10.14")
     implementation("com.jakewharton.timber:timber:5.0.1")
 }

@@ -21,11 +21,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
-import io.github.fobo66.wearmmr.util.GlideApp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -74,10 +74,9 @@ class MainActivity : AppCompatActivity() {
                         )
                         binding.content.rating.text = it.rating.rating.toString()
 
-                        GlideApp.with(this@MainActivity)
-                            .load(it.rating.avatarUrl)
-                            .placeholder(R.drawable.ic_person)
-                            .into(binding.content.playerPic)
+                        binding.content.playerPic.load(it.rating.avatarUrl) {
+                            placeholder(R.drawable.ic_person)
+                        }
                     }
                     MainViewState.Loading -> {
                         binding.content.playerDetails.isVisible = false
@@ -88,9 +87,7 @@ class MainActivity : AppCompatActivity() {
                         binding.content.playerDetails.isVisible = true
                         binding.content.playerName.text = ""
                         binding.content.playerPersonaName.text = ""
-                        GlideApp.with(this@MainActivity)
-                            .load(R.drawable.ic_person)
-                            .into(binding.content.playerPic)
+                        binding.content.playerPic.load(R.drawable.ic_person)
                         binding.content.rating.setText(R.string.placeholder_rating)
                     }
                 }

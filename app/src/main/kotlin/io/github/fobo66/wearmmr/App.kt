@@ -17,18 +17,17 @@
 package io.github.fobo66.wearmmr
 
 import android.app.Application
-import io.github.fobo66.wearmmr.api.apiModule
-import io.github.fobo66.wearmmr.db.databaseModule
+import io.github.fobo66.data.db.databaseModule
+import io.github.fobo66.data.di.dataModule
+import io.github.fobo66.data.di.dispatchersModule
 import io.github.fobo66.wearmmr.domain.domainModule
 import io.github.fobo66.wearmmr.model.viewModelsModule
-import io.github.fobo66.wearmmr.util.dispatchersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.Timber
 
-@Suppress("unused")
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -40,7 +39,13 @@ class App : Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@App)
-            modules(databaseModule, apiModule, dispatchersModule, viewModelsModule, domainModule)
+            modules(
+                databaseModule,
+                dispatchersModule,
+                viewModelsModule,
+                domainModule,
+                dataModule
+            )
         }
     }
 }

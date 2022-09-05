@@ -1,18 +1,17 @@
 package io.github.fobo66.wearmmr.model
 
-import android.content.SharedPreferences
-import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.fobo66.wearmmr.db.MatchmakingDatabase
+import io.github.fobo66.data.repositories.RatingRepository
+import io.github.fobo66.data.repositories.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainViewModel(
-    private val preferences: SharedPreferences,
-    private val matchmakingDatabase: MatchmakingDatabase
+    private val settingsRepository: SettingsRepository,
+    private val ratingRepository: RatingRepository
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState.Loading)
@@ -20,20 +19,17 @@ class MainViewModel(
         get() = _state
 
     fun checkViewState() = viewModelScope.launch {
-        val isFirstLaunch = preferences.getBoolean(KEY_FIRST_LAUNCH, true)
+        val isFirstLaunch = settingsRepository.loadFirstLaunch()
 
         if (isFirstLaunch) {
             Timber.d("First time launching the app")
             _state.emit(MainViewState.FirstLaunch)
-            preferences.edit {
-                putBoolean(KEY_FIRST_LAUNCH, false)
-            }
+            settingsRepository.saveFirstLaunch(false)
         } else {
-            val playerId = preferences.getLong(KEY_PLAYER_ID, NO_PLAYER_ID)
+            val playerId = settingsRepository.loadPlayerId()
 
             if (playerId != NO_PLAYER_ID) {
-                val rating =
-                    matchmakingDatabase.gameStatsDao().findOneByPlayerId(playerId)
+                val rating = ratingRepository.loadRating()
                 if (rating != null) {
                     Timber.d("Loaded rating")
                     _state.emit(MainViewState.LoadedRating(rating))
@@ -49,7 +45,5 @@ class MainViewModel(
 
     companion object {
         private const val NO_PLAYER_ID = -1L
-        private const val KEY_PLAYER_ID = "playerId"
-        private const val KEY_FIRST_LAUNCH = "firstLaunch"
     }
 }
