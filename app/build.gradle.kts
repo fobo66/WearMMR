@@ -26,7 +26,6 @@ plugins {
 
 val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
-val retrofitVersion = "2.9.0"
 val lifecycleVersion = "2.5.1"
 val moshiVersion = "1.13.0"
 
@@ -108,10 +107,6 @@ dependencies {
         "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
     )
     implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
-
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
