@@ -44,7 +44,7 @@ jobs:
         run: cp app/google-services.json.example app/google-services.json
       - uses: malinskiy/action-android/install-sdk@release/0.1.4
       - name: Run tests
-        run: ./gradlew pixelDebugAndroidTest
+        run: ./gradlew pixelDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect".
   unit-tests:
     runs-on: ubuntu-latest
 
