@@ -43,13 +43,8 @@ jobs:
       - name: Setup G services
         run: cp app/google-services.json.example app/google-services.json
       - uses: malinskiy/action-android/install-sdk@release/0.1.4
-      - uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
-        with:
-          cmd: ./gradlew connectedDebugAndroidTest
-          api: 29
-          tag: default
-          abi: x86
-          disableAnimations: true
+      - name: Run tests
+        run: ./gradlew pixelDebugAndroidTest
   unit-tests:
     runs-on: ubuntu-latest
 
