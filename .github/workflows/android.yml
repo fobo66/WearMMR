@@ -45,7 +45,7 @@ jobs:
       - uses: malinskiy/action-android/install-sdk@release/0.1.4
       - uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
         with:
-          cmd: ./gradlew connectedCheck
+          cmd: ./gradlew connectedDebugAndroidTest
           api: 29
           tag: default
           abi: x86
