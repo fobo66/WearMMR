@@ -43,7 +43,7 @@ jobs:
       - name: Setup G services
         run: cp app/google-services.json.example app/google-services.json
       - name: Accept licenses
-        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
       - name: Run tests
         run: ./gradlew pixelDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
   unit-tests:
