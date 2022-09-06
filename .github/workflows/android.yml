@@ -42,8 +42,8 @@ jobs:
           cache: gradle
       - name: Setup G services
         run: cp app/google-services.json.example app/google-services.json
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Accept licenses
+        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
       - name: Run tests
         run: ./gradlew pixelDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
   unit-tests:
