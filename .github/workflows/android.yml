@@ -30,7 +30,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew detekt lintDebug --continue
   ui-tests:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v3
