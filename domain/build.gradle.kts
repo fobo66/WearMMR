@@ -34,6 +34,7 @@ android {
 
 dependencies {
     val coroutinesVersion = "1.6.4"
+    implementation(project(":data"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("io.insert-koin:koin-android:3.2.0")

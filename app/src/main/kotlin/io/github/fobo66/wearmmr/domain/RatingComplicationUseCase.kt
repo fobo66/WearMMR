@@ -1,4 +1,4 @@
-package io.github.fobo66.wearmmr.domain.usecase
+package io.github.fobo66.wearmmr.domain
 
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase

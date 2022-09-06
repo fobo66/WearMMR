@@ -12,7 +12,6 @@ import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
 import io.github.fobo66.wearmmr.R
-import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
 import io.github.fobo66.wearmmr.ui.MainActivity
 import org.koin.android.ext.android.inject
 
