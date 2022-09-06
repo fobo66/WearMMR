@@ -30,7 +30,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew detekt lintDebug --continue
   ui-tests:
-    runs-on: macOS-10.15
+    runs-on: macos-latest
     
     steps:
       - uses: actions/checkout@v3
@@ -45,7 +45,7 @@ jobs:
       - uses: malinskiy/action-android/install-sdk@release/0.1.4
       - uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
         with:
-          cmd: ./gradlew connectedCheck --console-mode=plain
+          cmd: ./gradlew connectedCheck
           api: 29
           tag: default
           abi: x86
