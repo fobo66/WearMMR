@@ -44,8 +44,6 @@ jobs:
       - name: Setup G services
         run: cp app/google-services.json.example app/google-services.json
       - uses: gradle/wrapper-validation-action@v1
-      - name: Accept licenses
-        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
       - name: Run tests
         uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
         with:
