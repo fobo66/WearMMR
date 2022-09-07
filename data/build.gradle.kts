@@ -75,7 +75,7 @@ dependencies {
     val ktorVersion = "2.1.1"
     val ktorfitVersion = "1.0.0-beta12"
 
-    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("io.insert-koin:koin-android:3.2.0")
