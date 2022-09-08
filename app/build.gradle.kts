@@ -112,7 +112,7 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
-    implementation("io.coil-kt:coil:2.2.0")
+    implementation("io.coil-kt:coil:2.2.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
