@@ -28,7 +28,7 @@ class MainViewModel(
         } else {
             val playerId = settingsRepository.loadPlayerId()
 
-            if (playerId != NO_PLAYER_ID) {
+            if (playerId > 0) {
                 val rating = ratingRepository.loadRating()
                 if (rating != null) {
                     Timber.d("Loaded rating")
@@ -41,9 +41,5 @@ class MainViewModel(
                 _state.emit(MainViewState.NoRating)
             }
         }
-    }
-
-    companion object {
-        private const val NO_PLAYER_ID = -1L
     }
 }
