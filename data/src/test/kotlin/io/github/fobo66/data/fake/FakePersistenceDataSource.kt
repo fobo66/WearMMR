@@ -3,7 +3,7 @@ package io.github.fobo66.data.fake
 import io.github.fobo66.data.entities.MatchmakingRating
 import io.github.fobo66.data.source.PersistenceDataSource
 
-class FakePersistenceDataSource : PersistenceDataSource, Clearable {
+class FakePersistenceDataSource : PersistenceDataSource {
     var isLoadedFromCache = false
 
     var rating: MatchmakingRating? = null
@@ -15,10 +15,5 @@ class FakePersistenceDataSource : PersistenceDataSource, Clearable {
     override suspend fun saveRating(rating: MatchmakingRating): Long {
         this.rating = rating
         return rating.playerId
-    }
-
-    override fun clear() {
-        rating = null
-        isLoadedFromCache = false
     }
 }

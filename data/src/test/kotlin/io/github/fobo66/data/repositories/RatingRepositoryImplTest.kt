@@ -4,8 +4,6 @@ import io.github.fobo66.data.entities.MatchmakingRating
 import io.github.fobo66.data.fake.FakeNetworkDataSource
 import io.github.fobo66.data.fake.FakePersistenceDataSource
 import io.github.fobo66.data.fake.FakePreferenceDataSource
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
@@ -21,20 +19,8 @@ class RatingRepositoryImplTest {
 
     private val networkDataSource = FakeNetworkDataSource()
 
-    private lateinit var ratingRepository: RatingRepository
-
-    @BeforeTest
-    fun setUp() {
-        ratingRepository =
-            RatingRepositoryImpl(persistenceDataSource, preferenceDataSource, networkDataSource)
-    }
-
-    @AfterTest
-    fun tearDown() {
-        networkDataSource.clear()
-        persistenceDataSource.clear()
-        preferenceDataSource.clear()
-    }
+    private val ratingRepository: RatingRepository =
+        RatingRepositoryImpl(persistenceDataSource, preferenceDataSource, networkDataSource)
 
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
