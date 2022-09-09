@@ -3,7 +3,7 @@ package io.github.fobo66.domain.fake
 import io.github.fobo66.data.entities.MatchmakingRating
 import io.github.fobo66.data.repositories.RatingRepository
 
-class FakeRatingRepository : RatingRepository, Clearable {
+class FakeRatingRepository : RatingRepository {
     var noRating = false
     var rating: Int? = RATING
     override suspend fun loadRating(): MatchmakingRating? =
@@ -22,10 +22,5 @@ class FakeRatingRepository : RatingRepository, Clearable {
 
     companion object {
         const val RATING = 1000
-    }
-
-    override fun clear() {
-        noRating = false
-        rating = RATING
     }
 }

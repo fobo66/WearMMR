@@ -1,8 +1,6 @@
 package io.github.fobo66.domain.usecase
 
 import io.github.fobo66.domain.fake.FakeSettingsRepository
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,17 +11,7 @@ class LoadPlayerIdImplTest {
 
     private val settingsRepository = FakeSettingsRepository()
 
-    private lateinit var loadPlayerId: LoadPlayerId
-
-    @BeforeTest
-    fun setUp() {
-        loadPlayerId = LoadPlayerIdImpl(settingsRepository)
-    }
-
-    @AfterTest
-    fun tearDown() {
-        settingsRepository.clear()
-    }
+    private val loadPlayerId: LoadPlayerId = LoadPlayerIdImpl(settingsRepository)
 
     @Test
     fun `no player id`() = runTest {

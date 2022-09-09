@@ -2,7 +2,7 @@ package io.github.fobo66.domain.fake
 
 import io.github.fobo66.data.repositories.SettingsRepository
 
-class FakeSettingsRepository : SettingsRepository, Clearable {
+class FakeSettingsRepository : SettingsRepository {
     var firstLaunch = true
     var playerId = -1L
 
@@ -16,10 +16,5 @@ class FakeSettingsRepository : SettingsRepository, Clearable {
 
     override suspend fun savePlayerId(newPlayerId: Long) {
         playerId = newPlayerId
-    }
-
-    override fun clear() {
-        firstLaunch = true
-        playerId = -1L
     }
 }
