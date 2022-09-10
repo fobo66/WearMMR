@@ -73,7 +73,7 @@ dependencies {
     val roomVersion = "2.5.0-alpha03"
     val coroutinesVersion = "1.6.4"
     val ktorVersion = "2.1.1"
-    val ktorfitVersion = "1.0.0-beta12"
+    val ktorfitVersion = "1.0.0-beta13"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
