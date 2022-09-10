@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":data"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("com.jakewharton.timber:timber:5.0.1")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
