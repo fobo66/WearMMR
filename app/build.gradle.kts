@@ -74,10 +74,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    lint {
-        disable += "DialogFragmentCallbacksDetector"
-    }
 }
 
 dependencies {
@@ -86,11 +82,10 @@ dependencies {
     implementation(project(":data"))
 
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.activity:activity-ktx:1.5.1")
-    implementation("androidx.fragment:fragment-ktx:1.5.2")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.activity:activity-ktx:1.6.0-rc02")
+    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
@@ -112,12 +107,12 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.2.0")
 
-    implementation("io.coil-kt:coil:2.2.0")
+    implementation("io.coil-kt:coil:2.2.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.4.1"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.jakewharton.timber:timber:5.0.1")
