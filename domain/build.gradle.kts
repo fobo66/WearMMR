@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -29,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    lint {
+        disable += "DialogFragmentCallbacksDetector"
     }
 }
 
