@@ -33,8 +33,8 @@ class ResolveRatingStateImpl(
                     RatingState.NoRating
                 }
             } else {
-                Timber.d("No rating yet")
-                RatingState.NoRating
+                Timber.d("No player id found")
+                RatingState.NoPlayerId
             }
         }
     }
