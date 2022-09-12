@@ -16,7 +16,7 @@ import org.koin.dsl.module
 val domainModule = module {
     includes(databaseModule, dataModule, dispatchersModule)
     single<RatingComplicationUseCase> {
-        RatingComplicationUseCaseImpl(get())
+        RatingComplicationUseCaseImpl(get(), get())
     }
     single<LoadPlayerId> {
         LoadPlayerIdImpl(get())

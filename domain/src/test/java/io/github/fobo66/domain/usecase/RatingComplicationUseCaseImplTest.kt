@@ -1,6 +1,7 @@
 package io.github.fobo66.domain.usecase
 
 import io.github.fobo66.domain.fake.FakeRatingRepository
+import io.github.fobo66.domain.fake.FakeSettingsRepository
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,14 +11,16 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class RatingComplicationUseCaseImplTest {
 
+    private val settingsRepository = FakeSettingsRepository()
     private val ratingRepository = FakeRatingRepository()
 
     private val ratingComplicationUseCase: RatingComplicationUseCase =
-        RatingComplicationUseCaseImpl(ratingRepository)
+        RatingComplicationUseCaseImpl(settingsRepository, ratingRepository)
 
     @Test
     fun `load rating`() = runTest {
-        assertEquals(ratingComplicationUseCase.execute(), FakeRatingRepository.RATING)
+        settingsRepository.playerId = 1L
+        assertEquals(FakeRatingRepository.RATING, ratingComplicationUseCase.execute())
     }
 
     @Test

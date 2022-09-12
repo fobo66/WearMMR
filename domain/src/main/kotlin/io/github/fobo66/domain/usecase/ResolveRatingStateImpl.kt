@@ -20,7 +20,7 @@ class ResolveRatingStateImpl(
             val playerId = settingsRepository.loadPlayerId()
 
             if (playerId > 0) {
-                val rating = ratingRepository.loadRating()
+                val rating = ratingRepository.loadRating(playerId)
                 if (rating != null) {
                     Timber.d("Loaded rating")
                     RatingState.LoadedRating(

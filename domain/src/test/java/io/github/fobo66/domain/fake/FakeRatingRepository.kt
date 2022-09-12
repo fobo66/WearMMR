@@ -6,14 +6,14 @@ import io.github.fobo66.data.repositories.RatingRepository
 class FakeRatingRepository : RatingRepository {
     var noRating = false
     var rating: Int? = RATING
-    override suspend fun loadRating(): MatchmakingRating? =
+    override suspend fun loadRating(playerId: Long): MatchmakingRating? =
         if (noRating) {
             null
         } else {
             MatchmakingRating(1L, "test", "test", "test", rating)
         }
 
-    override suspend fun fetchRating(): MatchmakingRating? =
+    override suspend fun fetchRating(playerId: Long): MatchmakingRating? =
         if (noRating) {
             null
         } else {

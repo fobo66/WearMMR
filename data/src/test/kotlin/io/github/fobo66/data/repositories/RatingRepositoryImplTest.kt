@@ -20,12 +20,12 @@ class RatingRepositoryImplTest {
     private val networkDataSource = FakeNetworkDataSource()
 
     private val ratingRepository: RatingRepository =
-        RatingRepositoryImpl(persistenceDataSource, preferenceDataSource, networkDataSource)
+        RatingRepositoryImpl(persistenceDataSource, networkDataSource)
 
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
     fun `no rating by default`() = runTest {
-        assertNull(ratingRepository.loadRating())
+        assertNull(ratingRepository.loadRating(1L))
     }
 
     @Test
@@ -40,7 +40,7 @@ class RatingRepositoryImplTest {
             1
         )
 
-        ratingRepository.loadRating()
+        ratingRepository.loadRating(1L)
 
         assertTrue {
             persistenceDataSource.isLoadedFromCache
@@ -59,7 +59,7 @@ class RatingRepositoryImplTest {
             1
         )
 
-        ratingRepository.fetchRating()
+        ratingRepository.fetchRating(1L)
 
         assertFalse {
             persistenceDataSource.isLoadedFromCache
@@ -75,7 +75,7 @@ class RatingRepositoryImplTest {
     fun `no rating for given id - fetch rating`() = runTest {
         preferenceDataSource.longNumber = 1L
 
-        ratingRepository.loadRating()
+        ratingRepository.loadRating(1L)
 
         assertTrue {
             networkDataSource.isFetched

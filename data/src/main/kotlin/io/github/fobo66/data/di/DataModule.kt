@@ -73,7 +73,6 @@ val dataModule = module {
     single<RatingRepository> {
         RatingRepositoryImpl(
             get(),
-            get(),
             get()
         )
     }
