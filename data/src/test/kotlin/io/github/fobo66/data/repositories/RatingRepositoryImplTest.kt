@@ -6,11 +6,11 @@ import io.github.fobo66.data.fake.FakePersistenceDataSource
 import io.github.fobo66.data.fake.FakePreferenceDataSource
 import kotlin.test.Test
 import kotlin.test.assertFalse
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RatingRepositoryImplTest {
 
     private val persistenceDataSource = FakePersistenceDataSource()
@@ -23,13 +23,6 @@ class RatingRepositoryImplTest {
         RatingRepositoryImpl(persistenceDataSource, networkDataSource)
 
     @Test
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun `no rating by default`() = runTest {
-        assertNull(ratingRepository.loadRating(1L))
-    }
-
-    @Test
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun `load rating from cache`() = runTest {
         preferenceDataSource.longNumber = 1L
         persistenceDataSource.rating = MatchmakingRating(
@@ -48,7 +41,6 @@ class RatingRepositoryImplTest {
     }
 
     @Test
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun `fetch rating always from network`() = runTest {
         preferenceDataSource.longNumber = 1L
         persistenceDataSource.rating = MatchmakingRating(
@@ -71,7 +63,6 @@ class RatingRepositoryImplTest {
     }
 
     @Test
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun `no rating for given id - fetch rating`() = runTest {
         preferenceDataSource.longNumber = 1L
 
