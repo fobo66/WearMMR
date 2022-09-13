@@ -2,16 +2,14 @@ package io.github.fobo66.wearmmr.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.fobo66.data.repositories.RatingRepository
-import io.github.fobo66.data.repositories.SettingsRepository
+import io.github.fobo66.domain.entities.RatingState
+import io.github.fobo66.domain.usecase.ResolveRatingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MainViewModel(
-    private val settingsRepository: SettingsRepository,
-    private val ratingRepository: RatingRepository
+    private val resolveRatingState: ResolveRatingState
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState.Loading)
@@ -19,27 +17,17 @@ class MainViewModel(
         get() = _state
 
     fun checkViewState() = viewModelScope.launch {
-        val isFirstLaunch = settingsRepository.loadFirstLaunch()
-
-        if (isFirstLaunch) {
-            Timber.d("First time launching the app")
-            _state.emit(MainViewState.FirstLaunch)
-            settingsRepository.saveFirstLaunch(false)
-        } else {
-            val playerId = settingsRepository.loadPlayerId()
-
-            if (playerId > 0) {
-                val rating = ratingRepository.loadRating(playerId)
-                if (rating != null) {
-                    Timber.d("Loaded rating")
-                    _state.emit(MainViewState.LoadedRating(rating))
-                } else {
-                    _state.emit(MainViewState.NoRating)
-                }
-            } else {
-                Timber.d("No rating yet")
-                _state.emit(MainViewState.NoRating)
-            }
+        val viewState = when (val state = resolveRatingState.execute()) {
+            is RatingState.LoadedRating -> MainViewState.LoadedRating(
+                state.playerName,
+                state.personaName,
+                state.rating,
+                state.avatarUrl
+            )
+            RatingState.NoPlayerId -> MainViewState.FirstLaunch
+            RatingState.NoRating -> MainViewState.NoRating
         }
+
+        _state.emit(viewState)
     }
 }

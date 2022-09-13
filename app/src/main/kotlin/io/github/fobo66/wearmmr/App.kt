@@ -17,10 +17,7 @@
 package io.github.fobo66.wearmmr
 
 import android.app.Application
-import io.github.fobo66.data.db.databaseModule
-import io.github.fobo66.data.di.dataModule
-import io.github.fobo66.data.di.dispatchersModule
-import io.github.fobo66.wearmmr.domain.domainModule
+import io.github.fobo66.domain.di.domainModule
 import io.github.fobo66.wearmmr.model.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -40,11 +37,8 @@ class App : Application() {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@App)
             modules(
-                databaseModule,
-                dispatchersModule,
                 viewModelsModule,
-                domainModule,
-                dataModule
+                domainModule
             )
         }
     }

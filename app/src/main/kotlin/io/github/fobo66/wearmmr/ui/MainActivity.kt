@@ -67,14 +67,14 @@ class MainActivity : AppCompatActivity() {
                     is MainViewState.LoadedRating -> {
                         binding.content.progressBar.isVisible = false
                         binding.content.playerDetails.isVisible = true
-                        binding.content.playerName.text = it.rating.name
+                        binding.content.playerName.text = it.playerName
                         binding.content.playerPersonaName.text = getString(
                             R.string.player_name_display_placeholder,
-                            it.rating.personaName
+                            it.personaName
                         )
-                        binding.content.rating.text = it.rating.rating.toString()
+                        binding.content.rating.text = it.rating
 
-                        binding.content.playerPic.load(it.rating.avatarUrl) {
+                        binding.content.playerPic.load(it.avatarUrl) {
                             placeholder(R.drawable.ic_person)
                         }
                     }
