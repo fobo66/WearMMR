@@ -4,7 +4,7 @@ import io.github.fobo66.data.entities.PlayerInfo
 import io.github.fobo66.data.source.NetworkDataSource
 import kotlinx.serialization.json.Json
 
-class FakeNetworkDataSource : NetworkDataSource, Clearable {
+class FakeNetworkDataSource : NetworkDataSource {
     var isFetched = false
 
     private val json: Json by lazy {
@@ -16,10 +16,6 @@ class FakeNetworkDataSource : NetworkDataSource, Clearable {
     override suspend fun fetchRating(playerId: Long): PlayerInfo {
         isFetched = true
         return json.decodeFromString(PlayerInfo.serializer(), response)
-    }
-
-    override fun clear() {
-        isFetched = false
     }
 
     companion object {

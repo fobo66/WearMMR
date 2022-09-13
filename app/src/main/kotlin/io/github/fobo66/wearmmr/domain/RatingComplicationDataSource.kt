@@ -11,10 +11,14 @@ import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
+import io.github.fobo66.domain.usecase.RatingComplicationUseCase
 import io.github.fobo66.wearmmr.R
-import io.github.fobo66.wearmmr.domain.usecase.RatingComplicationUseCase
 import io.github.fobo66.wearmmr.ui.MainActivity
+import java.io.IOException
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
 
@@ -29,7 +33,13 @@ class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
     }
 
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData {
-        val rating = ratingComplicationUseCase.execute()
+        val rating = try {
+            ratingComplicationUseCase.execute()
+        } catch (exception: IOException) {
+            Timber.e(exception, "Failed to fetch rating fro complication")
+            Firebase.crashlytics.recordException(exception)
+            null
+        }
 
         return if (rating != null) {
             ShortTextComplicationData.Builder(

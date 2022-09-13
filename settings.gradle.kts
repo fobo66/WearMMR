@@ -8,4 +8,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WearMMR"
 
-include(":app", ":data")
+include(":app", ":data", ":domain")

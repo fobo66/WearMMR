@@ -27,7 +27,17 @@ jobs:
       - store_artifacts:
           path: app/build/reports/lint-results-debug.html
       - store_artifacts:
+          path: data/build/reports/lint-results-debug.html
+      - store_artifacts:
+          path: domain/build/reports/lint-results-debug.html
+      - store_artifacts:
           path: app/build/reports/detekt/detekt.html
+      - store_artifacts:
+          path: data/build/reports/detekt/detekt.html
+      - store_artifacts:
+          path: domain/build/reports/detekt/detekt.html
+
+
   unit-tests:
     # These next lines define the Android machine image executor.
     # See: https://circleci.com/docs/2.0/executor-types/
@@ -51,6 +61,8 @@ jobs:
           path: app/build/test-results/testDebugUnitTest
       - store_test_results:
           path: data/build/test-results/testDebugUnitTest
+      - store_test_results:
+          path: domain/build/test-results/testDebugUnitTest
       - android/save-build-cache:
           cache-prefix: v1a
       - android/save-gradle-cache:

@@ -12,7 +12,6 @@ import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import java.util.concurrent.Executors
 import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -24,51 +23,41 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class NetworkDataSourceImplTest {
 
-    private val engine: MockEngine by lazy {
-        MockEngine {
-            if (it.url.encodedPath.contains('1')) {
-                respond(
-                    FakeNetworkDataSource.response,
-                    headers = headersOf("Content-Type", "application/json")
-                )
-            } else {
-                respond(
-                    content = "",
-                    status = HttpStatusCode.InternalServerError,
-                    headers = headersOf("Content-Type", "application/json")
+    private val engine = MockEngine {
+        if (it.url.encodedPath.contains('1')) {
+            respond(
+                FakeNetworkDataSource.response,
+                headers = headersOf("Content-Type", "application/json")
+            )
+        } else {
+            respond(
+                content = "",
+                status = HttpStatusCode.InternalServerError,
+                headers = headersOf("Content-Type", "application/json")
+            )
+        }
+    }
+
+    private val ktorfit: Ktorfit = ktorfit {
+        baseUrl("https://localhost/")
+        httpClient(engine) {
+            install(ContentNegotiation) {
+                json(
+                    json = Json {
+                        ignoreUnknownKeys = true
+                    }
                 )
             }
         }
     }
 
-    private val ktorfit: Ktorfit by lazy {
-        ktorfit {
-            baseUrl("https://localhost/")
-            httpClient(engine) {
-                install(ContentNegotiation) {
-                    json(
-                        json = Json {
-                            ignoreUnknownKeys = true
-                        }
-                    )
-                }
-            }
-        }
-    }
+    private val dispatcher: ExecutorCoroutineDispatcher =
+        Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
-    private lateinit var networkDataSource: NetworkDataSource
-
-    private lateinit var dispatcher: ExecutorCoroutineDispatcher
-
-    @BeforeTest
-    fun setUp() {
-        dispatcher =
-            Executors.newSingleThreadExecutor().asCoroutineDispatcher()
-        networkDataSource = NetworkDataSourceImpl(
-            ktorfit.createMatchmakingRatingApi(),
-            dispatcher
-        )
-    }
+    private val networkDataSource: NetworkDataSource = NetworkDataSourceImpl(
+        ktorfit.createMatchmakingRatingApi(),
+        dispatcher
+    )
 
     @AfterTest
     fun tearDown() {

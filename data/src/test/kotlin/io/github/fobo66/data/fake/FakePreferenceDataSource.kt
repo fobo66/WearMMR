@@ -2,7 +2,7 @@ package io.github.fobo66.data.fake
 
 import io.github.fobo66.data.source.PreferenceDataSource
 
-class FakePreferenceDataSource : PreferenceDataSource, Clearable {
+class FakePreferenceDataSource : PreferenceDataSource {
 
     var longNumber: Long? = null
     var booleanValue: Boolean? = null
@@ -20,10 +20,5 @@ class FakePreferenceDataSource : PreferenceDataSource, Clearable {
 
     override suspend fun saveLong(key: String, value: Long) {
         longNumber = value
-    }
-
-    override fun clear() {
-        longNumber = -1L
-        booleanValue = true
     }
 }

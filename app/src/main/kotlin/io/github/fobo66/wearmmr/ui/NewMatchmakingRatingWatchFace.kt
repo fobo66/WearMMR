@@ -46,7 +46,6 @@ class NewMatchmakingRatingWatchFace : WatchFaceService() {
     override fun createComplicationSlotsManager(
         currentUserStyleRepository: CurrentUserStyleRepository
     ): ComplicationSlotsManager {
-
         val complicationFactory = CanvasComplicationFactory { watchState, invalidateCallback ->
             CanvasComplicationDrawable(
                 ComplicationDrawable.getDrawable(
@@ -84,7 +83,8 @@ class NewMatchmakingRatingWatchFace : WatchFaceService() {
             canvasComplicationFactory = complicationFactory,
             supportedTypes = ComplicationsConfig.Right.supportedTypes,
             defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-                SystemDataSources.DATA_SOURCE_WATCH_BATTERY, ComplicationType.SHORT_TEXT
+                SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+                ComplicationType.SHORT_TEXT
             ),
             bounds = ComplicationSlotBounds(
                 RectF(

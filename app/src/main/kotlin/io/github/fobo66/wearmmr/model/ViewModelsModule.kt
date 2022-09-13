@@ -5,12 +5,12 @@ import org.koin.dsl.module
 
 val viewModelsModule = module {
     viewModel {
-        MainViewModel(
+        MainViewModel(get())
+    }
+    viewModel {
+        SettingsViewModel(
             get(),
             get()
         )
-    }
-    viewModel {
-        SettingsViewModel(get())
     }
 }

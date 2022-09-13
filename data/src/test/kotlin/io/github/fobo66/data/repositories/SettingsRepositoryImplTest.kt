@@ -1,8 +1,6 @@
 package io.github.fobo66.data.repositories
 
 import io.github.fobo66.data.fake.FakePreferenceDataSource
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -15,17 +13,8 @@ class SettingsRepositoryImplTest {
 
     private val preferenceDataSource = FakePreferenceDataSource()
 
-    private lateinit var settingsRepository: SettingsRepository
-
-    @BeforeTest
-    fun setUp() {
-        settingsRepository = SettingsRepositoryImpl(preferenceDataSource)
-    }
-
-    @AfterTest
-    fun tearDown() {
-        preferenceDataSource.clear()
-    }
+    private val settingsRepository: SettingsRepository =
+        SettingsRepositoryImpl(preferenceDataSource)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
