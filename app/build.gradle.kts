@@ -27,7 +27,6 @@ plugins {
 val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
 val lifecycleVersion = "2.5.1"
-val moshiVersion = "1.13.0"
 
 android {
     namespace = "io.github.fobo66.wearmmr"
@@ -57,7 +56,10 @@ android {
         release {
             signingConfig = signingConfigs["releaseSign"]
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -85,7 +87,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-ktx:1.6.0-rc02")
     implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
-    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 

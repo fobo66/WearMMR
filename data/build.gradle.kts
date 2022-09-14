@@ -36,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        buildConfig = false
+    }
 
     libraryVariants.all {
         val variantName = this.name
