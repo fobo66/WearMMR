@@ -36,7 +36,7 @@ android {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
         targetSdk = 33
-        versionCode = 5
+        versionCode = 6
         versionName = "2.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
