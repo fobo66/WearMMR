@@ -26,7 +26,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", version = kotlinVersion))
         classpath(kotlin("serialization", version = kotlinVersion))
         classpath("com.google.gms:google-services:4.3.14")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.1")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.2")
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0")
     }
 }
