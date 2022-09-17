@@ -51,7 +51,7 @@ class MatchmakingRatingSharedAssets(context: Context) : Renderer.SharedAssets {
 
     val textPaint = Paint().apply {
         typeface =
-            ResourcesCompat.getFont(context, R.font.trajan_pro)
+            ResourcesCompat.getFont(context, R.font.cinzel)
         isAntiAlias = true
         color = ContextCompat.getColor(context, R.color.digital_text)
         textSize = context.resources.getDimension(
