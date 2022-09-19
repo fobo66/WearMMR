@@ -126,7 +126,7 @@ dependencies {
 
     implementation("io.coil-kt:coil:2.2.1")
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
