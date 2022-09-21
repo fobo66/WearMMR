@@ -40,11 +40,7 @@ class MatchmakingRatingSharedAssets(context: Context) : Renderer.SharedAssets {
         ).bitmap
 
     val timeXOffset = context.resources.getDimension(
-        if (context.resources.configuration.isScreenRound) {
-            R.dimen.digital_x_offset_round
-        } else {
-            R.dimen.digital_x_offset
-        }
+        R.dimen.digital_x_offset
     )
 
     val timeYOffset = context.resources.getDimension(R.dimen.digital_y_offset)
@@ -55,11 +51,7 @@ class MatchmakingRatingSharedAssets(context: Context) : Renderer.SharedAssets {
         isAntiAlias = true
         color = ContextCompat.getColor(context, R.color.digital_text)
         textSize = context.resources.getDimension(
-            if (context.resources.configuration.isScreenRound) {
-                R.dimen.digital_text_size_round
-            } else {
-                R.dimen.digital_text_size
-            }
+            R.dimen.digital_text_size
         )
     }
 
