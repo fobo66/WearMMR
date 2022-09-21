@@ -101,7 +101,7 @@ dependencies {
 
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-rc02")
+    implementation("androidx.activity:activity-ktx:1.6.0")
     implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
