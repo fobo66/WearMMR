@@ -96,7 +96,6 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("io.insert-koin:koin-android:3.2.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
