@@ -82,7 +82,6 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-ktx:1.6.0")
     implementation("com.google.android.material:material:1.8.0-alpha01")
