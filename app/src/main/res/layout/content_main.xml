@@ -55,7 +55,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/trajan_pro"
+        android:fontFamily="@font/cinzel"
         android:text="@string/placeholder_rating"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
