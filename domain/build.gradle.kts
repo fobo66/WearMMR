@@ -59,7 +59,7 @@ dependencies {
     val coroutinesVersion = "1.6.4"
     implementation(project(":data"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-    implementation("io.insert-koin:koin-android:3.2.1")
+    implementation("io.insert-koin:koin-android:3.2.2")
     implementation("com.jakewharton.timber:timber:5.0.1")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
