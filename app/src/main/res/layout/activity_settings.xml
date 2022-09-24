@@ -57,6 +57,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:id="@+id/settings_player_id_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

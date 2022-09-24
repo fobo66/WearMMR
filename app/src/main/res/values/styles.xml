@@ -15,13 +15,14 @@
   -->
 
 <resources>
-  <color name="background">#000000</color>
-  <color name="icon_color">#BEFFFFFF</color>
-  <color name="digital_text">#ffffff</color>
-  <color name="complication_background">#7C0F0F</color>
-  <color name="primary_color">#FF0000</color>
-  <color name="accent_color">#FF6C6C</color>
-  <color name="content_color">#EA9393</color>
-  <color name="content_color_variant">#C89292</color>
-  <color name="primary_color_inverse">#99FF0000</color>
+
+    <style name="WearMmrTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="colorPrimaryInverse">@color/primary_color_inverse</item>
+        <item name="colorOnSurface">@color/content_color</item>
+        <item name="colorOnSurfaceVariant">@color/content_color_variant</item>
+        <item name="colorOutline">@color/content_color</item>
+        <item name="android:textColorSecondary">@color/content_color_variant</item>
+    </style>
 </resources>

@@ -18,7 +18,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/player_pic"
@@ -35,6 +36,7 @@
         app:srcCompat="@drawable/ic_person" />
 
     <TextView
+        style="@style/TextAppearance.Material3.TitleSmall"
         android:id="@+id/player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +50,7 @@
         tools:text="Dendi" />
 
     <TextView
+        style="@style/TextAppearance.Material3.DisplaySmall"
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
