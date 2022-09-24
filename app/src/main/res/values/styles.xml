@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2022 Andrey Mukamolov
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<resources>
+
+    <style name="WearMmrTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="colorPrimaryInverse">@color/primary_color_inverse</item>
+        <item name="colorOnSurface">@color/content_color</item>
+        <item name="colorOnSurfaceVariant">@color/content_color_variant</item>
+        <item name="colorOutline">@color/content_color</item>
+        <item name="android:textColorPrimary">@color/content_color</item>
+        <item name="android:textColorSecondary">@color/content_color_variant</item>
+    </style>
+
+    <style name="RatingText" parent="@style/TextAppearance.Material3.DisplaySmall">
+        <item name="android:textSize">40sp</item>
+        <item name="android:fontFamily">@font/cinzel</item>
+    </style>
+</resources>

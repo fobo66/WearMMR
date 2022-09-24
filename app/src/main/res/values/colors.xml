@@ -19,4 +19,9 @@
   <color name="icon_color">#BEFFFFFF</color>
   <color name="digital_text">#ffffff</color>
   <color name="complication_background">#7C0F0F</color>
+  <color name="primary_color">#FF0000</color>
+  <color name="accent_color">#FF6C6C</color>
+  <color name="content_color">#E2D1D1</color>
+  <color name="content_color_variant">#FFE2E2</color>
+  <color name="primary_color_inverse">#99FF0000</color>
 </resources>

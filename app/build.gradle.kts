@@ -24,22 +24,6 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
-/*
- * Copyright 2018. Andrey Mukamolov
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
 val lifecycleVersion = "2.5.1"
@@ -55,7 +39,6 @@ android {
         versionCode = 8
         versionName = "2.1"
         multiDexEnabled = true
-        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -92,6 +75,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    lint {
+        disable += "DialogFragmentCallbacksDetector"
+    }
 }
 
 dependencies {
@@ -99,14 +85,12 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-ktx:1.6.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
+    implementation("com.google.android.material:material:1.8.0-alpha01")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
-    compileOnly("com.google.android.wearable:wearable:$wearableVersion")
     implementation("androidx.wear:wear:1.3.0-alpha03")
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
     implementation(
