@@ -75,6 +75,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    lint {
+        disable += "DialogFragmentCallbacksDetector"
+    }
 }
 
 dependencies {
