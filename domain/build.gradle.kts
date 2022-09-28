@@ -55,13 +55,16 @@ android {
     }
 }
 
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+    this.jvmTarget = "11"
+}
+
 dependencies {
-    val coroutinesVersion = "1.6.4"
     implementation(project(":data"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-    implementation("io.insert-koin:koin-android:3.2.2")
+    implementation(libs.coroutines)
+    implementation(libs.koin)
     implementation("com.jakewharton.timber:timber:5.0.1")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation(libs.coroutines.test)
 }

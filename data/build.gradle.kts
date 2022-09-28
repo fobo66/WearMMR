@@ -88,16 +88,18 @@ android {
     }
 }
 
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+    this.jvmTarget = "11"
+}
+
 dependencies {
     val roomVersion = "2.5.0-alpha03"
-    val coroutinesVersion = "1.6.4"
     val ktorVersion = "2.1.1"
     val ktorfitVersion = "1.0.0-beta14"
 
-    implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("io.insert-koin:koin-android:3.2.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation(libs.koin)
+    implementation(libs.coroutines)
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
@@ -112,6 +114,6 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.coroutines.test)
 }

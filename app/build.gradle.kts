@@ -80,6 +80,10 @@ android {
     }
 }
 
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+    this.jvmTarget = "11"
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -91,7 +95,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
-    implementation("androidx.wear:wear:1.3.0-alpha03")
+    implementation(libs.wear)
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
     implementation(
         "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
@@ -106,9 +110,9 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    implementation("io.insert-koin:koin-android:3.2.2")
+    implementation(libs.koin)
 
-    implementation("io.coil-kt:coil:2.2.1")
+    implementation(libs.coil)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
 
