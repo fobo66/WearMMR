@@ -22,7 +22,7 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
-    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
+    id("com.google.devtools.ksp") version "1.7.20-1.0.6"
 }
 
 android {
