@@ -24,9 +24,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
-val wearableVersion = "2.9.0"
 val wearableWatchfaceVersion = "1.1.1"
-val lifecycleVersion = "2.5.1"
 
 android {
     namespace = "io.github.fobo66.wearmmr"
@@ -89,11 +87,11 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.activity:activity-ktx:1.6.0")
-    implementation("com.google.android.material:material:1.8.0-alpha01")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
+    implementation(libs.material)
+    implementation(libs.lifecycle)
+    implementation(libs.viewmodel)
 
     implementation(libs.wear)
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
@@ -108,17 +106,17 @@ dependencies {
     )
     implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation(libs.coroutines)
 
     implementation(libs.koin)
 
     implementation(libs.coil)
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
+    coreLibraryDesugaring(libs.desugar)
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 }
