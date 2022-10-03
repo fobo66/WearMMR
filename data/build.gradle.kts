@@ -94,16 +94,15 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
 }
 
 dependencies {
-    val roomVersion = "2.5.0-alpha03"
     val ktorVersion = "2.1.1"
     val ktorfitVersion = "1.0.0-beta14"
 
     implementation(androidx.datastore)
     implementation(libs.koin)
     implementation(libs.coroutines)
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation(room.runtime)
+    implementation(room.ktx)
+    ksp(room.compiler)
     implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")

@@ -24,7 +24,6 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            version("room", "2.5.0-alpha03")
             version("ktor", "2.5.0-alpha03")
             version("ktorfit", "2.5.0-alpha03")
             library("coil", "io.coil-kt:coil:2.2.1")
@@ -79,6 +78,13 @@ dependencyResolutionManagement {
                 "androidx.wear.watchface",
                 "watchface-complications-data-source-ktx"
             ).versionRef("watchface")
+        }
+
+        register("room") {
+            version("room", "2.5.0-alpha03")
+            library("runtime", "androidx.room", "room-runtime").versionRef("room")
+            library("ktx", "androidx.room", "room-ktx").versionRef("room")
+            library("compiler", "androidx.room", "room-compiler").versionRef("room")
         }
 
         register("firebase") {
