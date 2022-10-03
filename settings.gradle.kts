@@ -28,7 +28,6 @@ dependencyResolutionManagement {
             version("room", "2.5.0-alpha03")
             version("ktor", "2.5.0-alpha03")
             version("ktorfit", "2.5.0-alpha03")
-            library("wear", "androidx.wear:wear:1.3.0-alpha03")
             library("coil", "io.coil-kt:coil:2.2.1")
             library("material", "com.google.android.material:material:1.8.0-alpha01")
             library("koin", "io.insert-koin:koin-android:3.2.2")
@@ -48,6 +47,7 @@ dependencyResolutionManagement {
         }
 
         register("androidx") {
+            library("wear", "androidx.wear:wear:1.3.0-alpha03")
             version("lifecycle", "2.5.1")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-ktx:1.6.0")

@@ -94,7 +94,7 @@ dependencies {
     implementation(androidx.constraint)
     implementation(libs.material)
 
-    implementation(libs.wear)
+    implementation(androidx.wear)
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
     implementation(
         "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
