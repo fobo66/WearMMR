@@ -115,8 +115,8 @@ dependencies {
     coreLibraryDesugaring(libs.desugar)
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(platform(libs.firebase))
-    implementation(libs.crashlytics)
-    implementation(libs.analytics)
+    implementation(platform(firebase.bom))
+    implementation(firebase.crashlytics)
+    implementation(firebase.analytics)
     implementation(libs.timber)
 }

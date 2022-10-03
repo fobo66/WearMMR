@@ -44,17 +44,6 @@ dependencyResolutionManagement {
             library("koin", "io.insert-koin:koin-android:3.2.2")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
-            library("firebase", "com.google.firebase:firebase-bom:30.5.0")
-            library(
-                "crashlytics",
-                "com.google.firebase",
-                "firebase-crashlytics-ktx"
-            ).withoutVersion()
-            library(
-                "analytics",
-                "com.google.firebase",
-                "firebase-analytics-ktx"
-            ).withoutVersion()
             library(
                 "coroutines",
                 "org.jetbrains.kotlinx",
@@ -66,6 +55,19 @@ dependencyResolutionManagement {
                 "org.jetbrains.kotlinx",
                 "kotlinx-coroutines-test"
             ).versionRef("coroutines")
+        }
+        register("firebase") {
+            library("bom", "com.google.firebase:firebase-bom:30.5.0")
+            library(
+                "crashlytics",
+                "com.google.firebase",
+                "firebase-crashlytics-ktx"
+            ).withoutVersion()
+            library(
+                "analytics",
+                "com.google.firebase",
+                "firebase-analytics-ktx"
+            ).withoutVersion()
         }
     }
 }
