@@ -24,7 +24,6 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            version("ktor", "2.5.0-alpha03")
             version("ktorfit", "2.5.0-alpha03")
             library("coil", "io.coil-kt:coil:2.2.1")
             library("material", "com.google.android.material:material:1.8.0-alpha01")
@@ -85,6 +84,14 @@ dependencyResolutionManagement {
             library("runtime", "androidx.room", "room-runtime").versionRef("room")
             library("ktx", "androidx.room", "room-ktx").versionRef("room")
             library("compiler", "androidx.room", "room-compiler").versionRef("room")
+        }
+
+        register("ktor") {
+            version("ktor", "2.1.2")
+            library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
+            library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
+            library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
+            library("json", "io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
         }
 
         register("firebase") {

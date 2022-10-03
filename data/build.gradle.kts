@@ -94,7 +94,6 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
 }
 
 dependencies {
-    val ktorVersion = "2.1.1"
     val ktorfitVersion = "1.0.0-beta14"
 
     implementation(androidx.datastore)
@@ -103,9 +102,9 @@ dependencies {
     implementation(room.runtime)
     implementation(room.ktx)
     ksp(room.compiler)
-    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation(ktor.client)
+    implementation(ktor.content)
+    implementation(ktor.json)
     implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
     ksp("de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
     coreLibraryDesugaring(libs.desugar)
@@ -114,7 +113,7 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.4.0")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
+    testImplementation(ktor.client.mock)
     testImplementation(libs.coroutines.test)
     androidTestImplementation(libs.coroutines.test)
 }
