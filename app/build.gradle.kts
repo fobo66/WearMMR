@@ -87,11 +87,12 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.activity)
+    implementation(androidx.core)
+    implementation(androidx.activity)
+    implementation(androidx.lifecycle)
+    implementation(androidx.viewmodel)
+    implementation(androidx.constraint)
     implementation(libs.material)
-    implementation(libs.lifecycle)
-    implementation(libs.viewmodel)
 
     implementation(libs.wear)
     implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
@@ -114,7 +115,6 @@ dependencies {
 
     coreLibraryDesugaring(libs.desugar)
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(platform(firebase.bom))
     implementation(firebase.crashlytics)
     implementation(firebase.analytics)

@@ -22,7 +22,7 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
-    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -98,7 +98,7 @@ dependencies {
     val ktorVersion = "2.1.1"
     val ktorfitVersion = "1.0.0-beta14"
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(androidx.datastore)
     implementation(libs.koin)
     implementation(libs.coroutines)
     implementation("androidx.room:room-runtime:$roomVersion")
