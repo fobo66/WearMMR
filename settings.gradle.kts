@@ -24,7 +24,6 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            version("watchface", "1.1.1")
             version("room", "2.5.0-alpha03")
             version("ktor", "2.5.0-alpha03")
             version("ktorfit", "2.5.0-alpha03")
@@ -59,6 +58,27 @@ dependencyResolutionManagement {
             library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-ktx").versionRef(
                 "lifecycle"
             )
+        }
+
+        register("watchface") {
+            version("watchface", "1.1.1")
+            library("core", "androidx.wear.watchface", "watchface").versionRef("watchface")
+            library("editor", "androidx.wear.watchface", "watchface-editor").versionRef("watchface")
+            library(
+                "complication",
+                "androidx.wear.watchface",
+                "watchface-complications-rendering"
+            ).versionRef("watchface")
+            library(
+                "complication-datasource",
+                "androidx.wear.watchface",
+                "watchface-complications-data-source"
+            ).versionRef("watchface")
+            library(
+                "complication-datasource-ktx",
+                "androidx.wear.watchface",
+                "watchface-complications-data-source-ktx"
+            ).versionRef("watchface")
         }
 
         register("firebase") {

@@ -24,8 +24,6 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
-val wearableWatchfaceVersion = "1.1.1"
-
 android {
     namespace = "io.github.fobo66.wearmmr"
 
@@ -92,20 +90,14 @@ dependencies {
     implementation(androidx.lifecycle)
     implementation(androidx.viewmodel)
     implementation(androidx.constraint)
+    implementation(androidx.wear)
     implementation(libs.material)
 
-    implementation(androidx.wear)
-    implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
-    implementation(
-        "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
-    )
-    implementation(
-        "androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion"
-    )
-    implementation(
-        "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
-    )
-    implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
+    implementation(watchface.core)
+    implementation(watchface.complication)
+    implementation(watchface.complication.datasource)
+    implementation(watchface.complication.datasource.ktx)
+    implementation(watchface.editor)
 
     implementation(libs.coroutines)
 
