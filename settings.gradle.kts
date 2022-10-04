@@ -24,7 +24,6 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            version("ktorfit", "2.5.0-alpha03")
             library("coil", "io.coil-kt:coil:2.2.1")
             library("material", "com.google.android.material:material:1.8.0-alpha01")
             library("koin", "io.insert-koin:koin-android:3.2.2")
@@ -92,6 +91,12 @@ dependencyResolutionManagement {
             library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
             library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
             library("json", "io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
+        }
+
+        register("ktorfit") {
+            version("ktorfit", "1.0.0-beta14")
+            library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
+            library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
 
         register("firebase") {

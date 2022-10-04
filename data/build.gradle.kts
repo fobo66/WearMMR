@@ -94,8 +94,6 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
 }
 
 dependencies {
-    val ktorfitVersion = "1.0.0-beta14"
-
     implementation(androidx.datastore)
     implementation(libs.koin)
     implementation(libs.coroutines)
@@ -105,8 +103,8 @@ dependencies {
     implementation(ktor.client)
     implementation(ktor.content)
     implementation(ktor.json)
-    implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
-    ksp("de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
+    implementation(ktorfit.library)
+    ksp(ktorfit.processor)
     coreLibraryDesugaring(libs.desugar)
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
