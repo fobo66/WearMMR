@@ -15,6 +15,7 @@
  */
 
 import com.android.build.api.dsl.ManagedVirtualDevice
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("com.android.library")
@@ -89,8 +90,8 @@ android {
     }
 }
 
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
-    this.jvmTarget = "11"
+tasks.withType<Detekt> {
+    jvmTarget = "11"
 }
 
 dependencies {
