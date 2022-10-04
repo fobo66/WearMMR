@@ -16,28 +16,22 @@
 
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
 
     dependencies {
-        val kotlinVersion = "1.7.10"
-        classpath("com.android.tools.build:gradle:8.0.0-alpha02")
-        classpath(kotlin("gradle-plugin", version = kotlinVersion))
-        classpath(kotlin("serialization", version = kotlinVersion))
-        classpath("com.google.gms:google-services:4.3.14")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.2")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0")
+        classpath(buildscriptPlugins.android)
+        classpath(kotlin("gradle-plugin", version = libs.versions.kotlin.get()))
+        classpath(kotlin("serialization", version = libs.versions.kotlin.get()))
+        classpath(buildscriptPlugins.googleServices)
+        classpath(buildscriptPlugins.crashlytics)
     }
 }
 
 tasks {
     register<Delete>("clean") {
         delete(rootProject.buildDir)
-    }
-
-    withType<io.gitlab.arturbosch.detekt.Detekt> {
-        // Target version of the generated JVM bytecode. It is used for type resolution.
-        this.jvmTarget = "11"
     }
 }

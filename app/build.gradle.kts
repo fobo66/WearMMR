@@ -14,6 +14,24 @@
  *    limitations under the License.
  */
 
+import io.gitlab.arturbosch.detekt.Detekt
+
+/*
+ *    Copyright 2022 Andrey Mukamolov
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -23,10 +41,6 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("io.gitlab.arturbosch.detekt")
 }
-
-val wearableVersion = "2.9.0"
-val wearableWatchfaceVersion = "1.1.1"
-val lifecycleVersion = "2.5.1"
 
 android {
     namespace = "io.github.fobo66.wearmmr"
@@ -80,41 +94,39 @@ android {
     }
 }
 
+tasks.withType<Detekt> {
+    jvmTarget = "11"
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(":domain"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.activity:activity-ktx:1.6.0")
-    implementation("com.google.android.material:material:1.8.0-alpha01")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation(androidx.core)
+    implementation(androidx.activity)
+    implementation(androidx.lifecycle)
+    implementation(androidx.viewmodel)
+    implementation(androidx.constraint)
+    implementation(androidx.wear)
+    implementation(libs.material)
 
-    implementation("androidx.wear:wear:1.3.0-alpha03")
-    implementation("androidx.wear.watchface:watchface:$wearableWatchfaceVersion")
-    implementation(
-        "androidx.wear.watchface:watchface-complications-rendering:$wearableWatchfaceVersion"
-    )
-    implementation(
-        "androidx.wear.watchface:watchface-complications-data-source:$wearableWatchfaceVersion"
-    )
-    implementation(
-        "androidx.wear.watchface:watchface-complications-data-source-ktx:$wearableWatchfaceVersion"
-    )
-    implementation("androidx.wear.watchface:watchface-editor:$wearableWatchfaceVersion")
+    implementation(watchface.core)
+    implementation(watchface.complication)
+    implementation(watchface.complication.datasource)
+    implementation(watchface.complication.datasource.ktx)
+    implementation(watchface.editor)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation(libs.coroutines)
 
-    implementation("io.insert-koin:koin-android:3.2.2")
+    implementation(libs.koin)
 
-    implementation("io.coil-kt:coil:2.2.1")
+    implementation(libs.coil)
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
+    coreLibraryDesugaring(libs.desugar)
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(platform(firebase.bom))
+    implementation(firebase.crashlytics)
+    implementation(firebase.analytics)
+    implementation(libs.timber)
 }
