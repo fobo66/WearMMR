@@ -21,6 +21,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
+        register("buildscriptPlugins") {
+            library("android", "com.android.tools.build:gradle:8.0.0-alpha02")
+            library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
+            library("googleServices", "com.google.gms:google-services:4.3.14")
+        }
+
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
