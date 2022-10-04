@@ -30,7 +30,7 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            library("coil", "io.coil-kt:coil:2.2.1")
+            library("coil", "io.coil-kt:coil:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-alpha01")
             library("koin", "io.insert-koin:koin-android:3.2.2")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
