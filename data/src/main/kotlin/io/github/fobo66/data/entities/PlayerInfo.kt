@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 data class PlayerInfo(
     @SerialName("profile") val profile: PlayerProfile,
     @SerialName("rank_tier") val rankTier: Int?,
-    @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate?
+    @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate? = null
 
 )
 
