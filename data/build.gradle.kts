@@ -107,6 +107,7 @@ dependencies {
     implementation(ktorfit.library)
     ksp(ktorfit.processor)
     coreLibraryDesugaring(libs.desugar)
+    implementation(libs.timber)
     androidTestImplementation(androidx.uitest.core)
     androidTestImplementation(androidx.uitest.junit)
     androidTestImplementation(androidx.uitest.runner)

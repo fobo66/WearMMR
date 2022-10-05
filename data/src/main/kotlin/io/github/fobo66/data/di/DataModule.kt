@@ -58,6 +58,7 @@ val dataModule = module {
                     }
                 )
             }
+            expectSuccess = true
         }
     }
 
