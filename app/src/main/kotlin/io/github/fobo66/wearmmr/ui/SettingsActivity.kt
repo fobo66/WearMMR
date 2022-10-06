@@ -1,7 +1,7 @@
 /*
- * Copyright 2018. Andrey Mukamolov
+ *    Copyright 2022 Andrey Mukamolov
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
  *
@@ -11,7 +11,7 @@
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
- * limitations under the License.
+ *    limitations under the License.
  */
 
 package io.github.fobo66.wearmmr.ui
@@ -23,16 +23,17 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType.EDITABLE
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
+import com.google.android.material.color.DynamicColors
 import io.github.fobo66.wearmmr.databinding.ActivitySettingsBinding
 import io.github.fobo66.wearmmr.domain.RatingComplicationDataSource
 import io.github.fobo66.wearmmr.model.SettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : ComponentActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
 
@@ -47,17 +48,18 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DynamicColors.applyToActivityIfAvailable(this)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         lifecycleScope.launchWhenResumed {
-            binding.playerIdInput.setText(
+            binding.playerIdInput.editText?.setText(
                 settingsViewModel.loadPlayerId(),
                 EDITABLE
             )
         }
 
-        binding.playerIdInput.setOnEditorActionListener { _, actionId, _ ->
+        binding.playerIdInput.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(
                     currentFocus!!.windowToken,
@@ -77,7 +79,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun updatePlayerIdPreference() {
-        val playerIdString = binding.playerIdInput.text.toString()
+        val playerIdString = binding.playerIdInput.editText?.text.toString()
         if (playerIdString.isNotBlank()) {
             settingsViewModel.savePlayerId(playerIdString)
         }

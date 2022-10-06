@@ -1,7 +1,7 @@
 /*
- * Copyright 2018. Andrey Mukamolov
+ *    Copyright 2022 Andrey Mukamolov
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
  *
@@ -11,24 +11,25 @@
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
- * limitations under the License.
+ *    limitations under the License.
  */
 
 package io.github.fobo66.wearmmr.ui
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.google.android.material.color.DynamicColors
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DynamicColors.applyToActivityIfAvailable(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -67,14 +69,14 @@ class MainActivity : AppCompatActivity() {
                     is MainViewState.LoadedRating -> {
                         binding.content.progressBar.isVisible = false
                         binding.content.playerDetails.isVisible = true
-                        binding.content.playerName.text = it.rating.name
+                        binding.content.playerName.text = it.playerName
                         binding.content.playerPersonaName.text = getString(
                             R.string.player_name_display_placeholder,
-                            it.rating.personaName
+                            it.personaName
                         )
-                        binding.content.rating.text = it.rating.rating.toString()
+                        binding.content.rating.text = it.rating
 
-                        binding.content.playerPic.load(it.rating.avatarUrl) {
+                        binding.content.playerPic.load(it.avatarUrl) {
                             placeholder(R.drawable.ic_person)
                         }
                     }

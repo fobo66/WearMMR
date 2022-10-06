@@ -1,4 +1,21 @@
+/*
+ *    Copyright 2022 Andrey Mukamolov
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 import com.android.build.api.dsl.ManagedVirtualDevice
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("com.android.library")
@@ -6,7 +23,7 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
-    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -30,11 +47,15 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    buildFeatures {
+        buildConfig = false
     }
 
     libraryVariants.all {
@@ -69,31 +90,29 @@ android {
     }
 }
 
-dependencies {
-    val roomVersion = "2.5.0-alpha03"
-    val coroutinesVersion = "1.6.4"
-    val ktorVersion = "2.1.0"
-    val ktorfitVersion = "1.0.0-beta12"
+tasks.withType<Detekt> {
+    jvmTarget = "11"
+}
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
-    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    implementation("de.jensklingenberg.ktorfit:ktorfit-lib:$ktorfitVersion")
-    ksp("de.jensklingenberg.ktorfit:ktorfit-ksp:$ktorfitVersion")
-    androidTestImplementation("androidx.test:core-ktx:1.4.0")
-    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
-    androidTestImplementation("androidx.test:runner:1.4.0")
+dependencies {
+    implementation(androidx.datastore)
+    implementation(libs.koin)
+    implementation(libs.coroutines)
+    implementation(room.runtime)
+    implementation(room.ktx)
+    ksp(room.compiler)
+    implementation(ktor.client)
+    implementation(ktor.content)
+    implementation(ktor.json)
+    implementation(ktorfit.library)
+    ksp(ktorfit.processor)
+    coreLibraryDesugaring(libs.desugar)
+    androidTestImplementation(androidx.uitest.core)
+    androidTestImplementation(androidx.uitest.junit)
+    androidTestImplementation(androidx.uitest.runner)
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation(ktor.client.mock)
+    testImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.coroutines.test)
 }

@@ -1,7 +1,7 @@
 <!--
-  ~ Copyright 2018. Andrey Mukamolov
+  ~    Copyright 2022 Andrey Mukamolov
   ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
   ~    You may obtain a copy of the License at
   ~
@@ -11,7 +11,7 @@
   ~    distributed under the License is distributed on an "AS IS" BASIS,
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and
-  ~ limitations under the License.
+  ~    limitations under the License.
   -->
 
 <resources>
@@ -21,7 +21,7 @@
     <string name="action_settings">Settings</string>
     <string name="mmr_watchface_name">MMR watch face</string>
     <string name="set_playerid_message">You need to set player ID first</string>
-    <string name="complications_provider_matchmaking_rating_name">Rating provider</string>
+    <string name="complications_provider_matchmaking_rating_name">Dota 2 MMR</string>
     <string name="rating_complication_description">Rating value</string>
     <string name="profile_picture_content_desc">Player\'s profile picture</string>
     <string name="settings_player_id_hint">Please specify your Steam ID in the input above so we can fetch your MMR</string>
