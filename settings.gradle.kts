@@ -54,7 +54,7 @@ dependencyResolutionManagement {
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-ktx:1.6.0")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
-            library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
+            library("datastore", "androidx.datastore:datastore-preferences:1.1.0-dev01")
             library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-ktx").versionRef(
                 "lifecycle"
             )
