@@ -30,6 +30,11 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: detekt
+    - name: Upload build reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: detekt
+        path: /**/build/reports/detekt/detekt.html
   ui-tests:
     runs-on: macos-latest
     
