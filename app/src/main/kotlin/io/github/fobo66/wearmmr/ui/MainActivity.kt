@@ -96,13 +96,7 @@ class MainActivity : ComponentActivity() {
             R.string.player_name_display_placeholder,
             rating.personaName
         )
-        this.rating.text =
-            if (rating.rating != "0") {
-                rating.rating
-            } else {
-                getString(R.string.placeholder_rating)
-            }
-
+        this.rating.text = rating.rating
         playerPic.load(rating.avatarUrl) {
             fallback(R.drawable.ic_person)
             placeholder(R.drawable.ic_person)
