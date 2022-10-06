@@ -42,7 +42,7 @@ class ResolveRatingStateImpl(
                     RatingState.LoadedRating(
                         playerName = rating.name.orEmpty(),
                         personaName = rating.personaName.orEmpty(),
-                        rating = rating.rating.toString(),
+                        rating = (rating.rating ?: 0).toString(),
                         avatarUrl = rating.avatarUrl.orEmpty()
                     )
                 } else {

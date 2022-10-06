@@ -43,7 +43,9 @@ class RatingRepositoryImpl(
 
     private suspend fun obtainRating(playerId: Long): MatchmakingRating? {
         return try {
-            val networkRating = networkDataSource.fetchRating(playerId).toMatchmakingRating()
+            val networkRating = networkDataSource.fetchRating(playerId).toMatchmakingRating(
+                playerId
+            )
             persistenceDataSource.saveRating(networkRating)
             networkRating
         } catch (e: ClientRequestException) {

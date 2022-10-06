@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
                     SettingsActivity.start(this)
                     true
                 }
+
                 else -> {
                     false
                 }
@@ -66,6 +67,7 @@ class MainActivity : ComponentActivity() {
                         ).show()
                         SettingsActivity.start(this@MainActivity)
                     }
+
                     is MainViewState.LoadedRating -> {
                         binding.content.progressBar.isVisible = false
                         binding.content.playerDetails.isVisible = true
@@ -74,16 +76,23 @@ class MainActivity : ComponentActivity() {
                             R.string.player_name_display_placeholder,
                             it.personaName
                         )
-                        binding.content.rating.text = it.rating
+                        binding.content.rating.text =
+                            if (it.rating != "0") {
+                                it.rating
+                            } else {
+                                getString(R.string.placeholder_rating)
+                            }
 
                         binding.content.playerPic.load(it.avatarUrl) {
                             placeholder(R.drawable.ic_person)
                         }
                     }
+
                     MainViewState.Loading -> {
                         binding.content.playerDetails.isVisible = false
                         binding.content.progressBar.isVisible = true
                     }
+
                     MainViewState.NoRating -> {
                         binding.content.progressBar.isVisible = false
                         binding.content.playerDetails.isVisible = true
