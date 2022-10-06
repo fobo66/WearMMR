@@ -37,17 +37,20 @@ class ResolveRatingStateImpl(
 
             if (playerId > 0) {
                 val rating = ratingRepository.loadRating(playerId)
-                if (rating != null) {
+                rating?.let {
                     Timber.d("Loaded rating")
-                    RatingState.LoadedRating(
-                        playerName = rating.name.orEmpty(),
-                        personaName = rating.personaName.orEmpty(),
-                        rating = (rating.rating ?: 0).toString(),
-                        avatarUrl = rating.avatarUrl.orEmpty()
-                    )
-                } else {
-                    RatingState.NoRating
-                }
+                    if (it.name.isNullOrEmpty() || it.personaName.isNullOrEmpty()) {
+                        Timber.d("Empty rating, likely player id is not actual")
+                        RatingState.InvalidPlayerId
+                    } else {
+                        RatingState.LoadedRating(
+                            playerName = it.name.orEmpty(),
+                            personaName = it.personaName.orEmpty(),
+                            rating = (it.rating ?: 0).toString(),
+                            avatarUrl = it.avatarUrl.orEmpty()
+                        )
+                    }
+                } ?: RatingState.NoRating
             } else {
                 Timber.d("No player id found")
                 RatingState.NoPlayerId

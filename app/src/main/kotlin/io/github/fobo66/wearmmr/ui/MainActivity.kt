@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
 
                     is MainViewState.LoadedRating -> {
                         binding.content.progressBar.isVisible = false
+                        binding.content.playerIdError.isVisible = false
                         binding.content.playerDetails.isVisible = true
                         binding.content.playerName.text = it.playerName
                         binding.content.playerPersonaName.text = getString(
@@ -90,16 +91,24 @@ class MainActivity : ComponentActivity() {
 
                     MainViewState.Loading -> {
                         binding.content.playerDetails.isVisible = false
+                        binding.content.playerIdError.isVisible = false
                         binding.content.progressBar.isVisible = true
                     }
 
                     MainViewState.NoRating -> {
                         binding.content.progressBar.isVisible = false
+                        binding.content.playerIdError.isVisible = false
                         binding.content.playerDetails.isVisible = true
                         binding.content.playerName.text = ""
                         binding.content.playerPersonaName.text = ""
                         binding.content.playerPic.load(R.drawable.ic_person)
                         binding.content.rating.setText(R.string.placeholder_rating)
+                    }
+
+                    MainViewState.InvalidPlayerId -> {
+                        binding.content.progressBar.isVisible = false
+                        binding.content.playerDetails.isVisible = false
+                        binding.content.playerIdError.isVisible = true
                     }
                 }
             }

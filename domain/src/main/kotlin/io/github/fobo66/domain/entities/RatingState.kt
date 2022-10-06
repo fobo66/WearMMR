@@ -26,4 +26,5 @@ sealed class RatingState {
     ) : RatingState()
 
     object NoRating : RatingState()
+    object InvalidPlayerId : RatingState()
 }
