@@ -16,6 +16,7 @@
 
 package io.github.fobo66.domain.usecase
 
+import io.github.fobo66.data.entities.MatchmakingRating
 import io.github.fobo66.data.repositories.RatingRepository
 import io.github.fobo66.data.repositories.SettingsRepository
 import io.github.fobo66.domain.entities.RatingState
@@ -37,24 +38,26 @@ class ResolveRatingStateImpl(
 
             if (playerId > 0) {
                 val rating = ratingRepository.loadRating(playerId)
-                rating?.let {
-                    Timber.d("Loaded rating")
-                    if (it.name.isNullOrEmpty() || it.personaName.isNullOrEmpty()) {
-                        Timber.d("Empty rating, likely player id is not actual")
-                        RatingState.InvalidPlayerId
-                    } else {
-                        RatingState.LoadedRating(
-                            playerName = it.name.orEmpty(),
-                            personaName = it.personaName.orEmpty(),
-                            rating = (it.rating ?: 0).toString(),
-                            avatarUrl = it.avatarUrl.orEmpty()
-                        )
-                    }
-                } ?: RatingState.NoRating
+                Timber.d("Loaded rating for %s", playerId)
+                resolveRatingState(rating)
             } else {
                 Timber.d("No player id found")
                 RatingState.NoPlayerId
             }
         }
     }
+
+    private fun resolveRatingState(rating: MatchmakingRating?) = rating?.let {
+        if (it.name.isNullOrEmpty() || it.personaName.isNullOrEmpty()) {
+            Timber.d("Empty rating, likely player id is not actual")
+            RatingState.InvalidPlayerId
+        } else {
+            RatingState.LoadedRating(
+                playerName = it.name.orEmpty(),
+                personaName = it.personaName.orEmpty(),
+                rating = (it.rating ?: 0).toString(),
+                avatarUrl = it.avatarUrl.orEmpty()
+            )
+        }
+    } ?: RatingState.NoRating
 }
