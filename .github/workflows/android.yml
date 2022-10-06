@@ -31,10 +31,14 @@ jobs:
       with:
         arguments: detekt
     - name: Upload build reports
+      if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: detekt
-        path: /**/build/reports/detekt/detekt.html
+        path: |
+          app/build/reports/detekt/detekt.html
+          data/build/reports/detekt/detekt.html
+          domain/build/reports/detekt/detekt.html
   ui-tests:
     runs-on: macos-latest
     
