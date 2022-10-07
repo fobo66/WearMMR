@@ -21,16 +21,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PlayerInfo(
-    @SerialName("profile") val profile: PlayerProfile,
-    @SerialName("rank_tier") val rankTier: Int?,
-    @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate?
+    @SerialName("profile") val profile: PlayerProfile? = null,
+    @SerialName("rank_tier") val rankTier: Int? = null,
+    @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate? = null
 
 )
 
-fun PlayerInfo.toMatchmakingRating(): MatchmakingRating = MatchmakingRating(
-    profile.accountId,
-    profile.name,
-    profile.personaName,
-    profile.avatarUrl,
+fun PlayerInfo.toMatchmakingRating(playerId: Long): MatchmakingRating = MatchmakingRating(
+    playerId,
+    profile?.name,
+    profile?.personaName,
+    profile?.avatarUrl,
     mmrEstimate?.estimate
 )

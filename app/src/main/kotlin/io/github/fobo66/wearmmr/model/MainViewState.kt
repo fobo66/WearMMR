@@ -27,4 +27,5 @@ sealed class MainViewState {
     ) : MainViewState()
 
     object NoRating : MainViewState()
+    object InvalidPlayerId : MainViewState()
 }

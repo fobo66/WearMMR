@@ -19,14 +19,18 @@ package io.github.fobo66.wearmmr.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.google.android.material.color.DynamicColors
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -47,54 +51,85 @@ class MainActivity : ComponentActivity() {
                     SettingsActivity.start(this)
                     true
                 }
+
                 else -> {
                     false
                 }
             }
         }
 
-        viewModel.checkViewState()
-
-        lifecycleScope.launchWhenResumed {
-            viewModel.state.collect {
-                when (it) {
-                    MainViewState.FirstLaunch -> {
-                        Toast.makeText(
-                            this@MainActivity,
-                            R.string.set_playerid_message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        SettingsActivity.start(this@MainActivity)
-                    }
-                    is MainViewState.LoadedRating -> {
-                        binding.content.progressBar.isVisible = false
-                        binding.content.playerDetails.isVisible = true
-                        binding.content.playerName.text = it.playerName
-                        binding.content.playerPersonaName.text = getString(
-                            R.string.player_name_display_placeholder,
-                            it.personaName
-                        )
-                        binding.content.rating.text = it.rating
-
-                        binding.content.playerPic.load(it.avatarUrl) {
-                            placeholder(R.drawable.ic_person)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.state.collect {
+                    when (it) {
+                        MainViewState.FirstLaunch -> {
+                            goToSettings()
                         }
-                    }
-                    MainViewState.Loading -> {
-                        binding.content.playerDetails.isVisible = false
-                        binding.content.progressBar.isVisible = true
-                    }
-                    MainViewState.NoRating -> {
-                        binding.content.progressBar.isVisible = false
-                        binding.content.playerDetails.isVisible = true
-                        binding.content.playerName.text = ""
-                        binding.content.playerPersonaName.text = ""
-                        binding.content.playerPic.load(R.drawable.ic_person)
-                        binding.content.rating.setText(R.string.placeholder_rating)
+
+                        is MainViewState.LoadedRating -> {
+                            showRating(it)
+                        }
+
+                        MainViewState.Loading -> {
+                            showProgress()
+                        }
+
+                        MainViewState.NoRating -> {
+                            showError(R.string.no_rating_error)
+                        }
+
+                        MainViewState.InvalidPlayerId -> {
+                            showError(R.string.invalid_player_id_error)
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun showRating(rating: MainViewState.LoadedRating) = binding.content.apply {
+        progressBar.isVisible = false
+        error.isVisible = false
+        playerDetails.isVisible = true
+        playerName.text = rating.playerName
+        playerPersonaName.text = getString(
+            R.string.player_name_display_placeholder,
+            rating.personaName
+        )
+        this.rating.text = rating.rating
+        playerPic.load(rating.avatarUrl) {
+            fallback(R.drawable.ic_person)
+            placeholder(R.drawable.ic_person)
+        }
+    }
+
+    private fun showProgress() = binding.content.apply {
+        playerDetails.isVisible = false
+        error.isVisible = false
+        progressBar.isVisible = true
+    }
+
+    private fun showError(@StringRes errorMessage: Int) = binding.content.apply {
+        playerDetails.isVisible = false
+        error.isVisible = true
+        progressBar.isVisible = false
+
+        error.setText(errorMessage)
+    }
+
+    private fun goToSettings() {
+        Toast.makeText(
+            this,
+            R.string.set_playerid_message,
+            Toast.LENGTH_SHORT
+        ).show()
+        SettingsActivity.start(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.checkViewState()
     }
 
     companion object {

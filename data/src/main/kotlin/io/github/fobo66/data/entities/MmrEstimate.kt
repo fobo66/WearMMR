@@ -21,5 +21,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MmrEstimate(
-    @SerialName("estimate") val estimate: Int?
+    @SerialName("estimate") val estimate: Int? = null
 )

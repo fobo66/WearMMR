@@ -42,6 +42,7 @@ class MainViewModel(
             )
             RatingState.NoPlayerId -> MainViewState.FirstLaunch
             RatingState.NoRating -> MainViewState.NoRating
+            RatingState.InvalidPlayerId -> MainViewState.InvalidPlayerId
         }
 
         _state.emit(viewState)
