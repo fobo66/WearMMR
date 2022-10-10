@@ -29,6 +29,6 @@
 
     <style name="RatingText" parent="@style/TextAppearance.Material3.DisplaySmall">
         <item name="android:textSize">40sp</item>
-        <item name="android:fontFamily">@font/cinzel</item>
+        <item name="fontFamily">@font/cinzel</item>
     </style>
 </resources>

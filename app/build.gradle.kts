@@ -77,6 +77,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = false
         viewBinding = true
     }
 
@@ -107,6 +108,7 @@ dependencies {
     implementation(androidx.activity)
     implementation(androidx.lifecycle)
     implementation(androidx.viewmodel)
+    implementation(androidx.appstartup)
     implementation(androidx.constraint)
     implementation(androidx.wear)
     implementation(libs.material)

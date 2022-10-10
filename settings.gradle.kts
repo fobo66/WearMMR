@@ -53,6 +53,7 @@ dependencyResolutionManagement {
             version("lifecycle", "2.5.1")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-ktx:1.6.0")
+            library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
             library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
             library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-ktx").versionRef(
