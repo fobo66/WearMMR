@@ -33,6 +33,7 @@ class MainViewModel(
         get() = _state
 
     fun checkViewState() = viewModelScope.launch {
+        _state.emit(MainViewState.Loading)
         val viewState = when (val state = resolveRatingState.execute()) {
             is RatingState.LoadedRating -> MainViewState.LoadedRating(
                 state.playerName,
@@ -40,6 +41,7 @@ class MainViewModel(
                 state.rating,
                 state.avatarUrl
             )
+
             RatingState.NoPlayerId -> MainViewState.FirstLaunch
             RatingState.NoRating -> MainViewState.NoRating
             RatingState.InvalidPlayerId -> MainViewState.InvalidPlayerId

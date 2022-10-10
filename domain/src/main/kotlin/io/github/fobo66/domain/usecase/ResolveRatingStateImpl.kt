@@ -48,7 +48,10 @@ class ResolveRatingStateImpl(
     }
 
     private fun resolveRatingState(rating: MatchmakingRating?) = rating?.let {
-        if (it.name.isNullOrEmpty() || it.personaName.isNullOrEmpty()) {
+        if (it.name.isNullOrEmpty() &&
+            it.personaName.isNullOrEmpty() &&
+            it.rating == null
+        ) {
             Timber.d("Empty rating, likely player id is not actual")
             RatingState.InvalidPlayerId
         } else {
