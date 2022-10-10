@@ -14,17 +14,18 @@
  *    limitations under the License.
  */
 
-package io.github.fobo66.wearmmr
+package io.github.fobo66.wearmmr.init
 
-import android.app.Application
+import android.content.Context
+import androidx.startup.Initializer
 import timber.log.Timber
 
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+class LogInitializer : Initializer<Timber.Tree> {
+    override fun create(context: Context): Timber.Tree {
+        val tree = Timber.DebugTree()
+        Timber.plant(tree)
+        return tree
     }
+
+    override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
 }
