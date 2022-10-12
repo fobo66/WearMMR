@@ -50,8 +50,8 @@ android {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
         targetSdk = 33
-        versionCode = 8
-        versionName = "2.1"
+        versionCode = 9
+        versionName = "2.1.1"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
