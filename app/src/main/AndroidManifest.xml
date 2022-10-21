@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~    Copyright 2022 Andrey Mukamolov
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +21,7 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Required for complications to receive complication data and open the provider chooser. -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required for complications to receive complication data and open the provider chooser. -->
     <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
 
     <application
@@ -30,9 +30,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/WearMmrTheme">
+        <activity
+            android:name=".ui.MainComposeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main_compose" />
+
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
+
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
@@ -46,7 +52,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.SettingsActivity"
             android:exported="true"
@@ -74,32 +79,28 @@
             <meta-data
                 android:name="com.google.android.wearable.watchface.preview_circular"
                 android:resource="@drawable/watchface_preview_circular" />
-
             <meta-data
                 android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
                 android:value="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR" />
-
             <meta-data
                 android:name="com.google.android.wearable.watchface.companionBuiltinConfigurationEnabled"
                 android:value="true" />
 
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
+
                 <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".domain.RatingComplicationDataSource"
             android:exported="true"
             android:icon="@drawable/ic_rating"
             android:label="@string/complications_provider_matchmaking_rating_name"
             android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
                 android:value="SHORT_TEXT" />
-
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="43200" />

@@ -63,6 +63,7 @@ android {
     buildFeatures {
         buildConfig = false
         viewBinding = true
+        compose = true
     }
 
     compileOptions {
@@ -76,6 +77,14 @@ android {
     }
     lint {
         disable += "DialogFragmentCallbacksDetector"
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = compose.versions.compiler.get()
+    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 

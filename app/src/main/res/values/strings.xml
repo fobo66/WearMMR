@@ -29,4 +29,5 @@
     <string name="no_rating_error">Unable to fetch your MMR. Please try again later</string>
     <string name="player_name_display_placeholder" translatable="false">(%1$s)</string>
     <string name="placeholder_rating" translatable="false">--</string>
+    <string name="title_activity_main_compose">MainComposeActivity</string>
 </resources>
