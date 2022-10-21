@@ -48,11 +48,27 @@ dependencyResolutionManagement {
             ).versionRef("coroutines")
         }
 
+        register("compose") {
+            version("compiler", "1.3.2")
+            version("regular", "1.3.0-rc01")
+            version("wear", "1.1.0-alpha07")
+            library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
+            library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
+            library(
+                "foundation.wear",
+                "androidx.wear.compose",
+                "compose-foundation"
+            ).versionRef("wear")
+            library("material", "androidx.wear.compose", "compose-material").versionRef("wear")
+            library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
+        }
+
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0-alpha03")
             version("lifecycle", "2.5.1")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-ktx:1.6.0")
+            library("activity-compose", "androidx.activity:activity-compose:1.7.0-alpha01")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
             library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
