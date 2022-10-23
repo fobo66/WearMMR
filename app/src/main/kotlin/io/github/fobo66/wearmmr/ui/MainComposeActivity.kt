@@ -19,13 +19,12 @@ package io.github.fobo66.wearmmr.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.compose.material.Scaffold
+import androidx.wear.compose.material.Text
 import theme.WearMMRTheme
 
 class MainComposeActivity : ComponentActivity() {
@@ -33,12 +32,8 @@ class MainComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WearMMRTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
+                Scaffold {
+                    Greeting(name = "Android")
                 }
             }
         }
@@ -46,8 +41,12 @@ class MainComposeActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(text = "Hello $name!")
+        Text(text = "Player name")
+        Text(text = "1234")
+    }
 }
 
 @Preview(showBackground = true)
