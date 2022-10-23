@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package theme
+package io.github.fobo66.wearmmr.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

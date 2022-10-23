@@ -23,9 +23,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
-import theme.WearMMRTheme
+import io.github.fobo66.wearmmr.ui.theme.WearMMRTheme
 
 class MainComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "Hello $name!")
         Text(text = "Player name")
-        Text(text = "1234")
+        Text(text = "1234", style = MaterialTheme.typography.title1)
     }
 }
 
