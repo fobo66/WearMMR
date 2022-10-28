@@ -110,7 +110,7 @@ dependencyResolutionManagement {
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:31.0.1")
+            library("bom", "com.google.firebase:firebase-bom:31.0.2")
             library(
                 "crashlytics",
                 "com.google.firebase",
