@@ -121,7 +121,8 @@ dependencies {
 
     implementation(libs.coroutines)
 
-    implementation(libs.koin)
+    implementation(koin.core)
+    implementation(koin.compose)
 
     implementation(libs.coil)
 

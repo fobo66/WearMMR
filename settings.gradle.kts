@@ -32,7 +32,6 @@ dependencyResolutionManagement {
             version("coroutines", "1.6.4")
             library("coil", "io.coil-kt:coil:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-alpha02")
-            library("koin", "io.insert-koin:koin-android:3.3.0")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
             library(
@@ -46,6 +45,12 @@ dependencyResolutionManagement {
                 "org.jetbrains.kotlinx",
                 "kotlinx-coroutines-test"
             ).versionRef("coroutines")
+        }
+
+        register("koin") {
+            version("koin", "3.3.0")
+            library("core", "io.insert-koin", "koin-android").versionRef("koin")
+            library("compose", "io.insert-koin", "koin-androidx-compose").versionRef("koin")
         }
 
         register("compose") {
