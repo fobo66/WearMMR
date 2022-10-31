@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.TimeText
 import io.github.fobo66.wearmmr.ui.theme.WearMMRTheme
 
 class MainComposeActivity : ComponentActivity() {
@@ -33,8 +34,12 @@ class MainComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WearMMRTheme {
-                Scaffold {
-                    Greeting(name = "Android")
+                Scaffold(
+                    timeText = {
+                        TimeText()
+                    }
+                ) {
+                    MainContent(name = "Android")
                 }
             }
         }
@@ -42,7 +47,7 @@ class MainComposeActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun MainContent(name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "Hello $name!")
         Text(text = "Player name")
@@ -54,6 +59,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     WearMMRTheme {
-        Greeting("Android")
+        MainContent("Android")
     }
 }
