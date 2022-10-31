@@ -70,17 +70,17 @@ dependencyResolutionManagement {
 
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0-alpha03")
-            version("lifecycle", "2.5.1")
+            version("lifecycle", "2.6.0-alpha03")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-ktx:1.7.0-alpha02")
             library("activity-compose", "androidx.activity:activity-compose:1.7.0-alpha02")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
             library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
-            library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-ktx").versionRef(
+            library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-compose").versionRef(
                 "lifecycle"
             )
-            library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-ktx").versionRef(
+            library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef(
                 "lifecycle"
             )
             library("uitest.core", "androidx.test:core-ktx:1.4.0")
