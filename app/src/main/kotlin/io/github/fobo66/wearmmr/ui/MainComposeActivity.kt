@@ -21,15 +21,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
+import io.github.fobo66.wearmmr.model.MainViewModel
+import io.github.fobo66.wearmmr.model.MainViewState
 import io.github.fobo66.wearmmr.ui.theme.WearMMRTheme
+import org.koin.androidx.compose.koinViewModel
 
 class MainComposeActivity : ComponentActivity() {
+    @OptIn(ExperimentalLifecycleComposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,7 +46,10 @@ class MainComposeActivity : ComponentActivity() {
                         TimeText()
                     }
                 ) {
-                    MainContent(name = "Android")
+                    val viewModel: MainViewModel = koinViewModel()
+
+                    val viewState by viewModel.state.collectAsStateWithLifecycle(initialValue = MainViewState.Loading)
+                    MainContent(viewState)
                 }
             }
         }
@@ -47,9 +57,9 @@ class MainComposeActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent(name: String, modifier: Modifier = Modifier) {
+fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        Text(text = "Hello $name!")
+        Text(text = "Name")
         Text(text = "Player name")
         Text(text = "1234", style = MaterialTheme.typography.title1)
     }
@@ -59,6 +69,6 @@ fun MainContent(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     WearMMRTheme {
-        MainContent("Android")
+        MainContent(MainViewState.Loading)
     }
 }
