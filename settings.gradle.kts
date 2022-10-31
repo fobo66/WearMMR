@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("buildscriptPlugins") {
-            library("android", "com.android.tools.build:gradle:8.0.0-alpha05")
+            library("android", "com.android.tools.build:gradle:8.0.0-alpha06")
             library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
             library("googleServices", "com.google.gms:google-services:4.3.14")
         }
@@ -31,8 +31,8 @@ dependencyResolutionManagement {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
             library("coil", "io.coil-kt:coil:2.2.2")
-            library("material", "com.google.android.material:material:1.8.0-alpha01")
-            library("koin", "io.insert-koin:koin-android:3.2.3")
+            library("material", "com.google.android.material:material:1.8.0-alpha02")
+            library("koin", "io.insert-koin:koin-android:3.3.0")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
             library(
@@ -112,7 +112,7 @@ dependencyResolutionManagement {
         }
 
         register("ktor") {
-            version("ktor", "2.1.2")
+            version("ktor", "2.1.3")
             library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
             library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
             library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
@@ -126,7 +126,7 @@ dependencyResolutionManagement {
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:31.0.1")
+            library("bom", "com.google.firebase:firebase-bom:31.0.2")
             library(
                 "crashlytics",
                 "com.google.firebase",

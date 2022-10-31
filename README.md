@@ -6,4 +6,6 @@ This is a WearOS app and watchface for displaying your Dota 2 MMR. On first laun
 
 Available in [Google Play](https://play.google.com/store/apps/details?id=io.github.fobo66.wearmmr), as well as [here](https://github.com/fobo66/WearMMR/releases/tag/v2.0)
 
+Project's kanban board with plans and work in progress can be viewed [here](https://trello.com/b/zeT8HvMz/wearmmr)
+
 Dota, the Dota 2 logo, and Defense of the Ancients are trademarks and/or registered trademarks of Valve Corporation.
