@@ -17,16 +17,26 @@
 package io.github.fobo66.wearmmr.ui.theme
 
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Typography
+import io.github.fobo66.wearmmr.R
 
-// Set of Material typography styles to start with
+val CinzelFontFamily = FontFamily(
+    Font(R.font.cinzel, FontWeight.Normal)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
+    ),
+    display3 = TextStyle(
+        fontFamily = CinzelFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 40.sp
     )
 )

@@ -70,7 +70,7 @@ fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
             Column(modifier = modifier) {
                 Text(text = viewState.playerName)
                 Text(text = viewState.personaName)
-                Text(text = viewState.rating, style = MaterialTheme.typography.title1)
+                Text(text = viewState.rating, style = MaterialTheme.typography.display3)
             }
         }
 
