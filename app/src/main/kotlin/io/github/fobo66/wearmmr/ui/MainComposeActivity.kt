@@ -19,18 +19,23 @@ package io.github.fobo66.wearmmr.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
+import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
 import io.github.fobo66.wearmmr.ui.theme.WearMMRTheme
@@ -69,9 +74,36 @@ fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
             }
         }
 
-        MainViewState.FirstLaunch -> TODO()
-        MainViewState.InvalidPlayerId -> TODO()
-        MainViewState.NoRating -> TODO()
+        MainViewState.FirstLaunch -> {
+            Column(modifier = modifier) {
+                Text(text = stringResource(id = R.string.set_playerid_message))
+                Button(onClick = { }) {
+                    Text(text = stringResource(id = R.string.set_playerid_button_label))
+                }
+            }
+        }
+
+        MainViewState.InvalidPlayerId -> {
+            Box(modifier = modifier) {
+                Text(
+                    text = stringResource(id = R.string.invalid_player_id_error),
+                    modifier = Modifier.align(
+                        Alignment.Center
+                    )
+                )
+            }
+        }
+
+        MainViewState.NoRating -> {
+            Box(modifier = modifier) {
+                Text(
+                    text = stringResource(id = R.string.no_rating_error),
+                    modifier = Modifier.align(
+                        Alignment.Center
+                    )
+                )
+            }
+        }
     }
 }
 
