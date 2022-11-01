@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
@@ -35,6 +36,7 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
+import coil.compose.AsyncImage
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
@@ -68,6 +70,12 @@ fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
         MainViewState.Loading -> CircularProgressIndicator()
         is MainViewState.LoadedRating -> {
             Column(modifier = modifier) {
+                AsyncImage(
+                    model = viewState.avatarUrl,
+                    contentDescription = stringResource(id = R.string.profile_picture_content_desc),
+                    placeholder = painterResource(id = R.drawable.ic_person),
+                    fallback = painterResource(id = R.drawable.ic_person)
+                )
                 Text(text = viewState.playerName)
                 Text(text = viewState.personaName)
                 Text(text = viewState.rating, style = MaterialTheme.typography.display3)

@@ -30,7 +30,7 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "1.7.20")
             version("coroutines", "1.6.4")
-            library("coil", "io.coil-kt:coil:2.2.2")
+            library("coil", "io.coil-kt:coil-compose:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-alpha02")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
