@@ -84,26 +84,27 @@ fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
         }
 
         MainViewState.InvalidPlayerId -> {
-            Box(modifier = modifier) {
-                Text(
-                    text = stringResource(id = R.string.invalid_player_id_error),
-                    modifier = Modifier.align(
-                        Alignment.Center
-                    )
-                )
-            }
+            ErrorPrompt(
+                errorLabel = stringResource(id = R.string.invalid_player_id_error),
+                modifier
+            )
         }
 
         MainViewState.NoRating -> {
-            Box(modifier = modifier) {
-                Text(
-                    text = stringResource(id = R.string.no_rating_error),
-                    modifier = Modifier.align(
-                        Alignment.Center
-                    )
-                )
-            }
+            ErrorPrompt(errorLabel = stringResource(id = R.string.no_rating_error), modifier)
         }
+    }
+}
+
+@Composable
+fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
+    Box(modifier = modifier) {
+        Text(
+            text = errorLabel,
+            modifier = Modifier.align(
+                Alignment.Center
+            )
+        )
     }
 }
 
