@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
@@ -58,10 +59,19 @@ class MainComposeActivity : ComponentActivity() {
 
 @Composable
 fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Text(text = "Name")
-        Text(text = "Player name")
-        Text(text = "1234", style = MaterialTheme.typography.title1)
+    when (viewState) {
+        MainViewState.Loading -> CircularProgressIndicator()
+        is MainViewState.LoadedRating -> {
+            Column(modifier = modifier) {
+                Text(text = viewState.playerName)
+                Text(text = viewState.personaName)
+                Text(text = viewState.rating, style = MaterialTheme.typography.title1)
+            }
+        }
+
+        MainViewState.FirstLaunch -> TODO()
+        MainViewState.InvalidPlayerId -> TODO()
+        MainViewState.NoRating -> TODO()
     }
 }
 
