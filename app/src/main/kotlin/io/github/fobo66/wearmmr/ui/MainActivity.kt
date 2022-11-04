@@ -19,9 +19,12 @@ package io.github.fobo66.wearmmr.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,6 +61,10 @@ class MainActivity : ComponentActivity() {
                     val viewModel: MainViewModel = koinViewModel()
                     val context = LocalContext.current
 
+                    LaunchedEffect(Unit) {
+                        viewModel.checkViewState()
+                    }
+
                     val viewState by viewModel.state.collectAsStateWithLifecycle(initialValue = MainViewState.Loading)
                     MainContent(viewState, {
                         SettingsActivity.start(context)
@@ -74,33 +81,37 @@ fun MainContent(
     onFirstLaunch: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    when (viewState) {
-        MainViewState.Loading -> CircularProgressIndicator(modifier = modifier)
-        is MainViewState.LoadedRating -> {
-            RatingDetails(modifier = modifier, viewState = viewState)
-        }
+    Box(modifier = modifier) {
+        Crossfade(viewState) {
+            when (it) {
+                MainViewState.Loading -> CircularProgressIndicator(modifier = modifier.fillMaxSize())
+                is MainViewState.LoadedRating -> {
+                    RatingDetails(modifier = Modifier.align(Alignment.Center), viewState = it)
+                }
 
-        MainViewState.FirstLaunch -> {
-            Column(modifier = modifier) {
-                Text(text = stringResource(id = R.string.set_playerid_message))
-                Button(onClick = onFirstLaunch) {
-                    Text(text = stringResource(id = R.string.set_playerid_button_label))
+                MainViewState.FirstLaunch -> {
+                    Column(modifier = Modifier.align(Alignment.Center)) {
+                        Text(text = stringResource(id = R.string.set_playerid_message))
+                        Button(onClick = onFirstLaunch) {
+                            Text(text = stringResource(id = R.string.set_playerid_button_label))
+                        }
+                    }
+                }
+
+                MainViewState.InvalidPlayerId -> {
+                    ErrorPrompt(
+                        errorLabel = stringResource(id = R.string.invalid_player_id_error),
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+
+                MainViewState.NoRating -> {
+                    ErrorPrompt(
+                        errorLabel = stringResource(id = R.string.no_rating_error),
+                        modifier = Modifier.align(Alignment.Center)
+                    )
                 }
             }
-        }
-
-        MainViewState.InvalidPlayerId -> {
-            ErrorPrompt(
-                errorLabel = stringResource(id = R.string.invalid_player_id_error),
-                modifier = modifier
-            )
-        }
-
-        MainViewState.NoRating -> {
-            ErrorPrompt(
-                errorLabel = stringResource(id = R.string.no_rating_error),
-                modifier = modifier
-            )
         }
     }
 }
