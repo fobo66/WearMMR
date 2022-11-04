@@ -17,122 +17,128 @@
 package io.github.fobo66.wearmmr.ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.annotation.StringRes
-import androidx.core.view.isVisible
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import coil.load
-import com.google.android.material.color.DynamicColors
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Scaffold
+import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.TimeText
+import coil.compose.AsyncImage
 import io.github.fobo66.wearmmr.R
-import io.github.fobo66.wearmmr.databinding.ActivityMainBinding
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import io.github.fobo66.wearmmr.ui.theme.WearMMRTheme
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
-    private val viewModel: MainViewModel by viewModel()
-
+    @OptIn(ExperimentalLifecycleComposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DynamicColors.applyToActivityIfAvailable(this)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.bottomActionDrawer.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_settings -> {
-                    SettingsActivity.start(this)
-                    true
-                }
-
-                else -> {
-                    false
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.state.collect {
-                    when (it) {
-                        MainViewState.FirstLaunch -> {
-                            goToSettings()
-                        }
-
-                        is MainViewState.LoadedRating -> {
-                            showRating(it)
-                        }
-
-                        MainViewState.Loading -> {
-                            showProgress()
-                        }
-
-                        MainViewState.NoRating -> {
-                            showError(R.string.no_rating_error)
-                        }
-
-                        MainViewState.InvalidPlayerId -> {
-                            showError(R.string.invalid_player_id_error)
-                        }
+        setContent {
+            WearMMRTheme {
+                Scaffold(
+                    timeText = {
+                        TimeText()
                     }
+                ) {
+                    val viewModel: MainViewModel = koinViewModel()
+                    val context = LocalContext.current
+
+                    val viewState by viewModel.state.collectAsStateWithLifecycle(initialValue = MainViewState.Loading)
+                    MainContent(viewState, {
+                        SettingsActivity.start(context)
+                    })
                 }
             }
         }
     }
+}
 
-    private fun showRating(rating: MainViewState.LoadedRating) = binding.content.apply {
-        progressBar.isVisible = false
-        error.isVisible = false
-        playerDetails.isVisible = true
-        playerName.text = rating.playerName
-        playerPersonaName.text = getString(
-            R.string.player_name_display_placeholder,
-            rating.personaName
-        )
-        this.rating.text = rating.rating
-        playerPic.load(rating.avatarUrl) {
-            fallback(R.drawable.ic_person)
-            placeholder(R.drawable.ic_person)
+@Composable
+fun MainContent(
+    viewState: MainViewState,
+    onFirstLaunch: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    when (viewState) {
+        MainViewState.Loading -> CircularProgressIndicator(modifier = modifier)
+        is MainViewState.LoadedRating -> {
+            RatingDetails(modifier = modifier, viewState = viewState)
+        }
+
+        MainViewState.FirstLaunch -> {
+            Column(modifier = modifier) {
+                Text(text = stringResource(id = R.string.set_playerid_message))
+                Button(onClick = onFirstLaunch) {
+                    Text(text = stringResource(id = R.string.set_playerid_button_label))
+                }
+            }
+        }
+
+        MainViewState.InvalidPlayerId -> {
+            ErrorPrompt(
+                errorLabel = stringResource(id = R.string.invalid_player_id_error),
+                modifier = modifier
+            )
+        }
+
+        MainViewState.NoRating -> {
+            ErrorPrompt(
+                errorLabel = stringResource(id = R.string.no_rating_error),
+                modifier = modifier
+            )
         }
     }
+}
 
-    private fun showProgress() = binding.content.apply {
-        playerDetails.isVisible = false
-        error.isVisible = false
-        progressBar.isVisible = true
+@Composable
+fun RatingDetails(
+    viewState: MainViewState.LoadedRating,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        AsyncImage(
+            model = viewState.avatarUrl,
+            contentDescription = stringResource(id = R.string.profile_picture_content_desc),
+            placeholder = painterResource(id = R.drawable.ic_person),
+            fallback = painterResource(id = R.drawable.ic_person)
+        )
+        Text(text = viewState.playerName)
+        Text(text = viewState.personaName)
+        Text(text = viewState.rating, style = MaterialTheme.typography.display3)
     }
+}
 
-    private fun showError(@StringRes errorMessage: Int) = binding.content.apply {
-        playerDetails.isVisible = false
-        error.isVisible = true
-        progressBar.isVisible = false
-
-        error.setText(errorMessage)
+@Composable
+fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
+    Box(modifier = modifier) {
+        Text(
+            text = errorLabel,
+            modifier = Modifier.align(
+                Alignment.Center
+            )
+        )
     }
+}
 
-    private fun goToSettings() {
-        Toast.makeText(
-            this,
-            R.string.set_playerid_message,
-            Toast.LENGTH_SHORT
-        ).show()
-        SettingsActivity.start(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        viewModel.checkViewState()
-    }
-
-    companion object {
-        const val REQUEST_CODE = 1245
+@Preview(showBackground = true)
+@Composable
+private fun DefaultPreview() {
+    WearMMRTheme {
+        MainContent(MainViewState.Loading, {})
     }
 }
