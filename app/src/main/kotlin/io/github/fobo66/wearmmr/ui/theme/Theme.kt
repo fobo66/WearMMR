@@ -22,15 +22,13 @@ import androidx.wear.compose.material.Colors
 import androidx.wear.compose.material.MaterialTheme
 
 private val DarkColorPalette = Colors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Red200,
+    primaryVariant = Red700
 )
 
 private val LightColorPalette = Colors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Red500,
+    primaryVariant = Red700
 
     /* Other default colors to override
     background = Color.White,
