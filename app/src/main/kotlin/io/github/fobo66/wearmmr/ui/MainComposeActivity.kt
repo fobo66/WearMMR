@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,9 +56,12 @@ class MainComposeActivity : ComponentActivity() {
                     }
                 ) {
                     val viewModel: MainViewModel = koinViewModel()
+                    val context = LocalContext.current
 
                     val viewState by viewModel.state.collectAsStateWithLifecycle(initialValue = MainViewState.Loading)
-                    MainContent(viewState)
+                    MainContent(viewState, {
+                        SettingsActivity.start(context)
+                    })
                 }
             }
         }
@@ -65,27 +69,21 @@ class MainComposeActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
+fun MainContent(
+    viewState: MainViewState,
+    onFirstLaunch: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     when (viewState) {
-        MainViewState.Loading -> CircularProgressIndicator()
+        MainViewState.Loading -> CircularProgressIndicator(modifier = modifier)
         is MainViewState.LoadedRating -> {
-            Column(modifier = modifier) {
-                AsyncImage(
-                    model = viewState.avatarUrl,
-                    contentDescription = stringResource(id = R.string.profile_picture_content_desc),
-                    placeholder = painterResource(id = R.drawable.ic_person),
-                    fallback = painterResource(id = R.drawable.ic_person)
-                )
-                Text(text = viewState.playerName)
-                Text(text = viewState.personaName)
-                Text(text = viewState.rating, style = MaterialTheme.typography.display3)
-            }
+            RatingDetails(modifier = modifier, viewState = viewState)
         }
 
         MainViewState.FirstLaunch -> {
             Column(modifier = modifier) {
                 Text(text = stringResource(id = R.string.set_playerid_message))
-                Button(onClick = { }) {
+                Button(onClick = onFirstLaunch) {
                     Text(text = stringResource(id = R.string.set_playerid_button_label))
                 }
             }
@@ -94,13 +92,34 @@ fun MainContent(viewState: MainViewState, modifier: Modifier = Modifier) {
         MainViewState.InvalidPlayerId -> {
             ErrorPrompt(
                 errorLabel = stringResource(id = R.string.invalid_player_id_error),
-                modifier
+                modifier = modifier
             )
         }
 
         MainViewState.NoRating -> {
-            ErrorPrompt(errorLabel = stringResource(id = R.string.no_rating_error), modifier)
+            ErrorPrompt(
+                errorLabel = stringResource(id = R.string.no_rating_error),
+                modifier = modifier
+            )
         }
+    }
+}
+
+@Composable
+fun RatingDetails(
+    viewState: MainViewState.LoadedRating,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        AsyncImage(
+            model = viewState.avatarUrl,
+            contentDescription = stringResource(id = R.string.profile_picture_content_desc),
+            placeholder = painterResource(id = R.drawable.ic_person),
+            fallback = painterResource(id = R.drawable.ic_person)
+        )
+        Text(text = viewState.playerName)
+        Text(text = viewState.personaName)
+        Text(text = viewState.rating, style = MaterialTheme.typography.display3)
     }
 }
 
@@ -118,8 +137,8 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     WearMMRTheme {
-        MainContent(MainViewState.Loading)
+        MainContent(MainViewState.Loading, {})
     }
 }
