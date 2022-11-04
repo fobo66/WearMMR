@@ -21,4 +21,4 @@ package io.github.fobo66.data
  * Created 12/17/17.
  */
 
-const val API_BASE_URL: String = "https://api.opendota.com/api/"
+const val ApiBaseUrl: String = "https://api.opendota.com/api/"
