@@ -31,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
@@ -81,36 +80,32 @@ fun MainContent(
     onFirstLaunch: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier) {
-        Crossfade(viewState) {
-            when (it) {
-                MainViewState.Loading -> CircularProgressIndicator(modifier = modifier.fillMaxSize())
-                is MainViewState.LoadedRating -> {
-                    RatingDetails(modifier = Modifier.align(Alignment.Center), viewState = it)
-                }
+    Crossfade(viewState, modifier = modifier) {
+        when (it) {
+            MainViewState.Loading -> CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+            is MainViewState.LoadedRating -> {
+                RatingDetails(viewState = it)
+            }
 
-                MainViewState.FirstLaunch -> {
-                    Column(modifier = Modifier.align(Alignment.Center)) {
-                        Text(text = stringResource(id = R.string.set_playerid_message))
-                        Button(onClick = onFirstLaunch) {
-                            Text(text = stringResource(id = R.string.set_playerid_button_label))
-                        }
+            MainViewState.FirstLaunch -> {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    Text(text = stringResource(id = R.string.set_playerid_message))
+                    Button(onClick = onFirstLaunch) {
+                        Text(text = stringResource(id = R.string.set_playerid_button_label))
                     }
                 }
+            }
 
-                MainViewState.InvalidPlayerId -> {
-                    ErrorPrompt(
-                        errorLabel = stringResource(id = R.string.invalid_player_id_error),
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+            MainViewState.InvalidPlayerId -> {
+                ErrorPrompt(
+                    errorLabel = stringResource(id = R.string.invalid_player_id_error)
+                )
+            }
 
-                MainViewState.NoRating -> {
-                    ErrorPrompt(
-                        errorLabel = stringResource(id = R.string.no_rating_error),
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+            MainViewState.NoRating -> {
+                ErrorPrompt(
+                    errorLabel = stringResource(id = R.string.no_rating_error)
+                )
             }
         }
     }
@@ -121,16 +116,31 @@ fun RatingDetails(
     viewState: MainViewState.LoadedRating,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
         AsyncImage(
             model = viewState.avatarUrl,
             contentDescription = stringResource(id = R.string.profile_picture_content_desc),
             placeholder = painterResource(id = R.drawable.ic_person),
-            fallback = painterResource(id = R.drawable.ic_person)
+            fallback = painterResource(id = R.drawable.ic_person),
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-        Text(text = viewState.playerName)
-        Text(text = viewState.personaName)
-        Text(text = viewState.rating, style = MaterialTheme.typography.display3)
+        Text(
+            text = viewState.playerName,
+            style = MaterialTheme.typography.title3,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = viewState.personaName,
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = viewState.rating, style = MaterialTheme.typography.display3,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -143,13 +153,5 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
                 Alignment.Center
             )
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    WearMMRTheme {
-        MainContent(MainViewState.Loading, {})
     }
 }
