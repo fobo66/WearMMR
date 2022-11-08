@@ -32,6 +32,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -160,5 +162,13 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
                 Alignment.Center
             )
         )
+    }
+}
+
+@Preview(device = Devices.WEAR_OS_LARGE_ROUND)
+@Composable
+private fun MainPreview() {
+    WearMMRTheme {
+        MainContent(viewState = MainViewState.FirstLaunch, onFirstLaunch = {})
     }
 }

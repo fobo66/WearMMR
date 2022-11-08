@@ -59,6 +59,7 @@ dependencyResolutionManagement {
             version("wear", "1.1.0-beta01")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
+            library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
             library(
                 "foundation.wear",
                 "androidx.wear.compose",

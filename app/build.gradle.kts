@@ -110,6 +110,7 @@ dependencies {
     implementation(compose.foundation)
     implementation(compose.foundation.wear)
     implementation(compose.navigation)
+    implementation(compose.tooling)
     debugImplementation(compose.preview)
     implementation(compose.material)
 
