@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("buildscriptPlugins") {
-            library("android", "com.android.tools.build:gradle:8.0.0-alpha07")
+            library("android", "com.android.tools.build:gradle:8.0.0-alpha08")
             library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
             library("googleServices", "com.google.gms:google-services:4.3.14")
         }
@@ -154,7 +154,7 @@ pluginManagement {
     }
     plugins {
         id("io.gitlab.arturbosch.detekt") version "1.21.0"
-        id("com.google.devtools.ksp") version "1.7.20-1.0.7"
+        id("com.google.devtools.ksp") version "1.7.20-1.0.8"
     }
 }
 
