@@ -172,12 +172,14 @@ fun RatingDetails(
 
 @Composable
 fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
-    Box(modifier = modifier) {
+    Box(modifier = modifier.fillMaxSize()) {
         Text(
             text = errorLabel,
-            modifier = Modifier.align(
-                Alignment.Center
-            )
+            modifier = Modifier
+                .align(
+                    Alignment.Center
+                )
+                .padding(16.dp)
         )
     }
 }
