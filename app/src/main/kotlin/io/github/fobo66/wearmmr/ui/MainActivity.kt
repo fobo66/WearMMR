@@ -23,6 +23,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -92,16 +93,7 @@ fun MainContent(
             }
 
             MainViewState.FirstLaunch -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 24.dp)
-                ) {
-                    Text(text = stringResource(id = R.string.set_playerid_message))
-                    Button(onClick = onFirstLaunch) {
-                        Text(text = stringResource(id = R.string.set_playerid_button_label))
-                    }
-                }
+                FirstLaunch(onFirstLaunch)
             }
 
             MainViewState.InvalidPlayerId -> {
@@ -114,6 +106,31 @@ fun MainContent(
                 ErrorPrompt(
                     errorLabel = stringResource(id = R.string.no_rating_error)
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun FirstLaunch(onFirstLaunch: () -> Unit, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = 24.dp)
+    ) {
+        Column(modifier = Modifier.align(Alignment.Center)) {
+            Text(
+                text = stringResource(id = R.string.set_playerid_message),
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            Button(
+                onClick = onFirstLaunch,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(text = stringResource(id = R.string.set_playerid_button_label))
             }
         }
     }
