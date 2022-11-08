@@ -23,6 +23,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
@@ -88,7 +90,11 @@ fun MainContent(
             }
 
             MainViewState.FirstLaunch -> {
-                Column(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 24.dp)
+                ) {
                     Text(text = stringResource(id = R.string.set_playerid_message))
                     Button(onClick = onFirstLaunch) {
                         Text(text = stringResource(id = R.string.set_playerid_button_label))
@@ -119,6 +125,7 @@ fun RatingDetails(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .padding(top = 24.dp)
     ) {
         AsyncImage(
             model = viewState.avatarUrl,
