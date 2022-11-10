@@ -44,7 +44,9 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.OutlinedCompactButton
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
@@ -86,18 +88,18 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContent(
     viewState: MainViewState,
-    onFirstLaunch: () -> Unit,
+    goToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Crossfade(viewState, modifier = modifier) {
         when (it) {
             MainViewState.Loading -> CircularProgressIndicator(modifier = Modifier.fillMaxSize())
             is MainViewState.LoadedRating -> {
-                RatingDetails(viewState = it)
+                RatingDetails(viewState = it, goToSettings)
             }
 
             MainViewState.FirstLaunch -> {
-                FirstLaunch(onFirstLaunch)
+                FirstLaunch(goToSettings)
             }
 
             MainViewState.InvalidPlayerId -> {
@@ -116,7 +118,7 @@ fun MainContent(
 }
 
 @Composable
-private fun FirstLaunch(onFirstLaunch: () -> Unit, modifier: Modifier = Modifier) {
+private fun FirstLaunch(goToSettings: () -> Unit, modifier: Modifier = Modifier) {
     BoxWithConstraints(
         modifier = modifier
             .fillMaxSize(),
@@ -128,7 +130,7 @@ private fun FirstLaunch(onFirstLaunch: () -> Unit, modifier: Modifier = Modifier
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
             Button(
-                onClick = onFirstLaunch,
+                onClick = goToSettings,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
@@ -143,6 +145,7 @@ private fun FirstLaunch(onFirstLaunch: () -> Unit, modifier: Modifier = Modifier
 @Composable
 fun RatingDetails(
     viewState: MainViewState.LoadedRating,
+    goToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     BoxWithConstraints(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
@@ -179,6 +182,17 @@ fun RatingDetails(
                 text = viewState.rating, style = MaterialTheme.typography.display1,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
+            OutlinedCompactButton(
+                onClick = goToSettings,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_settings),
+                    contentDescription = stringResource(
+                        id = R.string.settings_button_label
+                    )
+                )
+            }
         }
     }
 }
@@ -194,12 +208,12 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(device = Devices.WEAR_OS_LARGE_ROUND)
+@Preview(device = Devices.WEAR_OS_SMALL_ROUND)
 @Composable
 private fun MainPreview() {
     WearMMRTheme {
         MainContent(
-            viewState = MainViewState.FirstLaunch,
-            onFirstLaunch = {})
+            viewState = MainViewState.LoadedRating("test", "test", "1234", ""),
+            goToSettings = {})
     }
 }

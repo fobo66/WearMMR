@@ -22,6 +22,7 @@
     <string name="mmr_watchface_name">MMR watch face</string>
     <string name="set_playerid_message">You need to set player ID first</string>
     <string name="set_playerid_button_label">Go to settings</string>
+    <string name="settings_button_label">Settings</string>
     <string name="complications_provider_matchmaking_rating_name">Dota 2 MMR</string>
     <string name="rating_complication_description">Rating value</string>
     <string name="profile_picture_content_desc">Player\'s profile picture</string>
