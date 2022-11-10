@@ -29,9 +29,9 @@ val CinzelFontFamily = FontFamily(
 )
 
 val Typography = Typography(
-    display3 = TextStyle(
+    display1 = TextStyle(
         fontFamily = CinzelFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 40.sp
+        fontSize = 48.sp
     )
 )

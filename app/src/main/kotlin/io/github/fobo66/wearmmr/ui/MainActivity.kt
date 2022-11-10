@@ -21,15 +21,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -141,32 +146,41 @@ fun RatingDetails(
     viewState: MainViewState.LoadedRating,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(top = 24.dp)
-    ) {
-        AsyncImage(
-            model = viewState.avatarUrl,
-            contentDescription = stringResource(id = R.string.profile_picture_content_desc),
-            placeholder = painterResource(id = R.drawable.ic_person),
-            fallback = painterResource(id = R.drawable.ic_person),
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = viewState.playerName,
-            style = MaterialTheme.typography.title3,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = viewState.personaName,
-            style = MaterialTheme.typography.body2,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = viewState.rating, style = MaterialTheme.typography.display3,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+    BoxWithConstraints(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
+        Column {
+            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                AsyncImage(
+                    model = viewState.avatarUrl,
+                    contentDescription = stringResource(id = R.string.profile_picture_content_desc),
+                    placeholder = painterResource(id = R.drawable.ic_person),
+                    fallback = painterResource(id = R.drawable.ic_person),
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .size(48.dp)
+                        .clip(CircleShape)
+                )
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .padding(start = 16.dp)
+                ) {
+                    Text(
+                        text = viewState.playerName,
+                        style = MaterialTheme.typography.title1,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    Text(
+                        text = viewState.personaName,
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+            Text(
+                text = viewState.rating, style = MaterialTheme.typography.display1,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
     }
 }
 
@@ -188,6 +202,8 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
 @Composable
 private fun MainPreview() {
     WearMMRTheme {
-        MainContent(viewState = MainViewState.FirstLaunch, onFirstLaunch = {})
+        MainContent(
+            viewState = MainViewState.LoadedRating("test", "test", "1234", ""),
+            onFirstLaunch = {})
     }
 }
