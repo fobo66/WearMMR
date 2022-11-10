@@ -20,7 +20,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -118,12 +117,12 @@ fun MainContent(
 
 @Composable
 private fun FirstLaunch(onFirstLaunch: () -> Unit, modifier: Modifier = Modifier) {
-    Box(
+    BoxWithConstraints(
         modifier = modifier
-            .fillMaxSize()
-            .padding(top = 24.dp)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Column(modifier = Modifier.align(Alignment.Center)) {
+        Column {
             Text(
                 text = stringResource(id = R.string.set_playerid_message),
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -186,13 +185,10 @@ fun RatingDetails(
 
 @Composable
 fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
+    BoxWithConstraints(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
             text = errorLabel,
             modifier = Modifier
-                .align(
-                    Alignment.Center
-                )
                 .padding(16.dp)
         )
     }
@@ -203,7 +199,7 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
 private fun MainPreview() {
     WearMMRTheme {
         MainContent(
-            viewState = MainViewState.LoadedRating("test", "test", "1234", ""),
+            viewState = MainViewState.FirstLaunch,
             onFirstLaunch = {})
     }
 }
