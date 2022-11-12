@@ -20,6 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -160,6 +161,11 @@ fun RatingDetails(
                         .align(Alignment.CenterVertically)
                         .size(48.dp)
                         .clip(CircleShape)
+                        .border(
+                            width = 2.dp,
+                            color = MaterialTheme.colors.primary,
+                            shape = CircleShape
+                        )
                 )
                 Column(
                     modifier = Modifier
