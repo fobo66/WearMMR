@@ -99,7 +99,6 @@ dependencies {
 
     implementation(androidx.core)
     implementation(androidx.activity)
-    implementation(androidx.activity.compose)
     implementation(androidx.lifecycle)
     implementation(androidx.viewmodel)
     implementation(androidx.appstartup)

@@ -29,7 +29,4 @@
     <string name="settings_player_id_hint">Please specify your Steam ID in the input above so we can fetch your MMR</string>
     <string name="invalid_player_id_error">Your player ID seems to be incorrect. Please specify your Steam ID in the settings so we can fetch your MMR</string>
     <string name="no_rating_error">Unable to fetch your MMR. Please try again later</string>
-    <string name="player_name_display_placeholder" translatable="false">(%1$s)</string>
-    <string name="placeholder_rating" translatable="false">--</string>
-    <string name="title_activity_main_compose">MainComposeActivity</string>
 </resources>
