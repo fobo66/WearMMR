@@ -65,7 +65,7 @@ tasks.withType<Detekt> {
 dependencies {
     implementation(project(":data"))
     implementation(libs.coroutines)
-    implementation(libs.koin)
+    implementation(koin.core)
     implementation(libs.timber)
     coreLibraryDesugaring(libs.desugar)
     testImplementation(kotlin("test"))

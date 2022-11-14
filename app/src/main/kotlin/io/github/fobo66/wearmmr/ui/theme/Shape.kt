@@ -14,11 +14,14 @@
  *    limitations under the License.
  */
 
-package io.github.fobo66.data
+package io.github.fobo66.wearmmr.ui.theme
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.Shapes
 
-const val ApiBaseUrl: String = "https://api.opendota.com/api/"
+val Shapes = Shapes(
+    small = RoundedCornerShape(4.dp),
+    medium = RoundedCornerShape(4.dp),
+    large = RoundedCornerShape(0.dp)
+)

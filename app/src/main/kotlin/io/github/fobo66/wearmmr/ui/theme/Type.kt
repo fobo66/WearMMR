@@ -14,11 +14,24 @@
  *    limitations under the License.
  */
 
-package io.github.fobo66.data
+package io.github.fobo66.wearmmr.ui.theme
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.wear.compose.material.Typography
+import io.github.fobo66.wearmmr.R
 
-const val ApiBaseUrl: String = "https://api.opendota.com/api/"
+val CinzelFontFamily = FontFamily(
+    Font(R.font.cinzel, FontWeight.Normal)
+)
+
+val Typography = Typography(
+    display1 = TextStyle(
+        fontFamily = CinzelFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 48.sp
+    )
+)

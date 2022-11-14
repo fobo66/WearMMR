@@ -32,9 +32,9 @@ import com.google.firebase.ktx.Firebase
 import io.github.fobo66.domain.usecase.RatingComplicationUseCase
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.ui.MainActivity
-import java.io.IOException
 import org.koin.android.ext.android.inject
 import timber.log.Timber
+import java.io.IOException
 
 class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
 
@@ -75,7 +75,7 @@ class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
                 .setTapAction(
                     PendingIntent.getActivity(
                         applicationContext,
-                        MainActivity.REQUEST_CODE,
+                        REQUEST_CODE,
                         Intent(applicationContext, MainActivity::class.java),
                         PendingIntent.FLAG_IMMUTABLE
                     )
@@ -84,5 +84,9 @@ class RatingComplicationDataSource : SuspendingComplicationDataSourceService() {
         } else {
             NoDataComplicationData()
         }
+    }
+
+    companion object {
+        const val REQUEST_CODE = 1234
     }
 }

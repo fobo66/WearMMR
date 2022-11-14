@@ -16,9 +16,13 @@
 
 package io.github.fobo66.wearmmr.model
 
+import androidx.compose.runtime.Immutable
+
 sealed class MainViewState {
     object FirstLaunch : MainViewState()
     object Loading : MainViewState()
+
+    @Immutable
     data class LoadedRating(
         val playerName: String,
         val personaName: String,

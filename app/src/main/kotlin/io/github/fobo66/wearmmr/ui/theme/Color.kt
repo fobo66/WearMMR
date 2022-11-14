@@ -14,11 +14,10 @@
  *    limitations under the License.
  */
 
-package io.github.fobo66.data
+package io.github.fobo66.wearmmr.ui.theme
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
+import androidx.compose.ui.graphics.Color
 
-const val ApiBaseUrl: String = "https://api.opendota.com/api/"
+val Red200 = Color(0xFFFC8686)
+val Red500 = Color(0xFFEE0000)
+val Red700 = Color(0xFFB30000)
