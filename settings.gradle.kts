@@ -153,7 +153,7 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id("io.gitlab.arturbosch.detekt") version "1.21.0"
+        id("io.gitlab.arturbosch.detekt") version "1.22.0"
         id("com.google.devtools.ksp") version "1.7.20-1.0.8"
     }
 }
