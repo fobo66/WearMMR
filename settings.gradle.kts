@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("buildscriptPlugins") {
-            library("android", "com.android.tools.build:gradle:8.0.0-alpha09")
+            library("android", "com.android.tools.build:gradle:8.0.0-alpha10")
             library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
             library("googleServices", "com.google.gms:google-services:4.3.14")
         }
