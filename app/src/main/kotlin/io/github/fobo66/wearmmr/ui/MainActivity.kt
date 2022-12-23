@@ -151,7 +151,11 @@ fun RatingDetails(
 ) {
     BoxWithConstraints(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
         Column {
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 16.dp)
+            ) {
                 AsyncImage(
                     model = viewState.avatarUrl,
                     contentDescription = stringResource(id = R.string.profile_picture_content_desc),
