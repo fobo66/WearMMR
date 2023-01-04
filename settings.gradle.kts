@@ -84,7 +84,7 @@ dependencyResolutionManagement {
                 "lifecycle"
             )
             library("uitest.core", "androidx.test:core-ktx:1.5.0")
-            library("uitest.junit", "androidx.test.ext:junit-ktx:1.1.4")
+            library("uitest.junit", "androidx.test.ext:junit-ktx:1.1.5")
             library("uitest.runner", "androidx.test:runner:1.5.1")
         }
 
