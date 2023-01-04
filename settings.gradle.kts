@@ -48,7 +48,7 @@ dependencyResolutionManagement {
         }
 
         register("koin") {
-            version("koin", "3.3.0")
+            version("koin", "3.3.2")
             library("core", "io.insert-koin", "koin-android").versionRef("koin")
             library("compose", "io.insert-koin", "koin-androidx-compose").versionRef("koin")
         }
