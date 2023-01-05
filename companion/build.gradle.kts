@@ -14,69 +14,47 @@
  *    limitations under the License.
  */
 
-import io.gitlab.arturbosch.detekt.Detekt
-
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("kotlin-parcelize")
-    id("kotlinx-serialization")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
-    namespace = "io.github.fobo66.wearmmr"
-
+    namespace = "dev.fobo66.wearmmr.companion"
     compileSdk = 33
-    defaultConfig {
-        applicationId = "io.github.fobo66.wearmmr"
-        minSdk = 26
-        targetSdk = 33
-        versionCode = 10
-        versionName = "2.2"
-        multiDexEnabled = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
-    signingConfigs {
-        register("releaseSign") {
-            keyAlias = loadSecret(rootProject, KEY_ALIAS)
-            keyPassword = loadSecret(rootProject, KEY_PASSWORD)
-            storeFile = rootProject.file(loadSecret(rootProject, STORE_FILE))
-            storePassword = loadSecret(rootProject, STORE_PASSWORD)
+    defaultConfig {
+        applicationId = "dev.fobo66.wearmmr.companion"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs["releaseSign"]
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-
-    buildFeatures {
-        buildConfig = false
-        viewBinding = true
-        compose = true
-    }
-
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
-
     kotlinOptions {
         jvmTarget = "11"
     }
-    lint {
-        disable += "DialogFragmentCallbacksDetector"
+    buildFeatures {
+        compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = compose.versions.compiler.get()
@@ -88,36 +66,18 @@ android {
     }
 }
 
-tasks.withType<Detekt> {
-    jvmTarget = "11"
-}
-
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    implementation(project(":domain"))
-
     implementation(androidx.core)
     implementation(androidx.activity)
     implementation(androidx.lifecycle)
     implementation(androidx.viewmodel)
     implementation(androidx.appstartup)
-    implementation(androidx.constraint)
-    implementation(androidx.wear)
-    implementation(libs.material)
 
     implementation(compose.foundation)
-    implementation(compose.foundation.wear)
     implementation(compose.navigation)
     implementation(compose.tooling)
     debugImplementation(compose.preview)
-    implementation(compose.material.wear)
-
-    implementation(watchface.core)
-    implementation(watchface.complication)
-    implementation(watchface.complication.datasource)
-    implementation(watchface.complication.datasource.ktx)
-    implementation(watchface.editor)
+    implementation(compose.material)
 
     implementation(libs.coroutines)
 
@@ -132,4 +92,11 @@ dependencies {
     implementation(firebase.crashlytics)
     implementation(firebase.analytics)
     implementation(libs.timber)
+
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit"))
+
+    androidTestImplementation(androidx.uitest.core)
+    androidTestImplementation(androidx.uitest.junit)
+    androidTestImplementation(androidx.uitest.runner)
 }

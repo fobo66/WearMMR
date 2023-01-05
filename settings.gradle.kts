@@ -64,7 +64,8 @@ dependencyResolutionManagement {
                 "androidx.wear.compose",
                 "compose-foundation"
             ).versionRef("wear")
-            library("material", "androidx.wear.compose", "compose-material").versionRef("wear")
+            library("material", "androidx.compose.material3:material3:1.1.0-alpha03")
+            library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
 
@@ -159,4 +160,4 @@ pluginManagement {
 
 rootProject.name = "WearMMR"
 
-include(":app", ":data", ":domain")
+include(":app", ":data", ":domain", ":companion")
