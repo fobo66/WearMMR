@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2023 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -48,9 +48,8 @@ dependencyResolutionManagement {
         }
 
         register("koin") {
-            version("koin", "3.3.0")
-            library("core", "io.insert-koin", "koin-android").versionRef("koin")
-            library("compose", "io.insert-koin", "koin-androidx-compose").versionRef("koin")
+            library("core", "io.insert-koin:koin-android:3.3.2")
+            library("compose", "io.insert-koin:koin-androidx-compose:3.4.1")
         }
 
         register("compose") {
