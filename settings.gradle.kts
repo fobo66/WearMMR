@@ -153,7 +153,7 @@ pluginManagement {
     }
     plugins {
         id("io.gitlab.arturbosch.detekt") version "1.22.0"
-        id("com.google.devtools.ksp") version "1.7.21-1.0.8"
+        id("com.google.devtools.ksp") version "1.8.0-1.0.8"
     }
 }
 
