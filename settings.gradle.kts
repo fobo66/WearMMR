@@ -31,7 +31,7 @@ dependencyResolutionManagement {
             version("kotlin", "1.7.21")
             version("coroutines", "1.6.4")
             library("coil", "io.coil-kt:coil-compose:2.2.2")
-            library("material", "com.google.android.material:material:1.8.0-beta01")
+            library("material", "com.google.android.material:material:1.8.0-rc01")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
             library(
@@ -55,7 +55,7 @@ dependencyResolutionManagement {
         register("compose") {
             version("compiler", "1.4.0-alpha02")
             version("regular", "1.4.0-alpha03")
-            version("wear", "1.1.0")
+            version("wear", "1.1.1")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
             library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
@@ -71,7 +71,7 @@ dependencyResolutionManagement {
 
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0-alpha03")
-            version("lifecycle", "2.6.0-alpha03")
+            version("lifecycle", "2.6.0-alpha04")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-compose:1.7.0-alpha02")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
@@ -85,7 +85,7 @@ dependencyResolutionManagement {
             )
             library("uitest.core", "androidx.test:core-ktx:1.5.0")
             library("uitest.junit", "androidx.test.ext:junit-ktx:1.1.5")
-            library("uitest.runner", "androidx.test:runner:1.5.1")
+            library("uitest.runner", "androidx.test:runner:1.5.2")
         }
 
         register("watchface") {
@@ -110,7 +110,7 @@ dependencyResolutionManagement {
         }
 
         register("room") {
-            version("room", "2.5.0-rc01")
+            version("room", "2.5.0")
             library("runtime", "androidx.room", "room-runtime").versionRef("room")
             library("ktx", "androidx.room", "room-ktx").versionRef("room")
             library("compiler", "androidx.room", "room-compiler").versionRef("room")
