@@ -25,7 +25,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.fobo66.wearmmr.companion"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
