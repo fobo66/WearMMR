@@ -24,7 +24,7 @@ dependencyResolutionManagement {
         register("buildscriptPlugins") {
             library("android", "com.android.tools.build:gradle:8.0.0-alpha11")
             library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
-            library("googleServices", "com.google.gms:google-services:4.3.14")
+            library("googleServices", "com.google.gms:google-services:4.3.15")
         }
 
         register("libs") {
