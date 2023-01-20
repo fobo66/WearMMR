@@ -124,7 +124,7 @@ dependencyResolutionManagement {
         }
 
         register("ktorfit") {
-            version("ktorfit", "1.0.0-beta16")
+            version("ktorfit", "1.0.0-beta17")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
