@@ -24,7 +24,7 @@ dependencyResolutionManagement {
         register("buildscriptPlugins") {
             library("android", "com.android.tools.build:gradle:8.0.0-alpha11")
             library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
-            library("googleServices", "com.google.gms:google-services:4.3.14")
+            library("googleServices", "com.google.gms:google-services:4.3.15")
         }
 
         register("libs") {
@@ -125,13 +125,13 @@ dependencyResolutionManagement {
         }
 
         register("ktorfit") {
-            version("ktorfit", "1.0.0-beta16")
+            version("ktorfit", "1.0.0-beta17")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:31.1.1")
+            library("bom", "com.google.firebase:firebase-bom:31.2.0")
             library(
                 "crashlytics",
                 "com.google.firebase",
