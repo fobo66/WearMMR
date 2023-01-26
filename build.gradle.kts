@@ -18,7 +18,7 @@
     id("com.android.application") version "8.1.0-alpha01" apply false
     id("com.android.library") version "8.1.0-alpha01" apply false
     kotlin("android") version "1.8.0" apply false
-    kotlin("serialization") version "1.8.0" apply false
+    kotlin("plugin.serialization") version "1.8.0" apply false
     id("io.gitlab.arturbosch.detekt") version "1.22.0" apply false
     id("com.google.devtools.ksp") version "1.8.0-1.0.8" apply false
     id("com.google.gms.google-services") version "4.3.15" apply false
