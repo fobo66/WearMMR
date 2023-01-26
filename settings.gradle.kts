@@ -124,7 +124,7 @@ dependencyResolutionManagement {
             library("json", "io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
         }
 
-        register("ktorfit") {
+        register("apiclient") {
             version("ktorfit", "1.0.0-beta17")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")

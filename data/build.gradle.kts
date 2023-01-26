@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2023 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -105,8 +105,8 @@ dependencies {
     implementation(ktor.client)
     implementation(ktor.content)
     implementation(ktor.json)
-    implementation(ktorfit.library)
-    ksp(ktorfit.processor)
+    implementation(apiclient.library)
+    ksp(apiclient.processor)
     coreLibraryDesugaring(libs.desugar)
     implementation(libs.timber)
     androidTestImplementation(androidx.uitest.core)
