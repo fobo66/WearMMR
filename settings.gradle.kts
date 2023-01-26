@@ -152,10 +152,6 @@ pluginManagement {
         google()
         mavenCentral()
     }
-    plugins {
-        id("io.gitlab.arturbosch.detekt") version "1.22.0"
-        id("com.google.devtools.ksp") version "1.8.0-1.0.8"
-    }
 }
 
 rootProject.name = "WearMMR"

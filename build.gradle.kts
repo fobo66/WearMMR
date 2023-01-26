@@ -14,20 +14,16 @@
  *    limitations under the License.
  */
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(buildscriptPlugins.android)
-        classpath(kotlin("gradle-plugin", version = libs.versions.kotlin.get()))
-        classpath(kotlin("serialization", version = libs.versions.kotlin.get()))
-        classpath(buildscriptPlugins.googleServices)
-        classpath(buildscriptPlugins.crashlytics)
-    }
+ plugins {
+    id("com.android.application") version "8.1.0-alpha01" apply false
+    id("com.android.library") version "8.1.0-alpha01" apply false
+    kotlin("android") version "1.8.0" apply false
+    kotlin("serialization") version "1.8.0" apply false
+    id("io.gitlab.arturbosch.detekt") version "1.22.0" apply false
+    id("com.google.devtools.ksp") version "1.8.0-1.0.8" apply false
+    id("com.google.gms.google-services") version "4.3.15" apply false
+    id("com.google.firebase.crashlytics") version "2.9.2" apply false
+    id("de.jensklingenberg.ktorfit") version "1.0.0" apply false
 }
 
 tasks {

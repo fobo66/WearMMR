@@ -24,7 +24,7 @@ plugins {
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
     id("com.google.devtools.ksp")
-    id("de.jensklingenberg.ktorfit") version "1.0.0"
+    id("de.jensklingenberg.ktorfit")
 }
 
 android {
