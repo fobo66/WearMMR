@@ -28,7 +28,7 @@ dependencyResolutionManagement {
         }
 
         register("libs") {
-            version("kotlin", "1.7.21")
+            version("kotlin", "1.8.0")
             version("coroutines", "1.6.4")
             library("coil", "io.coil-kt:coil-compose:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-rc01")
@@ -53,7 +53,7 @@ dependencyResolutionManagement {
         }
 
         register("compose") {
-            version("compiler", "1.4.0-alpha02")
+            version("compiler", "1.4.0")
             version("regular", "1.4.0-alpha03")
             version("wear", "1.1.1")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
@@ -64,7 +64,8 @@ dependencyResolutionManagement {
                 "androidx.wear.compose",
                 "compose-foundation"
             ).versionRef("wear")
-            library("material", "androidx.wear.compose", "compose-material").versionRef("wear")
+            library("material", "androidx.compose.material3:material3:1.1.0-alpha03")
+            library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
 
@@ -159,4 +160,4 @@ pluginManagement {
 
 rootProject.name = "WearMMR"
 
-include(":app", ":data", ":domain")
+include(":app", ":data", ":domain", ":companion")
