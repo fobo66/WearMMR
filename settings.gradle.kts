@@ -33,7 +33,7 @@ dependencyResolutionManagement {
             library("coil", "io.coil-kt:coil-compose:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-rc01")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
-            library("desugar", "com.android.tools:desugar_jdk_libs:2.0.0")
+            library("desugar", "com.android.tools:desugar_jdk_libs:2.0.2")
             library(
                 "coroutines",
                 "org.jetbrains.kotlinx",
