@@ -20,7 +20,7 @@
      kotlin("android") version "1.8.0" apply false
      kotlin("plugin.serialization") version "1.8.0" apply false
      id("io.gitlab.arturbosch.detekt") version "1.22.0" apply false
-     id("com.google.devtools.ksp") version "1.8.0-1.0.8" apply false
+     id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
      id("com.google.gms.google-services") version "4.3.15" apply false
      id("com.google.firebase.crashlytics") version "2.9.2" apply false
      id("de.jensklingenberg.ktorfit") version "1.0.0" apply false
