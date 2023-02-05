@@ -15,15 +15,15 @@
  */
 
  plugins {
-     id("com.android.application") version "8.1.0-alpha02" apply false
-     id("com.android.library") version "8.1.0-alpha02" apply false
-     kotlin("android") version "1.8.0" apply false
-     kotlin("plugin.serialization") version "1.8.0" apply false
-     id("io.gitlab.arturbosch.detekt") version "1.22.0" apply false
-     id("com.google.devtools.ksp") version "1.8.0-1.0.8" apply false
-     id("com.google.gms.google-services") version "4.3.15" apply false
-     id("com.google.firebase.crashlytics") version "2.9.2" apply false
-     id("de.jensklingenberg.ktorfit") version "1.0.0" apply false
+     alias(agp.plugins.application) apply false
+     alias(agp.plugins.library) apply false
+     kotlin("android") version libs.versions.kotlin apply false
+     kotlin("plugin.serialization") version libs.versions.kotlin apply false
+     alias(libs.plugins.detekt) apply false
+     alias(libs.plugins.ksp) apply false
+     alias(firebase.plugins.googleServices) apply false
+     alias(firebase.plugins.crashlytics) apply false
+     alias(apiclient.plugins.ktorfit) apply false
  }
 
 tasks {

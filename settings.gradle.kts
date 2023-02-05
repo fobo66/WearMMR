@@ -21,15 +21,17 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
-        register("buildscriptPlugins") {
-            library("android", "com.android.tools.build:gradle:8.0.0-alpha11")
-            library("crashlytics", "com.google.firebase:firebase-crashlytics-gradle:2.9.2")
-            library("googleServices", "com.google.gms:google-services:4.3.15")
+        register("agp") {
+            version("agp", "8.1.0-alpha02")
+            plugin("application", "com.android.application").versionRef("agp")
+            plugin("library", "com.android.library").versionRef("agp")
         }
 
         register("libs") {
             version("kotlin", "1.8.0")
             version("coroutines", "1.6.4")
+            plugin("ksp", "com.google.devtools.ksp").version("1.8.0-1.0.8")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
             library("coil", "io.coil-kt:coil-compose:2.2.2")
             library("material", "com.google.android.material:material:1.8.0-rc01")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
@@ -126,12 +128,15 @@ dependencyResolutionManagement {
 
         register("apiclient") {
             version("ktorfit", "1.0.0-beta17")
+            plugin("ktorfit", "de.jensklingenberg.ktorfit").version("1.0.0")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
 
         register("firebase") {
             library("bom", "com.google.firebase:firebase-bom:31.2.0")
+            plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.2")
+            plugin("googleServices", "com.google.gms.google-services").version("4.3.15")
             library(
                 "crashlytics",
                 "com.google.firebase",
