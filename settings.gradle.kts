@@ -66,7 +66,7 @@ dependencyResolutionManagement {
                 "androidx.wear.compose",
                 "compose-foundation"
             ).versionRef("wear")
-            library("material", "androidx.compose.material3:material3:1.1.0-alpha05")
+            library("material", "androidx.compose.material3:material3:1.1.0-alpha06")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
