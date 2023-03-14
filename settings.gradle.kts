@@ -73,7 +73,7 @@ dependencyResolutionManagement {
 
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0-alpha04")
-            version("lifecycle", "2.6.0-rc01")
+            version("lifecycle", "2.6.0")
             library("core", "androidx.core:core-ktx:1.9.0")
             library("activity", "androidx.activity:activity-compose:1.7.0-rc01")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
