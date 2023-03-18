@@ -14,6 +14,7 @@
  *    limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -22,7 +23,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.1.0-alpha03")
+            version("agp", "8.1.0-alpha09")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }

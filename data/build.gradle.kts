@@ -91,6 +91,10 @@ android {
     }
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 tasks.withType<Detekt> {
     jvmTarget = "11"
 }

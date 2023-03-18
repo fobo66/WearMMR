@@ -81,7 +81,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = compose.versions.compiler.get()
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -90,6 +90,10 @@ android {
 
 tasks.withType<Detekt> {
     jvmTarget = "11"
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 dependencies {
