@@ -72,6 +72,7 @@ android {
         arg("room.schemaLocation", "$projectDir/schemas")
         arg("room.incremental", "true")
         arg("room.expandProjection", "true")
+        arg("room.generateKotlin", "true")
     }
 
     lint {
