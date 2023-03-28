@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2023 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.wear.compose.material.Typography
+import androidx.wear.compose.material3.Typography
 import io.github.fobo66.wearmmr.R
 
 val CinzelFontFamily = FontFamily(
@@ -29,7 +29,7 @@ val CinzelFontFamily = FontFamily(
 )
 
 val Typography = Typography(
-    display1 = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = CinzelFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 48.sp

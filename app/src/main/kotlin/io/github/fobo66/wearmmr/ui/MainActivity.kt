@@ -44,12 +44,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.CircularProgressIndicator
-import androidx.wear.compose.material.Icon
-import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.OutlinedCompactButton
 import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material3.Icon
+import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.Text
 import coil.compose.AsyncImage
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.model.MainViewModel
@@ -90,7 +90,7 @@ fun MainContent(
     goToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Crossfade(viewState, modifier = modifier) {
+    Crossfade(viewState, modifier = modifier, label = "MainContent") {
         when (it) {
             MainViewState.Loading -> CircularProgressIndicator(modifier = Modifier.fillMaxSize())
             is MainViewState.LoadedRating -> {
@@ -165,7 +165,7 @@ fun RatingDetails(
                         .clip(CircleShape)
                         .border(
                             width = 2.dp,
-                            color = MaterialTheme.colors.primary,
+                            color = MaterialTheme.colorScheme.primary,
                             shape = CircleShape
                         )
                 )
@@ -176,18 +176,18 @@ fun RatingDetails(
                 ) {
                     Text(
                         text = viewState.playerName,
-                        style = MaterialTheme.typography.title1,
+                        style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                     Text(
                         text = viewState.personaName,
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 }
             }
             Text(
-                text = viewState.rating, style = MaterialTheme.typography.display1,
+                text = viewState.rating, style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             OutlinedCompactButton(

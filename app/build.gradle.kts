@@ -111,6 +111,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(compose.foundation)
+    implementation(compose.material3)
     implementation(compose.foundation.wear)
     implementation(compose.navigation)
     implementation(compose.tooling)
