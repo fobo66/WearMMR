@@ -23,15 +23,15 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.1.0-beta01")
+            version("agp", "8.2.0-alpha02")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
 
         register("libs") {
-            version("kotlin", "1.8.20")
+            version("kotlin", "1.8.21")
             version("coroutines", "1.6.4")
-            plugin("ksp", "com.google.devtools.ksp").version("1.8.20-1.0.11")
+            plugin("ksp", "com.google.devtools.ksp").version("1.8.21-1.0.11")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
             library("coil", "io.coil-kt:coil-compose:2.3.0")
             library("material", "com.google.android.material:material:1.8.0")
@@ -56,7 +56,7 @@ dependencyResolutionManagement {
         }
 
         register("compose") {
-            version("compiler", "1.4.5")
+            version("compiler", "1.4.7")
             version("regular", "1.5.0-alpha03")
             version("wear", "1.2.0-alpha09")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
