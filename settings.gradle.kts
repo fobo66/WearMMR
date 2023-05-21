@@ -33,7 +33,7 @@ dependencyResolutionManagement {
             version("coroutines", "1.7.1")
             plugin("ksp", "com.google.devtools.ksp").version("1.8.21-1.0.11")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
-            library("coil", "io.coil-kt:coil-compose:2.3.0")
+            library("coil", "io.coil-kt:coil-compose:2.4.0")
             library("material", "com.google.android.material:material:1.9.0")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.3")
