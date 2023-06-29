@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 
         register("libs") {
             version("kotlin", "1.8.21")
-            version("coroutines", "1.7.1")
+            version("coroutines", "1.7.2")
             plugin("ksp", "com.google.devtools.ksp").version("1.8.21-1.0.11")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.0")
             library("coil", "io.coil-kt:coil-compose:2.4.0")
