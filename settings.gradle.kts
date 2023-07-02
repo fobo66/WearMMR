@@ -29,7 +29,7 @@ dependencyResolutionManagement {
         }
 
         register("libs") {
-            version("kotlin", "1.8.21")
+            version("kotlin", "1.8.22")
             version("coroutines", "1.7.2")
             plugin("ksp", "com.google.devtools.ksp").version("1.8.22-1.0.11")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.0")
@@ -56,7 +56,7 @@ dependencyResolutionManagement {
         }
 
         register("compose") {
-            version("compiler", "1.4.7")
+            version("compiler", "1.4.8")
             version("regular", "1.5.0-beta03")
             version("wear", "1.2.0-beta02")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
