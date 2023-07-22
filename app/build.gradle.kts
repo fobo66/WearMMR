@@ -108,6 +108,7 @@ dependencies {
     implementation(androidx.appstartup)
     implementation(androidx.constraint)
     implementation(androidx.wear)
+    implementation(androidx.wear.phoneinteraction)
     implementation(libs.material)
 
     implementation(compose.foundation)
