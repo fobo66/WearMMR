@@ -74,7 +74,7 @@ dependencyResolutionManagement {
         }
 
         register("androidx") {
-            library("wear", "androidx.wear:wear:1.3.0-rc01")
+            library("wear", "androidx.wear:wear:1.3.0")
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha03")
             version("lifecycle", "2.6.1")
             library("core", "androidx.core:core-ktx:1.10.1")
