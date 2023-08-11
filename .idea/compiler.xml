@@ -2,6 +2,9 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
+      <module name="StudioProjects.WearMMR.buildSrc" target="17" />
+      <module name="StudioProjects.WearMMR.buildSrc.main" target="17" />
+      <module name="StudioProjects.WearMMR.buildSrc.test" target="17" />
       <module name="WearMMR.buildSrc" target="17" />
       <module name="WearMMR.buildSrc.main" target="17" />
       <module name="WearMMR.buildSrc.test" target="17" />
