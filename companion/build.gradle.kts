@@ -21,12 +21,12 @@ plugins {
 
 android {
     namespace = "dev.fobo66.wearmmr.companion"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.fobo66.wearmmr.companion"
-        minSdk = 25
-        targetSdk = 33
+        minSdk = 26
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
