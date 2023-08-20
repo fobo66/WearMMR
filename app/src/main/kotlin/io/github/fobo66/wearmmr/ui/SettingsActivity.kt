@@ -127,7 +127,7 @@ class SettingsActivity : ComponentActivity() {
         fun start(context: Context) {
             context.startActivity(Intent(context, SettingsActivity::class.java).setClassName(
                 context.packageName,
-                this::class.java.name
+                SettingsActivity::class.java.name
             ))
         }
     }
