@@ -90,6 +90,7 @@ class SettingsActivity : ComponentActivity() {
             val request = OAuthRequest.Builder(this.applicationContext)
                 .setAuthProviderUrl(Uri.parse("https://steamcommunity.com/openid"))
                 .setCodeChallenge(CodeChallenge(codeVerifier))
+                .setClientId("wearmmr")
                 .build()
             val client = RemoteAuthClient.create(this)
             client.sendAuthorizationRequest(request,
