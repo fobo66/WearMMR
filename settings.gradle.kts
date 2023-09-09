@@ -68,7 +68,7 @@ dependencyResolutionManagement {
                 "compose-foundation"
             ).versionRef("wear")
             library("material", "androidx.compose.material3:material3:1.1.1")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha09")
+            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha10")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
@@ -115,14 +115,14 @@ dependencyResolutionManagement {
         }
 
         register("room") {
-            version("room", "2.6.0-alpha03")
+            version("room", "2.6.0-beta01")
             library("runtime", "androidx.room", "room-runtime").versionRef("room")
             library("ktx", "androidx.room", "room-ktx").versionRef("room")
             library("compiler", "androidx.room", "room-compiler").versionRef("room")
         }
 
         register("ktor") {
-            version("ktor", "2.3.3")
+            version("ktor", "2.3.4")
             library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
             library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
             library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
@@ -137,8 +137,8 @@ dependencyResolutionManagement {
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:32.2.2")
-            plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.8")
+            library("bom", "com.google.firebase:firebase-bom:32.2.3")
+            plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.9")
             plugin("googleServices", "com.google.gms.google-services").version("4.3.15")
             library(
                 "crashlytics",
