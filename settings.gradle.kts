@@ -58,7 +58,7 @@ dependencyResolutionManagement {
         register("compose") {
             version("compiler", "1.5.3")
             version("regular", "1.5.0")
-            version("wear", "1.2.0-beta02")
+            version("wear", "1.2.0")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
             library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
@@ -68,7 +68,7 @@ dependencyResolutionManagement {
                 "compose-foundation"
             ).versionRef("wear")
             library("material", "androidx.compose.material3:material3:1.1.1")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha10")
+            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha11")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
@@ -76,8 +76,8 @@ dependencyResolutionManagement {
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0")
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha03")
-            version("lifecycle", "2.6.1")
-            library("core", "androidx.core:core-ktx:1.10.1")
+            version("lifecycle", "2.6.2")
+            library("core", "androidx.core:core-ktx:1.12.0")
             library("activity", "androidx.activity:activity-compose:1.7.2")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
@@ -137,7 +137,7 @@ dependencyResolutionManagement {
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:32.2.3")
+            library("bom", "com.google.firebase:firebase-bom:32.3.1")
             plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.9")
             plugin("googleServices", "com.google.gms.google-services").version("4.3.15")
             library(
