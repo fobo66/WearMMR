@@ -130,8 +130,8 @@ dependencyResolutionManagement {
         }
 
         register("apiclient") {
-            version("ktorfit", "1.5.0")
-            plugin("ktorfit", "de.jensklingenberg.ktorfit").version("1.10.0")
+            version("ktorfit", "1.10.0")
+            plugin("ktorfit", "de.jensklingenberg.ktorfit").versionRef("ktorfit")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
