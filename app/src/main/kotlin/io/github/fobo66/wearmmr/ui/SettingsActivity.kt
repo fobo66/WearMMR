@@ -85,7 +85,7 @@ class SettingsActivity : ComponentActivity() {
             }
         }
 
-        binding.settingsPlayerIdHint.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             val codeVerifier = CodeVerifier()
             val request = OAuthRequest.Builder(this.applicationContext)
                 .setAuthProviderUrl(Uri.parse("https://steamcommunity.com/openid"))
