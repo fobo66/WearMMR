@@ -29,6 +29,7 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.wear.ambient.AmbientLifecycleObserver
 import androidx.wear.phone.interactions.authentication.CodeChallenge
 import androidx.wear.phone.interactions.authentication.CodeVerifier
 import androidx.wear.phone.interactions.authentication.OAuthRequest
@@ -47,6 +48,13 @@ class SettingsActivity : ComponentActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
 
+    private val ambientObserver = AmbientLifecycleObserver(
+        this,
+        object: AmbientLifecycleObserver.AmbientLifecycleCallback {
+
+        }
+    )
+
     private val updateRequester: ComplicationDataSourceUpdateRequester by lazy {
         ComplicationDataSourceUpdateRequester.create(
             this,
@@ -59,6 +67,7 @@ class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DynamicColors.applyToActivityIfAvailable(this)
+        lifecycle.addObserver(ambientObserver)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -88,7 +97,7 @@ class SettingsActivity : ComponentActivity() {
         binding.signInButton.setOnClickListener {
             val codeVerifier = CodeVerifier()
             val request = OAuthRequest.Builder(this.applicationContext)
-                .setAuthProviderUrl(Uri.parse("https://steamcommunity.com/openid"))
+                .setAuthProviderUrl(Uri.parse("https://steamcommunity.com/oauth/login"))
                 .setCodeChallenge(CodeChallenge(codeVerifier))
                 .setClientId("wearmmr")
                 .build()
