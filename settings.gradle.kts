@@ -23,20 +23,20 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.3.0-alpha04")
+            version("agp", "8.3.0-alpha13")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
 
         register("libs") {
-            version("kotlin", "1.9.10")
+            version("kotlin", "1.9.20")
             version("coroutines", "1.7.3")
-            plugin("ksp", "com.google.devtools.ksp").version("1.9.10-1.0.13")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.1")
-            library("coil", "io.coil-kt:coil-compose:2.4.0")
+            plugin("ksp", "com.google.devtools.ksp").version("1.9.20-1.0.14")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.3")
+            library("coil", "io.coil-kt:coil-compose:2.5.0")
             library("material", "com.google.android.material:material:1.9.0")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
-            library("desugar", "com.android.tools:desugar_jdk_libs:2.0.3")
+            library("desugar", "com.android.tools:desugar_jdk_libs:2.0.4")
             library(
                 "coroutines",
                 "org.jetbrains.kotlinx",
@@ -51,13 +51,13 @@ dependencyResolutionManagement {
         }
 
         register("koin") {
-            library("core", "io.insert-koin:koin-android:3.4.3")
-            library("compose", "io.insert-koin:koin-androidx-compose:3.4.6")
+            library("core", "io.insert-koin:koin-android:3.5.0")
+            library("compose", "io.insert-koin:koin-androidx-compose:3.5.0")
         }
 
         register("compose") {
-            version("compiler", "1.5.3")
-            version("regular", "1.5.0")
+            version("compiler", "1.5.4")
+            version("regular", "1.5.4")
             version("wear", "1.2.0")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
@@ -67,8 +67,8 @@ dependencyResolutionManagement {
                 "androidx.wear.compose",
                 "compose-foundation"
             ).versionRef("wear")
-            library("material", "androidx.compose.material3:material3:1.1.1")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha11")
+            library("material", "androidx.compose.material3:material3:1.1.2")
+            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha14")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
@@ -78,7 +78,7 @@ dependencyResolutionManagement {
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha03")
             version("lifecycle", "2.6.2")
             library("core", "androidx.core:core-ktx:1.12.0")
-            library("activity", "androidx.activity:activity-compose:1.7.2")
+            library("activity", "androidx.activity:activity-compose:1.8.0")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
             library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
@@ -115,14 +115,14 @@ dependencyResolutionManagement {
         }
 
         register("room") {
-            version("room", "2.6.0-beta01")
+            version("room", "2.6.0")
             library("runtime", "androidx.room", "room-runtime").versionRef("room")
             library("ktx", "androidx.room", "room-ktx").versionRef("room")
             library("compiler", "androidx.room", "room-compiler").versionRef("room")
         }
 
         register("ktor") {
-            version("ktor", "2.3.4")
+            version("ktor", "2.3.6")
             library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
             library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
             library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
@@ -130,25 +130,25 @@ dependencyResolutionManagement {
         }
 
         register("apiclient") {
-            version("ktorfit", "1.5.0")
-            plugin("ktorfit", "de.jensklingenberg.ktorfit").version("1.0.0")
+            version("ktorfit", "1.10.0")
+            plugin("ktorfit", "de.jensklingenberg.ktorfit").versionRef("ktorfit")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:32.3.1")
+            library("bom", "com.google.firebase:firebase-bom:32.5.0")
             plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.9")
-            plugin("googleServices", "com.google.gms.google-services").version("4.3.15")
+            plugin("googleServices", "com.google.gms.google-services").version("4.4.0")
             library(
                 "crashlytics",
                 "com.google.firebase",
-                "firebase-crashlytics-ktx"
+                "firebase-crashlytics"
             ).withoutVersion()
             library(
                 "analytics",
                 "com.google.firebase",
-                "firebase-analytics-ktx"
+                "firebase-analytics"
             ).withoutVersion()
         }
     }
@@ -159,6 +159,10 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+    }
+
+    plugins {
+        id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
     }
 }
 
