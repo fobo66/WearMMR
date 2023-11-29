@@ -94,7 +94,7 @@ dependencyResolutionManagement {
         }
 
         register("watchface") {
-            version("watchface", "1.1.1")
+            version("watchface", "1.2.0")
             library("core", "androidx.wear.watchface", "watchface").versionRef("watchface")
             library("editor", "androidx.wear.watchface", "watchface-editor").versionRef("watchface")
             library(
