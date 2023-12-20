@@ -51,7 +51,7 @@ dependencyResolutionManagement {
         }
 
         register("koin") {
-            library("core", "io.insert-koin:koin-android:3.5.0")
+            library("core", "io.insert-koin:koin-android:3.5.3")
             library("compose", "io.insert-koin:koin-androidx-compose:3.5.3")
         }
 
