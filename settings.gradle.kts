@@ -23,18 +23,18 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.3.0-alpha13")
+            version("agp", "8.2.1")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
 
         register("libs") {
-            version("kotlin", "1.9.20")
+            version("kotlin", "1.9.22")
             version("coroutines", "1.7.3")
-            plugin("ksp", "com.google.devtools.ksp").version("1.9.20-1.0.14")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.3")
+            plugin("ksp", "com.google.devtools.ksp").version("1.9.22-1.0.16")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.4")
             library("coil", "io.coil-kt:coil-compose:2.5.0")
-            library("material", "com.google.android.material:material:1.9.0")
+            library("material", "com.google.android.material:material:1.11.0")
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             library("desugar", "com.android.tools:desugar_jdk_libs:2.0.4")
             library(
@@ -51,14 +51,14 @@ dependencyResolutionManagement {
         }
 
         register("koin") {
-            library("core", "io.insert-koin:koin-android:3.5.0")
-            library("compose", "io.insert-koin:koin-androidx-compose:3.5.0")
+            library("core", "io.insert-koin:koin-android:3.5.3")
+            library("compose", "io.insert-koin:koin-androidx-compose:3.5.3")
         }
 
         register("compose") {
-            version("compiler", "1.5.4")
+            version("compiler", "1.5.8")
             version("regular", "1.5.4")
-            version("wear", "1.2.0")
+            version("wear", "1.2.1")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
             library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
@@ -68,17 +68,17 @@ dependencyResolutionManagement {
                 "compose-foundation"
             ).versionRef("wear")
             library("material", "androidx.compose.material3:material3:1.1.2")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha14")
+            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha15")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
 
         register("androidx") {
             library("wear", "androidx.wear:wear:1.3.0")
-            library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha03")
-            version("lifecycle", "2.6.2")
+            library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha04")
+            version("lifecycle", "2.7.0")
             library("core", "androidx.core:core-ktx:1.12.0")
-            library("activity", "androidx.activity:activity-compose:1.8.0")
+            library("activity", "androidx.activity:activity-compose:1.8.2")
             library("appstartup", "androidx.startup:startup-runtime:1.1.1")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
             library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
@@ -94,7 +94,7 @@ dependencyResolutionManagement {
         }
 
         register("watchface") {
-            version("watchface", "1.1.1")
+            version("watchface", "1.2.0")
             library("core", "androidx.wear.watchface", "watchface").versionRef("watchface")
             library("editor", "androidx.wear.watchface", "watchface-editor").versionRef("watchface")
             library(
@@ -115,14 +115,14 @@ dependencyResolutionManagement {
         }
 
         register("room") {
-            version("room", "2.6.0")
+            version("room", "2.6.1")
             library("runtime", "androidx.room", "room-runtime").versionRef("room")
             library("ktx", "androidx.room", "room-ktx").versionRef("room")
             library("compiler", "androidx.room", "room-compiler").versionRef("room")
         }
 
         register("ktor") {
-            version("ktor", "2.3.6")
+            version("ktor", "2.3.7")
             library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
             library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
             library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
@@ -130,14 +130,14 @@ dependencyResolutionManagement {
         }
 
         register("apiclient") {
-            version("ktorfit", "1.10.0")
+            version("ktorfit", "1.11.1")
             plugin("ktorfit", "de.jensklingenberg.ktorfit").versionRef("ktorfit")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib").versionRef("ktorfit")
             library("processor", "de.jensklingenberg.ktorfit", "ktorfit-ksp").versionRef("ktorfit")
         }
 
         register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:32.5.0")
+            library("bom", "com.google.firebase:firebase-bom:32.7.0")
             plugin("crashlytics", "com.google.firebase.crashlytics").version("2.9.9")
             plugin("googleServices", "com.google.gms.google-services").version("4.4.0")
             library(
