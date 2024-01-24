@@ -1,5 +1,5 @@
 /*
- *    Copyright 2023 Andrey Mukamolov
+ *    Copyright 2024 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.2.1")
+            version("agp", "8.4.0-alpha05")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
@@ -57,8 +57,8 @@ dependencyResolutionManagement {
 
         register("compose") {
             version("compiler", "1.5.8")
-            version("regular", "1.5.4")
-            version("wear", "1.2.1")
+            version("regular", "1.6.0-rc01")
+            version("wear", "1.4.0-alpha01")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
             library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
@@ -67,34 +67,34 @@ dependencyResolutionManagement {
                 "androidx.wear.compose",
                 "compose-foundation"
             ).versionRef("wear")
-            library("material", "androidx.compose.material3:material3:1.1.2")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha15")
+            library("material", "androidx.compose.material3:material3:1.2.0-rc01")
+            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha16")
             library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
             library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
         }
 
         register("androidx") {
-            library("wear", "androidx.wear:wear:1.3.0")
+            library("wear", "androidx.wear:wear:1.4.0-alpha01")
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha04")
-            version("lifecycle", "2.7.0")
-            library("core", "androidx.core:core-ktx:1.12.0")
-            library("activity", "androidx.activity:activity-compose:1.8.2")
-            library("appstartup", "androidx.startup:startup-runtime:1.1.1")
-            library("constraint", "androidx.constraintlayout:constraintlayout:2.1.4")
-            library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
+            version("lifecycle", "2.8.0-alpha01")
+            library("core", "androidx.core:core-ktx:1.13.0-alpha04")
+            library("activity", "androidx.activity:activity-compose:1.9.0-alpha01")
+            library("appstartup", "androidx.startup:startup-runtime:1.2.0-alpha02")
+            library("constraint", "androidx.constraintlayout:constraintlayout:2.2.0-alpha13")
+            library("datastore", "androidx.datastore:datastore-preferences:1.1.0-beta01")
             library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-compose").versionRef(
                 "lifecycle"
             )
             library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef(
                 "lifecycle"
             )
-            library("uitest.core", "androidx.test:core-ktx:1.5.0")
-            library("uitest.junit", "androidx.test.ext:junit-ktx:1.1.5")
-            library("uitest.runner", "androidx.test:runner:1.5.2")
+            library("uitest.core", "androidx.test:core-ktx:1.6.0-alpha04")
+            library("uitest.junit", "androidx.test.ext:junit-ktx:1.2.0-alpha02")
+            library("uitest.runner", "androidx.test:runner:1.6.0-alpha05")
         }
 
         register("watchface") {
-            version("watchface", "1.2.0")
+            version("watchface", "1.2.1")
             library("core", "androidx.wear.watchface", "watchface").versionRef("watchface")
             library("editor", "androidx.wear.watchface", "watchface-editor").versionRef("watchface")
             library(
