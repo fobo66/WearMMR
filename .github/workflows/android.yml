@@ -69,7 +69,7 @@ jobs:
             ~/.android/adb*
           key: avd-29
       - name: Run tests
-        uses: reactivecircus/android-emulator-runner@v2.29.0
+        uses: reactivecircus/android-emulator-runner@v2.30.1
         with:
           script: ./gradlew connectedDebugAndroidTest
           api-level: 29
