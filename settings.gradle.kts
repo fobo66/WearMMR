@@ -88,7 +88,7 @@ dependencyResolutionManagement {
             library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef(
                 "lifecycle"
             )
-            library("uitest.core", "androidx.test:core-ktx:1.6.0-alpha04")
+            library("uitest.core", "androidx.test:core-ktx:1.6.0-alpha05")
             library("uitest.junit", "androidx.test.ext:junit-ktx:1.2.0-alpha02")
             library("uitest.runner", "androidx.test:runner:1.6.0-alpha05")
         }
