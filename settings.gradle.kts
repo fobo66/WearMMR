@@ -78,7 +78,7 @@ dependencyResolutionManagement {
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha04")
             version("lifecycle", "2.8.0-alpha02")
             library("core", "androidx.core:core-ktx:1.13.0-alpha05")
-            library("activity", "androidx.activity:activity-compose:1.9.0-alpha03")
+            library("activity", "androidx.activity:activity-compose:1.9.0-beta01")
             library("appstartup", "androidx.startup:startup-runtime:1.2.0-alpha02")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.2.0-alpha13")
             library("datastore", "androidx.datastore:datastore-preferences:1.1.0-beta02")
