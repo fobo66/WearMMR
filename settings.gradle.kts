@@ -58,7 +58,7 @@ dependencyResolutionManagement {
         register("compose") {
             version("compiler", "1.5.8")
             version("regular", "1.6.4")
-            version("wear", "1.4.0-alpha05")
+            version("wear", "1.4.0-alpha07")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
             library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
             library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
