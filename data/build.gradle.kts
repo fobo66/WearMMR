@@ -1,5 +1,5 @@
 /*
- *    Copyright 2023 Andrey Mukamolov
+ *    Copyright 2024 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -55,9 +55,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
-        buildConfig = false
-    }
 
     libraryVariants.all {
         val variantName = this.name
@@ -90,10 +87,6 @@ android {
             }
         }
     }
-}
-
-kotlin {
-    jvmToolchain(17)
 }
 
 tasks.withType<Detekt> {
