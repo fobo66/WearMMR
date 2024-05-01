@@ -81,7 +81,7 @@ dependencyResolutionManagement {
             library("activity", "androidx.activity:activity-compose:1.9.0")
             library("appstartup", "androidx.startup:startup-runtime:1.2.0-alpha02")
             library("constraint", "androidx.constraintlayout:constraintlayout:2.2.0-alpha13")
-            library("datastore", "androidx.datastore:datastore-preferences:1.1.0")
+            library("datastore", "androidx.datastore:datastore-preferences:1.1.1")
             library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-compose").versionRef(
                 "lifecycle"
             )
