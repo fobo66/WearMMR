@@ -1,5 +1,5 @@
 /*
- *    Copyright 2023 Andrey Mukamolov
+ *    Copyright 2024 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,8 +39,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
@@ -50,6 +49,7 @@ import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
+import androidx.wear.compose.ui.tooling.preview.WearPreviewSmallRound
 import coil.compose.AsyncImage
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.model.MainViewModel
@@ -117,8 +117,8 @@ fun MainContent(
 }
 
 @Composable
-private fun FirstLaunch(goToSettings: () -> Unit, modifier: Modifier = Modifier) {
-    BoxWithConstraints(
+fun FirstLaunch(goToSettings: () -> Unit, modifier: Modifier = Modifier) {
+    Box(
         modifier = modifier
             .fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -147,7 +147,7 @@ fun RatingDetails(
     goToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BoxWithConstraints(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
+    Box(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
         Column {
             Row(
                 modifier = Modifier
@@ -207,7 +207,7 @@ fun RatingDetails(
 
 @Composable
 fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
-    BoxWithConstraints(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
             text = errorLabel,
             modifier = Modifier
@@ -216,7 +216,7 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(device = Devices.WEAR_OS_SMALL_ROUND)
+@WearPreviewSmallRound
 @Composable
 private fun MainPreview() {
     WearMMRTheme {

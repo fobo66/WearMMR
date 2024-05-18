@@ -113,6 +113,7 @@ dependencies {
     implementation(compose.navigation)
     implementation(compose.tooling)
     debugImplementation(compose.preview)
+    debugImplementation(compose.preview.wear)
     implementation(compose.material.wear)
 
     implementation(watchface.core)
