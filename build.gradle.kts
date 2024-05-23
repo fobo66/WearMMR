@@ -1,5 +1,5 @@
 /*
- *    Copyright 2023 Andrey Mukamolov
+ *    Copyright 2024 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
      alias(agp.plugins.library) apply false
      kotlin("android") version libs.versions.kotlin apply false
      kotlin("plugin.serialization") version libs.versions.kotlin apply false
+     kotlin("plugin.compose") version libs.versions.kotlin apply false
      alias(libs.plugins.detekt) apply false
      alias(libs.plugins.ksp) apply false
      alias(firebase.plugins.googleServices) apply false

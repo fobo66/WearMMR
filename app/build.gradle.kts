@@ -19,6 +19,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("plugin.compose")
     id("kotlin-parcelize")
     id("kotlinx-serialization")
     id("com.google.gms.google-services")
@@ -77,9 +78,6 @@ android {
     }
     lint {
         disable += "DialogFragmentCallbacksDetector"
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose.versions.compiler.get()
     }
     packaging {
         resources {

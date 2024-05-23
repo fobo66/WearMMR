@@ -29,9 +29,9 @@ dependencyResolutionManagement {
         }
 
         register("libs") {
-            version("kotlin", "1.9.24")
+            version("kotlin", "2.0.0")
             version("coroutines", "1.8.1")
-            plugin("ksp", "com.google.devtools.ksp").version("1.9.24-1.0.20")
+            plugin("ksp", "com.google.devtools.ksp").version("2.0.0-1.0.21")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
             library("coil", "io.coil-kt:coil-compose:2.6.0")
             library("material", "com.google.android.material:material:1.12.0")
@@ -56,7 +56,6 @@ dependencyResolutionManagement {
         }
 
         register("compose") {
-            version("compiler", "1.5.14")
             version("regular", "1.6.7")
             version("wear", "1.4.0-alpha08")
             library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
