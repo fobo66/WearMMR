@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StudioProjects.WearMMR.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WearMMR.iml" filepath="$PROJECT_DIR$/.idea/modules/WearMMR.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WearMMR.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WearMMR.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WearMMR.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WearMMR.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WearMMR.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WearMMR.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WearMMR.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WearMMR.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.test.iml" />
