@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2024 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.github.fobo66.data.ApiBaseUrl
-import io.github.fobo66.data.api.MatchmakingRatingApi
+import io.github.fobo66.data.api.createMatchmakingRatingApi
 import io.github.fobo66.data.repositories.RatingRepository
 import io.github.fobo66.data.repositories.RatingRepositoryImpl
 import io.github.fobo66.data.repositories.SettingsRepository
@@ -66,7 +66,7 @@ val dataModule = module {
             .baseUrl(ApiBaseUrl)
             .httpClient(get<HttpClient>())
             .build()
-            .create<MatchmakingRatingApi>()
+            .createMatchmakingRatingApi()
     }
 
     single<PreferenceDataSource> {

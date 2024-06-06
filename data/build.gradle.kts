@@ -104,7 +104,6 @@ dependencies {
     implementation(ktor.content)
     implementation(ktor.json)
     implementation(apiclient.library)
-    ksp(apiclient.processor)
     coreLibraryDesugaring(libs.desugar)
     implementation(libs.timber)
     androidTestImplementation(androidx.uitest.core)
