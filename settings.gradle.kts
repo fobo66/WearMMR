@@ -90,7 +90,7 @@ dependencyResolutionManagement {
             )
             library("uitest.core", "androidx.test:core-ktx:1.6.0-rc01")
             library("uitest.junit", "androidx.test.ext:junit-ktx:1.2.0-rc01")
-            library("uitest.runner", "androidx.test:runner:1.6.0-beta01")
+            library("uitest.runner", "androidx.test:runner:1.6.1")
         }
 
         register("watchface") {
