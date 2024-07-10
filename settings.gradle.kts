@@ -23,7 +23,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.6.0-alpha08")
+            version("agp", "8.6.0-beta01")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
