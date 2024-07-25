@@ -48,7 +48,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -78,14 +77,6 @@ android {
 
     testOptions {
         animationsDisabled = true
-        managedDevices {
-            devices.register<ManagedVirtualDevice>("pixel") {
-                device = "Pixel 2"
-                apiLevel = 30
-                systemImageSource = "aosp-atd"
-                require64Bit = false
-            }
-        }
     }
 }
 
@@ -104,7 +95,6 @@ dependencies {
     implementation(ktor.content)
     implementation(ktor.json)
     implementation(apiclient.library)
-    coreLibraryDesugaring(libs.desugar)
     implementation(libs.timber)
     androidTestImplementation(androidx.uitest.core)
     androidTestImplementation(androidx.uitest.junit)

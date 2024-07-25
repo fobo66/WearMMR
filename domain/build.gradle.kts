@@ -43,7 +43,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -64,7 +63,6 @@ dependencies {
     implementation(libs.coroutines)
     implementation(koin.core)
     implementation(libs.timber)
-    coreLibraryDesugaring(libs.desugar)
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
     testImplementation(libs.coroutines.test)

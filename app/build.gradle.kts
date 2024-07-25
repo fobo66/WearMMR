@@ -68,7 +68,6 @@ android {
     }
 
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -126,8 +125,6 @@ dependencies {
     implementation(koin.compose)
 
     implementation(libs.coil)
-
-    coreLibraryDesugaring(libs.desugar)
 
     implementation(platform(firebase.bom))
     implementation(firebase.crashlytics)
