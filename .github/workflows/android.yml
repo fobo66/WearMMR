@@ -25,7 +25,7 @@ jobs:
     - name: Setup G services
       run: cp app/google-services.json.example app/google-services.json
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v4
       with:
         cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
         validate-wrappers: true
@@ -58,7 +58,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
           validate-wrappers: true
@@ -88,7 +88,7 @@ jobs:
     - name: Setup G services
       run: cp app/google-services.json.example app/google-services.json
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v4
       with:
         cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
         validate-wrappers: true
