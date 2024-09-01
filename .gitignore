@@ -14,4 +14,4 @@
 .externalNativeBuild
 .env
 *.jks
-.kotlin/sessions
+.kotlin
