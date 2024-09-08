@@ -30,11 +30,11 @@ plugins {
 android {
     namespace = "io.github.fobo66.wearmmr"
 
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "io.github.fobo66.wearmmr"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 10
         versionName = "2.2"
         multiDexEnabled = true

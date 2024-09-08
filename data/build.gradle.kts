@@ -29,7 +29,7 @@ plugins {
 
 android {
     namespace = "io.github.fobo66.wearmmr.data"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26
