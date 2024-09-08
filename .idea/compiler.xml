@@ -6,6 +6,9 @@
       <module name="StudioProjects.WearMMR.buildSrc" target="17" />
       <module name="StudioProjects.WearMMR.buildSrc.main" target="17" />
       <module name="StudioProjects.WearMMR.buildSrc.test" target="17" />
+      <module name="WearMMR.buildSrc" target="21" />
+      <module name="WearMMR.buildSrc.main" target="21" />
+      <module name="WearMMR.buildSrc.test" target="21" />
       <module name="WearMMR.companion" target="21" />
       <module name="WearMMR.data" target="21" />
       <module name="WearMMR.domain" target="21" />

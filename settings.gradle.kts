@@ -23,7 +23,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         register("agp") {
-            version("agp", "8.7.0-alpha09")
+            version("agp", "8.7.0-beta01")
             plugin("application", "com.android.application").versionRef("agp")
             plugin("library", "com.android.library").versionRef("agp")
         }
@@ -31,7 +31,7 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "2.0.20")
             version("coroutines", "1.8.1")
-            plugin("ksp", "com.google.devtools.ksp").version("2.0.20-1.0.24")
+            plugin("ksp", "com.google.devtools.ksp").version("2.0.20-1.0.25")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
             library("coil", "io.coil-kt:coil-compose:2.7.0")
             library("material", "com.google.android.material:material:1.12.0")
@@ -130,7 +130,7 @@ dependencyResolutionManagement {
         }
 
         register("apiclient") {
-            version("ktorfit", "2.0.1")
+            version("ktorfit", "2.1.0")
             plugin("ktorfit", "de.jensklingenberg.ktorfit").versionRef("ktorfit")
             library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib-light").versionRef("ktorfit")
         }

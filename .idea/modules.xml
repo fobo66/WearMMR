@@ -13,8 +13,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/WearMMR.buildSrc.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.iml" filepath="$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.main.iml" filepath="$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/companion/WearMMR.companion.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/WearMMR.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/WearMMR.data.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/WearMMR.data.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/WearMMR.data.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/WearMMR.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/WearMMR.data.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/WearMMR.data.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/WearMMR.data.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/WearMMR.domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/WearMMR.domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/WearMMR.domain.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/WearMMR.domain.androidTest.iml" />
