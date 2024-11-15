@@ -31,7 +31,7 @@ dependencyResolutionManagement {
         register("libs") {
             version("kotlin", "2.0.20")
             version("coroutines", "1.9.0")
-            plugin("ksp", "com.google.devtools.ksp").version("2.0.20-1.0.25")
+            plugin("ksp", "com.google.devtools.ksp").version("2.0.21-1.0.27")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.7")
             library("coil", "io.coil-kt:coil-compose:2.7.0")
             library("material", "com.google.android.material:material:1.12.0")
