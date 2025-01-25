@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ dependencyResolutionManagement {
         }
 
         register("libs") {
-            version("kotlin", "2.0.20")
+            version("kotlin", "2.1.0")
             version("coroutines", "1.10.1")
             plugin("ksp", "com.google.devtools.ksp").version("2.1.0-1.0.29")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.7")
