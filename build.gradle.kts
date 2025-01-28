@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,16 +15,19 @@
  */
 
  plugins {
-     alias(agp.plugins.application) apply false
-     alias(agp.plugins.library) apply false
-     kotlin("android") version libs.versions.kotlin apply false
-     kotlin("plugin.serialization") version libs.versions.kotlin apply false
-     kotlin("plugin.compose") version libs.versions.kotlin apply false
+     alias(libs.plugins.android.app) apply false
+     alias(libs.plugins.android.library) apply false
+     alias(libs.plugins.kotlin.android) apply false
+     alias(libs.plugins.kotlin.serialization) apply false
+     alias(libs.plugins.compose) apply false
      alias(libs.plugins.detekt) apply false
+     alias(libs.plugins.kotlinter) apply false
+     alias(libs.plugins.room) apply false
      alias(libs.plugins.ksp) apply false
-     alias(firebase.plugins.googleServices) apply false
-     alias(firebase.plugins.crashlytics) apply false
-     alias(apiclient.plugins.ktorfit) apply false
+     alias(libs.plugins.junit) apply false
+     alias(libs.plugins.firebase.google.services) apply false
+     alias(libs.plugins.firebase.crashlytics) apply false
+     alias(libs.plugins.ktorfit) apply false
  }
 
 tasks {

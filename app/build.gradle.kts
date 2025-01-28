@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -102,7 +102,7 @@ dependencies {
     implementation(androidx.constraint)
     implementation(androidx.wear)
     implementation(androidx.wear.phoneinteraction)
-    implementation(libs.material)
+    implementation(libs.androidx.material)
 
     implementation(compose.foundation)
     implementation(compose.material3)
@@ -119,7 +119,7 @@ dependencies {
     implementation(watchface.complication.datasource.ktx)
     implementation(watchface.editor)
 
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(koin.core)
     implementation(koin.compose)

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ tasks.withType<Detekt> {
 dependencies {
     implementation(androidx.datastore)
     implementation(koin.core)
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(room.runtime)
     implementation(room.ktx)
     ksp(room.compiler)
@@ -101,6 +101,6 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
     testImplementation(ktor.client.mock)
-    testImplementation(libs.coroutines.test)
-    androidTestImplementation(libs.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }

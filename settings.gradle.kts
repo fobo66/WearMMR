@@ -22,34 +22,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
-        register("agp") {
-            version("agp", "8.8.0")
-            plugin("application", "com.android.application").versionRef("agp")
-            plugin("library", "com.android.library").versionRef("agp")
-        }
-
-        register("libs") {
-            version("kotlin", "2.1.0")
-            version("coroutines", "1.10.1")
-            plugin("ksp", "com.google.devtools.ksp").version("2.1.0-1.0.29")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.7")
-            library("coil", "io.coil-kt:coil-compose:2.7.0")
-            library("material", "com.google.android.material:material:1.12.0")
-            library("timber", "com.jakewharton.timber:timber:5.0.1")
-            library("desugar", "com.android.tools:desugar_jdk_libs:2.1.4")
-            library(
-                "coroutines",
-                "org.jetbrains.kotlinx",
-                "kotlinx-coroutines-android"
-            )
-                .versionRef("coroutines")
-            library(
-                "coroutines-test",
-                "org.jetbrains.kotlinx",
-                "kotlinx-coroutines-test"
-            ).versionRef("coroutines")
-        }
-
         register("koin") {
             library("core", "io.insert-koin:koin-android:4.0.1")
             library("compose", "io.insert-koin:koin-androidx-compose:4.0.0")
