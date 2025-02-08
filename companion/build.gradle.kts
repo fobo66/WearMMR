@@ -78,8 +78,9 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.android)
 
-    implementation(koin.core)
-    implementation(koin.compose)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
 
     implementation(libs.coil)
 

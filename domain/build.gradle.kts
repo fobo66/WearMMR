@@ -60,7 +60,8 @@ tasks.withType<Detekt> {
 dependencies {
     implementation(project(":data"))
     implementation(libs.kotlinx.coroutines.core)
-    implementation(koin.core)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
     implementation(libs.timber)
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))

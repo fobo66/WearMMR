@@ -83,7 +83,9 @@ tasks.withType<Detekt> {
 
 dependencies {
     implementation(androidx.datastore)
-    implementation(koin.core)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)

@@ -22,11 +22,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
     versionCatalogs {
-        register("koin") {
-            library("core", "io.insert-koin:koin-android:4.0.1")
-            library("compose", "io.insert-koin:koin-androidx-compose:4.0.0")
-        }
-
         register("androidx") {
             library("wear", "androidx.wear:wear:1.4.0-alpha01")
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha05")
