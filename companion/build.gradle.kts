@@ -70,11 +70,11 @@ dependencies {
     implementation(androidx.viewmodel)
     implementation(androidx.appstartup)
 
-    implementation(compose.foundation)
-    implementation(compose.navigation)
-    implementation(compose.tooling)
-    debugImplementation(compose.preview)
-    implementation(compose.material)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.preview)
+    implementation(libs.compose.material)
 
     implementation(libs.kotlinx.coroutines.android)
 

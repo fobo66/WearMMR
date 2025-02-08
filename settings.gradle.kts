@@ -27,24 +27,6 @@ dependencyResolutionManagement {
             library("compose", "io.insert-koin:koin-androidx-compose:4.0.0")
         }
 
-        register("compose") {
-            version("regular", "1.7.6")
-            version("wear", "1.4.0")
-            library("foundation", "androidx.compose.foundation", "foundation").versionRef("regular")
-            library("preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("regular")
-            library("preview.wear", "androidx.wear.compose", "compose-ui-tooling").versionRef("wear")
-            library("tooling", "androidx.compose.ui", "ui-tooling").versionRef("regular")
-            library(
-                "foundation.wear",
-                "androidx.wear.compose",
-                "compose-foundation"
-            ).versionRef("wear")
-            library("material", "androidx.compose.material3:material3:1.3.1")
-            library("material3", "androidx.wear.compose:compose-material3:1.0.0-alpha31")
-            library("material.wear", "androidx.wear.compose", "compose-material").versionRef("wear")
-            library("navigation", "androidx.wear.compose", "compose-navigation").versionRef("wear")
-        }
-
         register("androidx") {
             library("wear", "androidx.wear:wear:1.4.0-alpha01")
             library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha05")
