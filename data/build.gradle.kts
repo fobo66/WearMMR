@@ -14,7 +14,6 @@
  *    limitations under the License.
  */
 
-import com.android.build.api.dsl.ManagedVirtualDevice
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
@@ -25,6 +24,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
     id("com.google.devtools.ksp")
     id("de.jensklingenberg.ktorfit")
+    alias(libs.plugins.room)
 }
 
 android {
@@ -63,13 +63,6 @@ android {
         }
     }
 
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
-        arg("room.incremental", "true")
-        arg("room.expandProjection", "true")
-        arg("room.generateKotlin", "true")
-    }
-
     lint {
         disable += "DialogFragmentCallbacksDetector"
     }
@@ -77,6 +70,11 @@ android {
     testOptions {
         animationsDisabled = true
     }
+}
+
+room {
+    generateKotlin = true
+    schemaDirectory(layout.projectDirectory.dir("schemas"))
 }
 
 tasks.withType<Detekt> {
@@ -87,9 +85,9 @@ dependencies {
     implementation(androidx.datastore)
     implementation(koin.core)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(room.runtime)
-    implementation(room.ktx)
-    ksp(room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
     implementation(ktor.client)
     implementation(ktor.content)
     implementation(ktor.json)

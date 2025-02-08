@@ -68,13 +68,6 @@ dependencyResolutionManagement {
             ).versionRef("watchface")
         }
 
-        register("room") {
-            version("room", "2.6.1")
-            library("runtime", "androidx.room", "room-runtime").versionRef("room")
-            library("ktx", "androidx.room", "room-ktx").versionRef("room")
-            library("compiler", "androidx.room", "room-compiler").versionRef("room")
-        }
-
         register("ktor") {
             version("ktor", "3.0.3")
             library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
