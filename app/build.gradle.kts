@@ -115,11 +115,11 @@ dependencies {
     debugImplementation(libs.compose.ui.preview)
     debugImplementation(libs.wear.compose.preview)
 
-    implementation(watchface.core)
-    implementation(watchface.complication)
-    implementation(watchface.complication.datasource)
-    implementation(watchface.complication.datasource.ktx)
-    implementation(watchface.editor)
+    implementation(libs.wear.watchface)
+    implementation(libs.wear.watchface.complication)
+    implementation(libs.wear.watchface.complication.datasource)
+    implementation(libs.wear.watchface.complication.datasource.ktx)
+    implementation(libs.wear.watchface.editor)
 
     implementation(libs.kotlinx.coroutines.android)
 

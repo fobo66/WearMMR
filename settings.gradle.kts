@@ -41,27 +41,6 @@ dependencyResolutionManagement {
             library("uitest.junit", "androidx.test.ext:junit-ktx:1.2.1")
             library("uitest.runner", "androidx.test:runner:1.6.2")
         }
-
-        register("watchface") {
-            version("watchface", "1.2.1")
-            library("core", "androidx.wear.watchface", "watchface").versionRef("watchface")
-            library("editor", "androidx.wear.watchface", "watchface-editor").versionRef("watchface")
-            library(
-                "complication",
-                "androidx.wear.watchface",
-                "watchface-complications-rendering"
-            ).versionRef("watchface")
-            library(
-                "complication-datasource",
-                "androidx.wear.watchface",
-                "watchface-complications-data-source"
-            ).versionRef("watchface")
-            library(
-                "complication-datasource-ktx",
-                "androidx.wear.watchface",
-                "watchface-complications-data-source-ktx"
-            ).versionRef("watchface")
-        }
     }
 }
 
