@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import io.github.fobo66.data.source.PreferenceDataSource
 import io.github.fobo66.data.source.PreferenceDataSourceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -56,6 +57,10 @@ val dataModule = module {
                         ignoreUnknownKeys = true
                     }
                 )
+            }
+            install(ContentEncoding) {
+                gzip()
+                deflate()
             }
             expectSuccess = true
         }

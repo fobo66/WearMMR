@@ -93,6 +93,7 @@ dependencies {
     implementation(platform(libs.ktor.bom))
     implementation(libs.ktor.client)
     implementation(libs.ktor.content)
+    implementation(libs.ktor.encoding)
     implementation(libs.ktor.serialization)
     implementation(libs.ktorfit)
     implementation(libs.timber)
