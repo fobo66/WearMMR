@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -49,7 +49,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -65,36 +64,35 @@ android {
 }
 
 dependencies {
-    implementation(androidx.core)
-    implementation(androidx.activity)
-    implementation(androidx.lifecycle)
-    implementation(androidx.viewmodel)
-    implementation(androidx.appstartup)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.startup)
 
-    implementation(compose.foundation)
-    implementation(compose.navigation)
-    implementation(compose.tooling)
-    debugImplementation(compose.preview)
-    implementation(compose.material)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.preview)
+    implementation(libs.compose.material)
 
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines.android)
 
-    implementation(koin.core)
-    implementation(koin.compose)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
 
     implementation(libs.coil)
 
-    coreLibraryDesugaring(libs.desugar)
-
-    implementation(platform(firebase.bom))
-    implementation(firebase.crashlytics)
-    implementation(firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
     implementation(libs.timber)
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
 
-    androidTestImplementation(androidx.uitest.core)
-    androidTestImplementation(androidx.uitest.junit)
-    androidTestImplementation(androidx.uitest.runner)
+    androidTestImplementation(libs.androidx.test)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
 }

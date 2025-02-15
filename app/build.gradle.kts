@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -94,40 +94,45 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation(androidx.core)
-    implementation(androidx.activity)
-    implementation(androidx.lifecycle)
-    implementation(androidx.viewmodel)
-    implementation(androidx.appstartup)
-    implementation(androidx.constraint)
-    implementation(androidx.wear)
-    implementation(androidx.wear.phoneinteraction)
-    implementation(libs.material)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.startup)
+    implementation(libs.androidx.constraint)
+    implementation(libs.androidx.material)
 
-    implementation(compose.foundation)
-    implementation(compose.material3)
-    implementation(compose.foundation.wear)
-    implementation(compose.navigation)
-    implementation(compose.tooling)
-    debugImplementation(compose.preview)
-    debugImplementation(compose.preview.wear)
-    implementation(compose.material.wear)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.wear.compose.material)
+    implementation(libs.wear.compose.material3)
+    implementation(libs.wear.compose.foundation)
+    implementation(libs.compose.material.icons)
+    implementation(libs.wear.compose.navigation)
+    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.preview)
+    debugImplementation(libs.wear.compose.preview)
 
-    implementation(watchface.core)
-    implementation(watchface.complication)
-    implementation(watchface.complication.datasource)
-    implementation(watchface.complication.datasource.ktx)
-    implementation(watchface.editor)
+    implementation(libs.wear)
+    implementation(libs.wear.phoneinteraction)
+    implementation(libs.wear.watchface)
+    implementation(libs.wear.watchface.complication)
+    implementation(libs.wear.watchface.complication.datasource)
+    implementation(libs.wear.watchface.complication.datasource.ktx)
+    implementation(libs.wear.watchface.editor)
 
-    implementation(libs.coroutines)
+    implementation(libs.kotlinx.coroutines.android)
 
-    implementation(koin.core)
-    implementation(koin.compose)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.viewmodel)
 
     implementation(libs.coil)
 
-    implementation(platform(firebase.bom))
-    implementation(firebase.crashlytics)
-    implementation(firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
     implementation(libs.timber)
 }

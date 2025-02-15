@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  *    limitations under the License.
  */
 
-import com.android.build.api.dsl.ManagedVirtualDevice
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
@@ -24,7 +23,8 @@ plugins {
     id("kotlin-parcelize")
     id("io.gitlab.arturbosch.detekt")
     id("com.google.devtools.ksp")
-    id("de.jensklingenberg.ktorfit")
+    alias(libs.plugins.ktorfit)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -63,13 +63,6 @@ android {
         }
     }
 
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
-        arg("room.incremental", "true")
-        arg("room.expandProjection", "true")
-        arg("room.generateKotlin", "true")
-    }
-
     lint {
         disable += "DialogFragmentCallbacksDetector"
     }
@@ -79,28 +72,37 @@ android {
     }
 }
 
+room {
+    generateKotlin = true
+    schemaDirectory(layout.projectDirectory.dir("schemas"))
+}
+
 tasks.withType<Detekt> {
     jvmTarget = "17"
 }
 
 dependencies {
-    implementation(androidx.datastore)
-    implementation(koin.core)
-    implementation(libs.coroutines)
-    implementation(room.runtime)
-    implementation(room.ktx)
-    ksp(room.compiler)
-    implementation(ktor.client)
-    implementation(ktor.content)
-    implementation(ktor.json)
-    implementation(apiclient.library)
+    implementation(libs.androidx.datastore)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(platform(libs.ktor.bom))
+    implementation(libs.ktor.client)
+    implementation(libs.ktor.content)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktorfit)
     implementation(libs.timber)
-    androidTestImplementation(androidx.uitest.core)
-    androidTestImplementation(androidx.uitest.junit)
-    androidTestImplementation(androidx.uitest.runner)
+    androidTestImplementation(libs.androidx.test)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation(ktor.client.mock)
-    testImplementation(libs.coroutines.test)
-    androidTestImplementation(libs.coroutines.test)
+    testImplementation(platform(libs.ktor.bom))
+    testImplementation(libs.ktor.client.mock)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }
