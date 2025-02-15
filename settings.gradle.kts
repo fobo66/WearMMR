@@ -62,21 +62,6 @@ dependencyResolutionManagement {
                 "watchface-complications-data-source-ktx"
             ).versionRef("watchface")
         }
-
-        register("ktor") {
-            version("ktor", "3.0.3")
-            library("client", "io.ktor", "ktor-client-okhttp").versionRef("ktor")
-            library("client-mock", "io.ktor", "ktor-client-mock").versionRef("ktor")
-            library("content", "io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
-            library("json", "io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
-        }
-
-        register("apiclient") {
-            version("ktorfit", "2.2.0")
-            plugin("ktorfit", "de.jensklingenberg.ktorfit").versionRef("ktorfit")
-            library("library", "de.jensklingenberg.ktorfit", "ktorfit-lib-light").versionRef("ktorfit")
-        }
-
         register("firebase") {
             library("bom", "com.google.firebase:firebase-bom:33.8.0")
             plugin("crashlytics", "com.google.firebase.crashlytics").version("3.0.2")

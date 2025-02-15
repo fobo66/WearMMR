@@ -40,7 +40,7 @@ kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerialization = "1.8.0"
 ksp = "2.1.10-1.0.29"
-ktor = "3.0.3"
+ktor = "3.1.0"
 ktorfit = "2.2.0"
 leakCanary = "2.14"
 okhttp = "5.0.0-alpha.14"
@@ -108,13 +108,15 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
-ktor-client = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
-ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-encoding = { group = "io.ktor", name = "ktor-client-encoding", version.ref = "ktor" }
-ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
-ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktor-serialization-xml = { group = "io.ktor", name = "ktor-serialization-kotlinx-xml", version.ref = "ktor" }
+ktor-auth = { group = "io.ktor", name = "ktor-client-auth" }
+ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor" }
+ktor-client = { group = "io.ktor", name = "ktor-client-okhttp" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock" }
+ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation" }
+ktor-encoding = { group = "io.ktor", name = "ktor-client-encoding" }
+ktor-logging = { group = "io.ktor", name = "ktor-client-logging" }
+ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json" }
+ktorfit = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib-light", version.ref = "ktorfit" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
 okhttp-core = { group = "com.squareup.okhttp3", name = "okhttp" }
