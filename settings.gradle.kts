@@ -62,21 +62,6 @@ dependencyResolutionManagement {
                 "watchface-complications-data-source-ktx"
             ).versionRef("watchface")
         }
-        register("firebase") {
-            library("bom", "com.google.firebase:firebase-bom:33.8.0")
-            plugin("crashlytics", "com.google.firebase.crashlytics").version("3.0.2")
-            plugin("googleServices", "com.google.gms.google-services").version("4.4.2")
-            library(
-                "crashlytics",
-                "com.google.firebase",
-                "firebase-crashlytics"
-            ).withoutVersion()
-            library(
-                "analytics",
-                "com.google.firebase",
-                "firebase-analytics"
-            ).withoutVersion()
-        }
     }
 }
 

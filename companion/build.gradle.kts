@@ -84,9 +84,9 @@ dependencies {
 
     implementation(libs.coil)
 
-    implementation(platform(firebase.bom))
-    implementation(firebase.crashlytics)
-    implementation(firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
     implementation(libs.timber)
 
     testImplementation(kotlin("test"))
