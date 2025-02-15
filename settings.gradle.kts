@@ -21,27 +21,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
-    versionCatalogs {
-        register("androidx") {
-            library("wear", "androidx.wear:wear:1.4.0-alpha01")
-            library("wear.phoneinteraction", "androidx.wear:wear-phone-interactions:1.1.0-alpha05")
-            version("lifecycle", "2.8.7")
-            library("core", "androidx.core:core-ktx:1.15.0")
-            library("activity", "androidx.activity:activity-compose:1.9.3")
-            library("appstartup", "androidx.startup:startup-runtime:1.2.0")
-            library("constraint", "androidx.constraintlayout:constraintlayout:2.2.0")
-            library("datastore", "androidx.datastore:datastore-preferences:1.1.2")
-            library("lifecycle", "androidx.lifecycle", "lifecycle-runtime-compose").versionRef(
-                "lifecycle"
-            )
-            library("viewmodel", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef(
-                "lifecycle"
-            )
-            library("uitest.core", "androidx.test:core-ktx:1.6.1")
-            library("uitest.junit", "androidx.test.ext:junit-ktx:1.2.1")
-            library("uitest.runner", "androidx.test:runner:1.6.2")
-        }
-    }
 }
 
 pluginManagement {

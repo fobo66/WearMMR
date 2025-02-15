@@ -64,11 +64,11 @@ android {
 }
 
 dependencies {
-    implementation(androidx.core)
-    implementation(androidx.activity)
-    implementation(androidx.lifecycle)
-    implementation(androidx.viewmodel)
-    implementation(androidx.appstartup)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.startup)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation)
@@ -92,7 +92,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
 
-    androidTestImplementation(androidx.uitest.core)
-    androidTestImplementation(androidx.uitest.junit)
-    androidTestImplementation(androidx.uitest.runner)
+    androidTestImplementation(libs.androidx.test)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
 }

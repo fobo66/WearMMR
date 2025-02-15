@@ -94,14 +94,12 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation(androidx.core)
-    implementation(androidx.activity)
-    implementation(androidx.lifecycle)
-    implementation(androidx.viewmodel)
-    implementation(androidx.appstartup)
-    implementation(androidx.constraint)
-    implementation(androidx.wear)
-    implementation(androidx.wear.phoneinteraction)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.startup)
+    implementation(libs.androidx.constraint)
     implementation(libs.androidx.material)
 
     implementation(platform(libs.compose.bom))
@@ -115,6 +113,8 @@ dependencies {
     debugImplementation(libs.compose.ui.preview)
     debugImplementation(libs.wear.compose.preview)
 
+    implementation(libs.wear)
+    implementation(libs.wear.phoneinteraction)
     implementation(libs.wear.watchface)
     implementation(libs.wear.watchface.complication)
     implementation(libs.wear.watchface.complication.datasource)

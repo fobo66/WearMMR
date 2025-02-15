@@ -82,7 +82,7 @@ tasks.withType<Detekt> {
 }
 
 dependencies {
-    implementation(androidx.datastore)
+    implementation(libs.androidx.datastore)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -96,9 +96,9 @@ dependencies {
     implementation(libs.ktor.serialization)
     implementation(libs.ktorfit)
     implementation(libs.timber)
-    androidTestImplementation(androidx.uitest.core)
-    androidTestImplementation(androidx.uitest.junit)
-    androidTestImplementation(androidx.uitest.runner)
+    androidTestImplementation(libs.androidx.test)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
     testImplementation(platform(libs.ktor.bom))
