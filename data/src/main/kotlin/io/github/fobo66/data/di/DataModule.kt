@@ -34,7 +34,7 @@ import io.github.fobo66.data.source.PersistenceDataSourceImpl
 import io.github.fobo66.data.source.PreferenceDataSource
 import io.github.fobo66.data.source.PreferenceDataSourceImpl
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -50,7 +50,7 @@ val dataModule = module {
     }
 
     single {
-        HttpClient(OkHttp) {
+        HttpClient(CIO) {
             install(ContentNegotiation) {
                 json(
                     json = Json {
