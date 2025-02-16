@@ -62,9 +62,10 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor" }
-ktor-client = { group = "io.ktor", name = "ktor-client-okhttp" }
+ktor-client = { group = "io.ktor", name = "ktor-client-cio" }
 ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock" }
 ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation" }
+ktor-encoding = { group = "io.ktor", name = "ktor-client-encoding" }
 ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json" }
 ktorfit = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib-light", version.ref = "ktorfit" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
