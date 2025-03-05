@@ -1,6 +1,6 @@
 [versions]
 androidGradlePlugin = "8.10.0-alpha07"
-androidxActivity = "1.10.0"
+androidxActivity = "1.10.1"
 androidxCore = "1.15.0"
 androidxDatastore = "1.1.2"
 androidxLifecycle = "2.8.7"
