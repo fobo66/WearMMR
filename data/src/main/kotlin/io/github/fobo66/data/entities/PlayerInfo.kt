@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ data class PlayerInfo(
     @SerialName("profile") val profile: PlayerProfile? = null,
     @SerialName("rank_tier") val rankTier: Int? = null,
     @SerialName("mmr_estimate") val mmrEstimate: MmrEstimate? = null
-
 )
 
 fun PlayerInfo.toMatchmakingRating(playerId: Long): MatchmakingRating = MatchmakingRating(

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2023 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,8 +21,5 @@ import de.jensklingenberg.ktorfit.http.Query
 
 interface SteamApi {
     @GET("ISteamUser/GetPlayerSummaries/v0002/")
-    suspend fun getUser(
-        @Query("key") apiKey: String,
-        @Query("steamids") userId: String
-    )
+    suspend fun getUser(@Query("key") apiKey: String, @Query("steamids") userId: String)
 }

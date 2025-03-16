@@ -43,63 +43,66 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
-val dataModule = module {
+val dataModule =
+    module {
 
-    single {
-        androidContext().dataStore
-    }
+        single {
+            androidContext().dataStore
+        }
 
-    single {
-        HttpClient(CIO) {
-            install(ContentNegotiation) {
-                json(
-                    json = Json {
-                        ignoreUnknownKeys = true
-                    }
-                )
+        single {
+            HttpClient(CIO) {
+                install(ContentNegotiation) {
+                    json(
+                        json =
+                        Json {
+                            ignoreUnknownKeys = true
+                        }
+                    )
+                }
+                install(ContentEncoding) {
+                    gzip()
+                    deflate()
+                }
+                expectSuccess = true
             }
-            install(ContentEncoding) {
-                gzip()
-                deflate()
-            }
-            expectSuccess = true
+        }
+
+        single {
+            Ktorfit
+                .Builder()
+                .baseUrl(ApiBaseUrl)
+                .httpClient(get<HttpClient>())
+                .build()
+                .createMatchmakingRatingApi()
+        }
+
+        single<PreferenceDataSource> {
+            PreferenceDataSourceImpl(get())
+        }
+
+        single<PersistenceDataSource> {
+            PersistenceDataSourceImpl(get())
+        }
+
+        single<NetworkDataSource> {
+            NetworkDataSourceImpl(
+                get(),
+                get(qualifier("io"))
+            )
+        }
+
+        single<RatingRepository> {
+            RatingRepositoryImpl(
+                get(),
+                get()
+            )
+        }
+
+        single<SettingsRepository> {
+            SettingsRepositoryImpl(get())
         }
     }
-
-    single {
-        Ktorfit.Builder()
-            .baseUrl(ApiBaseUrl)
-            .httpClient(get<HttpClient>())
-            .build()
-            .createMatchmakingRatingApi()
-    }
-
-    single<PreferenceDataSource> {
-        PreferenceDataSourceImpl(get())
-    }
-
-    single<PersistenceDataSource> {
-        PersistenceDataSourceImpl(get())
-    }
-
-    single<NetworkDataSource> {
-        NetworkDataSourceImpl(
-            get(),
-            get(qualifier("io"))
-        )
-    }
-
-    single<RatingRepository> {
-        RatingRepositoryImpl(
-            get(),
-            get()
-        )
-    }
-
-    single<SettingsRepository> {
-        SettingsRepositoryImpl(get())
-    }
-}
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = "wearmmr"
