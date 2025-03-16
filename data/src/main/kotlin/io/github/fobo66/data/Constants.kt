@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,9 +16,4 @@
 
 package io.github.fobo66.data
 
-/**
- * (c) 2017 Andrey Mukamolov <fobo66@protonmail.com>
- * Created 12/17/17.
- */
-
-const val ApiBaseUrl: String = "https://api.opendota.com/api/"
+const val API_BASE_URL: String = "https://api.opendota.com/api/"

@@ -21,7 +21,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import de.jensklingenberg.ktorfit.Ktorfit
-import io.github.fobo66.data.ApiBaseUrl
+import io.github.fobo66.data.API_BASE_URL
 import io.github.fobo66.data.api.createMatchmakingRatingApi
 import io.github.fobo66.data.repositories.RatingRepository
 import io.github.fobo66.data.repositories.RatingRepositoryImpl
@@ -71,7 +71,7 @@ val dataModule =
         single {
             Ktorfit
                 .Builder()
-                .baseUrl(ApiBaseUrl)
+                .baseUrl(API_BASE_URL)
                 .httpClient(get<HttpClient>())
                 .build()
                 .createMatchmakingRatingApi()
