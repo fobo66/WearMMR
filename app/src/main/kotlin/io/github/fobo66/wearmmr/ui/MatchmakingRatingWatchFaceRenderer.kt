@@ -1,5 +1,5 @@
 /*
- *    Copyright 2022 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.SurfaceHolder
-import androidx.core.graphics.toRectF
 import androidx.wear.watchface.ComplicationSlotsManager
 import androidx.wear.watchface.DrawMode
 import androidx.wear.watchface.Renderer
@@ -45,11 +44,12 @@ class MatchmakingRatingWatchFaceRenderer(
     true
 ) {
     private val timeFormat: String
-        get() = if (isAmbient()) {
-            TIME_FORMAT_AMBIENT
-        } else {
-            TIME_FORMAT_INTERACTIVE
-        }
+        get() =
+            if (isAmbient()) {
+                TIME_FORMAT_AMBIENT
+            } else {
+                TIME_FORMAT_INTERACTIVE
+            }
 
     private fun isAmbient() = renderParameters.drawMode == DrawMode.AMBIENT
 
@@ -62,15 +62,10 @@ class MatchmakingRatingWatchFaceRenderer(
         zonedDateTime: ZonedDateTime,
         sharedAssets: MatchmakingRatingSharedAssets
     ) {
-        if (isAmbient() || sharedAssets.backgroundBitmap.isRecycled) {
-            canvas.drawPaint(sharedAssets.backgroundPaint)
+        if (isAmbient()) {
+            canvas.drawPaint(sharedAssets.backgroundAmbientPaint)
         } else {
-            canvas.drawBitmap(
-                sharedAssets.backgroundBitmap,
-                null,
-                bounds.toRectF(),
-                sharedAssets.backgroundPaint
-            )
+            canvas.drawPaint(sharedAssets.backgroundPaint)
         }
 
         canvas.drawText(

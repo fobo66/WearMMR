@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~    Copyright 2022 Andrey Mukamolov
+  ~    Copyright 2025 Andrey Mukamolov
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -15,7 +15,8 @@
   -->
 
 <resources>
-  <color name="background">#000000</color>
+  <color name="background_ambient">#000000</color>
+  <color name="background">#480808</color>
   <color name="icon_color">#BEFFFFFF</color>
   <color name="digital_text">#ffffff</color>
   <color name="complication_background">#7C0F0F</color>
