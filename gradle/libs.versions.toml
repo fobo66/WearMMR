@@ -21,6 +21,7 @@ detekt = "1.23.7"
 firebase = "33.10.0"
 firebaseCrashlytics = "3.0.3"
 googleServices = "4.4.2"
+horologist = "0.7.10-alpha"
 koin = "4.0.2"
 kotlin = "2.1.10"
 kotlinter = "5.0.1"
@@ -53,6 +54,8 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+horologist-compose-layout = { group = "com.google.android.horologist", name = "horologist-compose-layout", version.ref = "horologist"}
+horologist-compose-material = { group = "com.google.android.horologist", name = "horologist-compose-material", version.ref = "horologist"}
 koin-android = { group = "io.insert-koin", name = "koin-android" }
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose" }

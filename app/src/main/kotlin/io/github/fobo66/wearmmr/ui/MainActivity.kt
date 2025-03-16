@@ -1,5 +1,5 @@
 /*
- *    Copyright 2024 Andrey Mukamolov
+ *    Copyright 2025 Andrey Mukamolov
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,18 +39,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.OutlinedCompactButton
-import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material3.AppScaffold
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
+import androidx.wear.compose.ui.tooling.preview.WearPreviewLargeRound
 import androidx.wear.compose.ui.tooling.preview.WearPreviewSmallRound
+import androidx.wear.compose.ui.tooling.preview.WearPreviewSquare
 import coil.compose.AsyncImage
+import com.google.android.horologist.compose.layout.ResponsiveTimeText
+import com.google.android.horologist.compose.layout.responsivePaddingDefaults
 import io.github.fobo66.wearmmr.R
 import io.github.fobo66.wearmmr.model.MainViewModel
 import io.github.fobo66.wearmmr.model.MainViewState
@@ -61,9 +69,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WearMMRTheme {
-                Scaffold(
+                AppScaffold(
                     timeText = {
-                        TimeText()
+                        ResponsiveTimeText()
                     }
                 ) {
                     val viewModel: MainViewModel = koinViewModel()
@@ -73,7 +81,9 @@ class MainActivity : ComponentActivity() {
                         viewModel.checkViewState()
                     }
 
-                    val viewState by viewModel.state.collectAsStateWithLifecycle(initialValue = MainViewState.Loading)
+                    val viewState by viewModel.state.collectAsStateWithLifecycle(
+                        initialValue = MainViewState.Loading
+                    )
                     MainContent(viewState, {
                         SettingsActivity.start(context)
                     })
@@ -84,32 +94,43 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent(
-    viewState: MainViewState,
-    goToSettings: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Crossfade(viewState, modifier = modifier, label = "MainContent") {
-        when (it) {
-            MainViewState.Loading -> CircularProgressIndicator(modifier = Modifier.fillMaxSize())
-            is MainViewState.LoadedRating -> {
-                RatingDetails(viewState = it, goToSettings)
-            }
-
-            MainViewState.FirstLaunch -> {
-                FirstLaunch(goToSettings)
-            }
-
-            MainViewState.InvalidPlayerId -> {
-                ErrorPrompt(
-                    errorLabel = stringResource(id = R.string.invalid_player_id_error)
+fun MainContent(viewState: MainViewState, goToSettings: () -> Unit, modifier: Modifier = Modifier) {
+    ScreenScaffold(modifier = modifier) { padding ->
+        Crossfade(viewState, label = "MainContent", modifier = Modifier.padding(padding)) {
+            when (it) {
+                MainViewState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.fillMaxSize()
                 )
-            }
 
-            MainViewState.NoRating -> {
-                ErrorPrompt(
-                    errorLabel = stringResource(id = R.string.no_rating_error)
-                )
+                is MainViewState.LoadedRating -> {
+                    RatingDetails(
+                        viewState = it,
+                        goToSettings = goToSettings,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(responsivePaddingDefaults())
+                    )
+                }
+
+                MainViewState.FirstLaunch -> {
+                    FirstLaunch(
+                        goToSettings,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
+                }
+
+                MainViewState.InvalidPlayerId -> {
+                    ErrorPrompt(
+                        errorLabel = stringResource(id = R.string.invalid_player_id_error)
+                    )
+                }
+
+                MainViewState.NoRating -> {
+                    ErrorPrompt(
+                        errorLabel = stringResource(id = R.string.no_rating_error)
+                    )
+                }
             }
         }
     }
@@ -118,21 +139,22 @@ fun MainContent(
 @Composable
 fun FirstLaunch(goToSettings: () -> Unit, modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .fillMaxSize(),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        Column {
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(
                 text = stringResource(id = R.string.set_playerid_message),
-                modifier = Modifier.padding(horizontal = 16.dp)
+                textAlign = TextAlign.Center
             )
             Button(
                 onClick = goToSettings,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
-                    .padding(16.dp)
             ) {
                 Text(text = stringResource(id = R.string.set_playerid_button_label))
             }
@@ -146,7 +168,7 @@ fun RatingDetails(
     goToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
+    Box(contentAlignment = Alignment.Center, modifier = modifier) {
         Column {
             Row(
                 modifier = Modifier
@@ -186,7 +208,8 @@ fun RatingDetails(
                 }
             }
             Text(
-                text = viewState.rating, style = MaterialTheme.typography.displaySmall,
+                text = viewState.rating,
+                style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             OutlinedCompactButton(
@@ -209,18 +232,34 @@ fun ErrorPrompt(errorLabel: String, modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
             text = errorLabel,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(16.dp)
         )
     }
 }
 
+class ViewStatePreviewProvider :
+    CollectionPreviewParameterProvider<MainViewState>(
+        listOf(
+            MainViewState.FirstLaunch,
+            MainViewState.NoRating,
+            MainViewState.InvalidPlayerId,
+            MainViewState.LoadedRating("test", "test", "1234", "")
+        )
+    )
+
 @WearPreviewSmallRound
+@WearPreviewLargeRound
+@WearPreviewSquare
 @Composable
-private fun MainPreview() {
+private fun MainPreview(
+    @PreviewParameter(provider = ViewStatePreviewProvider::class) state: MainViewState
+) {
     WearMMRTheme {
         MainContent(
-            viewState = MainViewState.LoadedRating("test", "test", "1234", ""),
-            goToSettings = {})
+            viewState = state,
+            goToSettings = {}
+        )
     }
 }
